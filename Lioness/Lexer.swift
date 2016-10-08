@@ -19,7 +19,7 @@ public enum Token {
     case comma
 	case equals
 	case plus
-	case define
+	case function
     case other(String)
 }
 
@@ -27,12 +27,12 @@ open class Lexer {
 	
 	typealias TokenGenerator = (String) -> Token?
 	
-	let tokenList: [(String, TokenGenerator)] = [
+	fileprivate let tokenList: [(String, TokenGenerator)] = [
 		("[ \t\n]", { _ in nil }),
 		
 		// Prefer keywords over identifiers
 		
-		("[a-zA-Z][a-zA-Z0-9]*", { $0 == "def" ? .define : .identifier($0) }),
+		("[a-zA-Z][a-zA-Z0-9]*", { $0 == "func" ? .function : .identifier($0) }),
 
 //		("[a-zA-Z][a-zA-Z0-9]*", { $0 == "if" ? .ifStatement : .identifier($0) }),
 
@@ -41,12 +41,12 @@ open class Lexer {
 		("\\)", { _ in .parensClose }),
 		("\\{", { _ in .curlyOpen }),
 		("\\}", { _ in .curlyClose }),
-//		("=", { _ in .equals }),
+		("=", { _ in .equals }),
 //		("\\+", { _ in .plus }),
 		(",", { _ in .comma }),
 	]
 	
-	let input: String
+	fileprivate let input: String
 	
 	init(input: String) {
         self.input = input

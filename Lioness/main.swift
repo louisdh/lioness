@@ -8,23 +8,30 @@
 
 import Foundation
 
-let source = multiline(
-	"def foo(x, y)",
-	"  x + y * 2 + (4 + 5)^3 / 3",
-	"  x + y",
-	"",
-	"def bar(a, b)",
-	"  15 * 8",
-	"",
-	"foo(3, 4)"
-)
 
 
 //let source = multiline(
-//	"1 + 2"
+//	"func foo(x, y) {",
+//	"  x + y * 2 + (4 + 5)^3 / 3",
+//	"  x + y",
+//	"}",
+//	"",
+//	"func bar(a, b) {",
+//	"  15 * 8",
+//	"}",
+//	"",
+//	"foo(3, 4)"
 //)
 
 
+let source = multiline(
+	"1 + 2"
+)
+
+// LOAD_CONST 0
+// LOAD_CONST 1
+// BINARY_ADD
+// POP_TOP
 
 
 let lexer = Lexer(input: source)
@@ -36,18 +43,37 @@ for t in tokens {
 	print(t)
 }
 
-print("================================")
+
+
+print("\n================================\n")
+
+
 
 let parser = Parser(tokens: tokens)
 
-do {
-	
+//do {
+
 	let ast = try parser.parse()
 	
 	for a in ast {
 		print(a.description)
 	}
 	
-} catch {
-	print(error)
+//} catch {
+//	print(error)
+//}
+
+
+
+print("\n================================\n")
+
+
+
+let bytecodeCompiler = BytecodeCompiler(ast: ast)
+
+let bytecode = try bytecodeCompiler.compile()
+
+for b in bytecode {
+	print(b.description)
 }
+

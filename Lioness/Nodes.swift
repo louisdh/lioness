@@ -8,62 +8,175 @@
 
 import Foundation
 
-public protocol ASTNode: CustomStringConvertible {
+// AST nodes contain a compile function to compile to Scorpion
+
+open class ASTNode: CustomStringConvertible {
+	
+	/// Return Scorpion in form of strings
+	public func compile(_ ctx: BytecodeCompiler) -> [String] {
+		
+		return [""]
+	}
+	
+	public var description: String {
+		return ""
+	}
+
+}
+
+public class NumberNode: ASTNode, Equatable {
+	
+	public let value: Float
+	
+	init(value: Float) {
+		self.value = value
+	}
+	
+	public override func compile(_ ctx: BytecodeCompiler) -> [String] {
+		
+		//		let i = ctx.indexForNumberNode(numberNode: self)
+		let i = self.value
+		return ["LOAD_CONST \(i)"]
+		
+	}
+	
+	public override var description: String {
+        return "NumberNode(\(value))"
+    }
 	
 }
 
-public struct NumberNode: ASTNode {
-    public let value: Float
-    public var description: String {
-        return "NumberNode(\(value))"
-    }
+public func ==(lhs: NumberNode, rhs: NumberNode) -> Bool {
+	return lhs.value == rhs.value
 }
 
-public struct VariableNode: ASTNode {
-    public let name: String
-    public var description: String {
+public class VariableNode: ASTNode {
+	
+	public let name: String
+	
+	init(name: String) {
+		self.name = name
+	}
+	
+	public override var description: String {
         return "VariableNode(\(name))"
     }
+	
 }
 
-public struct BinaryOpNode: ASTNode {
-    public let op: String
+public func ==(lhs: VariableNode, rhs: VariableNode) -> Bool {
+	return lhs.name == rhs.name
+}
+
+public class BinaryOpNode: ASTNode {
+	
+	public let op: String
     public let lhs: ASTNode
     public let rhs: ASTNode
-    public var description: String {
+	
+	init(op: String, lhs: ASTNode, rhs: ASTNode) {
+		self.op = op
+		self.lhs = lhs
+		self.rhs = rhs
+	}
+	
+	public override func compile(_ ctx: BytecodeCompiler) -> [String] {
+		
+		let l = lhs.compile(ctx)
+		let r = rhs.compile(ctx)
+		
+		var bytecode = [String]()
+		
+		bytecode.append(contentsOf: l)
+		bytecode.append(contentsOf: r)
+		
+		return bytecode
+		
+	}
+	
+	public override var description: String {
         return "BinaryOpNode(\(op), lhs: \(lhs), rhs: \(rhs))"
     }
+	
 }
 
-public struct CallNode: ASTNode {
-    public let callee: String
+//public func ==(lhs: BinaryOpNode, rhs: BinaryOpNode) -> Bool {
+//	return lhs.op == rhs.op && lhs.lhs == rhs.lhs && lhs.rhs == rhs.rhs
+//}
+
+
+public class CallNode: ASTNode {
+	
+	public let callee: String
     public let arguments: [ASTNode]
-    public var description: String {
+	
+	init(callee: String, arguments: [ASTNode]) {
+		self.callee = callee
+		self.arguments = arguments
+	}
+	
+    public override var description: String {
 		var str = "CallNode(name: \(callee), argument: "
 		
 		for a in arguments {
-			str += "\n \(a.description)"
+			str += "\n    \(a.description)"
 		}
 		
         return str + ")"
     }
 }
 
-public struct PrototypeNode: ASTNode {
+//public func ==(lhs: CallNode, rhs: CallNode) -> Bool {
+//	return lhs.callee == rhs.callee && lhs.arguments == rhs.arguments
+//}
+
+
+public class PrototypeNode: ASTNode {
+	
     public let name: String
     public let argumentNames: [String]
-    public var description: String {
+	
+	init(name: String, argumentNames: [String]) {
+		self.name = name
+		self.argumentNames = argumentNames
+	}
+	
+    public override var description: String {
         return "PrototypeNode(name: \(name), argumentNames: \(argumentNames))"
     }
+	
 }
 
-public struct FunctionNode: ASTNode {
-    public let prototype: PrototypeNode
-    public let body: ASTNode
-    public var description: String {
-        return "FunctionNode(prototype: \(prototype), body: \n\(body))"
-    }
+public func ==(lhs: PrototypeNode, rhs: PrototypeNode) -> Bool {
+	return lhs.name == rhs.name && lhs.argumentNames == rhs.argumentNames
 }
+
+public class FunctionNode: ASTNode {
+	
+    public let prototype: PrototypeNode
+    public let body: [ASTNode]
+	
+	init(prototype: PrototypeNode, body: [ASTNode]) {
+		self.prototype = prototype
+		self.body = body
+	}
+	
+    public override var description: String {
+		
+		var str = "FunctionNode(prototype: \(prototype), body: ["
+		
+		for e in body {
+			str += "\n    \(e.description)"
+		}
+		
+        return str + "\n])"
+    }
+	
+}
+
+//public func ==(lhs: FunctionNode, rhs: FunctionNode) -> Bool {
+//	return lhs.prototype == rhs.prototype && lhs.body == rhs.body
+//}
 
 // Block
 
