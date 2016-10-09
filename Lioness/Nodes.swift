@@ -16,7 +16,6 @@ enum CompileError: Error {
 
 open class ASTNode: CustomStringConvertible {
 	
-	/// Return Scorpion in form of strings
 	public func compile(_ ctx: BytecodeCompiler) throws -> [BytecodeInstruction] {
 		
 		return []

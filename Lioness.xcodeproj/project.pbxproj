@@ -104,10 +104,8 @@
 		BE3FEBA21DA4273F0000648D /* Parser */ = {
 			isa = PBXGroup;
 			children = (
-				BE3FEBB01DA4444F0000648D /* Parser Generator */,
 				BE3FEBAE1DA43CB10000648D /* ParserGenerator.swift */,
 				BE3FEBA61DA427800000648D /* Parser.swift */,
-				BE3FEBA51DA427800000648D /* Nodes.swift */,
 			);
 			name = Parser;
 			sourceTree = "<group>";
@@ -115,15 +113,9 @@
 		BE3FEBA31DA427440000648D /* AST */ = {
 			isa = PBXGroup;
 			children = (
+				BE3FEBA51DA427800000648D /* Nodes.swift */,
 			);
 			name = AST;
-			sourceTree = "<group>";
-		};
-		BE3FEBB01DA4444F0000648D /* Parser Generator */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = "Parser Generator";
 			sourceTree = "<group>";
 		};
 		BE9369F91DA8079C00C0B3DF /* Scorpion Bytecode */ = {
