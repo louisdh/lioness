@@ -10,12 +10,16 @@ import Foundation
 
 // AST nodes contain a compile function to compile to Scorpion
 
+enum CompileError: Error {
+	case unexpectedCommand
+}
+
 open class ASTNode: CustomStringConvertible {
 	
 	/// Return Scorpion in form of strings
-	public func compile(_ ctx: BytecodeCompiler) -> [String] {
+	public func compile(_ ctx: BytecodeCompiler) throws -> [BytecodeInstruction] {
 		
-		return [""]
+		return []
 	}
 	
 	public var description: String {
@@ -32,11 +36,11 @@ public class NumberNode: ASTNode, Equatable {
 		self.value = value
 	}
 	
-	public override func compile(_ ctx: BytecodeCompiler) -> [String] {
+	public override func compile(_ ctx: BytecodeCompiler) -> [BytecodeInstruction] {
 		
-		//		let i = ctx.indexForNumberNode(numberNode: self)
 		let i = self.value
-		return ["LOAD_CONST \(i)"]
+		let label = ctx.nextIndexLabel()
+		return [BytecodeInstruction(label: label, command: "load_const", arguments: ["\(i)"])]
 		
 	}
 	
@@ -65,7 +69,7 @@ public class VariableNode: ASTNode {
 }
 
 public func ==(lhs: VariableNode, rhs: VariableNode) -> Bool {
-	return lhs.name == rhs.name
+	return lhs === rhs
 }
 
 public class BinaryOpNode: ASTNode {
@@ -80,16 +84,32 @@ public class BinaryOpNode: ASTNode {
 		self.rhs = rhs
 	}
 	
-	public override func compile(_ ctx: BytecodeCompiler) -> [String] {
+	public override func compile(_ ctx: BytecodeCompiler) throws -> [BytecodeInstruction] {
 		
-		let l = lhs.compile(ctx)
-		let r = rhs.compile(ctx)
+		let l = try lhs.compile(ctx)
+		let r = try rhs.compile(ctx)
 		
-		var bytecode = [String]()
+		var bytecode = [BytecodeInstruction]()
 		
 		bytecode.append(contentsOf: l)
 		bytecode.append(contentsOf: r)
 		
+		let label = ctx.nextIndexLabel()
+		
+		var opCommands = ["+": "add",
+		                  "-": "sub",
+		                  "*": "mul",
+		                  "/": "div",
+		                  "^": "pow"]
+		
+		guard let command = opCommands[op] else {
+			throw CompileError.unexpectedCommand
+		}
+		
+		let operation = BytecodeInstruction(label: label, command: command)
+
+		bytecode.append(operation)
+
 		return bytecode
 		
 	}

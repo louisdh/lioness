@@ -22,28 +22,25 @@ public class BytecodeCompiler {
 	// MARK: -
 	// MARK: Public
 	
-	func compile() throws -> [String] {
+	func compile() throws -> [BytecodeInstruction] {
 
 		stack = [Int]()
 		
-		var bytecode = [String]()
+		var bytecode = [BytecodeInstruction]()
 
 		for a in ast {
 			
-			bytecode.append(contentsOf: a.compile(self))
+			let compiled = try a.compile(self)
+			bytecode.append(contentsOf: compiled)
 			
 		}
 		
 		return bytecode
 	}
 	
-	func indexForNumberNode(numberNode: NumberNode) -> Int {
-		
-		let numbers = ast.filter { (node) -> Bool in
-			return node is NumberNode
-		} as! [NumberNode]
-		
-		return numbers.index(of: numberNode)!
+	func nextIndexLabel() -> String {
+		index += 1
+		return "\(index)"
 	}
 
 }
