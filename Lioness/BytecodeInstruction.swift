@@ -15,7 +15,7 @@ enum BytecodeInstructionError: Error {
 public class BytecodeInstruction: CustomStringConvertible {
 	
 	let label: String
-	let command: String
+	let type: BytecodeInstructionType
 	let arguments: [String]
 	
 	init(instructionString: String) throws {
@@ -38,7 +38,11 @@ public class BytecodeInstruction: CustomStringConvertible {
 			throw BytecodeInstructionError.invalidDecoding
 		}
 		
-		self.command = command
+		guard let type = BytecodeInstructionType(rawValue: command) else {
+			throw BytecodeInstructionError.invalidDecoding
+		}
+		
+		self.type = type
 		
 		if let args = substrings[safe: 2]?.components(separatedBy: ",") {
 			self.arguments = args
@@ -48,15 +52,15 @@ public class BytecodeInstruction: CustomStringConvertible {
 		
 	}
 	
-	init(label: String, command: String, arguments: [String]) {
+	init(label: String, type: BytecodeInstructionType, arguments: [String]) {
 		self.label = label
-		self.command = command
+		self.type = type
 		self.arguments = arguments
 	}
 	
-	init(label: String, command: String) {
+	init(label: String, type: BytecodeInstructionType) {
 		self.label = label
-		self.command = command
+		self.type = type
 		self.arguments = []
 	}
 
@@ -73,7 +77,7 @@ public class BytecodeInstruction: CustomStringConvertible {
 			}
 		}
 		
-		return "\(label): \(command) \(args)"
+		return "\(label): \(type.command) \(args)"
 	}
 	
 }

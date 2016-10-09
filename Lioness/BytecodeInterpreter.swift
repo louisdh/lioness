@@ -43,38 +43,40 @@ public class BytecodeInterpreter {
 			
 			let instruction = bytecode[pc]
 			
-			if instruction.command == "load_const" {
-				pc = executeLoadConst(instruction, pc: pc)
+			switch instruction.type {
+				
+				case .pushConst:
+					pc = executePushConst(instruction, pc: pc)
+
+				case .add:
+					pc = executeAdd(pc: pc)
+
+				case .sub:
+					pc = executeSub(pc: pc)
+
+				case .mul:
+					pc = executeMul(pc: pc)
+
+				case .div:
+					pc = executeDiv(pc: pc)
+
+				case .pow:
+					pc = executePow(pc: pc)
+
 			}
 			
-			if instruction.command == "add" {
-				pc = executeAdd(pc: pc)
-			}
-			
-			if instruction.command == "sub" {
-				pc = executeSub(pc: pc)
-			}
-			
-			if instruction.command == "mul" {
-				pc = executeMul(pc: pc)
-			}
-			
-			if instruction.command == "div" {
-				pc = executeDiv(pc: pc)
-			}
-		
 		}
 		
 		print("Stack at end of execution:\n\(stack)")
 		
 	}
 
-	func executeLoadConst(_ instruction: BytecodeInstruction, pc: Int) -> Int {
+	fileprivate func executePushConst(_ instruction: BytecodeInstruction, pc: Int) -> Int {
 		push(Float(instruction.arguments.first!)!)
 		return pc + 1
 	}
 	
-	func executeAdd(pc: Int) -> Int {
+	fileprivate func executeAdd(pc: Int) -> Int {
 		
 		let lhs = pop()
 		let rhs = pop()
@@ -84,7 +86,7 @@ public class BytecodeInterpreter {
 		return pc + 1
 	}
 	
-	func executeSub(pc: Int) -> Int {
+	fileprivate func executeSub(pc: Int) -> Int {
 		
 		let lhs = pop()
 		let rhs = pop()
@@ -94,7 +96,7 @@ public class BytecodeInterpreter {
 		return pc + 1
 	}
 	
-	func executeMul(pc: Int) -> Int {
+	fileprivate func executeMul(pc: Int) -> Int {
 		
 		let lhs = pop()
 		let rhs = pop()
@@ -104,7 +106,7 @@ public class BytecodeInterpreter {
 		return pc + 1
 	}
 	
-	func executeDiv(pc: Int) -> Int {
+	fileprivate func executeDiv(pc: Int) -> Int {
 		
 		let rhs = pop()
 		let lhs = pop()
@@ -114,12 +116,22 @@ public class BytecodeInterpreter {
 		return pc + 1
 	}
 	
-	func pop() -> Float {
+	fileprivate func executePow(pc: Int) -> Int {
+		
+		let rhs = pop()
+		let lhs = pop()
+		
+		push(pow(lhs, rhs))
+		
+		return pc + 1
+	}
+	
+	fileprivate func pop() -> Float {
 		let last = stack.removeLast()
 		return last
 	}
 	
-	func push(_ item: Float) {
+	fileprivate func push(_ item: Float) {
 		stack.append(item)
 	}
 

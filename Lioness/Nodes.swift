@@ -39,7 +39,7 @@ public class NumberNode: ASTNode, Equatable {
 		
 		let i = self.value
 		let label = ctx.nextIndexLabel()
-		return [BytecodeInstruction(label: label, command: "load_const", arguments: ["\(i)"])]
+		return [BytecodeInstruction(label: label, type: .pushConst, arguments: ["\(i)"])]
 		
 	}
 	
@@ -95,17 +95,19 @@ public class BinaryOpNode: ASTNode {
 		
 		let label = ctx.nextIndexLabel()
 		
-		var opCommands = ["+": "add",
-		                  "-": "sub",
-		                  "*": "mul",
-		                  "/": "div",
-		                  "^": "pow"]
+		var opTypes: [String : BytecodeInstructionType]
+			
+		opTypes = ["+" : .add,
+		           "-" : .sub,
+		           "*" : .mul,
+		           "/" : .div,
+		           "^" : .pow]
 		
-		guard let command = opCommands[op] else {
+		guard let type = opTypes[op] else {
 			throw CompileError.unexpectedCommand
 		}
 		
-		let operation = BytecodeInstruction(label: label, command: command)
+		let operation = BytecodeInstruction(label: label, type: type)
 
 		bytecode.append(operation)
 
