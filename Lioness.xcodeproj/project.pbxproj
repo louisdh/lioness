@@ -14,7 +14,6 @@
 		BE3FEBAB1DA427800000648D /* Parser.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3FEBA61DA427800000648D /* Parser.swift */; };
 		BE3FEBAC1DA427800000648D /* Regex.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3FEBA71DA427800000648D /* Regex.swift */; };
 		BE3FEBAD1DA427800000648D /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3FEBA81DA427800000648D /* String.swift */; };
-		BE3FEBAF1DA43CB10000648D /* ParserGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3FEBAE1DA43CB10000648D /* ParserGenerator.swift */; };
 		BE5653641DAAB86F006171B9 /* BytecodeInstructionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE5653631DAAB86F006171B9 /* BytecodeInstructionType.swift */; };
 		BE9369FC1DA83AB000C0B3DF /* BytecodeCompiler.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE9369FB1DA83AB000C0B3DF /* BytecodeCompiler.swift */; };
 		BEFFCB901DAA77AE001EF8E4 /* BytecodeInterpreter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEFFCB8F1DAA77AE001EF8E4 /* BytecodeInterpreter.swift */; };
@@ -42,7 +41,6 @@
 		BE3FEBA61DA427800000648D /* Parser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Parser.swift; sourceTree = "<group>"; };
 		BE3FEBA71DA427800000648D /* Regex.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Regex.swift; sourceTree = "<group>"; };
 		BE3FEBA81DA427800000648D /* String.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
-		BE3FEBAE1DA43CB10000648D /* ParserGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParserGenerator.swift; sourceTree = "<group>"; };
 		BE5653631DAAB86F006171B9 /* BytecodeInstructionType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BytecodeInstructionType.swift; sourceTree = "<group>"; };
 		BE68520E1DAA73A200026418 /* B.lion */ = {isa = PBXFileReference; explicitFileType = text.json; fileEncoding = 4; path = B.lion; sourceTree = "<group>"; };
 		BE9369FB1DA83AB000C0B3DF /* BytecodeCompiler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BytecodeCompiler.swift; sourceTree = "<group>"; };
@@ -106,7 +104,6 @@
 		BE3FEBA21DA4273F0000648D /* Parser */ = {
 			isa = PBXGroup;
 			children = (
-				BE3FEBAE1DA43CB10000648D /* ParserGenerator.swift */,
 				BE3FEBA61DA427800000648D /* Parser.swift */,
 			);
 			name = Parser;
@@ -206,7 +203,6 @@
 				BE5653641DAAB86F006171B9 /* BytecodeInstructionType.swift in Sources */,
 				BE3FEBAA1DA427800000648D /* Nodes.swift in Sources */,
 				BE3FEB9A1DA425A30000648D /* main.swift in Sources */,
-				BE3FEBAF1DA43CB10000648D /* ParserGenerator.swift in Sources */,
 				BEFFCB901DAA77AE001EF8E4 /* BytecodeInterpreter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

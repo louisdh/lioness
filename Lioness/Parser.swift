@@ -18,7 +18,7 @@ enum ParseError: Error {
 	case expectedFunctionName
 }
 
-class Parser {
+public class Parser {
 	
 	fileprivate let tokens: [Token]
 	fileprivate var index = 0

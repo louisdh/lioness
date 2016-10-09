@@ -8,13 +8,13 @@
 
 import Foundation
 
-// AST nodes contain a compile function to compile to Scorpion
 
 enum CompileError: Error {
 	case unexpectedCommand
 }
 
-open class ASTNode: CustomStringConvertible {
+/// AST node with a compile function to compile to Scorpion
+public class ASTNode: CustomStringConvertible {
 	
 	public func compile(_ ctx: BytecodeCompiler) throws -> [BytecodeInstruction] {
 		

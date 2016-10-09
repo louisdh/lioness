@@ -9,7 +9,9 @@
 import Foundation
 
 /// Bytecode Instruction Type
-/// enum cases are lower camel case (per Swift guideline)
+///
+/// Enum cases are lower camel case (per Swift guideline)
+///
 /// Instruction commands are lower snake case
 enum BytecodeInstructionType: String {
 	

@@ -23,7 +23,7 @@ public enum Token {
     case other(String)
 }
 
-open class Lexer {
+public class Lexer {
 	
 	typealias TokenGenerator = (String) -> Token?
 	
@@ -42,7 +42,6 @@ open class Lexer {
 		("\\{", { _ in .curlyOpen }),
 		("\\}", { _ in .curlyClose }),
 		("=", { _ in .equals }),
-//		("\\+", { _ in .plus }),
 		(",", { _ in .comma }),
 	]
 	
@@ -52,7 +51,7 @@ open class Lexer {
         self.input = input
     }
 	
-    open func tokenize() -> [Token] {
+    public func tokenize() -> [Token] {
 		
         var tokens = [Token]()
         var content = input
