@@ -10,11 +10,17 @@
 		BE04D63A1DA99FC800DAEB84 /* BytecodeInstruction.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE04D6391DA99FC800DAEB84 /* BytecodeInstruction.swift */; };
 		BE3FEB9A1DA425A30000648D /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3FEB991DA425A30000648D /* main.swift */; };
 		BE3FEBA91DA427800000648D /* Lexer.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3FEBA41DA427800000648D /* Lexer.swift */; };
-		BE3FEBAA1DA427800000648D /* Nodes.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3FEBA51DA427800000648D /* Nodes.swift */; };
+		BE3FEBAA1DA427800000648D /* ASTNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3FEBA51DA427800000648D /* ASTNode.swift */; };
 		BE3FEBAB1DA427800000648D /* Parser.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3FEBA61DA427800000648D /* Parser.swift */; };
 		BE3FEBAC1DA427800000648D /* Regex.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3FEBA71DA427800000648D /* Regex.swift */; };
 		BE3FEBAD1DA427800000648D /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3FEBA81DA427800000648D /* String.swift */; };
 		BE5653641DAAB86F006171B9 /* BytecodeInstructionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE5653631DAAB86F006171B9 /* BytecodeInstructionType.swift */; };
+		BE5653661DAAE7AD006171B9 /* NumberNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE5653651DAAE7AD006171B9 /* NumberNode.swift */; };
+		BE5653681DAAE7BE006171B9 /* VariableNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE5653671DAAE7BD006171B9 /* VariableNode.swift */; };
+		BE56536A1DAAE7C6006171B9 /* BinaryOpNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE5653691DAAE7C6006171B9 /* BinaryOpNode.swift */; };
+		BE56536C1DAAE7D0006171B9 /* CallNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE56536B1DAAE7CF006171B9 /* CallNode.swift */; };
+		BE56536E1DAAE7D8006171B9 /* PrototypeNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE56536D1DAAE7D8006171B9 /* PrototypeNode.swift */; };
+		BE5653701DAAE822006171B9 /* FunctionNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE56536F1DAAE822006171B9 /* FunctionNode.swift */; };
 		BE9369FC1DA83AB000C0B3DF /* BytecodeCompiler.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE9369FB1DA83AB000C0B3DF /* BytecodeCompiler.swift */; };
 		BEFFCB901DAA77AE001EF8E4 /* BytecodeInterpreter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEFFCB8F1DAA77AE001EF8E4 /* BytecodeInterpreter.swift */; };
 /* End PBXBuildFile section */
@@ -37,11 +43,17 @@
 		BE3FEB961DA425A30000648D /* Lioness */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Lioness; sourceTree = BUILT_PRODUCTS_DIR; };
 		BE3FEB991DA425A30000648D /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		BE3FEBA41DA427800000648D /* Lexer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Lexer.swift; sourceTree = "<group>"; };
-		BE3FEBA51DA427800000648D /* Nodes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Nodes.swift; sourceTree = "<group>"; };
+		BE3FEBA51DA427800000648D /* ASTNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ASTNode.swift; sourceTree = "<group>"; };
 		BE3FEBA61DA427800000648D /* Parser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Parser.swift; sourceTree = "<group>"; };
 		BE3FEBA71DA427800000648D /* Regex.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Regex.swift; sourceTree = "<group>"; };
 		BE3FEBA81DA427800000648D /* String.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		BE5653631DAAB86F006171B9 /* BytecodeInstructionType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BytecodeInstructionType.swift; sourceTree = "<group>"; };
+		BE5653651DAAE7AD006171B9 /* NumberNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NumberNode.swift; sourceTree = "<group>"; };
+		BE5653671DAAE7BD006171B9 /* VariableNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VariableNode.swift; sourceTree = "<group>"; };
+		BE5653691DAAE7C6006171B9 /* BinaryOpNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BinaryOpNode.swift; sourceTree = "<group>"; };
+		BE56536B1DAAE7CF006171B9 /* CallNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CallNode.swift; sourceTree = "<group>"; };
+		BE56536D1DAAE7D8006171B9 /* PrototypeNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrototypeNode.swift; sourceTree = "<group>"; };
+		BE56536F1DAAE822006171B9 /* FunctionNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FunctionNode.swift; sourceTree = "<group>"; };
 		BE68520E1DAA73A200026418 /* B.lion */ = {isa = PBXFileReference; explicitFileType = text.json; fileEncoding = 4; path = B.lion; sourceTree = "<group>"; };
 		BE9369FB1DA83AB000C0B3DF /* BytecodeCompiler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BytecodeCompiler.swift; sourceTree = "<group>"; };
 		BEFFCB8E1DAA744B001EF8E4 /* C.lion */ = {isa = PBXFileReference; explicitFileType = text.json; fileEncoding = 4; path = C.lion; sourceTree = "<group>"; };
@@ -112,7 +124,13 @@
 		BE3FEBA31DA427440000648D /* AST */ = {
 			isa = PBXGroup;
 			children = (
-				BE3FEBA51DA427800000648D /* Nodes.swift */,
+				BE3FEBA51DA427800000648D /* ASTNode.swift */,
+				BE5653651DAAE7AD006171B9 /* NumberNode.swift */,
+				BE5653671DAAE7BD006171B9 /* VariableNode.swift */,
+				BE5653691DAAE7C6006171B9 /* BinaryOpNode.swift */,
+				BE56536B1DAAE7CF006171B9 /* CallNode.swift */,
+				BE56536D1DAAE7D8006171B9 /* PrototypeNode.swift */,
+				BE56536F1DAAE822006171B9 /* FunctionNode.swift */,
 			);
 			name = AST;
 			sourceTree = "<group>";
@@ -194,16 +212,22 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BE5653661DAAE7AD006171B9 /* NumberNode.swift in Sources */,
+				BE5653681DAAE7BE006171B9 /* VariableNode.swift in Sources */,
 				BE3FEBAD1DA427800000648D /* String.swift in Sources */,
 				BE3FEBAB1DA427800000648D /* Parser.swift in Sources */,
 				BE3FEBAC1DA427800000648D /* Regex.swift in Sources */,
+				BE5653701DAAE822006171B9 /* FunctionNode.swift in Sources */,
 				BE9369FC1DA83AB000C0B3DF /* BytecodeCompiler.swift in Sources */,
 				BE3FEBA91DA427800000648D /* Lexer.swift in Sources */,
 				BE04D63A1DA99FC800DAEB84 /* BytecodeInstruction.swift in Sources */,
+				BE56536A1DAAE7C6006171B9 /* BinaryOpNode.swift in Sources */,
 				BE5653641DAAB86F006171B9 /* BytecodeInstructionType.swift in Sources */,
-				BE3FEBAA1DA427800000648D /* Nodes.swift in Sources */,
+				BE3FEBAA1DA427800000648D /* ASTNode.swift in Sources */,
+				BE56536E1DAAE7D8006171B9 /* PrototypeNode.swift in Sources */,
 				BE3FEB9A1DA425A30000648D /* main.swift in Sources */,
 				BEFFCB901DAA77AE001EF8E4 /* BytecodeInterpreter.swift in Sources */,
+				BE56536C1DAAE7D0006171B9 /* CallNode.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
