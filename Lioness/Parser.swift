@@ -37,15 +37,17 @@ class Parser {
 		var nodes = [ASTNode]()
 		
 		while index < tokens.count {
+			
 			switch peekCurrentToken() {
-			case .function:
-				let node = try parseFunction()
-				nodes.append(node)
-				
-			default:
-				let expr = try parseExpression()
-				nodes.append(expr)
+				case .function:
+					let node = try parseFunction()
+					nodes.append(node)
+					
+				default:
+					let expr = try parseExpression()
+					nodes.append(expr)
 			}
+			
 		}
 		
 		return nodes
@@ -112,10 +114,10 @@ class Parser {
 		
 		if case Token.parensClose = peekCurrentToken() {
 		
-		}
+		} else {
 			
-		else {
 			while true {
+				
 				let argument = try parseExpression()
 				arguments.append(argument)
 				
@@ -126,7 +128,9 @@ class Parser {
 				guard case Token.comma = popCurrentToken() else {
 					throw ParseError.expectedArgumentList
 				}
+				
 			}
+			
 		}
 		
 		popCurrentToken()
@@ -136,14 +140,14 @@ class Parser {
 	fileprivate func parsePrimary() throws -> ASTNode {
 		
 		switch peekCurrentToken() {
-		case .identifier:
-			return try parseIdentifier()
-		case .number:
-			return try parseNumber()
-		case .parensOpen:
-			return try parseParens()
-		default:
-			throw ParseError.expectedExpression
+			case .identifier:
+				return try parseIdentifier()
+			case .number:
+				return try parseNumber()
+			case .parensOpen:
+				return try parseParens()
+			default:
+				throw ParseError.expectedExpression
 		}
 		
 	}
@@ -173,8 +177,11 @@ class Parser {
 	}
 	
 	fileprivate func parseBinaryOp(_ node: ASTNode, exprPrecedence: Int = 0) throws -> ASTNode {
+		
 		var lhs = node
+		
 		while true {
+			
 			let tokenPrecedence = try getCurrentTokenPrecedence()
 			if tokenPrecedence < exprPrecedence {
 				return lhs
@@ -188,11 +195,13 @@ class Parser {
 			let nextPrecedence = try getCurrentTokenPrecedence()
 			
 			if tokenPrecedence < nextPrecedence {
-				rhs = try parseBinaryOp(rhs, exprPrecedence: tokenPrecedence+1)
+				rhs = try parseBinaryOp(rhs, exprPrecedence: tokenPrecedence + 1)
 			}
 			
 			lhs = BinaryOpNode(op: op, lhs: lhs, rhs: rhs)
+			
 		}
+		
 	}
 	
 	fileprivate func parsePrototype() throws -> PrototypeNode {
