@@ -8,6 +8,9 @@
 
 import Foundation
 
+/// Bytecode Instruction Type
+/// enum cases are lower camel case (per Swift guideline)
+/// Instruction commands are lower snake case
 enum BytecodeInstructionType: String {
 	
 	case pushConst = "push_const"
@@ -16,11 +19,13 @@ enum BytecodeInstructionType: String {
 	case mul = "mul"
 	case div = "div"
 	case pow = "pow"
+	case goto = "goto"
+	
+	// TODO: To be implemented
+//	case invokeFunc = "invoke_func"
 	
 	var command: String {
-		
 		return self.rawValue
-
 	}
 	
 }

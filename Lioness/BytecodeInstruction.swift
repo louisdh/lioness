@@ -18,6 +18,8 @@ public class BytecodeInstruction: CustomStringConvertible {
 	let type: BytecodeInstructionType
 	let arguments: [String]
 	
+	// TODO: Comment support (';' as marker?)
+	
 	init(instructionString: String) throws {
 		
 		let substrings = instructionString.components(separatedBy: " ")

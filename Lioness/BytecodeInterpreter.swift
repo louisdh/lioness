@@ -8,10 +8,13 @@
 
 import Foundation
 
+enum InterpreterError: Error {
+	case unexpectedArgument
+}
+
 public class BytecodeInterpreter {
 	
 	fileprivate let bytecode: [BytecodeInstruction]
-	fileprivate var index = 0
 	
 	fileprivate var stack = [Float]()
 	
@@ -43,36 +46,53 @@ public class BytecodeInterpreter {
 			
 			let instruction = bytecode[pc]
 			
-			switch instruction.type {
-				
-				case .pushConst:
-					pc = executePushConst(instruction, pc: pc)
-
-				case .add:
-					pc = executeAdd(pc: pc)
-
-				case .sub:
-					pc = executeSub(pc: pc)
-
-				case .mul:
-					pc = executeMul(pc: pc)
-
-				case .div:
-					pc = executeDiv(pc: pc)
-
-				case .pow:
-					pc = executePow(pc: pc)
-
-			}
+			pc = try executeInstruction(instruction, pc: pc)
 			
 		}
 		
 		print("Stack at end of execution:\n\(stack)")
 		
 	}
+	
+	fileprivate func executeInstruction(_ instruction: BytecodeInstruction, pc: Int) throws -> Int {
+		
+		var newPc: Int
+		
+		switch instruction.type {
+			
+			case .pushConst:
+				newPc = try executePushConst(instruction, pc: pc)
+				
+			case .add:
+				newPc = executeAdd(pc: pc)
+				
+			case .sub:
+				newPc = executeSub(pc: pc)
+				
+			case .mul:
+				newPc = executeMul(pc: pc)
+				
+			case .div:
+				newPc = executeDiv(pc: pc)
+				
+			case .pow:
+				newPc = executePow(pc: pc)
+				
+			case .goto:
+				newPc = try executeGoto(instruction)
+				
+		}
+		
+		return newPc
+	}
 
-	fileprivate func executePushConst(_ instruction: BytecodeInstruction, pc: Int) -> Int {
-		push(Float(instruction.arguments.first!)!)
+	fileprivate func executePushConst(_ instruction: BytecodeInstruction, pc: Int) throws -> Int {
+		guard let arg = instruction.arguments.first, let f = Float(arg) else {
+			throw InterpreterError.unexpectedArgument
+		}
+		
+		push(f)
+		
 		return pc + 1
 	}
 	
@@ -124,6 +144,15 @@ public class BytecodeInterpreter {
 		push(pow(lhs, rhs))
 		
 		return pc + 1
+	}
+	
+	fileprivate func executeGoto(_ instruction: BytecodeInstruction) throws -> Int {
+		
+		guard let arg = instruction.arguments.first, let newPc = Int(arg) else {
+			throw InterpreterError.unexpectedArgument
+		}
+
+		return newPc
 	}
 	
 	fileprivate func pop() -> Float {
