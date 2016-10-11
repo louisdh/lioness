@@ -62,7 +62,7 @@ public class Lexer {
             
             for (pattern, generator) in tokenList {
 				
-                if let m = content.match(pattern) {
+				if let m = content.firstMatch(withRegExPattern: pattern) {
 					
                     if let t = generator(m) {
                         tokens.append(t)

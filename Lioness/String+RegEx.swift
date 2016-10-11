@@ -12,7 +12,7 @@ import Foundation
 
 public extension String {
 	
-    public func match(_ regex: String) -> String? {
+    public func firstMatch(withRegExPattern pattern: String) -> String? {
 
 //        if let exists = expressions[regex] {
 //            expression = exists
@@ -21,14 +21,14 @@ public extension String {
 //            expressions[regex] = expression
 //        }
 		
-		guard let expression = try? NSRegularExpression(pattern: "^\(regex)", options: []) else {
+		guard let expression = try? NSRegularExpression(pattern: "^\(pattern)", options: []) else {
 			return nil
 		}
 		
-		return match(withRegEx: expression)
+		return firstMatch(withRegEx: expression)
     }
 	
-	public func match(withRegEx regEx: NSRegularExpression) -> String? {
+	public func firstMatch(withRegEx regEx: NSRegularExpression) -> String? {
 		
 		let stringRange = NSRange(location: 0, length: self.characters.count)
 		let rangeOfFirstMatch = regEx.rangeOfFirstMatch(in: self, options: [], range: stringRange)

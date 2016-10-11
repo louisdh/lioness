@@ -12,7 +12,7 @@
 		BE3FEBA91DA427800000648D /* Lexer.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3FEBA41DA427800000648D /* Lexer.swift */; };
 		BE3FEBAA1DA427800000648D /* ASTNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3FEBA51DA427800000648D /* ASTNode.swift */; };
 		BE3FEBAB1DA427800000648D /* Parser.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3FEBA61DA427800000648D /* Parser.swift */; };
-		BE3FEBAC1DA427800000648D /* Regex.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3FEBA71DA427800000648D /* Regex.swift */; };
+		BE3FEBAC1DA427800000648D /* String+RegEx.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3FEBA71DA427800000648D /* String+RegEx.swift */; };
 		BE5653641DAAB86F006171B9 /* BytecodeInstructionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE5653631DAAB86F006171B9 /* BytecodeInstructionType.swift */; };
 		BE5653661DAAE7AD006171B9 /* NumberNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE5653651DAAE7AD006171B9 /* NumberNode.swift */; };
 		BE5653681DAAE7BE006171B9 /* VariableNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE5653671DAAE7BD006171B9 /* VariableNode.swift */; };
@@ -45,7 +45,7 @@
 		BE3FEBA41DA427800000648D /* Lexer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Lexer.swift; sourceTree = "<group>"; };
 		BE3FEBA51DA427800000648D /* ASTNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ASTNode.swift; sourceTree = "<group>"; };
 		BE3FEBA61DA427800000648D /* Parser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Parser.swift; sourceTree = "<group>"; };
-		BE3FEBA71DA427800000648D /* Regex.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Regex.swift; sourceTree = "<group>"; };
+		BE3FEBA71DA427800000648D /* String+RegEx.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+RegEx.swift"; sourceTree = "<group>"; };
 		BE5653631DAAB86F006171B9 /* BytecodeInstructionType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BytecodeInstructionType.swift; sourceTree = "<group>"; };
 		BE5653651DAAE7AD006171B9 /* NumberNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NumberNode.swift; sourceTree = "<group>"; };
 		BE5653671DAAE7BD006171B9 /* VariableNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VariableNode.swift; sourceTree = "<group>"; };
@@ -107,7 +107,7 @@
 			isa = PBXGroup;
 			children = (
 				BE3FEBA41DA427800000648D /* Lexer.swift */,
-				BE3FEBA71DA427800000648D /* Regex.swift */,
+				BE3FEBA71DA427800000648D /* String+RegEx.swift */,
 			);
 			name = Lexer;
 			sourceTree = "<group>";
@@ -216,7 +216,7 @@
 				BE5653681DAAE7BE006171B9 /* VariableNode.swift in Sources */,
 				BEF5BA411DAC15B100D9ADB7 /* AssignmentNode.swift in Sources */,
 				BE3FEBAB1DA427800000648D /* Parser.swift in Sources */,
-				BE3FEBAC1DA427800000648D /* Regex.swift in Sources */,
+				BE3FEBAC1DA427800000648D /* String+RegEx.swift in Sources */,
 				BE5653701DAAE822006171B9 /* FunctionNode.swift in Sources */,
 				BE9369FC1DA83AB000C0B3DF /* BytecodeCompiler.swift in Sources */,
 				BE3FEBA91DA427800000648D /* Lexer.swift in Sources */,
