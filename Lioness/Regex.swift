@@ -24,14 +24,20 @@ public extension String {
 		guard let expression = try? NSRegularExpression(pattern: "^\(regex)", options: []) else {
 			return nil
 		}
-
-        let range = expression.rangeOfFirstMatch(in: self, options: [], range: NSMakeRange(0, self.utf16.count))
 		
-        if range.location != NSNotFound {
-            return (self as NSString).substring(with: range)
-        }
-		
-        return nil
+		return match(withRegEx: expression)
     }
+	
+	public func match(withRegEx regEx: NSRegularExpression) -> String? {
+		
+		let stringRange = NSRange(location: 0, length: self.characters.count)
+		let rangeOfFirstMatch = regEx.rangeOfFirstMatch(in: self, options: [], range: stringRange)
+		
+		if rangeOfFirstMatch.location != NSNotFound {
+			return (self as NSString).substring(with: rangeOfFirstMatch)
+		}
+		
+		return nil
+	}
 	
 }
