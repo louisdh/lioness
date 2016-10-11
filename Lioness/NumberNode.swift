@@ -16,7 +16,7 @@ public class NumberNode: ASTNode, Equatable {
 		self.value = value
 	}
 	
-	public override func compile(_ ctx: BytecodeCompiler) -> [BytecodeInstruction] {
+	public override func compile(_ ctx: BytecodeCompiler) throws -> [BytecodeInstruction] {
 		
 		let i = self.value
 		let label = ctx.nextIndexLabel()

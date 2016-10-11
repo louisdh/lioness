@@ -21,6 +21,8 @@ enum ParseError: Error {
 public class Parser {
 	
 	fileprivate let tokens: [Token]
+	
+	/// Token index
 	fileprivate var index = 0
 	
 	init(tokens: [Token]) {
@@ -38,14 +40,30 @@ public class Parser {
 		
 		while index < tokens.count {
 			
-			switch peekCurrentToken() {
+			guard let currentToken = peekCurrentToken() else {
+				continue
+			}
+			
+			switch currentToken {
+				
 				case .function:
 					let node = try parseFunction()
 					nodes.append(node)
-					
+				
 				default:
-					let expr = try parseExpression()
-					nodes.append(expr)
+					
+					if shouldParseAssignment() {
+						
+						let assign = try parseAssignment()
+						nodes.append(assign)
+						
+					} else {
+						
+						let expr = try parseExpression()
+						nodes.append(expr)
+					
+					}
+				
 			}
 			
 		}
@@ -56,8 +74,22 @@ public class Parser {
 	// MARK: -
 	// MARK: Private
 	
-	fileprivate func peekCurrentToken() -> Token {
-		return tokens[index]
+	fileprivate let operatorPrecedence: [String: Int] = [
+		"+": 20,
+		"-": 20,
+		"*": 40,
+		"/": 40,
+		"^": 60
+	]
+
+	// MARK: Tokens
+
+	fileprivate func peekCurrentToken() -> Token? {
+		return tokens[safe: index]
+	}
+	
+	fileprivate func peekNextToken() -> Token? {
+		return tokens[safe: index + 1]
 	}
 	
 	@discardableResult
@@ -67,6 +99,43 @@ public class Parser {
 		index += 1
 		
 		return t
+	}
+	
+	// MARK: Parsing
+
+	fileprivate func shouldParseAssignment() -> Bool {
+
+		guard let currentToken = peekCurrentToken(), case Token.identifier = currentToken else {
+			return false
+		}
+		
+		guard let nextToken = peekNextToken() else {
+			return false
+		}
+		
+		guard case Token.equals = nextToken else {
+			return false
+		}
+		
+		return true
+		
+	}
+	
+	fileprivate func parseAssignment() throws -> AssignmentNode {
+		
+		guard case let Token.identifier(variable) = popCurrentToken() else {
+			throw ParseError.unexpectedToken
+		}
+		
+		guard case Token.equals = popCurrentToken() else {
+			throw ParseError.expectedCharacter("=")
+		}
+		
+		let exp = try parseExpression()
+		
+		let assign = AssignmentNode(variable: VariableNode(name: variable), value: exp)
+
+		return assign
 	}
 	
 	fileprivate func parseNumber() throws -> ASTNode {
@@ -103,8 +172,8 @@ public class Parser {
 		guard case let Token.identifier(name) = popCurrentToken() else {
 			throw ParseError.unexpectedToken
 		}
-		
-		guard case Token.parensOpen = peekCurrentToken() else {
+
+		guard let currentToken = peekCurrentToken(), case Token.parensOpen = currentToken else {
 			return VariableNode(name: name)
 		}
 		
@@ -112,7 +181,7 @@ public class Parser {
 		
 		var arguments = [ASTNode]()
 		
-		if case Token.parensClose = peekCurrentToken() {
+		if let currentToken = peekCurrentToken(), case Token.parensClose = currentToken {
 		
 		} else {
 			
@@ -120,8 +189,8 @@ public class Parser {
 				
 				let argument = try parseExpression()
 				arguments.append(argument)
-				
-				if case Token.parensClose = peekCurrentToken() {
+
+				if let currentToken = peekCurrentToken(), case Token.parensClose = currentToken {
 					break
 				}
 				
@@ -139,7 +208,11 @@ public class Parser {
 	
 	fileprivate func parsePrimary() throws -> ASTNode {
 		
-		switch peekCurrentToken() {
+		guard let currentToken = peekCurrentToken() else {
+			throw ParseError.unexpectedToken
+		}
+		
+		switch currentToken {
 			case .identifier:
 				return try parseIdentifier()
 			case .number:
@@ -152,20 +225,12 @@ public class Parser {
 		
 	}
 	
-	fileprivate let operatorPrecedence: [String: Int] = [
-		"+": 20,
-		"-": 20,
-		"*": 40,
-		"/": 40,
-		"^": 60
-	]
-	
 	fileprivate func getCurrentTokenPrecedence() throws -> Int {
 		guard index < tokens.count else {
 			return -1
 		}
 		
-		guard case let Token.other(op) = peekCurrentToken() else {
+		guard let currentToken = peekCurrentToken(), case let Token.other(op) = currentToken else {
 			return -1
 		}
 		
@@ -214,11 +279,11 @@ public class Parser {
 		}
 		
 		var argumentNames = [String]()
-		while case let Token.identifier(name) = peekCurrentToken() {
+		while let currentToken = peekCurrentToken(), case let Token.identifier(name) = currentToken {
 			popCurrentToken()
 			argumentNames.append(name)
 			
-			if case Token.parensClose = peekCurrentToken() {
+			if let currentToken = peekCurrentToken(), case Token.parensClose = currentToken {
 				break
 			}
 			
@@ -247,11 +312,20 @@ public class Parser {
 		var body = [ASTNode]()
 
 		while index < tokens.count {
-
-			let expr = try parseExpression()
-			body.append(expr)
-
-			if case Token.curlyClose = peekCurrentToken() {
+			
+			if shouldParseAssignment() {
+				
+				let assign = try parseAssignment()
+				body.append(assign)
+				
+			} else {
+				
+				let expr = try parseExpression()
+				body.append(expr)
+				
+			}
+			
+			if let currentToken = peekCurrentToken(), case Token.curlyClose = currentToken {
 				break
 			}
 			

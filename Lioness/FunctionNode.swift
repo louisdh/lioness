@@ -18,6 +18,19 @@ public class FunctionNode: ASTNode {
 		self.body = body
 	}
 	
+	public override func compile(_ ctx: BytecodeCompiler) throws -> [BytecodeInstruction] {
+		
+		var bytecode = [BytecodeInstruction]()
+	
+		for a in body {
+			let instructions = try a.compile(ctx)
+			bytecode.append(contentsOf: instructions)
+		}
+	
+		return bytecode
+		
+	}
+	
 	public override var description: String {
 		
 		var str = "FunctionNode(prototype: \(prototype), body: ["

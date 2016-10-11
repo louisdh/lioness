@@ -22,6 +22,9 @@ enum BytecodeInstructionType: String {
 	case div = "div"
 	case pow = "pow"
 	case goto = "goto"
+	case registerStore = "reg_store"
+	case registerClear = "reg_clear"
+	case registerLoad = "reg_load"
 	
 	// TODO: To be implemented
 //	case invokeFunc = "invoke_func"

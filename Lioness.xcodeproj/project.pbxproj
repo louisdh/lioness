@@ -22,6 +22,7 @@
 		BE56536E1DAAE7D8006171B9 /* PrototypeNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE56536D1DAAE7D8006171B9 /* PrototypeNode.swift */; };
 		BE5653701DAAE822006171B9 /* FunctionNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE56536F1DAAE822006171B9 /* FunctionNode.swift */; };
 		BE9369FC1DA83AB000C0B3DF /* BytecodeCompiler.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE9369FB1DA83AB000C0B3DF /* BytecodeCompiler.swift */; };
+		BEF5BA411DAC15B100D9ADB7 /* AssignmentNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEF5BA401DAC15B100D9ADB7 /* AssignmentNode.swift */; };
 		BEFFCB901DAA77AE001EF8E4 /* BytecodeInterpreter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEFFCB8F1DAA77AE001EF8E4 /* BytecodeInterpreter.swift */; };
 /* End PBXBuildFile section */
 
@@ -56,6 +57,7 @@
 		BE56536F1DAAE822006171B9 /* FunctionNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FunctionNode.swift; sourceTree = "<group>"; };
 		BE68520E1DAA73A200026418 /* B.lion */ = {isa = PBXFileReference; explicitFileType = text.json; fileEncoding = 4; path = B.lion; sourceTree = "<group>"; };
 		BE9369FB1DA83AB000C0B3DF /* BytecodeCompiler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BytecodeCompiler.swift; sourceTree = "<group>"; };
+		BEF5BA401DAC15B100D9ADB7 /* AssignmentNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AssignmentNode.swift; sourceTree = "<group>"; };
 		BEFFCB8E1DAA744B001EF8E4 /* C.lion */ = {isa = PBXFileReference; explicitFileType = text.json; fileEncoding = 4; path = C.lion; sourceTree = "<group>"; };
 		BEFFCB8F1DAA77AE001EF8E4 /* BytecodeInterpreter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BytecodeInterpreter.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -127,10 +129,11 @@
 				BE3FEBA51DA427800000648D /* ASTNode.swift */,
 				BE5653651DAAE7AD006171B9 /* NumberNode.swift */,
 				BE5653671DAAE7BD006171B9 /* VariableNode.swift */,
+				BEF5BA401DAC15B100D9ADB7 /* AssignmentNode.swift */,
 				BE5653691DAAE7C6006171B9 /* BinaryOpNode.swift */,
 				BE56536B1DAAE7CF006171B9 /* CallNode.swift */,
-				BE56536D1DAAE7D8006171B9 /* PrototypeNode.swift */,
 				BE56536F1DAAE822006171B9 /* FunctionNode.swift */,
+				BE56536D1DAAE7D8006171B9 /* PrototypeNode.swift */,
 			);
 			name = AST;
 			sourceTree = "<group>";
@@ -214,6 +217,7 @@
 			files = (
 				BE5653661DAAE7AD006171B9 /* NumberNode.swift in Sources */,
 				BE5653681DAAE7BE006171B9 /* VariableNode.swift in Sources */,
+				BEF5BA411DAC15B100D9ADB7 /* AssignmentNode.swift in Sources */,
 				BE3FEBAD1DA427800000648D /* String.swift in Sources */,
 				BE3FEBAB1DA427800000648D /* Parser.swift in Sources */,
 				BE3FEBAC1DA427800000648D /* Regex.swift in Sources */,

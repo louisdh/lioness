@@ -17,6 +17,7 @@ public class BytecodeInterpreter {
 	fileprivate let bytecode: [BytecodeInstruction]
 	
 	fileprivate var stack = [Float]()
+	fileprivate var registers = [String : Float]()
 	
 	init(bytecode: [BytecodeInstruction]) {
 		self.bytecode = bytecode
@@ -39,6 +40,9 @@ public class BytecodeInterpreter {
 	
 	func interpret() throws {
 		
+		stack = [Float]()
+		registers = [String : Float]()
+		
 		// Program counter
 		var pc = 0
 		
@@ -51,6 +55,7 @@ public class BytecodeInterpreter {
 		}
 		
 		print("Stack at end of execution:\n\(stack)")
+		print("Registers at end of execution:\n\(registers)")
 		
 	}
 	
@@ -80,7 +85,17 @@ public class BytecodeInterpreter {
 				
 			case .goto:
 				newPc = try executeGoto(instruction)
-				
+			
+			case .registerStore:
+				newPc = try executeStore(instruction, pc: pc)
+			
+			case .registerClear:
+				newPc = try executeRegisterClear(instruction, pc: pc)
+			
+			case .registerLoad:
+				newPc = try executeRegisterLoad(instruction, pc: pc)
+			
+			
 		}
 		
 		return newPc
@@ -154,6 +169,44 @@ public class BytecodeInterpreter {
 
 		return newPc
 	}
+	
+	fileprivate func executeStore(_ instruction: BytecodeInstruction, pc: Int) throws -> Int {
+		
+		guard let reg = instruction.arguments[safe: 0] else {
+			throw InterpreterError.unexpectedArgument
+		}
+		
+		registers[reg] = pop()
+		
+		return pc + 1
+	}
+	
+	fileprivate func executeRegisterClear(_ instruction: BytecodeInstruction, pc: Int) throws -> Int {
+
+		guard let reg = instruction.arguments[safe: 0] else {
+			throw InterpreterError.unexpectedArgument
+		}
+		
+		registers.removeValue(forKey: reg)
+		
+		return pc + 1
+	}
+	
+	fileprivate func executeRegisterLoad(_ instruction: BytecodeInstruction, pc: Int) throws -> Int {
+		
+		guard let reg = instruction.arguments[safe: 0] else {
+			throw InterpreterError.unexpectedArgument
+		}
+		
+		guard let regValue = registers[reg] else {
+			throw InterpreterError.unexpectedArgument
+		}
+		
+		push(regValue)
+		
+		return pc + 1
+	}
+	
 	
 	fileprivate func pop() -> Float {
 		let last = stack.removeLast()

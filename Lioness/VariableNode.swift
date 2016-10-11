@@ -16,6 +16,18 @@ public class VariableNode: ASTNode {
 		self.name = name
 	}
 	
+	public override func compile(_ ctx: BytecodeCompiler) throws -> [BytecodeInstruction] {
+		
+		var bytecode = [BytecodeInstruction]()
+
+		let load = BytecodeInstruction(label: ctx.nextIndexLabel(), type: .registerLoad, arguments: [name])
+		
+		bytecode.append(load)
+		
+		return bytecode
+		
+	}
+	
 	public override var description: String {
 		return "VariableNode(\(name))"
 	}
