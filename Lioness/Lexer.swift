@@ -8,39 +8,50 @@
 
 import Foundation
 
-public enum Token {
-    case ifStatement
-    case identifier(String)
-    case number(Float)
-    case parensOpen
-    case parensClose
-	case curlyOpen
-	case curlyClose
-    case comma
-	case equals
-	case plus
-	case function
-    case other(String)
-}
-
 public class Lexer {
 	
-	typealias TokenGenerator = (String) -> Token?
+	fileprivate static let keywordTokens: [String : Token] = [
+		"func": .function,
+		"while": .while,
+		"if": .if
+	]
 	
+	fileprivate typealias TokenGenerator = (String) -> Token?
+
 	fileprivate let tokenList: [(String, TokenGenerator)] = [
 		("[ \t\n]", { _ in nil }),
 		
-		// Prefer keywords over identifiers
+		("[a-zA-Z][a-zA-Z0-9]*", {
+			
+			// Prefer keywords over identifiers
+			if let t = Lexer.keywordTokens[$0] {
+				return t
+			} else {
+				return .identifier($0)
+			}
+		}),
+
+		("-*[0-9,\\.]+", { (r: String) in .number((r as NSString).floatValue) }),
 		
-		("[a-zA-Z][a-zA-Z0-9]*", { $0 == "func" ? .function : .identifier($0) }),
-
-//		("[a-zA-Z][a-zA-Z0-9]*", { $0 == "if" ? .ifStatement : .identifier($0) }),
-
-		("[0-9.]+", { (r: String) in .number((r as NSString).floatValue) }),
 		("\\(", { _ in .parensOpen }),
 		("\\)", { _ in .parensClose }),
 		("\\{", { _ in .curlyOpen }),
 		("\\}", { _ in .curlyClose }),
+		
+		("==", { _ in .comparatorEqual }),
+		("!=", { _ in .notEqual }),
+		
+		(">", { _ in .comparatorGreaterThan }),
+		("<", { _ in .comparatorLessThan }),
+		(">=", { _ in .comparatorGreaterThanEqual }),
+		("<=", { _ in .comparatorLessThanEqual }),
+		
+		("\\+=", { _ in .shortHandAdd }),
+		("\\-=", { _ in .shortHandSub }),
+		("\\*=", { _ in .shortHandMul }),
+		("\\/=", { _ in .shortHandDiv }),
+		("\\^=", { _ in .shortHandPow }),
+
 		("=", { _ in .equals }),
 		(",", { _ in .comma }),
 	]

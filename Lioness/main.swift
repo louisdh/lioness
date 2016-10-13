@@ -215,5 +215,5 @@ class Lioness {
 }
 
 let lioness = Lioness(printDebug: true)
-try lioness.runSource(atPath: "/Users/louisdhauwe/Desktop/Swift/Lioness/Lioness/A.lion")
+try lioness.runSource(atPath: "/Users/louisdhauwe/Desktop/Swift/Lioness/Lioness/C.lion")
 

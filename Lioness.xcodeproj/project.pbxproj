@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		BE04D63A1DA99FC800DAEB84 /* BytecodeInstruction.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE04D6391DA99FC800DAEB84 /* BytecodeInstruction.swift */; };
+		BE295CE31DAD87990019EC57 /* Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE295CE21DAD87990019EC57 /* Token.swift */; };
 		BE3FEB9A1DA425A30000648D /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3FEB991DA425A30000648D /* main.swift */; };
 		BE3FEBA91DA427800000648D /* Lexer.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3FEBA41DA427800000648D /* Lexer.swift */; };
 		BE3FEBAA1DA427800000648D /* ASTNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3FEBA51DA427800000648D /* ASTNode.swift */; };
@@ -40,6 +41,7 @@
 /* Begin PBXFileReference section */
 		BE04D6391DA99FC800DAEB84 /* BytecodeInstruction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BytecodeInstruction.swift; sourceTree = "<group>"; };
 		BE04D63B1DAA72D900DAEB84 /* A.lion */ = {isa = PBXFileReference; explicitFileType = text.json; fileEncoding = 4; path = A.lion; sourceTree = "<group>"; };
+		BE295CE21DAD87990019EC57 /* Token.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Token.swift; sourceTree = "<group>"; };
 		BE3FEB961DA425A30000648D /* Lioness */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Lioness; sourceTree = BUILT_PRODUCTS_DIR; };
 		BE3FEB991DA425A30000648D /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		BE3FEBA41DA427800000648D /* Lexer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Lexer.swift; sourceTree = "<group>"; };
@@ -106,6 +108,7 @@
 		BE3FEBA01DA426150000648D /* Lexer */ = {
 			isa = PBXGroup;
 			children = (
+				BE295CE21DAD87990019EC57 /* Token.swift */,
 				BE3FEBA41DA427800000648D /* Lexer.swift */,
 				BE3FEBA71DA427800000648D /* String+RegEx.swift */,
 			);
@@ -227,6 +230,7 @@
 				BE56536E1DAAE7D8006171B9 /* PrototypeNode.swift in Sources */,
 				BE3FEB9A1DA425A30000648D /* main.swift in Sources */,
 				BEFFCB901DAA77AE001EF8E4 /* BytecodeInterpreter.swift in Sources */,
+				BE295CE31DAD87990019EC57 /* Token.swift in Sources */,
 				BE56536C1DAAE7D0006171B9 /* CallNode.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
