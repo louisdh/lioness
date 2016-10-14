@@ -40,6 +40,8 @@ public enum Token {
 	case `while`
 	case `if`
 	case function
+	case `true`
+	case `false`
 	
 	// Fallback
 	case other(String)

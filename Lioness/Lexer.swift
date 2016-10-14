@@ -13,7 +13,9 @@ public class Lexer {
 	fileprivate static let keywordTokens: [String : Token] = [
 		"func": .function,
 		"while": .while,
-		"if": .if
+		"if": .if,
+		"true": .true,
+		"false": .false
 	]
 	
 	fileprivate typealias TokenGenerator = (String) -> Token?
@@ -30,8 +32,9 @@ public class Lexer {
 				return .identifier($0)
 			}
 		}),
-
-		("-*[0-9,\\.]+", { (r: String) in .number((r as NSString).floatValue) }),
+		
+		// Don't worry about empty matches, tokenize() will ignore those
+		("(-?[0-9]?+(,[0-9]+)*(\\.[0-9]+(e-?[0-9]+)?)?)", { (r: String) in .number(Float(r) ?? 0.0) }),
 		
 		("\\(", { _ in .parensOpen }),
 		("\\)", { _ in .parensClose }),
@@ -74,6 +77,10 @@ public class Lexer {
             for (pattern, generator) in tokenList {
 				
 				if let m = content.firstMatch(withRegExPattern: pattern) {
+					
+					if m.isEmpty {
+						continue
+					}
 					
                     if let t = generator(m) {
                         tokens.append(t)
