@@ -21,14 +21,45 @@ class Lioness_Tests: XCTestCase {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
         super.tearDown()
     }
-    
-    func testExample() {
-        let source = "a = 0.3"
+	
+	func testLexerAssignment() {
+		
+		// Test "a = 0.3" lexing in various number notations
+		testLexerAssignment(withSource: "a = 0.3")
+		testLexerAssignment(withSource: "a = .3")
+		testLexerAssignment(withSource: "a = 3.0e-1")
+		
+	}
+	
+	/// Test Lexer with input: "a = 0.3"
+	func testLexerAssignment(withSource source: String) {
 		
 		let lexer = Lexer(input: source)
 		let tokens = lexer.tokenize()
-		
+
 		assert(tokens.count == 3)
+		
+		let token1 = tokens[0]
+		let token2 = tokens[1]
+		let token3 = tokens[2]
+		
+		if case let Token.identifier(t1) = token1 {
+			XCTAssert(t1 == "a", "Expected identifier 'a'")
+		} else {
+			XCTAssert(false, "Expected identifier 'a'")
+		}
+		
+		if case Token.equals = token2 {
+
+		} else {
+			XCTAssert(false, "Expected equals")
+		}
+		
+		if case let Token.number(t3) = token3 {
+			XCTAssert(t3 == 0.3, "Expected number '0.3'")
+		} else {
+			XCTAssert(false, "Expected number '0.3'")
+		}
 		
     }
     

@@ -61,12 +61,12 @@
 			isa = PBXGroup;
 			children = (
 				BE1412A51DB2544E00DAA385 /* Examples */,
+				BE1412A31DB2540800DAA385 /* LionessRunner.swift */,
 				BE1412941DB253D300DAA385 /* AppDelegate.swift */,
 				BE1412961DB253D300DAA385 /* ViewController.swift */,
 				BE1412981DB253D300DAA385 /* Assets.xcassets */,
 				BE14129A1DB253D400DAA385 /* Main.storyboard */,
 				BE14129D1DB253D400DAA385 /* Info.plist */,
-				BE1412A31DB2540800DAA385 /* LionessRunner.swift */,
 			);
 			path = "macOS Example";
 			sourceTree = "<group>";
@@ -313,6 +313,7 @@
 				BE1412A21DB253D400DAA385 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
