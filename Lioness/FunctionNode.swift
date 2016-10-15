@@ -13,7 +13,7 @@ public class FunctionNode: ASTNode {
 	public let prototype: PrototypeNode
 	public let body: [ASTNode]
 	
-	init(prototype: PrototypeNode, body: [ASTNode]) {
+	public init(prototype: PrototypeNode, body: [ASTNode]) {
 		self.prototype = prototype
 		self.body = body
 	}

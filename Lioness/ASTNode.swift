@@ -8,7 +8,7 @@
 
 import Foundation
 
-enum CompileError: Error {
+public enum CompileError: Error {
 	case unexpectedCommand
 }
 

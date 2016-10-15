@@ -12,7 +12,7 @@ public class VariableNode: ASTNode {
 	
 	public let name: String
 	
-	init(name: String) {
+	public init(name: String) {
 		self.name = name
 	}
 	

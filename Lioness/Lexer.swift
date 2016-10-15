@@ -61,7 +61,7 @@ public class Lexer {
 	
 	fileprivate let input: String
 	
-	init(input: String) {
+	public init(input: String) {
         self.input = input
     }
 	

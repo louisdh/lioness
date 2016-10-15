@@ -8,7 +8,7 @@
 
 import Foundation
 
-enum ParseError: Error {
+public enum ParseError: Error {
 	case unexpectedToken
 	case undefinedOperator(String)
 	
@@ -25,14 +25,14 @@ public class Parser {
 	/// Token index
 	fileprivate var index = 0
 	
-	init(tokens: [Token]) {
+	public init(tokens: [Token]) {
 		self.tokens = tokens
 	}
 	
 	// MARK: -
 	// MARK: Public
 	
-	func parse() throws -> [ASTNode] {
+	public func parse() throws -> [ASTNode] {
 		
 		index = 0
 		

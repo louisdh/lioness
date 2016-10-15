@@ -4,6 +4,11 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
+		<key>Lioness Tests.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>1</integer>
+		</dict>
 		<key>Lioness.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
@@ -12,7 +17,27 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
+		<key>BE2296271DB16EE800EA477A</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>BE295CE71DB14DCE0019EC57</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>BE3FEB951DA425A30000648D</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>BEF913A91DB151610075C6CC</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>BEF913C61DB16AE20075C6CC</key>
 		<dict>
 			<key>primary</key>
 			<true/>

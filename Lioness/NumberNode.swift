@@ -12,7 +12,7 @@ public class NumberNode: ASTNode, Equatable {
 	
 	public let value: Float
 	
-	init(value: Float) {
+	public init(value: Float) {
 		self.value = value
 	}
 	

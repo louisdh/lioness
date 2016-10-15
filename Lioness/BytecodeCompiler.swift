@@ -15,14 +15,14 @@ public class BytecodeCompiler {
 	
 	fileprivate var stack = [Int]()
 	
-	init(ast: [ASTNode]) {
+	public init(ast: [ASTNode]) {
 		self.ast = ast
 	}
 	
 	// MARK: -
 	// MARK: Public
 	
-	func compile() throws -> [BytecodeInstruction] {
+	public func compile() throws -> [BytecodeInstruction] {
 
 		stack = [Int]()
 		

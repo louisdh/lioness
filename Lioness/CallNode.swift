@@ -13,7 +13,7 @@ public class CallNode: ASTNode {
 	public let callee: String
 	public let arguments: [ASTNode]
 	
-	init(callee: String, arguments: [ASTNode]) {
+	public init(callee: String, arguments: [ASTNode]) {
 		self.callee = callee
 		self.arguments = arguments
 	}

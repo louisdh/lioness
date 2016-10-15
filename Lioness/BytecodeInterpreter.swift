@@ -8,7 +8,7 @@
 
 import Foundation
 
-enum InterpreterError: Error {
+public enum InterpreterError: Error {
 	case unexpectedArgument
 }
 
@@ -19,11 +19,11 @@ public class BytecodeInterpreter {
 	fileprivate var stack = [Float]()
 	fileprivate var registers = [String : Float]()
 	
-	init(bytecode: [BytecodeInstruction]) {
+	public init(bytecode: [BytecodeInstruction]) {
 		self.bytecode = bytecode
 	}
 	
-	init?(bytecodeStrings: [String]) {
+	public init?(bytecodeStrings: [String]) {
 		
 		var bytecode = [BytecodeInstruction]()
 		
@@ -38,7 +38,7 @@ public class BytecodeInterpreter {
 		self.bytecode = bytecode
 	}
 	
-	func interpret() throws {
+	public func interpret() throws {
 		
 		stack = [Float]()
 		registers = [String : Float]()

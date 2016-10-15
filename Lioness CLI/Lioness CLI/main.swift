@@ -1,13 +1,14 @@
 //
 //  main.swift
-//  Lioness
+//  Lioness CLI
 //
 //  Created by Louis D'hauwe on 04/10/2016.
 //  Copyright © 2016 Silver Fox. All rights reserved.
 //
 
 import Foundation
-
+import AppKit
+import Lioness
 
 class Lioness {
 	
@@ -27,7 +28,7 @@ class Lioness {
 	func runSource(_ source: String) {
 		
 		let startTime = CFAbsoluteTimeGetCurrent()
-
+		
 		if printDebug {
 			printSourceCode(source)
 		}
@@ -35,7 +36,7 @@ class Lioness {
 		runLionessSourceCode(source)
 		
 		if printDebug {
-
+			
 			let timeElapsed = CFAbsoluteTimeGetCurrent() - startTime
 			print("\nTotal execution time: \(timeElapsed)ms")
 			
@@ -70,11 +71,11 @@ class Lioness {
 		}
 		
 	}
-
+	
 	fileprivate func runLexer(withSource source: String) -> [Token] {
 		
 		if printDebug {
-
+			
 			print("\n================================")
 			print("Start lexer")
 			print("================================\n")
@@ -85,13 +86,13 @@ class Lioness {
 		let tokens = lexer.tokenize()
 		
 		if printDebug {
-
+			
 			print("Number of tokens: \(tokens.count)")
 			
 			for t in tokens {
 				print(t)
 			}
-
+			
 		}
 		
 		return tokens
@@ -115,7 +116,7 @@ class Lioness {
 			ast = try parser.parse()
 			
 			if printDebug {
-
+				
 				print("Parsed AST:")
 				
 				if let ast = ast {
@@ -129,13 +130,13 @@ class Lioness {
 			return ast
 			
 		} catch {
-		
+			
 			if printDebug {
 				print(error)
 			}
 			
 			return nil
-
+			
 		}
 		
 	}
@@ -143,11 +144,11 @@ class Lioness {
 	fileprivate func compileToBytecode(ast: [ASTNode]) -> [BytecodeInstruction]? {
 		
 		if printDebug {
-
+			
 			print("\n================================")
 			print("Start bytecode compiler")
 			print("================================\n")
-
+			
 		}
 		
 		let bytecodeCompiler = BytecodeCompiler(ast: ast)
@@ -159,7 +160,7 @@ class Lioness {
 			bytecode = try bytecodeCompiler.compile()
 			
 			if printDebug {
-
+				
 				if let bytecode = bytecode {
 					for b in bytecode {
 						print(b.description)
@@ -173,9 +174,9 @@ class Lioness {
 		} catch {
 			
 			if printDebug {
-
+				
 				print(error)
-
+				
 			}
 			
 			return nil
@@ -187,11 +188,11 @@ class Lioness {
 	fileprivate func interpretBytecode(_ bytecode: [BytecodeInstruction]) {
 		
 		if printDebug {
-
+			
 			print("\n================================")
 			print("Start bytecode interpreter")
 			print("================================\n")
-
+			
 		}
 		
 		let interpreter = BytecodeInterpreter(bytecode: bytecode)
@@ -203,9 +204,9 @@ class Lioness {
 		} catch {
 			
 			if printDebug {
-
+				
 				print(error)
-
+				
 			}
 			
 		}

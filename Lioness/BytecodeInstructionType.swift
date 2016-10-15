@@ -13,7 +13,7 @@ import Foundation
 /// Enum cases are lower camel case (per Swift guideline)
 ///
 /// Instruction commands are lower snake case
-enum BytecodeInstructionType: String {
+public enum BytecodeInstructionType: String {
 	
 	case pushConst = "push_const"
 	case add = "add"
@@ -29,7 +29,7 @@ enum BytecodeInstructionType: String {
 	// TODO: To be implemented
 //	case invokeFunc = "invoke_func"
 	
-	var command: String {
+	public var command: String {
 		return self.rawValue
 	}
 	

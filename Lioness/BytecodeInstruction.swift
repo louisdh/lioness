@@ -8,7 +8,7 @@
 
 import Foundation
 
-enum BytecodeInstructionError: Error {
+public enum BytecodeInstructionError: Error {
 	case invalidDecoding
 }
 
@@ -20,7 +20,7 @@ public class BytecodeInstruction: CustomStringConvertible {
 	
 	// TODO: Comment support (';' as marker?)
 	
-	init(instructionString: String) throws {
+	public init(instructionString: String) throws {
 		
 		let substrings = instructionString.components(separatedBy: " ")
 		

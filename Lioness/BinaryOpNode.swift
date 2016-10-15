@@ -14,7 +14,7 @@ public class BinaryOpNode: ASTNode {
 	public let lhs: ASTNode
 	public let rhs: ASTNode
 	
-	init(op: String, lhs: ASTNode, rhs: ASTNode) {
+	public init(op: String, lhs: ASTNode, rhs: ASTNode) {
 		self.op = op
 		self.lhs = lhs
 		self.rhs = rhs

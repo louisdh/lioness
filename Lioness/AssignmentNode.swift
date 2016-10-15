@@ -13,7 +13,7 @@ public class AssignmentNode: ASTNode {
 	public let variable: VariableNode
 	public let value: ASTNode
 	
-	init(variable: VariableNode, value: ASTNode) {
+	public init(variable: VariableNode, value: ASTNode) {
 		self.variable = variable
 		self.value = value
 	}
