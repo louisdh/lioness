@@ -10,6 +10,9 @@ import Foundation
 
 public enum Token {
 	
+	/// Token which has no effect on program, such as white space
+	case ignoreableToken
+	
 	case identifier(String)
 	case number(Float)
 	

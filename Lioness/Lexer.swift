@@ -23,7 +23,7 @@ public class Lexer {
 	/// The order of this list is important,
 	/// e.g. match identifiers before numbers
 	fileprivate let tokenList: [(String, TokenGenerator)] = [
-		("[ \t\n]", { _ in nil }),
+		("[ \t\n]", { _ in .ignoreableToken }),
 		
 		("[a-zA-Z][a-zA-Z0-9]*", {
 			
@@ -36,7 +36,14 @@ public class Lexer {
 		}),
 		
 		// Don't worry about empty matches, tokenize() will ignore those
-		("(-?[0-9]?+(,[0-9]+)*(\\.[0-9]+(e-?[0-9]+)?)?)", { (r: String) in .number(Float(r) ?? 0.0) }),
+		("(-?[0-9]?+(,[0-9]+)*(\\.[0-9]+(e-?[0-9]+)?)?)", {
+			
+			if let f = Float($0) {
+				return .number(f)
+			}
+		
+			return nil
+		}),
 		
 		("\\(", { _ in .parensOpen }),
 		("\\)", { _ in .parensClose }),
@@ -89,12 +96,19 @@ public class Lexer {
 					}
 					
                     if let t = generator(m) {
-                        tokens.append(t)
-                    }
+						
+						if case Token.ignoreableToken = t {
+						
+						} else {
+							tokens.append(t)
+						}
+						
+						content = content.substring(from: content.characters.index(content.startIndex, offsetBy: m.characters.count))
+						matched = true
+						
+						break
 
-                    content = content.substring(from: content.characters.index(content.startIndex, offsetBy: m.characters.count))
-                    matched = true
-                    break
+					}
 					
                 }
 				

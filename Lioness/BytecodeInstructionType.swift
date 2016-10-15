@@ -30,6 +30,7 @@ public enum BytecodeInstructionType: String {
 	case neq = "neq"
 
 	case goto = "goto"
+	
 	case registerStore = "reg_store"
 	case registerClear = "reg_clear"
 	case registerLoad = "reg_load"

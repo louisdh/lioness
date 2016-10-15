@@ -137,9 +137,9 @@ public class BytecodeInterpreter {
 	}
 	
 	fileprivate func executeSub(pc: Int) -> Int {
-		
-		let lhs = pop()
+
 		let rhs = pop()
+		let lhs = pop()
 		
 		push(lhs - rhs)
 		

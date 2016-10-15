@@ -1,4 +1,1 @@
-a = false
-b = true
-c = a != b
-d = a == b
+a = 5 * 3 - 3
