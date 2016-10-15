@@ -16,8 +16,8 @@ public class BytecodeInterpreter {
 	
 	fileprivate let bytecode: [BytecodeInstruction]
 	
-	fileprivate var stack = [Float]()
-	fileprivate var registers = [String : Float]()
+	fileprivate(set) public var stack = [Float]()
+	fileprivate(set) public var registers = [String : Float]()
 	
 	public init(bytecode: [BytecodeInstruction]) {
 		self.bytecode = bytecode
@@ -53,9 +53,6 @@ public class BytecodeInterpreter {
 			pc = try executeInstruction(instruction, pc: pc)
 			
 		}
-		
-		print("Stack at end of execution:\n\(stack)")
-		print("Registers at end of execution:\n\(registers)")
 		
 	}
 	

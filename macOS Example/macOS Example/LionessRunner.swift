@@ -11,10 +11,10 @@ import Lioness
 
 class Lioness {
 	
-	fileprivate var printDebug: Bool
+	fileprivate var logDebug: Bool
 	
-	init(printDebug: Bool = false) {
-		self.printDebug = printDebug
+	init(logDebug: Bool = false) {
+		self.logDebug = logDebug
 	}
 	
 	func runSource(atPath path: String) throws {
@@ -28,16 +28,16 @@ class Lioness {
 		
 		let startTime = CFAbsoluteTimeGetCurrent()
 		
-		if printDebug {
+		if logDebug {
 			printSourceCode(source)
 		}
 		
 		runLionessSourceCode(source)
 		
-		if printDebug {
+		if logDebug {
 			
 			let timeElapsed = CFAbsoluteTimeGetCurrent() - startTime
-			print("\nTotal execution time: \(timeElapsed)ms")
+			log("\nTotal execution time: \(timeElapsed)ms")
 			
 		}
 		
@@ -61,35 +61,35 @@ class Lioness {
 	
 	fileprivate func printSourceCode(_ source: String) {
 		
-		print("================================")
-		print("Source code")
-		print("================================\n")
+		log("================================")
+		log("Source code")
+		log("================================\n")
 		
 		for s in source.components(separatedBy: "\n") {
-			print(s)
+			log(s)
 		}
 		
 	}
 	
 	fileprivate func runLexer(withSource source: String) -> [Token] {
 		
-		if printDebug {
+		if logDebug {
 			
-			print("\n================================")
-			print("Start lexer")
-			print("================================\n")
+			log("\n================================")
+			log("Start lexer")
+			log("================================\n")
 			
 		}
 		
 		let lexer = Lexer(input: source)
 		let tokens = lexer.tokenize()
 		
-		if printDebug {
+		if logDebug {
 			
-			print("Number of tokens: \(tokens.count)")
+			log("Number of tokens: \(tokens.count)")
 			
 			for t in tokens {
-				print(t)
+				log(t)
 			}
 			
 		}
@@ -100,10 +100,10 @@ class Lioness {
 	
 	fileprivate func parseTokens(_ tokens: [Token]) -> [ASTNode]? {
 		
-		if printDebug {
-			print("\n================================")
-			print("Start parser")
-			print("================================\n")
+		if logDebug {
+			log("\n================================")
+			log("Start parser")
+			log("================================\n")
 		}
 		
 		let parser = Parser(tokens: tokens)
@@ -114,13 +114,13 @@ class Lioness {
 			
 			ast = try parser.parse()
 			
-			if printDebug {
+			if logDebug {
 				
-				print("Parsed AST:")
+				log("Parsed AST:")
 				
 				if let ast = ast {
 					for a in ast {
-						print(a.description)
+						log(a.description)
 					}
 				}
 				
@@ -130,8 +130,8 @@ class Lioness {
 			
 		} catch {
 			
-			if printDebug {
-				print(error)
+			if logDebug {
+				log(error)
 			}
 			
 			return nil
@@ -142,11 +142,11 @@ class Lioness {
 	
 	fileprivate func compileToBytecode(ast: [ASTNode]) -> [BytecodeInstruction]? {
 		
-		if printDebug {
+		if logDebug {
 			
-			print("\n================================")
-			print("Start bytecode compiler")
-			print("================================\n")
+			log("\n================================")
+			log("Start bytecode compiler")
+			log("================================\n")
 			
 		}
 		
@@ -158,11 +158,11 @@ class Lioness {
 			
 			bytecode = try bytecodeCompiler.compile()
 			
-			if printDebug {
+			if logDebug {
 				
 				if let bytecode = bytecode {
 					for b in bytecode {
-						print(b.description)
+						log(b.description)
 					}
 				}
 				
@@ -172,9 +172,9 @@ class Lioness {
 			
 		} catch {
 			
-			if printDebug {
+			if logDebug {
 				
-				print(error)
+				log(error)
 				
 			}
 			
@@ -186,11 +186,11 @@ class Lioness {
 	
 	fileprivate func interpretBytecode(_ bytecode: [BytecodeInstruction]) {
 		
-		if printDebug {
+		if logDebug {
 			
-			print("\n================================")
-			print("Start bytecode interpreter")
-			print("================================\n")
+			log("\n================================")
+			log("Start bytecode interpreter")
+			log("================================\n")
 			
 		}
 		
@@ -200,16 +200,35 @@ class Lioness {
 			
 			try interpreter.interpret()
 			
+			if logDebug {
+
+				log("Stack at end of execution:\n\(interpreter.stack)")
+				log("Registers at end of execution:\n\(interpreter.registers)")
+
+			}
+			
 		} catch {
 			
-			if printDebug {
+			if logDebug {
 				
-				print(error)
+				log(error)
 				
 			}
 			
 		}
 		
+	}
+	
+	fileprivate func log(_ message: String) {
+		print(message)
+	}
+	
+	fileprivate func log(_ error: Error) {
+		print(error)
+	}
+	
+	fileprivate func log(_ token: Token) {
+		print(token)
 	}
 	
 }

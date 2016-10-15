@@ -58,11 +58,11 @@
                   moduleName = "Lioness"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/louisdhauwe/Desktop/Swift/Lioness/Lioness/Parser.swift"
-                  timestampString = "498260951.899744"
+                  timestampString = "498268144.987589"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "502"
-                  endingLineNumber = "502"
+                  startingLineNumber = "524"
+                  endingLineNumber = "524"
                   offsetFromSymbolStart = "162">
                </Location>
                <Location
@@ -73,11 +73,11 @@
                   moduleName = "Lioness"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/louisdhauwe/Desktop/Swift/Lioness/Lioness/Parser.swift"
-                  timestampString = "498260951.90276"
+                  timestampString = "498268144.990532"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "502"
-                  endingLineNumber = "502"
+                  startingLineNumber = "524"
+                  endingLineNumber = "524"
                   offsetFromSymbolStart = "184">
                </Location>
             </Locations>
