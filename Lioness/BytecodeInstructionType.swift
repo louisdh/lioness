@@ -21,6 +21,11 @@ public enum BytecodeInstructionType: String {
 	case mul = "mul"
 	case div = "div"
 	case pow = "pow"
+	
+	case and = "and"
+	case or = "or"
+	case not = "not"
+
 	case goto = "goto"
 	case registerStore = "reg_store"
 	case registerClear = "reg_clear"

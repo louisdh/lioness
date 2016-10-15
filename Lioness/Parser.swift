@@ -81,7 +81,42 @@ public class Parser {
 		"/": 40,
 		"^": 60
 	]
-
+	
+	fileprivate func booleanOperatorString(for token: Token) -> String? {
+	
+		if case Token.booleanOr = token {
+			return "||"
+		}
+		
+		if case Token.booleanAnd = token {
+			return "&&"
+		}
+		
+		if case Token.booleanNot = token {
+			return "!"
+		}
+		
+		return nil
+		
+	}
+	
+	fileprivate func booleanOperatorPrecedence(for token: Token) -> Int? {
+		
+		if case Token.booleanOr = token {
+			return 20
+		}
+		
+		if case Token.booleanAnd = token {
+			return 40
+		}
+		
+		if case Token.booleanNot = token {
+			return 60
+		}
+		
+		return nil
+	}
+	
 	/// Get operator for token (e.g. '+=' returns '+')
 	fileprivate func getOperator(for token: Token) -> String? {
 
@@ -114,8 +149,14 @@ public class Parser {
 		return tokens[safe: index]
 	}
 	
+	/// Look ahead 1 token
 	fileprivate func peekNextToken() -> Token? {
-		return tokens[safe: index + 1]
+		return peekToken(offset: 1)
+	}
+	
+	/// Look ahead
+	fileprivate func peekToken(offset: Int) -> Token? {
+		return tokens[safe: index + offset]
 	}
 	
 	@discardableResult
@@ -128,7 +169,43 @@ public class Parser {
 	}
 	
 	// MARK: Parsing
+	
+	/// Look ahead to check if boolean operator should be parsed
+	fileprivate func shouldParseBooleanOp() -> Bool {
 
+		var i = 0
+		while let tokenAhead = peekToken(offset: i) {
+			
+			if case Token.true = tokenAhead {
+				return true
+			}
+			
+			if case Token.false = tokenAhead {
+				return true
+			}
+			
+			if let _ = booleanOperatorString(for: tokenAhead) {
+				return true
+			}
+			
+			i += 1
+
+			if case Token.parensClose = tokenAhead {
+				continue
+			}
+			
+			if case Token.parensOpen = tokenAhead {
+				continue
+			}
+			
+			return false
+		}
+		
+		return false
+		
+	}
+
+	/// Look ahead to check if assignment should be parsed
 	fileprivate func shouldParseAssignment() -> Bool {
 
 		guard let currentToken = peekCurrentToken(), case Token.identifier = currentToken else {
@@ -197,10 +274,17 @@ public class Parser {
 		
 		}
 		
+		if shouldParseBooleanOp() {
+			
+			let expr = try parseBooleanOp(node)
+			return expr
+			
+		}
 		
 		let expr = try parseBinaryOp(node)
-
+		
 		return expr
+
 	}
 	
 	fileprivate func parseParens() throws -> ASTNode {
@@ -216,6 +300,48 @@ public class Parser {
 		}
 		
 		return exp
+	}
+	
+	fileprivate func parseNotOperation() throws -> ASTNode {
+		
+		guard case Token.booleanNot = popCurrentToken() else {
+			throw ParseError.expectedCharacter("!")
+		}
+		
+		guard let currentToken = peekCurrentToken() else {
+			throw ParseError.unexpectedToken
+		}
+		
+		if case Token.parensOpen = currentToken {
+			
+			let exp = try parseParens()
+			
+			return BooleanOpNode(op: "!", lhs: exp)
+			
+		} else {
+			
+			let lhs: ASTNode
+			
+			switch currentToken {
+				
+				case .identifier:
+					lhs = try parseIdentifier()
+				
+				case .number:
+					lhs = try parseNumber()
+				
+				case .true, .false:
+					lhs = try parseRawBoolean()
+				
+				default:
+					throw ParseError.unexpectedToken
+
+			}
+			
+			return BooleanOpNode(op: "!", lhs: lhs)
+			
+		}
+
 	}
 	
 	fileprivate func parseIdentifier() throws -> ASTNode {
@@ -257,6 +383,8 @@ public class Parser {
 		return CallNode(callee: name, arguments: arguments)
 	}
 	
+	/// Primary can be seen as the start of an operation 
+	/// (e.g. boolean operation), where this function returns the first term
 	fileprivate func parsePrimary() throws -> ASTNode {
 		
 		guard let currentToken = peekCurrentToken() else {
@@ -266,17 +394,46 @@ public class Parser {
 		switch currentToken {
 			case .identifier:
 				return try parseIdentifier()
+		
 			case .number:
 				return try parseNumber()
+
+			case .true, .false:
+				return try parseRawBoolean()
+
+			case .booleanNot:
+				return try parseNotOperation()
+			
 			case .parensOpen:
 				return try parseParens()
+			
 			default:
 				throw ParseError.expectedExpression
 		}
 		
 	}
 	
-	fileprivate func getCurrentTokenPrecedence() throws -> Int {
+	/// Parse "true" or "false"
+	fileprivate func parseRawBoolean() throws -> ASTNode {
+		
+		guard let currentToken = peekCurrentToken() else {
+			throw ParseError.unexpectedToken
+		}
+		
+		if case Token.true = currentToken {
+			popCurrentToken()
+			return BooleanNode(bool: true)
+		}
+		
+		if case Token.false = currentToken {
+			popCurrentToken()
+			return BooleanNode(bool: false)
+		}
+		
+		throw ParseError.unexpectedToken
+	}
+	
+	fileprivate func getCurrentTokenBinaryOpPrecedence() throws -> Int {
 		
 		guard index < tokens.count else {
 			return -1
@@ -293,13 +450,30 @@ public class Parser {
 		return precedence
 	}
 	
+	fileprivate func getCurrentTokenBooleanOpPrecedence() throws -> Int {
+		
+		guard index < tokens.count else {
+			return -1
+		}
+		
+		guard let currentToken = peekCurrentToken() else {
+			return -1
+		}
+		
+		guard let precedence = booleanOperatorPrecedence(for: currentToken) else {
+			return -1
+		}
+		
+		return precedence
+	}
+	
 	fileprivate func parseBinaryOp(_ node: ASTNode, exprPrecedence: Int = 0) throws -> ASTNode {
 		
 		var lhs = node
-
+		
 		while true {
 			
-			let tokenPrecedence = try getCurrentTokenPrecedence()
+			let tokenPrecedence = try getCurrentTokenBinaryOpPrecedence()
 			if tokenPrecedence < exprPrecedence {
 				
 				return lhs
@@ -310,13 +484,42 @@ public class Parser {
 			}
 			
 			var rhs = try parsePrimary()
-			let nextPrecedence = try getCurrentTokenPrecedence()
+			let nextPrecedence = try getCurrentTokenBinaryOpPrecedence()
 			
 			if tokenPrecedence < nextPrecedence {
 				rhs = try parseBinaryOp(rhs, exprPrecedence: tokenPrecedence + 1)
 			}
 			
 			lhs = BinaryOpNode(op: op, lhs: lhs, rhs: rhs)
+			
+		}
+		
+	}
+	
+	fileprivate func parseBooleanOp(_ node: ASTNode, exprPrecedence: Int = 0) throws -> ASTNode {
+		
+		var lhs = node
+		
+		while true {
+			
+			let tokenPrecedence = try getCurrentTokenBooleanOpPrecedence()
+			if tokenPrecedence < exprPrecedence {
+				
+				return lhs
+			}
+			
+			guard let op = booleanOperatorString(for: popCurrentToken()) else {
+				throw ParseError.unexpectedToken
+			}
+			
+			var rhs = try parsePrimary()
+			let nextPrecedence = try getCurrentTokenBooleanOpPrecedence()
+			
+			if tokenPrecedence < nextPrecedence {
+				rhs = try parseBooleanOp(rhs, exprPrecedence: tokenPrecedence + 1)
+			}
+			
+			lhs = BooleanOpNode(op: op, lhs: lhs, rhs: rhs)
 			
 		}
 		

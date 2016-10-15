@@ -82,7 +82,16 @@ public class BytecodeInterpreter {
 				
 			case .pow:
 				newPc = executePow(pc: pc)
-				
+			
+			case .and:
+				newPc = executeAnd(pc: pc)
+			
+			case .or:
+				newPc = executeOr(pc: pc)
+			
+			case .not:
+				newPc = executeNot(pc: pc)
+			
 			case .goto:
 				newPc = try executeGoto(instruction)
 			
@@ -157,6 +166,41 @@ public class BytecodeInterpreter {
 		let lhs = pop()
 		
 		push(pow(lhs, rhs))
+		
+		return pc + 1
+	}
+	
+	fileprivate func executeAnd(pc: Int) -> Int {
+		
+		let rhs = pop() == 1.0
+		let lhs = pop() == 1.0
+		
+		let and: Float = (rhs && lhs) == true ? 1.0 : 0.0
+		
+		push(and)
+		
+		return pc + 1
+	}
+	
+	fileprivate func executeOr(pc: Int) -> Int {
+		
+		let rhs = pop() == 1.0
+		let lhs = pop() == 1.0
+		
+		let and: Float = (rhs || lhs) == true ? 1.0 : 0.0
+		
+		push(and)
+		
+		return pc + 1
+	}
+	
+	fileprivate func executeNot(pc: Int) -> Int {
+		
+		let b = pop() == 1.0
+		
+		let not: Float = (!b) == true ? 1.0 : 0.0
+		
+		push(not)
 		
 		return pc + 1
 	}

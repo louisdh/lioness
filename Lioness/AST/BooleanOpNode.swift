@@ -1,20 +1,22 @@
 //
-//  BinaryOpNode.swift
+//  BooleanOpNode.swift
 //  Lioness
 //
-//  Created by Louis D'hauwe on 09/10/2016.
+//  Created by Louis D'hauwe on 15/10/2016.
 //  Copyright © 2016 Silver Fox. All rights reserved.
 //
 
 import Foundation
 
-public class BinaryOpNode: ASTNode {
+public class BooleanOpNode: ASTNode {
 	
 	public let op: String
 	public let lhs: ASTNode
-	public let rhs: ASTNode
 	
-	public init(op: String, lhs: ASTNode, rhs: ASTNode) {
+	/// Can be nil, e.g. for 'not' operation
+	public let rhs: ASTNode?
+	
+	public init(op: String, lhs: ASTNode, rhs: ASTNode? = nil) {
 		self.op = op
 		self.lhs = lhs
 		self.rhs = rhs
@@ -23,22 +25,23 @@ public class BinaryOpNode: ASTNode {
 	public override func compile(_ ctx: BytecodeCompiler) throws -> [BytecodeInstruction] {
 		
 		let l = try lhs.compile(ctx)
-		let r = try rhs.compile(ctx)
+		let r = try rhs?.compile(ctx)
 		
 		var bytecode = [BytecodeInstruction]()
 		
 		bytecode.append(contentsOf: l)
-		bytecode.append(contentsOf: r)
+		
+		if let r = r {
+			bytecode.append(contentsOf: r)
+		}
 		
 		let label = ctx.nextIndexLabel()
 		
 		var opTypes: [String : BytecodeInstructionType]
 		
-		opTypes = ["+" : .add,
-		           "-" : .sub,
-		           "*" : .mul,
-		           "/" : .div,
-		           "^" : .pow]
+		opTypes = ["&&" : .and,
+		           "||" : .or,
+		           "!" : .not]
 		
 		guard let type = opTypes[op] else {
 			throw CompileError.unexpectedCommand
@@ -53,7 +56,11 @@ public class BinaryOpNode: ASTNode {
 	}
 	
 	public override var description: String {
-		return "BinaryOpNode(\(op), lhs: \(lhs), rhs: \(rhs))"
+		if let rhs = rhs {
+			return "BooleanOpNode(\(op), lhs: \(lhs), rhs: \(rhs))"
+		}
+		
+		return "BooleanOpNode(\(op), lhs: \(lhs)"
 	}
 	
 }

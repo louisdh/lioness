@@ -20,6 +20,8 @@ public class Lexer {
 	
 	fileprivate typealias TokenGenerator = (String) -> Token?
 
+	/// The order of this list is important,
+	/// e.g. match identifiers before numbers
 	fileprivate let tokenList: [(String, TokenGenerator)] = [
 		("[ \t\n]", { _ in nil }),
 		
@@ -40,6 +42,11 @@ public class Lexer {
 		("\\)", { _ in .parensClose }),
 		("\\{", { _ in .curlyOpen }),
 		("\\}", { _ in .curlyClose }),
+		
+		("&&", { _ in .booleanAnd }),
+		("\\|\\|", { _ in .booleanOr }),
+		("!", { _ in .booleanNot }),
+		
 		
 		("==", { _ in .comparatorEqual }),
 		("!=", { _ in .notEqual }),

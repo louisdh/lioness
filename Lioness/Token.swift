@@ -29,6 +29,11 @@ public enum Token {
 	case equals
 	case notEqual
 	
+	// Boolean operators
+	case booleanAnd
+	case booleanOr
+	case booleanNot
+	
 	// Short hand operators
 	case shortHandAdd
 	case shortHandSub
