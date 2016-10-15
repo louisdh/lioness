@@ -25,6 +25,9 @@ public enum BytecodeInstructionType: String {
 	case and = "and"
 	case or = "or"
 	case not = "not"
+	
+	case eq = "eq"
+	case neq = "neq"
 
 	case goto = "goto"
 	case registerStore = "reg_store"

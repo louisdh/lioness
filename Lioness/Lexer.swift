@@ -43,13 +43,12 @@ public class Lexer {
 		("\\{", { _ in .curlyOpen }),
 		("\\}", { _ in .curlyClose }),
 		
+		("==", { _ in .comparatorEqual }),
+		("!=", { _ in .notEqual }),
+		
 		("&&", { _ in .booleanAnd }),
 		("\\|\\|", { _ in .booleanOr }),
 		("!", { _ in .booleanNot }),
-		
-		
-		("==", { _ in .comparatorEqual }),
-		("!=", { _ in .notEqual }),
 		
 		(">", { _ in .comparatorGreaterThan }),
 		("<", { _ in .comparatorLessThan }),

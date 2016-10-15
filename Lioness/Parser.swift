@@ -96,6 +96,14 @@ public class Parser {
 			return "!"
 		}
 		
+		if case Token.comparatorEqual = token {
+			return "=="
+		}
+		
+		if case Token.notEqual = token {
+			return "!="
+		}
+		
 		return nil
 		
 	}
@@ -112,6 +120,14 @@ public class Parser {
 		
 		if case Token.booleanNot = token {
 			return 60
+		}
+		
+		if case Token.comparatorEqual = token {
+			return 10
+		}
+		
+		if case Token.notEqual = token {
+			return 10
 		}
 		
 		return nil

@@ -92,6 +92,12 @@ public class BytecodeInterpreter {
 			case .not:
 				newPc = executeNot(pc: pc)
 			
+			case .eq:
+				newPc = executeEqual(pc: pc)
+				
+			case .neq:
+				newPc = executeNotEqual(pc: pc)
+			
 			case .goto:
 				newPc = try executeGoto(instruction)
 			
@@ -201,6 +207,30 @@ public class BytecodeInterpreter {
 		let not: Float = (!b) == true ? 1.0 : 0.0
 		
 		push(not)
+		
+		return pc + 1
+	}
+	
+	fileprivate func executeEqual(pc: Int) -> Int {
+		
+		let rhs = pop()
+		let lhs = pop()
+		
+		let eq: Float = (lhs == rhs) ? 1.0 : 0.0
+		
+		push(eq)
+		
+		return pc + 1
+	}
+	
+	fileprivate func executeNotEqual(pc: Int) -> Int {
+		
+		let rhs = pop()
+		let lhs = pop()
+		
+		let neq: Float = (lhs != rhs) ? 1.0 : 0.0
+		
+		push(neq)
 		
 		return pc + 1
 	}

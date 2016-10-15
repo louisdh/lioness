@@ -1,3 +1,4 @@
-a = true
-b = false
-c = (a && !b) && (!b)
+a = false
+b = true
+c = a != b
+d = a == b

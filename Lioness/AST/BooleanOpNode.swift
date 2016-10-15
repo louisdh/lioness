@@ -41,6 +41,8 @@ public class BooleanOpNode: ASTNode {
 		
 		opTypes = ["&&" : .and,
 		           "||" : .or,
+		           "==": .eq,
+		           "!=": .neq,
 		           "!" : .not]
 		
 		guard let type = opTypes[op] else {
