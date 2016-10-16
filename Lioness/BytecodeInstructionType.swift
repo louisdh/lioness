@@ -30,6 +30,9 @@ public enum BytecodeInstructionType: String {
 	case eq = "eq"
 	/// Not equals
 	case neq = "neq"
+	
+	case ifTrue = "if_true"
+	case ifFalse = "if_false"
 
 	/// Compare less than or equal
 	case cmple = "cmple"

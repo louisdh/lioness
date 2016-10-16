@@ -115,6 +115,12 @@ public class BytecodeInterpreter {
 			case .registerLoad:
 				newPc = try executeRegisterLoad(instruction, pc: pc)
 		
+			case .ifTrue:
+				newPc = try executeIfTrue(instruction, pc: pc)
+			
+			case .ifFalse:
+				newPc = try executeIfFalse(instruction, pc: pc)
+			
 		}
 		
 		return newPc
@@ -261,6 +267,34 @@ public class BytecodeInterpreter {
 		push(cmp)
 		
 		return pc + 1
+	}
+	
+	fileprivate func executeIfTrue(_ instruction: BytecodeInstruction, pc: Int) throws -> Int {
+		
+		guard let arg = instruction.arguments.first, let newPc = Int(arg) else {
+			throw InterpreterError.unexpectedArgument
+		}
+		
+		if pop() == 1.0 {
+			return newPc
+		}
+		
+		return pc + 1
+		
+	}
+	
+	fileprivate func executeIfFalse(_ instruction: BytecodeInstruction, pc: Int) throws -> Int {
+		
+		guard let arg = instruction.arguments.first, let newPc = Int(arg) else {
+			throw InterpreterError.unexpectedArgument
+		}
+		
+		if pop() == 0.0 {
+			return newPc
+		}
+		
+		return pc + 1
+		
 	}
 	
 	fileprivate func executeGoto(_ instruction: BytecodeInstruction) throws -> Int {

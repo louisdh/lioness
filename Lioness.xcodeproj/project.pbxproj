@@ -28,6 +28,7 @@
 		BE22963E1DB16F2100EA477A /* BytecodeInstructionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE5653631DAAB86F006171B9 /* BytecodeInstructionType.swift */; };
 		BE22963F1DB16F2100EA477A /* BytecodeInterpreter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEFFCB8F1DAA77AE001EF8E4 /* BytecodeInterpreter.swift */; };
 		BE295CEB1DB14DCE0019EC57 /* Lioness_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE295CEA1DB14DCE0019EC57 /* Lioness_Tests.swift */; };
+		BE2CC65F1DB41E4400F74DBE /* ConditionalStatementNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE2CC65E1DB41E4400F74DBE /* ConditionalStatementNode.swift */; };
 		BEAD9A7F1DB3A1A000A6DDC1 /* LionessRunner.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEAD9A7E1DB3A1A000A6DDC1 /* LionessRunner.swift */; };
 /* End PBXBuildFile section */
 
@@ -43,6 +44,7 @@
 		BE295CE81DB14DCE0019EC57 /* Lioness Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Lioness Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BE295CEA1DB14DCE0019EC57 /* Lioness_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lioness_Tests.swift; sourceTree = "<group>"; };
 		BE295CEC1DB14DCE0019EC57 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BE2CC65E1DB41E4400F74DBE /* ConditionalStatementNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ConditionalStatementNode.swift; path = AST/ConditionalStatementNode.swift; sourceTree = "<group>"; };
 		BE3FEBA41DA427800000648D /* Lexer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Lexer.swift; sourceTree = "<group>"; };
 		BE3FEBA51DA427800000648D /* ASTNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ASTNode.swift; sourceTree = "<group>"; };
 		BE3FEBA61DA427800000648D /* Parser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Parser.swift; sourceTree = "<group>"; };
@@ -146,6 +148,7 @@
 				BE56536B1DAAE7CF006171B9 /* CallNode.swift */,
 				BE56536F1DAAE822006171B9 /* FunctionNode.swift */,
 				BE56536D1DAAE7D8006171B9 /* PrototypeNode.swift */,
+				BE2CC65E1DB41E4400F74DBE /* ConditionalStatementNode.swift */,
 			);
 			name = AST;
 			sourceTree = "<group>";
@@ -302,6 +305,7 @@
 				BE2296361DB16F2100EA477A /* VariableNode.swift in Sources */,
 				BE2296321DB16F1B00EA477A /* String+RegEx.swift in Sources */,
 				BE22963C1DB16F2100EA477A /* BytecodeCompiler.swift in Sources */,
+				BE2CC65F1DB41E4400F74DBE /* ConditionalStatementNode.swift in Sources */,
 				BE22963F1DB16F2100EA477A /* BytecodeInterpreter.swift in Sources */,
 				BEAD9A7F1DB3A1A000A6DDC1 /* LionessRunner.swift in Sources */,
 				BE1412AF1DB2B07200DAA385 /* BooleanOpNode.swift in Sources */,

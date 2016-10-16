@@ -42,5 +42,9 @@ public class BytecodeCompiler {
 		index += 1
 		return "\(index)"
 	}
+	
+	func peekNextIndexLabel() -> String {
+		return "\(index + 1)"
+	}
 
 }

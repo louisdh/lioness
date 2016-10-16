@@ -335,6 +335,7 @@ public class Parser {
 		return NumberNode(value: value)
 	}
 	
+	/// Expression can be a binary/bool op
 	fileprivate func parseExpression() throws -> ASTNode {
 		
 		let node = try parsePrimary()
@@ -492,10 +493,55 @@ public class Parser {
 			case .parensOpen:
 				return try parseParens()
 			
+			case .if:
+				return try parseIfStatement()
+			
 			default:
 				throw ParseError.expectedExpression
 		}
 		
+	}
+	
+	fileprivate func parseIfStatement() throws -> ASTNode {
+		
+		guard case Token.if = popCurrentToken() else {
+			throw ParseError.unexpectedToken
+		}
+		
+		let condition = try parseExpression()
+		
+		guard case Token.curlyOpen = popCurrentToken() else {
+			throw ParseError.expectedCharacter("{")
+		}
+		
+		var body = [ASTNode]()
+		
+		while index < tokens.count {
+			
+			if shouldParseAssignment() {
+				
+				let assign = try parseAssignment()
+				body.append(assign)
+				
+			} else {
+				
+				let expr = try parseExpression()
+				body.append(expr)
+				
+			}
+			
+			if let currentToken = peekCurrentToken(), case Token.curlyClose = currentToken {
+				break
+			}
+			
+		}
+		
+		guard case Token.curlyClose = popCurrentToken() else {
+			throw ParseError.expectedCharacter("}")
+		}
+		
+		return ConditionalStatementNode(condition: condition, body: body)
+
 	}
 	
 	/// Parse "true" or "false"
