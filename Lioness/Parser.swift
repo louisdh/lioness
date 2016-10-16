@@ -96,6 +96,22 @@ public class Parser {
 			return "!="
 		}
 		
+		if case Token.comparatorLessThan = token {
+			return "<"
+		}
+		
+		if case Token.comparatorLessThanEqual = token {
+			return "<="
+		}
+		
+		if case Token.comparatorGreaterThan = token {
+			return ">"
+		}
+		
+		if case Token.comparatorGreaterThanEqual = token {
+			return ">="
+		}
+		
 		return nil
 	}
 	
@@ -110,6 +126,22 @@ public class Parser {
 		}
 		
 		if case Token.notEqual = token {
+			return 10
+		}
+		
+		if case Token.comparatorLessThan = token {
+			return 10
+		}
+		
+		if case Token.comparatorLessThanEqual = token {
+			return 10
+		}
+		
+		if case Token.comparatorGreaterThan = token {
+			return 10
+		}
+		
+		if case Token.comparatorGreaterThanEqual = token {
 			return 10
 		}
 		

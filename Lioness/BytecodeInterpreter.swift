@@ -97,6 +97,12 @@ public class BytecodeInterpreter {
 			case .neq:
 				newPc = executeNotEqual(pc: pc)
 			
+			case .cmple:
+				newPc = executeCmpLe(pc: pc)
+				
+			case .cmplt:
+				newPc = executeCmpLt(pc: pc)
+			
 			case .goto:
 				newPc = try executeGoto(instruction)
 			
@@ -108,8 +114,7 @@ public class BytecodeInterpreter {
 			
 			case .registerLoad:
 				newPc = try executeRegisterLoad(instruction, pc: pc)
-			
-			
+		
 		}
 		
 		return newPc
@@ -230,6 +235,30 @@ public class BytecodeInterpreter {
 		let neq: StackElement = (lhs != rhs) ? 1.0 : 0.0
 		
 		push(neq)
+		
+		return pc + 1
+	}
+	
+	fileprivate func executeCmpLe(pc: Int) -> Int {
+
+		let rhs = pop()
+		let lhs = pop()
+		
+		let cmp: StackElement = (lhs <= rhs) ? 1.0 : 0.0
+		
+		push(cmp)
+		
+		return pc + 1
+	}
+	
+	fileprivate func executeCmpLt(pc: Int) -> Int {
+
+		let rhs = pop()
+		let lhs = pop()
+		
+		let cmp: StackElement = (lhs < rhs) ? 1.0 : 0.0
+		
+		push(cmp)
 		
 		return pc + 1
 	}

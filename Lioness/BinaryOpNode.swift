@@ -22,13 +22,9 @@ public class BinaryOpNode: ASTNode {
 	
 	public override func compile(_ ctx: BytecodeCompiler) throws -> [BytecodeInstruction] {
 		
-		let l = try lhs.compile(ctx)
-		let r = try rhs.compile(ctx)
+		
 		
 		var bytecode = [BytecodeInstruction]()
-		
-		bytecode.append(contentsOf: l)
-		bytecode.append(contentsOf: r)
 		
 		let label = ctx.nextIndexLabel()
 		
@@ -40,10 +36,34 @@ public class BinaryOpNode: ASTNode {
 		           "/" : .div,
 		           "^" : .pow,
 		           "==" : .eq,
-		           "!=" : .neq]
+		           "!=" : .neq,
+		           ">": .cmplt,
+		           "<": .cmplt,
+		           ">=": .cmple,
+		           "<=": .cmple]
 		
 		guard let type = opTypes[op] else {
 			throw CompileError.unexpectedCommand
+		}
+		
+		if op == ">" || op == ">=" {
+			
+			// flip l and r
+
+			let r = try lhs.compile(ctx)
+			let l = try rhs.compile(ctx)
+			
+			bytecode.append(contentsOf: l)
+			bytecode.append(contentsOf: r)
+			
+		} else {
+			
+			let l = try lhs.compile(ctx)
+			let r = try rhs.compile(ctx)
+			
+			bytecode.append(contentsOf: l)
+			bytecode.append(contentsOf: r)
+			
 		}
 		
 		let operation = BytecodeInstruction(label: label, type: type)

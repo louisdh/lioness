@@ -57,10 +57,11 @@ public class Lexer {
 		("\\|\\|", { _ in .booleanOr }),
 		("!", { _ in .booleanNot }),
 		
-		(">", { _ in .comparatorGreaterThan }),
-		("<", { _ in .comparatorLessThan }),
 		(">=", { _ in .comparatorGreaterThanEqual }),
 		("<=", { _ in .comparatorLessThanEqual }),
+		(">", { _ in .comparatorGreaterThan }),
+		("<", { _ in .comparatorLessThan }),
+		
 		
 		("\\+=", { _ in .shortHandAdd }),
 		("\\-=", { _ in .shortHandSub }),
