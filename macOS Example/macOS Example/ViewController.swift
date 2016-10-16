@@ -7,13 +7,14 @@
 //
 
 import Cocoa
+import Lioness
 
 class ViewController: NSViewController {
 
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
-		let lioness = Lioness(logDebug: true)
+		let lioness = LionessRunner(logDebug: true)
 		try! lioness.runSource(atPath: "/Users/louisdhauwe/Desktop/Swift/Lioness/macOS Example/macOS Example/C.lion")
 		
 	}

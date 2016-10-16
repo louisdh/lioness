@@ -16,10 +16,10 @@ public class BytecodeInterpreter {
 	
 	fileprivate let bytecode: [BytecodeInstruction]
 	
-	public typealias StackElement = Double
+	typealias StackElement = Double
 	
-	fileprivate(set) public var stack = [StackElement]()
-	fileprivate(set) public var registers = [String : StackElement]()
+	fileprivate(set) var stack = [StackElement]()
+	fileprivate(set) var registers = [String : StackElement]()
 	
 	public init(bytecode: [BytecodeInstruction]) {
 		self.bytecode = bytecode

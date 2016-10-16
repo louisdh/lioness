@@ -28,6 +28,7 @@
 		BE22963E1DB16F2100EA477A /* BytecodeInstructionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE5653631DAAB86F006171B9 /* BytecodeInstructionType.swift */; };
 		BE22963F1DB16F2100EA477A /* BytecodeInterpreter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEFFCB8F1DAA77AE001EF8E4 /* BytecodeInterpreter.swift */; };
 		BE295CEB1DB14DCE0019EC57 /* Lioness_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE295CEA1DB14DCE0019EC57 /* Lioness_Tests.swift */; };
+		BEAD9A7F1DB3A1A000A6DDC1 /* LionessRunner.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEAD9A7E1DB3A1A000A6DDC1 /* LionessRunner.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -54,6 +55,7 @@
 		BE56536D1DAAE7D8006171B9 /* PrototypeNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrototypeNode.swift; sourceTree = "<group>"; };
 		BE56536F1DAAE822006171B9 /* FunctionNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FunctionNode.swift; sourceTree = "<group>"; };
 		BE9369FB1DA83AB000C0B3DF /* BytecodeCompiler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BytecodeCompiler.swift; sourceTree = "<group>"; };
+		BEAD9A7E1DB3A1A000A6DDC1 /* LionessRunner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LionessRunner.swift; sourceTree = "<group>"; };
 		BEF5BA401DAC15B100D9ADB7 /* AssignmentNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AssignmentNode.swift; sourceTree = "<group>"; };
 		BEFFCB8F1DAA77AE001EF8E4 /* BytecodeInterpreter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BytecodeInterpreter.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -169,6 +171,7 @@
 		BEF913AB1DB151610075C6CC /* Lioness */ = {
 			isa = PBXGroup;
 			children = (
+				BEAD9A7E1DB3A1A000A6DDC1 /* LionessRunner.swift */,
 				BE1FD5F81DB1703C00B2A55B /* Lioness.h */,
 				BE22962B1DB16EE800EA477A /* Info.plist */,
 				BE3FEBA01DA426150000648D /* Lexer */,
@@ -300,6 +303,7 @@
 				BE2296321DB16F1B00EA477A /* String+RegEx.swift in Sources */,
 				BE22963C1DB16F2100EA477A /* BytecodeCompiler.swift in Sources */,
 				BE22963F1DB16F2100EA477A /* BytecodeInterpreter.swift in Sources */,
+				BEAD9A7F1DB3A1A000A6DDC1 /* LionessRunner.swift in Sources */,
 				BE1412AF1DB2B07200DAA385 /* BooleanOpNode.swift in Sources */,
 				BE2296301DB16F1B00EA477A /* Token.swift in Sources */,
 				BE2296351DB16F2100EA477A /* NumberNode.swift in Sources */,

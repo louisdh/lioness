@@ -7,24 +7,26 @@
 //
 
 import Foundation
-import Lioness
 
-class Lioness {
+/// Runs through full pipeline, from lexer to interpreter
+public class LionessRunner {
 	
 	fileprivate var logDebug: Bool
 	
-	init(logDebug: Bool = false) {
+	// MARK: -
+
+	public init(logDebug: Bool = false) {
 		self.logDebug = logDebug
 	}
 	
-	func runSource(atPath path: String) throws {
+	public func runSource(atPath path: String) throws {
 		
 		let source = try String(contentsOfFile: path, encoding: .utf8)
 		
 		runSource(source)
 	}
 	
-	func runSource(_ source: String) {
+	public func runSource(_ source: String) {
 		
 		let startTime = CFAbsoluteTimeGetCurrent()
 		
@@ -42,6 +44,8 @@ class Lioness {
 		}
 		
 	}
+	
+	// MARK: -
 	
 	fileprivate func runLionessSourceCode(_ source: String) {
 		
@@ -218,6 +222,9 @@ class Lioness {
 		}
 		
 	}
+	
+	// MARK: -
+	// MARK: Logging
 	
 	fileprivate func log(_ message: String) {
 		print(message)
