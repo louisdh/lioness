@@ -82,6 +82,40 @@ public class Parser {
 		"^": 60
 	]
 	
+	fileprivate func operatorString(for token: Token) -> String? {
+
+		if case let Token.other(op) = token {
+			return op
+		}
+		
+		if case Token.comparatorEqual = token {
+			return "=="
+		}
+		
+		if case Token.notEqual = token {
+			return "!="
+		}
+		
+		return nil
+	}
+	
+	fileprivate func operatorPrecedence(for token: Token) -> Int? {
+		
+		if case let Token.other(op) = token {
+			return operatorPrecedence[op]
+		}
+
+		if case Token.comparatorEqual = token {
+			return 10
+		}
+		
+		if case Token.notEqual = token {
+			return 10
+		}
+		
+		return nil
+	}
+	
 	fileprivate func booleanOperatorString(for token: Token) -> String? {
 	
 		if case Token.booleanOr = token {
@@ -201,7 +235,10 @@ public class Parser {
 			}
 			
 			if let _ = booleanOperatorString(for: tokenAhead) {
-				return true
+				// Don't assume boolean op if op is also possible for binary ops
+				if operatorPrecedence(for: tokenAhead) == nil {
+					return true
+				}
 			}
 			
 			i += 1
@@ -455,12 +492,12 @@ public class Parser {
 			return -1
 		}
 		
-		guard let currentToken = peekCurrentToken(), case let Token.other(op) = currentToken else {
+		guard let currentToken = peekCurrentToken() else {
 			return -1
 		}
 		
-		guard let precedence = operatorPrecedence[op] else {
-			throw ParseError.undefinedOperator(op)
+		guard let precedence = operatorPrecedence(for: currentToken) else {
+			throw ParseError.unexpectedToken
 		}
 		
 		return precedence
@@ -483,6 +520,7 @@ public class Parser {
 		return precedence
 	}
 	
+	/// Recursive
 	fileprivate func parseBinaryOp(_ node: ASTNode, exprPrecedence: Int = 0) throws -> ASTNode {
 		
 		var lhs = node
@@ -491,11 +529,10 @@ public class Parser {
 			
 			let tokenPrecedence = try getCurrentTokenBinaryOpPrecedence()
 			if tokenPrecedence < exprPrecedence {
-				
 				return lhs
 			}
 			
-			guard case let Token.other(op) = popCurrentToken() else {
+			guard let op = operatorString(for: popCurrentToken()) else {
 				throw ParseError.unexpectedToken
 			}
 			

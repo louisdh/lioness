@@ -38,7 +38,9 @@ public class BinaryOpNode: ASTNode {
 		           "-" : .sub,
 		           "*" : .mul,
 		           "/" : .div,
-		           "^" : .pow]
+		           "^" : .pow,
+		           "==" : .eq,
+		           "!=" : .neq]
 		
 		guard let type = opTypes[op] else {
 			throw CompileError.unexpectedCommand
