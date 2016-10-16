@@ -38,7 +38,7 @@ public class Lexer {
 		// Don't worry about empty matches, tokenize() will ignore those
 		("(-?[0-9]?+(,[0-9]+)*(\\.[0-9]+(e-?[0-9]+)?)?)", {
 			
-			if let f = Float($0) {
+			if let f = Double($0) {
 				return .number(f)
 			}
 		

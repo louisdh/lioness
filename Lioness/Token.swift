@@ -14,7 +14,7 @@ public enum Token {
 	case ignoreableToken
 	
 	case identifier(String)
-	case number(Float)
+	case number(Double)
 	
 	case parensOpen
 	case parensClose

@@ -10,9 +10,9 @@ import Foundation
 
 public class NumberNode: ASTNode, Equatable {
 	
-	public let value: Float
+	public let value: Double
 	
-	public init(value: Float) {
+	public init(value: Double) {
 		self.value = value
 	}
 	

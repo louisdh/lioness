@@ -16,8 +16,10 @@ public class BytecodeInterpreter {
 	
 	fileprivate let bytecode: [BytecodeInstruction]
 	
-	fileprivate(set) public var stack = [Float]()
-	fileprivate(set) public var registers = [String : Float]()
+	public typealias StackElement = Double
+	
+	fileprivate(set) public var stack = [StackElement]()
+	fileprivate(set) public var registers = [String : StackElement]()
 	
 	public init(bytecode: [BytecodeInstruction]) {
 		self.bytecode = bytecode
@@ -40,8 +42,8 @@ public class BytecodeInterpreter {
 	
 	public func interpret() throws {
 		
-		stack = [Float]()
-		registers = [String : Float]()
+		stack = [StackElement]()
+		registers = [String : StackElement]()
 		
 		// Program counter
 		var pc = 0
@@ -114,7 +116,7 @@ public class BytecodeInterpreter {
 	}
 
 	fileprivate func executePushConst(_ instruction: BytecodeInstruction, pc: Int) throws -> Int {
-		guard let arg = instruction.arguments.first, let f = Float(arg) else {
+		guard let arg = instruction.arguments.first, let f = StackElement(arg) else {
 			throw InterpreterError.unexpectedArgument
 		}
 		
@@ -178,7 +180,7 @@ public class BytecodeInterpreter {
 		let rhs = pop() == 1.0
 		let lhs = pop() == 1.0
 		
-		let and: Float = (rhs && lhs) == true ? 1.0 : 0.0
+		let and: StackElement = (rhs && lhs) == true ? 1.0 : 0.0
 		
 		push(and)
 		
@@ -190,7 +192,7 @@ public class BytecodeInterpreter {
 		let rhs = pop() == 1.0
 		let lhs = pop() == 1.0
 		
-		let and: Float = (rhs || lhs) == true ? 1.0 : 0.0
+		let and: StackElement = (rhs || lhs) == true ? 1.0 : 0.0
 		
 		push(and)
 		
@@ -201,7 +203,7 @@ public class BytecodeInterpreter {
 		
 		let b = pop() == 1.0
 		
-		let not: Float = (!b) == true ? 1.0 : 0.0
+		let not: StackElement = (!b) == true ? 1.0 : 0.0
 		
 		push(not)
 		
@@ -213,7 +215,7 @@ public class BytecodeInterpreter {
 		let rhs = pop()
 		let lhs = pop()
 		
-		let eq: Float = (lhs == rhs) ? 1.0 : 0.0
+		let eq: StackElement = (lhs == rhs) ? 1.0 : 0.0
 		
 		push(eq)
 		
@@ -225,7 +227,7 @@ public class BytecodeInterpreter {
 		let rhs = pop()
 		let lhs = pop()
 		
-		let neq: Float = (lhs != rhs) ? 1.0 : 0.0
+		let neq: StackElement = (lhs != rhs) ? 1.0 : 0.0
 		
 		push(neq)
 		
@@ -279,12 +281,12 @@ public class BytecodeInterpreter {
 	}
 	
 	
-	fileprivate func pop() -> Float {
+	fileprivate func pop() -> StackElement {
 		let last = stack.removeLast()
 		return last
 	}
 	
-	fileprivate func push(_ item: Float) {
+	fileprivate func push(_ item: StackElement) {
 		stack.append(item)
 	}
 
