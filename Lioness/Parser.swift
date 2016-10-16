@@ -486,7 +486,7 @@ public class Parser {
 		throw ParseError.unexpectedToken
 	}
 	
-	fileprivate func getCurrentTokenBinaryOpPrecedence() throws -> Int {
+	fileprivate func getCurrentTokenBinaryOpPrecedence() -> Int {
 		
 		guard index < tokens.count else {
 			return -1
@@ -497,13 +497,13 @@ public class Parser {
 		}
 		
 		guard let precedence = operatorPrecedence(for: currentToken) else {
-			throw ParseError.unexpectedToken
+			return -1
 		}
 		
 		return precedence
 	}
 	
-	fileprivate func getCurrentTokenBooleanOpPrecedence() throws -> Int {
+	fileprivate func getCurrentTokenBooleanOpPrecedence() -> Int {
 		
 		guard index < tokens.count else {
 			return -1
@@ -527,7 +527,7 @@ public class Parser {
 		
 		while true {
 			
-			let tokenPrecedence = try getCurrentTokenBinaryOpPrecedence()
+			let tokenPrecedence = getCurrentTokenBinaryOpPrecedence()
 			if tokenPrecedence < exprPrecedence {
 				return lhs
 			}
@@ -537,7 +537,7 @@ public class Parser {
 			}
 			
 			var rhs = try parsePrimary()
-			let nextPrecedence = try getCurrentTokenBinaryOpPrecedence()
+			let nextPrecedence = getCurrentTokenBinaryOpPrecedence()
 			
 			if tokenPrecedence < nextPrecedence {
 				rhs = try parseBinaryOp(rhs, exprPrecedence: tokenPrecedence + 1)
@@ -555,7 +555,7 @@ public class Parser {
 		
 		while true {
 			
-			let tokenPrecedence = try getCurrentTokenBooleanOpPrecedence()
+			let tokenPrecedence = getCurrentTokenBooleanOpPrecedence()
 			if tokenPrecedence < exprPrecedence {
 				
 				return lhs
@@ -566,7 +566,7 @@ public class Parser {
 			}
 			
 			var rhs = try parsePrimary()
-			let nextPrecedence = try getCurrentTokenBooleanOpPrecedence()
+			let nextPrecedence = getCurrentTokenBooleanOpPrecedence()
 			
 			if tokenPrecedence < nextPrecedence {
 				rhs = try parseBooleanOp(rhs, exprPrecedence: tokenPrecedence + 1)
