@@ -9,13 +9,14 @@
 import Cocoa
 import Lioness
 
-class ViewController: NSViewController {
+class ViewController: NSViewController, LionessRunnerDelegate {
 
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
-		let lioness = LionessRunner(logDebug: true)
-		try! lioness.runSource(atPath: "/Users/louisdhauwe/Desktop/Swift/Lioness/macOS Example/macOS Example/C.lion")
+		let runner = LionessRunner(logDebug: true)
+		runner.delegate = self
+		try! runner.runSource(atPath: "/Users/louisdhauwe/Desktop/Swift/Lioness/macOS Example/macOS Example/C.lion")
 		
 	}
 
@@ -24,5 +25,20 @@ class ViewController: NSViewController {
 		// Update the view, if already loaded.
 		}
 	}
+	
+	// MARK: -
+	// MARK: Lioness Runner Delegate
 
+	@nonobjc func log(_ message: String) {
+		print(message)
+	}
+	
+	@nonobjc func log(_ error: Error) {
+		print(error)
+	}
+	
+	@nonobjc func log(_ token: Token) {
+		print(token)
+	}
+	
 }

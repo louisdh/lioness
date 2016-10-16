@@ -8,10 +8,22 @@
 
 import Foundation
 
+public protocol LionessRunnerDelegate {
+	
+	func log(_ message: String)
+	
+	func log(_ error: Error)
+	
+	func log(_ token: Token)
+	
+}
+
 /// Runs through full pipeline, from lexer to interpreter
 public class LionessRunner {
 	
 	fileprivate var logDebug: Bool
+	
+	public var delegate: LionessRunnerDelegate?
 	
 	// MARK: -
 
@@ -31,7 +43,7 @@ public class LionessRunner {
 		let startTime = CFAbsoluteTimeGetCurrent()
 		
 		if logDebug {
-			printSourceCode(source)
+			logSourceCode(source)
 		}
 		
 		runLionessSourceCode(source)
@@ -39,7 +51,7 @@ public class LionessRunner {
 		if logDebug {
 			
 			let timeElapsed = CFAbsoluteTimeGetCurrent() - startTime
-			log("\nTotal execution time: \(timeElapsed)ms")
+			log("\nTotal execution time: \(timeElapsed)s")
 			
 		}
 		
@@ -63,7 +75,7 @@ public class LionessRunner {
 		
 	}
 	
-	fileprivate func printSourceCode(_ source: String) {
+	fileprivate func logSourceCode(_ source: String) {
 		
 		log("================================")
 		log("Source code")
@@ -227,15 +239,15 @@ public class LionessRunner {
 	// MARK: Logging
 	
 	fileprivate func log(_ message: String) {
-		print(message)
+		delegate?.log(message)
 	}
 	
 	fileprivate func log(_ error: Error) {
-		print(error)
+		delegate?.log(error)
 	}
 	
 	fileprivate func log(_ token: Token) {
-		print(token)
+		delegate?.log(token)
 	}
 	
 }
