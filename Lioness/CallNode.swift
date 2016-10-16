@@ -29,7 +29,3 @@ public class CallNode: ASTNode {
 	}
 	
 }
-
-//public func ==(lhs: CallNode, rhs: CallNode) -> Bool {
-//	return lhs.callee == rhs.callee && lhs.arguments == rhs.arguments
-//}

@@ -33,7 +33,3 @@ public class VariableNode: ASTNode {
 	}
 	
 }
-
-public func ==(lhs: VariableNode, rhs: VariableNode) -> Bool {
-	return lhs === rhs
-}

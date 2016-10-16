@@ -8,7 +8,7 @@
 
 import Foundation
 
-public class NumberNode: ASTNode, Equatable {
+public class NumberNode: ASTNode {
 	
 	public let value: Double
 	
@@ -28,8 +28,4 @@ public class NumberNode: ASTNode, Equatable {
 		return "NumberNode(\(value))"
 	}
 	
-}
-
-public func ==(lhs: NumberNode, rhs: NumberNode) -> Bool {
-	return lhs.value == rhs.value
 }

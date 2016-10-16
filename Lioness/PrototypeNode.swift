@@ -23,7 +23,3 @@ public class PrototypeNode: ASTNode {
 	}
 	
 }
-
-public func ==(lhs: PrototypeNode, rhs: PrototypeNode) -> Bool {
-	return lhs.name == rhs.name && lhs.argumentNames == rhs.argumentNames
-}

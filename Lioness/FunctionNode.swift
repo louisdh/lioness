@@ -43,7 +43,3 @@ public class FunctionNode: ASTNode {
 	}
 	
 }
-
-//public func ==(lhs: FunctionNode, rhs: FunctionNode) -> Bool {
-//	return lhs.prototype == rhs.prototype && lhs.body == rhs.body
-//}
