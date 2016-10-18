@@ -271,12 +271,18 @@ public class BytecodeInterpreter {
 	
 	fileprivate func executeIfTrue(_ instruction: BytecodeInstruction, pc: Int) throws -> Int {
 		
-		guard let arg = instruction.arguments.first, let newPc = Int(arg) else {
+		guard let label = instruction.arguments.first else {
 			throw InterpreterError.unexpectedArgument
 		}
 		
 		if pop() == 1.0 {
-			return newPc
+			
+			if let newPc = progamCounter(for: label) {
+				return newPc
+			} else {
+				return bytecode.count
+			}
+			
 		}
 		
 		return pc + 1
@@ -285,12 +291,18 @@ public class BytecodeInterpreter {
 	
 	fileprivate func executeIfFalse(_ instruction: BytecodeInstruction, pc: Int) throws -> Int {
 		
-		guard let arg = instruction.arguments.first, let newPc = Int(arg) else {
+		guard let label = instruction.arguments.first else {
 			throw InterpreterError.unexpectedArgument
 		}
 		
 		if pop() == 0.0 {
-			return newPc
+			
+			if let newPc = progamCounter(for: label) {
+				return newPc
+			} else {
+				return bytecode.count
+			}
+		
 		}
 		
 		return pc + 1
@@ -299,11 +311,16 @@ public class BytecodeInterpreter {
 	
 	fileprivate func executeGoto(_ instruction: BytecodeInstruction) throws -> Int {
 		
-		guard let arg = instruction.arguments.first, let newPc = Int(arg) else {
+		guard let label = instruction.arguments.first else {
 			throw InterpreterError.unexpectedArgument
 		}
 
-		return newPc
+		if let newPc = progamCounter(for: label) {
+			return newPc
+		} else {
+			return bytecode.count
+		}
+		
 	}
 	
 	fileprivate func executeStore(_ instruction: BytecodeInstruction, pc: Int) throws -> Int {
@@ -343,6 +360,13 @@ public class BytecodeInterpreter {
 		return pc + 1
 	}
 	
+	fileprivate func progamCounter(for label: String) -> Int? {
+		
+		return bytecode.index(where: { (b) -> Bool in
+			b.label == label
+		})
+		
+	}
 	
 	fileprivate func pop() -> StackElement {
 		let last = stack.removeLast()

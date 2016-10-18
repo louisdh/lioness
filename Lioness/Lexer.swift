@@ -14,6 +14,7 @@ public class Lexer {
 		"func": .function,
 		"while": .while,
 		"if": .if,
+		"else": .else,
 		"true": .true,
 		"false": .false
 	]

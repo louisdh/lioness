@@ -47,6 +47,7 @@ public enum Token {
 	// Keywords
 	case `while`
 	case `if`
+	case `else`
 	case function
 	case `true`
 	case `false`

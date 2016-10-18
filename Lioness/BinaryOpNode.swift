@@ -26,7 +26,6 @@ public class BinaryOpNode: ASTNode {
 		
 		var bytecode = [BytecodeInstruction]()
 		
-		let label = ctx.nextIndexLabel()
 		
 		var opTypes: [String : BytecodeInstructionType]
 		
@@ -50,11 +49,11 @@ public class BinaryOpNode: ASTNode {
 			
 			// flip l and r
 
-			let r = try lhs.compile(ctx)
-			let l = try rhs.compile(ctx)
+			let r = try rhs.compile(ctx)
+			let l = try lhs.compile(ctx)
 			
-			bytecode.append(contentsOf: l)
 			bytecode.append(contentsOf: r)
+			bytecode.append(contentsOf: l)
 			
 		} else {
 			
@@ -66,6 +65,7 @@ public class BinaryOpNode: ASTNode {
 			
 		}
 		
+		let label = ctx.nextIndexLabel()
 		let operation = BytecodeInstruction(label: label, type: type)
 		
 		bytecode.append(operation)

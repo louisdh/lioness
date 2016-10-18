@@ -540,8 +540,51 @@ public class Parser {
 			throw ParseError.expectedCharacter("}")
 		}
 		
-		return ConditionalStatementNode(condition: condition, body: body)
+		if let nextToken = peekCurrentToken(), case Token.else = nextToken {
+			
+			guard case Token.else = popCurrentToken() else {
+				throw ParseError.unexpectedToken
+			}
+			
+			guard case Token.curlyOpen = popCurrentToken() else {
+				throw ParseError.expectedCharacter("{")
+			}
+			
+			var elseBody = [ASTNode]()
+			
+			while index < tokens.count {
+				
+				if shouldParseAssignment() {
+					
+					let assign = try parseAssignment()
+					elseBody.append(assign)
+					
+				} else {
+					
+					let expr = try parseExpression()
+					elseBody.append(expr)
+					
+				}
+				
+				if let currentToken = peekCurrentToken(), case Token.curlyClose = currentToken {
+					break
+				}
+				
+			}
+			
+			guard case Token.curlyClose = popCurrentToken() else {
+				throw ParseError.expectedCharacter("}")
+			}
 
+			return ConditionalStatementNode(condition: condition, body: body, elseBody: elseBody)
+
+			
+		} else {
+			
+			return ConditionalStatementNode(condition: condition, body: body)
+
+		}
+		
 	}
 	
 	/// Parse "true" or "false"
