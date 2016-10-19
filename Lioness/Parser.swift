@@ -16,6 +16,9 @@ public enum ParseError: Error {
 	case expectedExpression
 	case expectedArgumentList
 	case expectedFunctionName
+	
+	case internalInconsistencyOccurred
+
 }
 
 public class Parser {
@@ -41,7 +44,7 @@ public class Parser {
 		while index < tokens.count {
 			
 			guard let currentToken = peekCurrentToken() else {
-				continue
+				throw ParseError.internalInconsistencyOccurred
 			}
 			
 			switch currentToken {

@@ -10,6 +10,7 @@ import Foundation
 
 public enum InterpreterError: Error {
 	case unexpectedArgument
+	case illegalStackOperation
 }
 
 public class BytecodeInterpreter {
@@ -68,40 +69,40 @@ public class BytecodeInterpreter {
 				newPc = try executePushConst(instruction, pc: pc)
 				
 			case .add:
-				newPc = executeAdd(pc: pc)
+				newPc = try executeAdd(pc: pc)
 				
 			case .sub:
-				newPc = executeSub(pc: pc)
+				newPc = try executeSub(pc: pc)
 				
 			case .mul:
-				newPc = executeMul(pc: pc)
+				newPc = try executeMul(pc: pc)
 				
 			case .div:
-				newPc = executeDiv(pc: pc)
+				newPc = try executeDiv(pc: pc)
 				
 			case .pow:
-				newPc = executePow(pc: pc)
+				newPc = try executePow(pc: pc)
 			
 			case .and:
-				newPc = executeAnd(pc: pc)
+				newPc = try executeAnd(pc: pc)
 			
 			case .or:
-				newPc = executeOr(pc: pc)
+				newPc = try executeOr(pc: pc)
 			
 			case .not:
-				newPc = executeNot(pc: pc)
+				newPc = try executeNot(pc: pc)
 			
 			case .eq:
-				newPc = executeEqual(pc: pc)
+				newPc = try executeEqual(pc: pc)
 				
 			case .neq:
-				newPc = executeNotEqual(pc: pc)
+				newPc = try executeNotEqual(pc: pc)
 			
 			case .cmple:
-				newPc = executeCmpLe(pc: pc)
+				newPc = try executeCmpLe(pc: pc)
 				
 			case .cmplt:
-				newPc = executeCmpLt(pc: pc)
+				newPc = try executeCmpLt(pc: pc)
 			
 			case .goto:
 				newPc = try executeGoto(instruction)
@@ -136,60 +137,60 @@ public class BytecodeInterpreter {
 		return pc + 1
 	}
 	
-	fileprivate func executeAdd(pc: Int) -> Int {
+	fileprivate func executeAdd(pc: Int) throws -> Int {
 		
-		let lhs = pop()
-		let rhs = pop()
+		let lhs = try pop()
+		let rhs = try pop()
 		
 		push(lhs + rhs)
 		
 		return pc + 1
 	}
 	
-	fileprivate func executeSub(pc: Int) -> Int {
+	fileprivate func executeSub(pc: Int) throws -> Int {
 
-		let rhs = pop()
-		let lhs = pop()
+		let rhs = try pop()
+		let lhs = try pop()
 		
 		push(lhs - rhs)
 		
 		return pc + 1
 	}
 	
-	fileprivate func executeMul(pc: Int) -> Int {
+	fileprivate func executeMul(pc: Int) throws -> Int {
 		
-		let lhs = pop()
-		let rhs = pop()
+		let lhs = try pop()
+		let rhs = try pop()
 		
 		push(lhs * rhs)
 		
 		return pc + 1
 	}
 	
-	fileprivate func executeDiv(pc: Int) -> Int {
+	fileprivate func executeDiv(pc: Int) throws -> Int {
 		
-		let rhs = pop()
-		let lhs = pop()
+		let rhs = try pop()
+		let lhs = try pop()
 
 		push(lhs / rhs)
 		
 		return pc + 1
 	}
 	
-	fileprivate func executePow(pc: Int) -> Int {
+	fileprivate func executePow(pc: Int) throws -> Int {
 		
-		let rhs = pop()
-		let lhs = pop()
+		let rhs = try pop()
+		let lhs = try pop()
 		
 		push(pow(lhs, rhs))
 		
 		return pc + 1
 	}
 	
-	fileprivate func executeAnd(pc: Int) -> Int {
+	fileprivate func executeAnd(pc: Int) throws -> Int {
 		
-		let rhs = pop() == 1.0
-		let lhs = pop() == 1.0
+		let rhs = try pop() == 1.0
+		let lhs = try pop() == 1.0
 		
 		let and: StackElement = (rhs && lhs) == true ? 1.0 : 0.0
 		
@@ -198,10 +199,10 @@ public class BytecodeInterpreter {
 		return pc + 1
 	}
 	
-	fileprivate func executeOr(pc: Int) -> Int {
+	fileprivate func executeOr(pc: Int) throws -> Int {
 		
-		let rhs = pop() == 1.0
-		let lhs = pop() == 1.0
+		let rhs = try pop() == 1.0
+		let lhs = try pop() == 1.0
 		
 		let and: StackElement = (rhs || lhs) == true ? 1.0 : 0.0
 		
@@ -210,9 +211,9 @@ public class BytecodeInterpreter {
 		return pc + 1
 	}
 	
-	fileprivate func executeNot(pc: Int) -> Int {
+	fileprivate func executeNot(pc: Int) throws -> Int {
 		
-		let b = pop() == 1.0
+		let b = try pop() == 1.0
 		
 		let not: StackElement = (!b) == true ? 1.0 : 0.0
 		
@@ -221,10 +222,10 @@ public class BytecodeInterpreter {
 		return pc + 1
 	}
 	
-	fileprivate func executeEqual(pc: Int) -> Int {
+	fileprivate func executeEqual(pc: Int) throws -> Int {
 		
-		let rhs = pop()
-		let lhs = pop()
+		let rhs = try pop()
+		let lhs = try pop()
 		
 		let eq: StackElement = (lhs == rhs) ? 1.0 : 0.0
 		
@@ -233,10 +234,10 @@ public class BytecodeInterpreter {
 		return pc + 1
 	}
 	
-	fileprivate func executeNotEqual(pc: Int) -> Int {
+	fileprivate func executeNotEqual(pc: Int) throws -> Int {
 		
-		let rhs = pop()
-		let lhs = pop()
+		let rhs = try pop()
+		let lhs = try pop()
 		
 		let neq: StackElement = (lhs != rhs) ? 1.0 : 0.0
 		
@@ -245,10 +246,10 @@ public class BytecodeInterpreter {
 		return pc + 1
 	}
 	
-	fileprivate func executeCmpLe(pc: Int) -> Int {
+	fileprivate func executeCmpLe(pc: Int) throws -> Int {
 
-		let rhs = pop()
-		let lhs = pop()
+		let rhs = try pop()
+		let lhs = try pop()
 		
 		let cmp: StackElement = (lhs <= rhs) ? 1.0 : 0.0
 		
@@ -257,10 +258,10 @@ public class BytecodeInterpreter {
 		return pc + 1
 	}
 	
-	fileprivate func executeCmpLt(pc: Int) -> Int {
+	fileprivate func executeCmpLt(pc: Int) throws -> Int {
 
-		let rhs = pop()
-		let lhs = pop()
+		let rhs = try pop()
+		let lhs = try pop()
 		
 		let cmp: StackElement = (lhs < rhs) ? 1.0 : 0.0
 		
@@ -275,7 +276,7 @@ public class BytecodeInterpreter {
 			throw InterpreterError.unexpectedArgument
 		}
 		
-		if pop() == 1.0 {
+		if try pop() == 1.0 {
 			
 			if let newPc = progamCounter(for: label) {
 				return newPc
@@ -295,7 +296,7 @@ public class BytecodeInterpreter {
 			throw InterpreterError.unexpectedArgument
 		}
 		
-		if pop() == 0.0 {
+		if try pop() == 0.0 {
 			
 			if let newPc = progamCounter(for: label) {
 				return newPc
@@ -329,7 +330,7 @@ public class BytecodeInterpreter {
 			throw InterpreterError.unexpectedArgument
 		}
 		
-		registers[reg] = pop()
+		registers[reg] = try pop()
 		
 		return pc + 1
 	}
@@ -368,8 +369,12 @@ public class BytecodeInterpreter {
 		
 	}
 	
-	fileprivate func pop() -> StackElement {
-		let last = stack.removeLast()
+	fileprivate func pop() throws -> StackElement {
+		
+		guard let last = stack.popLast() else {
+			throw InterpreterError.illegalStackOperation
+		}
+		
 		return last
 	}
 	
