@@ -105,7 +105,8 @@ public class Lexer {
 							tokens.append(t)
 						}
 						
-						content = content.substring(from: content.characters.index(content.startIndex, offsetBy: m.characters.count))
+						let index = content.characters.index(content.startIndex, offsetBy: m.characters.count)
+						content = content.substring(from: index)
 						matched = true
 						
 						break

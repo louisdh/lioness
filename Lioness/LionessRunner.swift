@@ -1,6 +1,6 @@
 //
 //  LionessRunner.swift
-//  macOS Example
+//  Lioness
 //
 //  Created by Louis D'hauwe on 15/10/2016.
 //  Copyright © 2016 Silver Fox. All rights reserved.

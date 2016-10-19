@@ -10,9 +10,9 @@ import Foundation
 
 //var expressions = [String : NSRegularExpression]()
 
-public extension String {
+extension String {
 	
-    public func firstMatch(withRegExPattern pattern: String) -> String? {
+	func firstMatch(withRegExPattern pattern: String) -> String? {
 
 //        if let exists = expressions[regex] {
 //            expression = exists
@@ -28,7 +28,7 @@ public extension String {
 		return firstMatch(withRegEx: expression)
     }
 	
-	public func firstMatch(withRegEx regEx: NSRegularExpression) -> String? {
+	fileprivate func firstMatch(withRegEx regEx: NSRegularExpression) -> String? {
 		
 		let stringRange = NSRange(location: 0, length: self.characters.count)
 		let rangeOfFirstMatch = regEx.rangeOfFirstMatch(in: self, options: [], range: stringRange)
