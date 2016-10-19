@@ -513,6 +513,36 @@ public class Parser {
 		
 		let condition = try parseExpression()
 		
+		let body = try parseBodyWithCurlies()
+		
+		if let nextToken = peekCurrentToken(), case Token.else = nextToken {
+			
+			guard case Token.else = popCurrentToken() else {
+				throw ParseError.unexpectedToken
+			}
+			
+			if let nextToken = peekCurrentToken(), case Token.if = nextToken {
+				
+				let ifStatement = try parseIfStatement()
+				
+				return ConditionalStatementNode(condition: condition, body: body, elseBody: [ifStatement])
+				
+			}
+
+			let elseBody = try parseBodyWithCurlies()
+
+			return ConditionalStatementNode(condition: condition, body: body, elseBody: elseBody)
+
+		} else {
+			
+			return ConditionalStatementNode(condition: condition, body: body)
+
+		}
+		
+	}
+	
+	fileprivate func parseBodyWithCurlies() throws -> [ASTNode] {
+
 		guard case Token.curlyOpen = popCurrentToken() else {
 			throw ParseError.expectedCharacter("{")
 		}
@@ -522,32 +552,8 @@ public class Parser {
 		guard case Token.curlyClose = popCurrentToken() else {
 			throw ParseError.expectedCharacter("}")
 		}
-		
-		if let nextToken = peekCurrentToken(), case Token.else = nextToken {
-			
-			guard case Token.else = popCurrentToken() else {
-				throw ParseError.unexpectedToken
-			}
-			
-			guard case Token.curlyOpen = popCurrentToken() else {
-				throw ParseError.expectedCharacter("{")
-			}
-			
-			let elseBody = try parseBody()
 
-			guard case Token.curlyClose = popCurrentToken() else {
-				throw ParseError.expectedCharacter("}")
-			}
-
-			return ConditionalStatementNode(condition: condition, body: body, elseBody: elseBody)
-
-			
-		} else {
-			
-			return ConditionalStatementNode(condition: condition, body: body)
-
-		}
-		
+		return body
 	}
 	
 	/// Expects opened curly brace, will exit when closing curly brace found
@@ -715,8 +721,9 @@ public class Parser {
 			}
 		}
 		
-		// remove ")"
-		popCurrentToken()
+		guard case Token.parensOpen = popCurrentToken() else {
+			throw ParseError.expectedCharacter(")")
+		}
 		
 		guard case Token.curlyOpen = popCurrentToken() else {
 			throw ParseError.expectedCharacter("{")
