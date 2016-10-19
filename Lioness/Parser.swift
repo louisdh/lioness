@@ -515,13 +515,13 @@ public class Parser {
 		
 		let body = try parseBodyWithCurlies()
 		
-		if let nextToken = peekCurrentToken(), case Token.else = nextToken {
+		if let currentToken = peekCurrentToken(), case Token.else = currentToken {
 			
 			guard case Token.else = popCurrentToken() else {
 				throw ParseError.unexpectedToken
 			}
 			
-			if let nextToken = peekCurrentToken(), case Token.if = nextToken {
+			if let currentToken = peekCurrentToken(), case Token.if = currentToken {
 				
 				let ifStatement = try parseIfStatement()
 				
