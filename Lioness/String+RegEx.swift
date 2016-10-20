@@ -12,21 +12,33 @@ import Foundation
 
 extension String {
 	
-	func firstMatch(withRegExPattern pattern: String) -> String? {
+	/// First match at start of string (will add "^" to front of pattern)
+	func firstMatchAtStart(withRegExPattern pattern: String) -> String? {
 
-//        if let exists = expressions[regex] {
-//            expression = exists
-//        } else {
-//            expression = try! NSRegularExpression(pattern: "^\(regex)", options: [])
-//            expressions[regex] = expression
+//        if let exists = expressions[pattern] {
+//			return firstMatch(withRegEx: exists)
 //        }
 		
 		guard let expression = try? NSRegularExpression(pattern: "^\(pattern)", options: []) else {
 			return nil
 		}
 		
+//		expressions[pattern] = expression
+		
 		return firstMatch(withRegEx: expression)
     }
+	
+	func hasMatch(withRegExPattern pattern: String) -> Bool {
+
+		guard let expression = try? NSRegularExpression(pattern: "\(pattern)", options: []) else {
+			return false
+		}
+		
+		let stringRange = NSRange(location: 0, length: self.characters.count)
+		let rangeOfFirstMatch = expression.rangeOfFirstMatch(in: self, options: [], range: stringRange)
+		
+		return rangeOfFirstMatch.location != NSNotFound
+	}
 	
 	fileprivate func firstMatch(withRegEx regEx: NSRegularExpression) -> String? {
 		

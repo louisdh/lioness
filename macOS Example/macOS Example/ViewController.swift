@@ -16,7 +16,10 @@ class ViewController: NSViewController, LionessRunnerDelegate {
 		
 		let runner = LionessRunner(logDebug: true)
 		runner.delegate = self
-		try! runner.runSource(atPath: "/Users/louisdhauwe/Desktop/Swift/Lioness/macOS Example/macOS Example/C.lion")
+		
+		let path = "/Users/louisdhauwe/Desktop/Swift/Lioness/macOS Example/macOS Example/C.lion"
+		
+		try! runner.runSource(atPath: path)
 		
 	}
 

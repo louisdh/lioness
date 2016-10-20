@@ -81,6 +81,7 @@ public class Lexer {
 
 		("=", { _ in .equals }),
 		(",", { _ in .comma }),
+		
 	]
 	
 	fileprivate let input: String
@@ -91,22 +92,34 @@ public class Lexer {
 	
     public func tokenize() -> [Token] {
 		
+		var content = input
+
+		var tokenListToUse = [(String, TokenGenerator)]()
+		
+		for (pattern, generator) in tokenList {
+			
+			if content.hasMatch(withRegExPattern: pattern) {
+				tokenListToUse.append((pattern, generator))
+			}
+		
+		}
+	
+		
         var tokens = [Token]()
-        var content = input
-        
+		
         while content.characters.count > 0 {
 			
             var matched = false
             
-            for (pattern, generator) in tokenList {
+            for (pattern, generator) in tokenListToUse {
 				
-				if let m = content.firstMatch(withRegExPattern: pattern) {
+				if let match = content.firstMatchAtStart(withRegExPattern: pattern) {
 					
-					if m.isEmpty {
+					if match.isEmpty {
 						continue
 					}
 					
-                    if let t = generator(m) {
+                    if let t = generator(match) {
 						
 						if case Token.ignoreableToken = t {
 						
@@ -114,7 +127,7 @@ public class Lexer {
 							tokens.append(t)
 						}
 						
-						let index = content.characters.index(content.startIndex, offsetBy: m.characters.count)
+						let index = content.characters.index(content.startIndex, offsetBy: match.characters.count)
 						content = content.substring(from: index)
 						matched = true
 						
