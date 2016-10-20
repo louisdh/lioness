@@ -1,9 +1,14 @@
+/*
+	Test Lioness
+*/
+
 a = 20
 
-if a < 1 + 4 {
+if a < 1 + 4 { // Test comment
 
 	b = 2
 
+// Another comment
 } else if 2 < 1 {
 
 	c = 3
@@ -17,5 +22,4 @@ if a < 1 + 4 {
 	e = 2
 
 }
-
 

@@ -24,6 +24,15 @@ public class Lexer {
 	/// The order of this list is important,
 	/// e.g. match identifiers before numbers
 	fileprivate let tokenList: [(String, TokenGenerator)] = [
+		
+		// one line comment
+		("\\/\\/.*", { _ in .ignoreableToken }),
+
+		// multiline comment
+		("/\\*[^*]*\\*+(?:[^/*][^*]*\\*+)*/", { _ in .ignoreableToken }),
+
+		
+
 		("[ \t\n]", { _ in .ignoreableToken }),
 		
 		("[a-zA-Z][a-zA-Z0-9]*", {
