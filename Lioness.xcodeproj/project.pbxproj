@@ -29,6 +29,9 @@
 		BE22963F1DB16F2100EA477A /* BytecodeInterpreter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEFFCB8F1DAA77AE001EF8E4 /* BytecodeInterpreter.swift */; };
 		BE295CEB1DB14DCE0019EC57 /* Lioness_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE295CEA1DB14DCE0019EC57 /* Lioness_Tests.swift */; };
 		BE2CC65F1DB41E4400F74DBE /* ConditionalStatementNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE2CC65E1DB41E4400F74DBE /* ConditionalStatementNode.swift */; };
+		BE2CC6611DB94BF800F74DBE /* LargeMathOperation.lion in Resources */ = {isa = PBXBuildFile; fileRef = BE2CC6601DB94BF800F74DBE /* LargeMathOperation.lion */; };
+		BE2CC6631DB94D3500F74DBE /* FullRun+Performance.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE2CC6621DB94D3500F74DBE /* FullRun+Performance.swift */; };
+		BE2CC6651DB94F7100F74DBE /* Lexer+Performance.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE2CC6641DB94F7100F74DBE /* Lexer+Performance.swift */; };
 		BEAD9A7F1DB3A1A000A6DDC1 /* LionessRunner.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEAD9A7E1DB3A1A000A6DDC1 /* LionessRunner.swift */; };
 /* End PBXBuildFile section */
 
@@ -45,6 +48,9 @@
 		BE295CEA1DB14DCE0019EC57 /* Lioness_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lioness_Tests.swift; sourceTree = "<group>"; };
 		BE295CEC1DB14DCE0019EC57 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BE2CC65E1DB41E4400F74DBE /* ConditionalStatementNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ConditionalStatementNode.swift; path = AST/ConditionalStatementNode.swift; sourceTree = "<group>"; };
+		BE2CC6601DB94BF800F74DBE /* LargeMathOperation.lion */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LargeMathOperation.lion; sourceTree = "<group>"; };
+		BE2CC6621DB94D3500F74DBE /* FullRun+Performance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "FullRun+Performance.swift"; sourceTree = "<group>"; };
+		BE2CC6641DB94F7100F74DBE /* Lexer+Performance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Lexer+Performance.swift"; sourceTree = "<group>"; };
 		BE3FEBA41DA427800000648D /* Lexer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Lexer.swift; sourceTree = "<group>"; };
 		BE3FEBA51DA427800000648D /* ASTNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ASTNode.swift; sourceTree = "<group>"; };
 		BE3FEBA61DA427800000648D /* Parser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Parser.swift; sourceTree = "<group>"; };
@@ -93,7 +99,10 @@
 			isa = PBXGroup;
 			children = (
 				BE295CEA1DB14DCE0019EC57 /* Lioness_Tests.swift */,
+				BE2CC6641DB94F7100F74DBE /* Lexer+Performance.swift */,
+				BE2CC6621DB94D3500F74DBE /* FullRun+Performance.swift */,
 				BE295CEC1DB14DCE0019EC57 /* Info.plist */,
+				BE2CC6601DB94BF800F74DBE /* LargeMathOperation.lion */,
 			);
 			path = "Lioness Tests";
 			sourceTree = "<group>";
@@ -287,6 +296,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BE2CC6611DB94BF800F74DBE /* LargeMathOperation.lion in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -324,7 +334,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BE2CC6651DB94F7100F74DBE /* Lexer+Performance.swift in Sources */,
 				BE295CEB1DB14DCE0019EC57 /* Lioness_Tests.swift in Sources */,
+				BE2CC6631DB94D3500F74DBE /* FullRun+Performance.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
