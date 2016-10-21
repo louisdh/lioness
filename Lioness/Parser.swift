@@ -499,6 +499,9 @@ public class Parser {
 			case .if:
 				return try parseIfStatement()
 			
+			case .while:
+				return try parseWhileStatement()
+			
 			default:
 				throw ParseError.expectedExpression
 		}
@@ -539,6 +542,20 @@ public class Parser {
 
 		}
 		
+	}
+	
+	fileprivate func parseWhileStatement() throws -> ASTNode {
+		
+		guard case Token.while = popCurrentToken() else {
+			throw ParseError.unexpectedToken
+		}
+		
+		let condition = try parseExpression()
+		
+		let body = try parseBodyWithCurlies()
+		
+		return WhileStatementNode(condition: condition, body: body)
+
 	}
 	
 	fileprivate func parseBodyWithCurlies() throws -> [ASTNode] {
