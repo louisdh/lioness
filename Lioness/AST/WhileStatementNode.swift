@@ -57,7 +57,7 @@ public class WhileStatementNode: ASTNode {
 	
 	public override var description: String {
 		
-		var str = "ConditionalStatementNode(condition: \(condition), body: ["
+		var str = "WhileStatementNode(condition: \(condition), body: ["
 		
 		for e in body {
 			str += "\n    \(e.description)"
