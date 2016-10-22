@@ -1,6 +1,6 @@
 //
-//  Lioness_Tests.swift
-//  Lioness Tests
+//  Lexer+Tests.swift
+//  Lexer Tests
 //
 //  Created by Louis D'hauwe on 14/10/2016.
 //  Copyright © 2016 Silver Fox. All rights reserved.
@@ -8,9 +8,9 @@
 
 import XCTest
 import Foundation
-import Lioness
+@testable import Lioness
 
-class Lioness_Tests: XCTestCase {
+class Lexer_Tests: XCTestCase {
     
     override func setUp() {
         super.setUp()
@@ -61,13 +61,6 @@ class Lioness_Tests: XCTestCase {
 			XCTAssert(false, "Expected number '0.3'")
 		}
 		
-    }
-    
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
-        }
     }
     
 }

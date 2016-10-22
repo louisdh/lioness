@@ -200,6 +200,8 @@ public class LionessRunner {
 		
 	}
 	
+	var interpreter: BytecodeInterpreter!
+	
 	fileprivate func interpretBytecode(_ bytecode: [BytecodeInstruction]) {
 		
 		if logDebug {
@@ -210,7 +212,7 @@ public class LionessRunner {
 			
 		}
 		
-		let interpreter = BytecodeInterpreter(bytecode: bytecode)
+		interpreter = BytecodeInterpreter(bytecode: bytecode)
 		
 		do {
 			

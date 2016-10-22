@@ -27,12 +27,14 @@
 		BE22963D1DB16F2100EA477A /* BytecodeInstruction.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE04D6391DA99FC800DAEB84 /* BytecodeInstruction.swift */; };
 		BE22963E1DB16F2100EA477A /* BytecodeInstructionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE5653631DAAB86F006171B9 /* BytecodeInstructionType.swift */; };
 		BE22963F1DB16F2100EA477A /* BytecodeInterpreter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEFFCB8F1DAA77AE001EF8E4 /* BytecodeInterpreter.swift */; };
-		BE295CEB1DB14DCE0019EC57 /* Lioness_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE295CEA1DB14DCE0019EC57 /* Lioness_Tests.swift */; };
+		BE295CEB1DB14DCE0019EC57 /* Lexer+Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE295CEA1DB14DCE0019EC57 /* Lexer+Tests.swift */; };
 		BE2CC65F1DB41E4400F74DBE /* ConditionalStatementNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE2CC65E1DB41E4400F74DBE /* ConditionalStatementNode.swift */; };
 		BE2CC6611DB94BF800F74DBE /* LargeMathOperation.lion in Resources */ = {isa = PBXBuildFile; fileRef = BE2CC6601DB94BF800F74DBE /* LargeMathOperation.lion */; };
-		BE2CC6631DB94D3500F74DBE /* FullRun+Performance.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE2CC6621DB94D3500F74DBE /* FullRun+Performance.swift */; };
+		BE2CC6631DB94D3500F74DBE /* Runner+Performance.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE2CC6621DB94D3500F74DBE /* Runner+Performance.swift */; };
 		BE2CC6651DB94F7100F74DBE /* Lexer+Performance.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE2CC6641DB94F7100F74DBE /* Lexer+Performance.swift */; };
 		BE2CC6671DBA79AD00F74DBE /* WhileStatementNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE2CC6661DBA79AD00F74DBE /* WhileStatementNode.swift */; };
+		BE37DFA51DBB8FBD003F6A3E /* ParseError.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE37DFA41DBB8FBD003F6A3E /* ParseError.swift */; };
+		BE37DFAB1DBB96CF003F6A3E /* Runner+Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE37DFAA1DBB96CF003F6A3E /* Runner+Tests.swift */; };
 		BEAD9A7F1DB3A1A000A6DDC1 /* LionessRunner.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEAD9A7E1DB3A1A000A6DDC1 /* LionessRunner.swift */; };
 /* End PBXBuildFile section */
 
@@ -46,13 +48,15 @@
 		BE22962B1DB16EE800EA477A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BE295CE21DAD87990019EC57 /* Token.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Token.swift; sourceTree = "<group>"; };
 		BE295CE81DB14DCE0019EC57 /* Lioness Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Lioness Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		BE295CEA1DB14DCE0019EC57 /* Lioness_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lioness_Tests.swift; sourceTree = "<group>"; };
+		BE295CEA1DB14DCE0019EC57 /* Lexer+Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Lexer+Tests.swift"; sourceTree = "<group>"; };
 		BE295CEC1DB14DCE0019EC57 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BE2CC65E1DB41E4400F74DBE /* ConditionalStatementNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ConditionalStatementNode.swift; path = AST/ConditionalStatementNode.swift; sourceTree = "<group>"; };
 		BE2CC6601DB94BF800F74DBE /* LargeMathOperation.lion */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LargeMathOperation.lion; sourceTree = "<group>"; };
-		BE2CC6621DB94D3500F74DBE /* FullRun+Performance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "FullRun+Performance.swift"; sourceTree = "<group>"; };
+		BE2CC6621DB94D3500F74DBE /* Runner+Performance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Runner+Performance.swift"; sourceTree = "<group>"; };
 		BE2CC6641DB94F7100F74DBE /* Lexer+Performance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Lexer+Performance.swift"; sourceTree = "<group>"; };
 		BE2CC6661DBA79AD00F74DBE /* WhileStatementNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WhileStatementNode.swift; path = AST/WhileStatementNode.swift; sourceTree = "<group>"; };
+		BE37DFA41DBB8FBD003F6A3E /* ParseError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ParseError.swift; path = Parser/ParseError.swift; sourceTree = "<group>"; };
+		BE37DFAA1DBB96CF003F6A3E /* Runner+Tests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Runner+Tests.swift"; sourceTree = "<group>"; };
 		BE3FEBA41DA427800000648D /* Lexer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Lexer.swift; sourceTree = "<group>"; };
 		BE3FEBA51DA427800000648D /* ASTNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ASTNode.swift; sourceTree = "<group>"; };
 		BE3FEBA61DA427800000648D /* Parser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Parser.swift; sourceTree = "<group>"; };
@@ -100,13 +104,46 @@
 		BE295CE91DB14DCE0019EC57 /* Lioness Tests */ = {
 			isa = PBXGroup;
 			children = (
-				BE295CEA1DB14DCE0019EC57 /* Lioness_Tests.swift */,
-				BE2CC6641DB94F7100F74DBE /* Lexer+Performance.swift */,
-				BE2CC6621DB94D3500F74DBE /* FullRun+Performance.swift */,
-				BE295CEC1DB14DCE0019EC57 /* Info.plist */,
+				BE37DFA61DBB9293003F6A3E /* Lexer */,
+				BE37DFA71DBB9297003F6A3E /* Parser */,
+				BE37DFA81DBB92A0003F6A3E /* Compiler */,
+				BE37DFA91DBB92A7003F6A3E /* Interpreter */,
+				BE2CC6621DB94D3500F74DBE /* Runner+Performance.swift */,
+				BE37DFAA1DBB96CF003F6A3E /* Runner+Tests.swift */,
 				BE2CC6601DB94BF800F74DBE /* LargeMathOperation.lion */,
+				BE295CEC1DB14DCE0019EC57 /* Info.plist */,
 			);
 			path = "Lioness Tests";
+			sourceTree = "<group>";
+		};
+		BE37DFA61DBB9293003F6A3E /* Lexer */ = {
+			isa = PBXGroup;
+			children = (
+				BE2CC6641DB94F7100F74DBE /* Lexer+Performance.swift */,
+				BE295CEA1DB14DCE0019EC57 /* Lexer+Tests.swift */,
+			);
+			name = Lexer;
+			sourceTree = "<group>";
+		};
+		BE37DFA71DBB9297003F6A3E /* Parser */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Parser;
+			sourceTree = "<group>";
+		};
+		BE37DFA81DBB92A0003F6A3E /* Compiler */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Compiler;
+			sourceTree = "<group>";
+		};
+		BE37DFA91DBB92A7003F6A3E /* Interpreter */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Interpreter;
 			sourceTree = "<group>";
 		};
 		BE3FEB8D1DA425A30000648D = {
@@ -141,6 +178,7 @@
 		BE3FEBA21DA4273F0000648D /* Parser */ = {
 			isa = PBXGroup;
 			children = (
+				BE37DFA41DBB8FBD003F6A3E /* ParseError.swift */,
 				BE3FEBA61DA427800000648D /* Parser.swift */,
 			);
 			name = Parser;
@@ -165,14 +203,14 @@
 			name = AST;
 			sourceTree = "<group>";
 		};
-		BE9369F91DA8079C00C0B3DF /* Scorpion Bytecode */ = {
+		BE9369F91DA8079C00C0B3DF /* Compiler */ = {
 			isa = PBXGroup;
 			children = (
 				BE9369FB1DA83AB000C0B3DF /* BytecodeCompiler.swift */,
 				BE04D6391DA99FC800DAEB84 /* BytecodeInstruction.swift */,
 				BE5653631DAAB86F006171B9 /* BytecodeInstructionType.swift */,
 			);
-			name = "Scorpion Bytecode";
+			name = Compiler;
 			sourceTree = "<group>";
 		};
 		BE9369FA1DA807B400C0B3DF /* Interpreter */ = {
@@ -192,7 +230,7 @@
 				BE3FEBA01DA426150000648D /* Lexer */,
 				BE3FEBA21DA4273F0000648D /* Parser */,
 				BE3FEBA31DA427440000648D /* AST */,
-				BE9369F91DA8079C00C0B3DF /* Scorpion Bytecode */,
+				BE9369F91DA8079C00C0B3DF /* Compiler */,
 				BE9369FA1DA807B400C0B3DF /* Interpreter */,
 			);
 			path = Lioness;
@@ -318,6 +356,7 @@
 				BE2296361DB16F2100EA477A /* VariableNode.swift in Sources */,
 				BE2296321DB16F1B00EA477A /* String+RegEx.swift in Sources */,
 				BE22963C1DB16F2100EA477A /* BytecodeCompiler.swift in Sources */,
+				BE37DFA51DBB8FBD003F6A3E /* ParseError.swift in Sources */,
 				BE2CC65F1DB41E4400F74DBE /* ConditionalStatementNode.swift in Sources */,
 				BE22963F1DB16F2100EA477A /* BytecodeInterpreter.swift in Sources */,
 				BEAD9A7F1DB3A1A000A6DDC1 /* LionessRunner.swift in Sources */,
@@ -339,8 +378,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				BE2CC6651DB94F7100F74DBE /* Lexer+Performance.swift in Sources */,
-				BE295CEB1DB14DCE0019EC57 /* Lioness_Tests.swift in Sources */,
-				BE2CC6631DB94D3500F74DBE /* FullRun+Performance.swift in Sources */,
+				BE37DFAB1DBB96CF003F6A3E /* Runner+Tests.swift in Sources */,
+				BE295CEB1DB14DCE0019EC57 /* Lexer+Tests.swift in Sources */,
+				BE2CC6631DB94D3500F74DBE /* Runner+Performance.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

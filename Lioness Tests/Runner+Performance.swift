@@ -23,7 +23,7 @@ class FullRun_Performance: XCTestCase {
 
     func testLargeMathPerformance() {
 		
-		let runner = LionessRunner(logDebug: true)
+		let runner = LionessRunner(logDebug: false)
 
 		let path = "/Users/louisdhauwe/Desktop/Swift/Lioness/Lioness Tests/LargeMathOperation.lion"
 		let source = try! String(contentsOfFile: path, encoding: .utf8)

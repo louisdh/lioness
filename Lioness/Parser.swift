@@ -8,19 +8,6 @@
 
 import Foundation
 
-public enum ParseError: Error {
-	case unexpectedToken
-	case undefinedOperator(String)
-	
-	case expectedCharacter(Character)
-	case expectedExpression
-	case expectedArgumentList
-	case expectedFunctionName
-	
-	case internalInconsistencyOccurred
-
-}
-
 public class Parser {
 	
 	fileprivate let tokens: [Token]
@@ -376,7 +363,7 @@ public class Parser {
 
 	}
 	
-	fileprivate func parseParens() throws -> ASTNode {
+	fileprivate func parseParensExpr() throws -> ASTNode {
 		
 		guard case Token.parensOpen = popCurrentToken() else {
 			throw ParseError.expectedCharacter("(")
@@ -403,7 +390,7 @@ public class Parser {
 		
 		if case Token.parensOpen = currentToken {
 			
-			let exp = try parseParens()
+			let exp = try parseParensExpr()
 			
 			return BooleanOpNode(op: "!", lhs: exp)
 			
@@ -494,7 +481,7 @@ public class Parser {
 				return try parseNotOperation()
 			
 			case .parensOpen:
-				return try parseParens()
+				return try parseParensExpr()
 			
 			case .if:
 				return try parseIfStatement()
