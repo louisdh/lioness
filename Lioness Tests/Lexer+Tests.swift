@@ -7,10 +7,9 @@
 //
 
 import XCTest
-import Foundation
 @testable import Lioness
 
-class Lexer_Tests: XCTestCase {
+class Lexer_Tests: BaseTestCase {
     
     override func setUp() {
         super.setUp()

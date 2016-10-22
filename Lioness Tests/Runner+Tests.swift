@@ -9,7 +9,7 @@
 import XCTest
 @testable import Lioness
 
-class Runner_Tests: XCTestCase {
+class Runner_Tests: BaseTestCase {
 	
 	override func setUp() {
 		super.setUp()
@@ -30,7 +30,7 @@ class Runner_Tests: XCTestCase {
 		runner.runSource(source)
 
 		guard let value = runner.interpreter?.stack.first else {
-			XCTAssert(false, "Expected value at top of stack")
+			XCTFail("Expected value at top of stack")
 			return
 		}
 		
@@ -41,12 +41,23 @@ class Runner_Tests: XCTestCase {
 	func testInnerWhileLoops() {
 		
 		let runner = LionessRunner(logDebug: false)
-		let path = "/Users/louisdhauwe/Desktop/Swift/Lioness/Lioness Tests/InnerWhileLoops.lion"
+
+		let fileURL = getFilePath(for: "InnerWhileLoops")
+
+		guard let path = fileURL?.path else {
+			XCTFail("Invalid path for test")
+			return
+		}
 		
-		try! runner.runSource(atPath: path)
+		do {
+			try runner.runSource(atPath: path)
+		} catch {
+			XCTFail("Failed to run")
+			return
+		}
 		
 		guard let value = runner.interpreter?.registers["sum"] else {
-			XCTAssert(false, "Expected value in register for \"sum\"")
+			XCTFail("Expected value in register for \"sum\"")
 			return
 		}
 		

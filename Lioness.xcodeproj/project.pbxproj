@@ -37,6 +37,7 @@
 		BE37DFAB1DBB96CF003F6A3E /* Runner+Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE37DFAA1DBB96CF003F6A3E /* Runner+Tests.swift */; };
 		BE37DFAD1DBBBAEA003F6A3E /* ContinueNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE37DFAC1DBBBAEA003F6A3E /* ContinueNode.swift */; };
 		BE37DFAF1DBBE2D3003F6A3E /* InnerWhileLoops.lion in Resources */ = {isa = PBXBuildFile; fileRef = BE37DFAE1DBBE2D3003F6A3E /* InnerWhileLoops.lion */; };
+		BE736A8D1DBBEA5F00ADC83A /* BaseTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE736A8C1DBBEA5F00ADC83A /* BaseTestCase.swift */; };
 		BEAD9A7F1DB3A1A000A6DDC1 /* LionessRunner.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEAD9A7E1DB3A1A000A6DDC1 /* LionessRunner.swift */; };
 /* End PBXBuildFile section */
 
@@ -72,6 +73,7 @@
 		BE56536B1DAAE7CF006171B9 /* CallNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CallNode.swift; sourceTree = "<group>"; };
 		BE56536D1DAAE7D8006171B9 /* PrototypeNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrototypeNode.swift; sourceTree = "<group>"; };
 		BE56536F1DAAE822006171B9 /* FunctionNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FunctionNode.swift; sourceTree = "<group>"; };
+		BE736A8C1DBBEA5F00ADC83A /* BaseTestCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseTestCase.swift; sourceTree = "<group>"; };
 		BE9369FB1DA83AB000C0B3DF /* BytecodeCompiler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BytecodeCompiler.swift; sourceTree = "<group>"; };
 		BEAD9A7E1DB3A1A000A6DDC1 /* LionessRunner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LionessRunner.swift; sourceTree = "<group>"; };
 		BEF5BA401DAC15B100D9ADB7 /* AssignmentNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AssignmentNode.swift; sourceTree = "<group>"; };
@@ -108,6 +110,7 @@
 		BE295CE91DB14DCE0019EC57 /* Lioness Tests */ = {
 			isa = PBXGroup;
 			children = (
+				BE736A8C1DBBEA5F00ADC83A /* BaseTestCase.swift */,
 				BE37DFA61DBB9293003F6A3E /* Lexer */,
 				BE37DFA71DBB9297003F6A3E /* Parser */,
 				BE37DFA81DBB92A0003F6A3E /* Compiler */,
@@ -387,6 +390,7 @@
 			files = (
 				BE2CC6651DB94F7100F74DBE /* Lexer+Performance.swift in Sources */,
 				BE37DFAB1DBB96CF003F6A3E /* Runner+Tests.swift in Sources */,
+				BE736A8D1DBBEA5F00ADC83A /* BaseTestCase.swift in Sources */,
 				BE295CEB1DB14DCE0019EC57 /* Lexer+Tests.swift in Sources */,
 				BE2CC6631DB94D3500F74DBE /* Runner+Performance.swift in Sources */,
 			);

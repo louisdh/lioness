@@ -17,10 +17,24 @@ class ViewController: NSViewController, LionessRunnerDelegate {
 		let runner = LionessRunner(logDebug: true)
 		runner.delegate = self
 		
-		let path = "/Users/louisdhauwe/Desktop/Swift/Lioness/macOS Example/macOS Example/C.lion"
+		let path = stringPath(for: "C")
 		
+		print(path)
+
 		try! runner.runSource(atPath: path)
 		
+	}
+	
+	/// Load .lion file in resources of "macOS Example" target
+	fileprivate func stringPath(for testFile: String) -> String {
+	
+		let fileManager = FileManager.default
+		
+		let current = fileManager.currentDirectoryPath
+		let resources = "\(current)/macOS Example.app/Contents/Resources/"
+		let path = "\(resources)\(testFile).lion"
+		
+		return path
 	}
 
 	override var representedObject: Any? {

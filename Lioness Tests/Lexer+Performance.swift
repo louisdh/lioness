@@ -7,9 +7,9 @@
 //
 
 import XCTest
-import Lioness
+@testable import Lioness
 
-class Lexer_Performance: XCTestCase {
+class Lexer_Performance: BaseTestCase {
 
     override func setUp() {
         super.setUp()
@@ -22,11 +22,19 @@ class Lexer_Performance: XCTestCase {
     }
 
     func testLargeMathPerformance() {
-		
-		let path = "/Users/louisdhauwe/Desktop/Swift/Lioness/Lioness Tests/LargeMathOperation.lion"
-		let source = try! String(contentsOfFile: path, encoding: .utf8)
-		
 
+		let fileURL = getFilePath(for: "LargeMathOperation")
+
+		guard let path = fileURL?.path else {
+			XCTFail("Invalid path for test")
+			return
+		}
+		
+		guard let source = try? String(contentsOfFile: path, encoding: .utf8) else {
+			XCTFail("Failed to get source")
+			return
+		}
+		
         self.measure {
 
 			let lexer = Lexer(input: source)
