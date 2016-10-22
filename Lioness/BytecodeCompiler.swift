@@ -10,11 +10,18 @@ import Foundation
 
 public class BytecodeCompiler {
 	
+	// MARK: -
+	// MARK: Private 
+	
 	fileprivate let ast: [ASTNode]
 	fileprivate var index = 0
 	
 	fileprivate var stack = [Int]()
 	
+	fileprivate var scopeStartStack = [String]()
+	
+	// MARK: -
+
 	public init(ast: [ASTNode]) {
 		self.ast = ast
 	}
@@ -38,6 +45,10 @@ public class BytecodeCompiler {
 		return bytecode
 	}
 	
+	// MARK: -
+
+	// MARK: - Labels
+
 	func nextIndexLabel() -> String {
 		index += 1
 		return "\(index)"
@@ -46,5 +57,18 @@ public class BytecodeCompiler {
 	func peekNextIndexLabel() -> String {
 		return "\(index + 1)"
 	}
+	
+	// MARK: - Scope start stack
 
+	func pushScopeStartStack(_ label: String) {
+		scopeStartStack.append(label)
+	}
+
+	func popScopeStartStack() -> String? {
+		return scopeStartStack.popLast()
+	}
+	
+	func peekScopeStartStack() -> String? {
+		return scopeStartStack.last
+	}
 }

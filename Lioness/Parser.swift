@@ -486,6 +486,9 @@ public class Parser {
 			case .if:
 				return try parseIfStatement()
 			
+			case .continue:
+				return try parseContinue()
+			
 			case .while:
 				return try parseWhileStatement()
 			
@@ -493,6 +496,15 @@ public class Parser {
 				throw ParseError.expectedExpression
 		}
 		
+	}
+	
+	fileprivate func parseContinue() throws -> ASTNode {
+
+		guard case Token.continue = popCurrentToken() else {
+			throw ParseError.unexpectedToken
+		}
+		
+		return ContinueNode()
 	}
 	
 	fileprivate func parseIfStatement() throws -> ASTNode {

@@ -8,7 +8,6 @@
 
 import Foundation
 
-
 public class WhileStatementNode: ASTNode {
 	
 	public let condition: ASTNode
@@ -24,6 +23,8 @@ public class WhileStatementNode: ASTNode {
 		var bytecode = [BytecodeInstruction]()
 		
 		let firstLabelOfBody = ctx.peekNextIndexLabel()
+		
+		ctx.pushScopeStartStack(firstLabelOfBody)
 		
 		let conditionInstruction = try condition.compile(ctx)
 		bytecode.append(contentsOf: conditionInstruction)
@@ -50,7 +51,10 @@ public class WhileStatementNode: ASTNode {
 		let goToStart = BytecodeInstruction(label: goToEndLabel, type: .goto, arguments: [firstLabelOfBody])
 		bytecode.append(goToStart)
 		
-		
+		guard let _ = ctx.popScopeStartStack() else {
+			throw CompileError.unexpectedCommand
+		}
+
 		return bytecode
 		
 	}

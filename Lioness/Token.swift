@@ -51,6 +51,7 @@ public enum Token {
 	case function
 	case `true`
 	case `false`
+	case `continue`
 	
 	// Fallback
 	case other(String)
