@@ -38,4 +38,20 @@ class Runner_Tests: XCTestCase {
 		
 	}
 	
+	func testInnerWhileLoops() {
+		
+		let runner = LionessRunner(logDebug: false)
+		let path = "/Users/louisdhauwe/Desktop/Swift/Lioness/Lioness Tests/InnerWhileLoops.lion"
+		
+		try! runner.runSource(atPath: path)
+		
+		guard let value = runner.interpreter?.registers["sum"] else {
+			XCTAssert(false, "Expected value in register for \"sum\"")
+			return
+		}
+		
+		XCTAssert(value == 7_255_941_120, "Binary operation returned wrong result")
+		
+	}
+	
 }
