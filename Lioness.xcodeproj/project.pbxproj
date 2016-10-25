@@ -38,6 +38,7 @@
 		BE37DFAD1DBBBAEA003F6A3E /* ContinueNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE37DFAC1DBBBAEA003F6A3E /* ContinueNode.swift */; };
 		BE37DFAF1DBBE2D3003F6A3E /* InnerWhileLoops.lion in Resources */ = {isa = PBXBuildFile; fileRef = BE37DFAE1DBBE2D3003F6A3E /* InnerWhileLoops.lion */; };
 		BE736A8D1DBBEA5F00ADC83A /* BaseTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE736A8C1DBBEA5F00ADC83A /* BaseTestCase.swift */; };
+		BE736A911DBD3C0D00ADC83A /* Execution+Performance.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE736A901DBD3C0D00ADC83A /* Execution+Performance.swift */; };
 		BEAD9A7F1DB3A1A000A6DDC1 /* LionessRunner.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEAD9A7E1DB3A1A000A6DDC1 /* LionessRunner.swift */; };
 /* End PBXBuildFile section */
 
@@ -74,6 +75,7 @@
 		BE56536D1DAAE7D8006171B9 /* PrototypeNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrototypeNode.swift; sourceTree = "<group>"; };
 		BE56536F1DAAE822006171B9 /* FunctionNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FunctionNode.swift; sourceTree = "<group>"; };
 		BE736A8C1DBBEA5F00ADC83A /* BaseTestCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseTestCase.swift; sourceTree = "<group>"; };
+		BE736A901DBD3C0D00ADC83A /* Execution+Performance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Execution+Performance.swift"; path = "Execution/Execution+Performance.swift"; sourceTree = "<group>"; };
 		BE9369FB1DA83AB000C0B3DF /* BytecodeCompiler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BytecodeCompiler.swift; sourceTree = "<group>"; };
 		BEAD9A7E1DB3A1A000A6DDC1 /* LionessRunner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LionessRunner.swift; sourceTree = "<group>"; };
 		BEF5BA401DAC15B100D9ADB7 /* AssignmentNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AssignmentNode.swift; sourceTree = "<group>"; };
@@ -110,15 +112,14 @@
 		BE295CE91DB14DCE0019EC57 /* Lioness Tests */ = {
 			isa = PBXGroup;
 			children = (
+				BE736A921DBD3C3000ADC83A /* Test source files */,
 				BE736A8C1DBBEA5F00ADC83A /* BaseTestCase.swift */,
 				BE37DFA61DBB9293003F6A3E /* Lexer */,
 				BE37DFA71DBB9297003F6A3E /* Parser */,
 				BE37DFA81DBB92A0003F6A3E /* Compiler */,
 				BE37DFA91DBB92A7003F6A3E /* Interpreter */,
-				BE2CC6621DB94D3500F74DBE /* Runner+Performance.swift */,
-				BE37DFAA1DBB96CF003F6A3E /* Runner+Tests.swift */,
-				BE2CC6601DB94BF800F74DBE /* LargeMathOperation.lion */,
-				BE37DFAE1DBBE2D3003F6A3E /* InnerWhileLoops.lion */,
+				BE736A8E1DBD3B5200ADC83A /* Execution */,
+				BE736A8F1DBD3BCF00ADC83A /* Runner */,
 				BE295CEC1DB14DCE0019EC57 /* Info.plist */,
 			);
 			path = "Lioness Tests";
@@ -210,6 +211,32 @@
 				BE37DFAC1DBBBAEA003F6A3E /* ContinueNode.swift */,
 			);
 			name = AST;
+			sourceTree = "<group>";
+		};
+		BE736A8E1DBD3B5200ADC83A /* Execution */ = {
+			isa = PBXGroup;
+			children = (
+				BE736A901DBD3C0D00ADC83A /* Execution+Performance.swift */,
+			);
+			name = Execution;
+			sourceTree = "<group>";
+		};
+		BE736A8F1DBD3BCF00ADC83A /* Runner */ = {
+			isa = PBXGroup;
+			children = (
+				BE2CC6621DB94D3500F74DBE /* Runner+Performance.swift */,
+				BE37DFAA1DBB96CF003F6A3E /* Runner+Tests.swift */,
+			);
+			name = Runner;
+			sourceTree = "<group>";
+		};
+		BE736A921DBD3C3000ADC83A /* Test source files */ = {
+			isa = PBXGroup;
+			children = (
+				BE2CC6601DB94BF800F74DBE /* LargeMathOperation.lion */,
+				BE37DFAE1DBBE2D3003F6A3E /* InnerWhileLoops.lion */,
+			);
+			name = "Test source files";
 			sourceTree = "<group>";
 		};
 		BE9369F91DA8079C00C0B3DF /* Compiler */ = {
@@ -393,6 +420,7 @@
 				BE736A8D1DBBEA5F00ADC83A /* BaseTestCase.swift in Sources */,
 				BE295CEB1DB14DCE0019EC57 /* Lexer+Tests.swift in Sources */,
 				BE2CC6631DB94D3500F74DBE /* Runner+Performance.swift in Sources */,
+				BE736A911DBD3C0D00ADC83A /* Execution+Performance.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

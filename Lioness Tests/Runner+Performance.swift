@@ -9,6 +9,7 @@
 import XCTest
 @testable import Lioness
 
+/// Performance tests for full run (from lexer to interpreter)
 class FullRun_Performance: BaseTestCase {
 
     override func setUp() {
