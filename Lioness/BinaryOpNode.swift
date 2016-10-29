@@ -22,10 +22,7 @@ public class BinaryOpNode: ASTNode {
 	
 	public override func compile(_ ctx: BytecodeCompiler) throws -> [BytecodeInstruction] {
 		
-		
-		
 		var bytecode = [BytecodeInstruction]()
-		
 		
 		var opTypes: [String : BytecodeInstructionType]
 		
@@ -77,5 +74,14 @@ public class BinaryOpNode: ASTNode {
 	public override var description: String {
 		return "BinaryOpNode(\(op), lhs: \(lhs), rhs: \(rhs))"
 	}
+	
+	public override var nodeDescription: String? {
+		return op
+	}
+	
+	public override var childNodes: [(String?, ASTNode)] {
+		return [("lhs", lhs), ("rhs", rhs)]
+	}
+	
 	
 }

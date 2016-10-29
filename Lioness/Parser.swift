@@ -526,8 +526,9 @@ public class Parser {
 			if let currentToken = peekCurrentToken(), case Token.if = currentToken {
 				
 				let ifStatement = try parseIfStatement()
+				let elseBody = BodyNode(nodes: [ifStatement])
 				
-				return ConditionalStatementNode(condition: condition, body: body, elseBody: [ifStatement])
+				return ConditionalStatementNode(condition: condition, body: body, elseBody: elseBody)
 				
 			}
 
@@ -557,7 +558,7 @@ public class Parser {
 
 	}
 	
-	fileprivate func parseBodyWithCurlies() throws -> [ASTNode] {
+	fileprivate func parseBodyWithCurlies() throws -> BodyNode {
 
 		guard case Token.curlyOpen = popCurrentToken() else {
 			throw ParseError.expectedCharacter("{")
@@ -573,21 +574,21 @@ public class Parser {
 	}
 	
 	/// Expects opened curly brace, will exit when closing curly brace found
-	fileprivate func parseBody() throws -> [ASTNode] {
+	fileprivate func parseBody() throws -> BodyNode {
 		
-		var body = [ASTNode]()
+		var nodes = [ASTNode]()
 		
 		while index < tokens.count {
 			
 			if shouldParseAssignment() {
 				
 				let assign = try parseAssignment()
-				body.append(assign)
+				nodes.append(assign)
 				
 			} else {
 				
 				let expr = try parseExpression()
-				body.append(expr)
+				nodes.append(expr)
 				
 			}
 			
@@ -597,7 +598,7 @@ public class Parser {
 			
 		}
 		
-		return body
+		return BodyNode(nodes: nodes)
 		
 	}
 	

@@ -52,4 +52,16 @@ public class BooleanNode: ASTNode {
 		return "BooleanNode(\(value))"
 	}
 	
+	public override var nodeDescription: String? {
+		if boolValue == true {
+			return "true"
+		} else {
+			return "false"
+		}
+	}
+	
+	public override var childNodes: [(String?, ASTNode)] {
+		return []
+	}
+	
 }

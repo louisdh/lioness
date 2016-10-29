@@ -17,11 +17,33 @@ class ViewController: NSViewController, LionessRunnerDelegate {
 		let runner = LionessRunner(logDebug: true)
 		runner.delegate = self
 		
-		let path = stringPath(for: "C")
+		let path = stringPath(for: "A")
 		
 		print(path)
 
 		try! runner.runSource(atPath: path)
+		
+		drawASTGraph(for: "A")
+	}
+	
+	func drawASTGraph(for testFile: String) {
+		
+		let path = stringPath(for: testFile)
+		
+		let source = try! String(contentsOfFile: path, encoding: .utf8)
+
+		let lexer = Lexer(input: source)
+		let tokens = lexer.tokenize()
+		
+		let parser = Parser(tokens: tokens)
+		let ast = try! parser.parse()
+
+		let visualizer = ASTVisualizer(body: BodyNode(nodes: ast))
+		
+		if let image = visualizer.draw() {
+			print(image)
+		}
+		
 		
 	}
 	

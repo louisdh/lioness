@@ -39,4 +39,12 @@ public class AssignmentNode: ASTNode {
 		return "\(variable.description) = \(value.description)"
 	}
 	
+	public override var nodeDescription: String? {
+		return "="
+	}
+	
+	public override var childNodes: [(String?, ASTNode)] {
+		return [("lhs", variable), ("rhs", value)]
+	}
+	
 }

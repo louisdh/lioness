@@ -22,4 +22,12 @@ public class PrototypeNode: ASTNode {
 		return "PrototypeNode(name: \(name), argumentNames: \(argumentNames))"
 	}
 	
+	public override var nodeDescription: String? {
+		return "Prototype"
+	}
+	
+	public override var childNodes: [(String?, ASTNode)] {
+		return []
+	}
+	
 }

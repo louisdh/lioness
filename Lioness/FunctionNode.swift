@@ -11,9 +11,9 @@ import Foundation
 public class FunctionNode: ASTNode {
 	
 	public let prototype: PrototypeNode
-	public let body: [ASTNode]
+	public let body: BodyNode
 	
-	public init(prototype: PrototypeNode, body: [ASTNode]) {
+	public init(prototype: PrototypeNode, body: BodyNode) {
 		self.prototype = prototype
 		self.body = body
 	}
@@ -22,10 +22,8 @@ public class FunctionNode: ASTNode {
 		
 		var bytecode = [BytecodeInstruction]()
 	
-		for a in body {
-			let instructions = try a.compile(ctx)
-			bytecode.append(contentsOf: instructions)
-		}
+		let instructions = try body.compile(ctx)
+		bytecode.append(contentsOf: instructions)
 	
 		return bytecode
 		
@@ -33,13 +31,24 @@ public class FunctionNode: ASTNode {
 	
 	public override var description: String {
 		
-		var str = "FunctionNode(prototype: \(prototype), body: ["
+		var str = "FunctionNode(prototype: \(prototype), "
 		
-		for e in body {
-			str += "\n    \(e.description)"
-		}
+		str += "\n    \(body.description)"
+
 		
-		return str + "\n])"
+		return str + ")"
+	}
+	
+	public override var nodeDescription: String? {
+		return "Function"
+	}
+	
+	public override var childNodes: [(String?, ASTNode)] {
+		var children = [(String?, ASTNode)]()
+		
+		children.append(contentsOf: body.childNodes)
+		
+		return children
 	}
 	
 }

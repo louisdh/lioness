@@ -26,4 +26,12 @@ public class ContinueNode: ASTNode {
 		return "ContinueNode"
 	}
 	
+	public override var nodeDescription: String? {
+		return "continue"
+	}
+	
+	public override var childNodes: [(String?, ASTNode)] {
+		return []
+	}
+	
 }

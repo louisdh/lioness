@@ -28,4 +28,18 @@ public class CallNode: ASTNode {
 		return str + ")"
 	}
 	
+	public override var nodeDescription: String? {
+		return callee
+	}
+	
+	public override var childNodes: [(String?, ASTNode)] {
+		var children = [(String?, ASTNode)]()
+		
+		for a in arguments {
+			children.append(("argument", a))
+		}
+		
+		return children
+	}
+	
 }

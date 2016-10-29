@@ -32,4 +32,12 @@ public class VariableNode: ASTNode {
 		return "VariableNode(\(name))"
 	}
 	
+	public override var nodeDescription: String? {
+		return "\(name)"
+	}
+	
+	public override var childNodes: [(String?, ASTNode)] {
+		return []
+	}
+	
 }

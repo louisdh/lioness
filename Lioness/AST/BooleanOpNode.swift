@@ -65,4 +65,18 @@ public class BooleanOpNode: ASTNode {
 		return "BooleanOpNode(\(op), lhs: \(lhs)"
 	}
 	
+	public override var nodeDescription: String? {
+		return op
+	}
+	
+	public override var childNodes: [(String?, ASTNode)] {
+		var children: [(String?, ASTNode)]  = [("lhs", lhs)]
+		
+		if let rhs = rhs {
+			children.append(("rhs", rhs))
+		}
+		
+		return children
+	}
+	
 }

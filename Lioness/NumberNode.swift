@@ -28,4 +28,12 @@ public class NumberNode: ASTNode {
 		return "NumberNode(\(value))"
 	}
 	
+	public override var nodeDescription: String? {
+		return "\(value)"
+	}
+	
+	public override var childNodes: [(String?, ASTNode)] {
+		return []
+	}
+	
 }

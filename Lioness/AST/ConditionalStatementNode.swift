@@ -11,10 +11,10 @@ import Foundation
 public class ConditionalStatementNode: ASTNode {
 	
 	public let condition: ASTNode
-	public let body: [ASTNode]
-	public let elseBody: [ASTNode]?
+	public let body: BodyNode
+	public let elseBody: BodyNode?
 
-	public init(condition: ASTNode, body: [ASTNode], elseBody: [ASTNode]? = nil) {
+	public init(condition: ASTNode, body: BodyNode, elseBody: BodyNode? = nil) {
 		self.condition = condition
 		self.body = body
 		self.elseBody = elseBody
@@ -34,10 +34,8 @@ public class ConditionalStatementNode: ASTNode {
 
 		var elseBodyBytecode = [BytecodeInstruction]()
 
-		for a in body {
-			let instructions = try a.compile(ctx)
-			bodyBytecode.append(contentsOf: instructions)
-		}
+		let bodyInstructions = try body.compile(ctx)
+		bodyBytecode.append(contentsOf: bodyInstructions)
 		
 		let goToEndLabel = ctx.nextIndexLabel()
 
@@ -48,10 +46,8 @@ public class ConditionalStatementNode: ASTNode {
 		
 		if let elseBody = elseBody {
 			
-			for a in elseBody {
-				let instructions = try a.compile(ctx)
-				elseBodyBytecode.append(contentsOf: instructions)
-			}
+			let instructions = try elseBody.compile(ctx)
+			elseBodyBytecode.append(contentsOf: instructions)
 			
 		}
 
@@ -70,19 +66,15 @@ public class ConditionalStatementNode: ASTNode {
 		
 		var str = "ConditionalStatementNode(condition: \(condition), body: ["
 		
-		for e in body {
-			str += "\n    \(e.description)"
-		}
+		str += "\n    \(body.description)"
 		
 		if let elseBody = elseBody {
 
-			str += "], elseBody: ["
+			str += ", elseBody: "
 			
-			for e in elseBody {
-				str += "\n    \(e.description)"
-			}
-			
-			str += "\n])"
+			str += "\n    \(elseBody.description)"
+
+			str += "\n)"
 			
 		} else {
 			
@@ -91,6 +83,24 @@ public class ConditionalStatementNode: ASTNode {
 		}
 		
 		return str
+	}
+	
+	public override var nodeDescription: String? {
+		return "if"
+	}
+	
+	public override var childNodes: [(String?, ASTNode)] {
+		var children = [(String?, ASTNode)]()
+		
+		children.append(("condition", condition))
+		
+		children.append(("if", body))
+
+		if let elseBody = elseBody {
+			children.append(("else", elseBody))
+		}
+		
+		return children
 	}
 	
 }

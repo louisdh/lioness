@@ -11,9 +11,9 @@ import Foundation
 public class WhileStatementNode: ASTNode {
 	
 	public let condition: ASTNode
-	public let body: [ASTNode]
+	public let body: BodyNode
 	
-	public init(condition: ASTNode, body: [ASTNode], elseBody: [ASTNode]? = nil) {
+	public init(condition: ASTNode, body: BodyNode) {
 		self.condition = condition
 		self.body = body
 	}
@@ -33,10 +33,8 @@ public class WhileStatementNode: ASTNode {
 		
 		var bodyBytecode = [BytecodeInstruction]()
 		
-		for a in body {
-			let instructions = try a.compile(ctx)
-			bodyBytecode.append(contentsOf: instructions)
-		}
+		let bodyInstructions = try body.compile(ctx)
+		bodyBytecode.append(contentsOf: bodyInstructions)
 		
 		let goToEndLabel = ctx.nextIndexLabel()
 		
@@ -61,15 +59,27 @@ public class WhileStatementNode: ASTNode {
 	
 	public override var description: String {
 		
-		var str = "WhileStatementNode(condition: \(condition), body: ["
+		var str = "WhileStatementNode(condition: \(condition), body: "
+
+		str += "\n    \(body.description)"
 		
-		for e in body {
-			str += "\n    \(e.description)"
-		}
-		
-		str += "\n])"
+		str += ")"
 
 		return str
+	}
+	
+	public override var nodeDescription: String? {
+		return "while"
+	}
+	
+	public override var childNodes: [(String?, ASTNode)] {
+		var children = [(String?, ASTNode)]()
+		
+		children.append(("condition", condition))
+		
+		children.append((nil, body))
+		
+		return children
 	}
 	
 }
