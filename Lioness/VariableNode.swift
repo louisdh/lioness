@@ -16,7 +16,7 @@ public class VariableNode: ASTNode {
 		self.name = name
 	}
 	
-	public override func compile(_ ctx: BytecodeCompiler) throws -> [BytecodeInstruction] {
+	public override func compile(with ctx: BytecodeCompiler) throws -> [BytecodeInstruction] {
 		
 		var bytecode = [BytecodeInstruction]()
 

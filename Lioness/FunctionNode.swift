@@ -18,11 +18,11 @@ public class FunctionNode: ASTNode {
 		self.body = body
 	}
 	
-	public override func compile(_ ctx: BytecodeCompiler) throws -> [BytecodeInstruction] {
+	public override func compile(with ctx: BytecodeCompiler) throws -> [BytecodeInstruction] {
 		
 		var bytecode = [BytecodeInstruction]()
 	
-		let instructions = try body.compile(ctx)
+		let instructions = try body.compile(with: ctx)
 		bytecode.append(contentsOf: instructions)
 	
 		return bytecode

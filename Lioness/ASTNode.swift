@@ -61,7 +61,7 @@ public struct ASTChildNode {
 public class ASTNode: CustomStringConvertible, ASTNodeDescriptor {
 	
 	/// Compiles to Scorpion bytecode instructions
-	public func compile(_ ctx: BytecodeCompiler) throws -> [BytecodeInstruction] {
+	public func compile(with ctx: BytecodeCompiler) throws -> [BytecodeInstruction] {
 		
 		return []
 	}

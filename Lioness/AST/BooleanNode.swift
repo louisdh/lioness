@@ -40,7 +40,7 @@ public class BooleanNode: ASTNode {
 		
 	}
 	
-	public override func compile(_ ctx: BytecodeCompiler) throws -> [BytecodeInstruction] {
+	public override func compile(with ctx: BytecodeCompiler) throws -> [BytecodeInstruction] {
 		
 		let i = self.value
 		let label = ctx.nextIndexLabel()

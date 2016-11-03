@@ -20,7 +20,7 @@ public class BinaryOpNode: ASTNode {
 		self.rhs = rhs
 	}
 	
-	public override func compile(_ ctx: BytecodeCompiler) throws -> [BytecodeInstruction] {
+	public override func compile(with ctx: BytecodeCompiler) throws -> [BytecodeInstruction] {
 		
 		var bytecode = [BytecodeInstruction]()
 		
@@ -46,16 +46,16 @@ public class BinaryOpNode: ASTNode {
 			
 			// flip l and r
 
-			let r = try rhs.compile(ctx)
-			let l = try lhs.compile(ctx)
+			let r = try rhs.compile(with: ctx)
+			let l = try lhs.compile(with: ctx)
 			
 			bytecode.append(contentsOf: r)
 			bytecode.append(contentsOf: l)
 			
 		} else {
 			
-			let l = try lhs.compile(ctx)
-			let r = try rhs.compile(ctx)
+			let l = try lhs.compile(with: ctx)
+			let r = try rhs.compile(with: ctx)
 			
 			bytecode.append(contentsOf: l)
 			bytecode.append(contentsOf: r)

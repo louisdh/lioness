@@ -18,9 +18,9 @@ public class AssignmentNode: ASTNode {
 		self.value = value
 	}
 	
-	public override func compile(_ ctx: BytecodeCompiler) throws -> [BytecodeInstruction] {
+	public override func compile(with ctx: BytecodeCompiler) throws -> [BytecodeInstruction] {
 		
-		let v = try value.compile(ctx)
+		let v = try value.compile(with: ctx)
 		
 		var bytecode = [BytecodeInstruction]()
 
