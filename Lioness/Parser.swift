@@ -19,8 +19,7 @@ public class Parser {
 		self.tokens = tokens
 	}
 	
-	// MARK: -
-	// MARK: Public
+	// MARK: - Public
 	
 	public func parse() throws -> [ASTNode] {
 		
@@ -61,8 +60,9 @@ public class Parser {
 		return nodes
 	}
 
-	// MARK: -
-	// MARK: Private
+	// MARK: - Private
+	
+	// TODO: Refactor operators and their precedence
 	
 	fileprivate let operatorPrecedence: [String : Int] = [
 		"+": 20,
@@ -215,7 +215,7 @@ public class Parser {
 		return nil
 	}
 
-	// MARK: Tokens
+	// MARK: - Tokens
 
 	fileprivate func peekCurrentToken() -> Token? {
 		return tokens[safe: index]
@@ -240,7 +240,7 @@ public class Parser {
 		return t
 	}
 	
-	// MARK: Parsing
+	// MARK: - Parsing
 	
 	/// Look ahead to check if boolean operator should be parsed
 	fileprivate func shouldParseBooleanOp() -> Bool {
@@ -363,12 +363,14 @@ public class Parser {
 
 	}
 	
+	// TODO: Refactor, always use "expr" as var name for expressions, "exp" is short for exponents
+
 	fileprivate func parseParensExpr() throws -> ASTNode {
 		
 		guard case Token.parensOpen = popCurrentToken() else {
 			throw ParseError.expectedCharacter("(")
 		}
-		
+
 		let exp = try parseExpression()
 		
 		guard case Token.parensClose = popCurrentToken() else {
@@ -685,6 +687,7 @@ public class Parser {
 		
 	}
 	
+	/// Recursive
 	fileprivate func parseBooleanOp(_ node: ASTNode, exprPrecedence: Int = 0) throws -> ASTNode {
 		
 		var lhs = node

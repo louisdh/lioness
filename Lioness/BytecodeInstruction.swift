@@ -8,6 +8,7 @@
 
 import Foundation
 
+// TODO: Refactor to separate class?
 public enum BytecodeInstructionError: Error {
 	case invalidDecoding
 }
@@ -84,6 +85,7 @@ public class BytecodeInstruction: CustomStringConvertible {
 	
 }
 
+// TODO: Move to separate extension file?
 extension Array {
 	subscript (safe index: Int) -> Element? {
 		return indices ~= index ? self[index] : nil

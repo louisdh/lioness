@@ -8,10 +8,12 @@
 
 import Foundation
 
+// TODO: Refactor to separate class?
 public enum CompileError: Error {
 	case unexpectedCommand
 }
 
+// TODO: Refactor to separate class?
 public protocol ASTNodeDescriptor {
 	
 	var nodeDescription: String? {
@@ -24,6 +26,7 @@ public protocol ASTNodeDescriptor {
 	
 }
 
+// TODO: Refactor to separate class?
 public struct ASTChildNode {
 	
 	public let connectionToParent: String?
@@ -57,12 +60,13 @@ public struct ASTChildNode {
 	
 }
 
+// TODO: Refactor to separate class?
+
 /// AST node with a compile function to compile to Scorpion
 public class ASTNode: CustomStringConvertible, ASTNodeDescriptor {
 	
 	/// Compiles to Scorpion bytecode instructions
 	public func compile(with ctx: BytecodeCompiler) throws -> [BytecodeInstruction] {
-		
 		return []
 	}
 	

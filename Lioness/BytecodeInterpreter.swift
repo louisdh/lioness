@@ -63,6 +63,8 @@ public class BytecodeInterpreter {
 		
 		var newPc: Int
 		
+		// TODO: Cleaner (more generic) mapping possible?
+
 		switch instruction.type {
 			
 			case .pushConst:

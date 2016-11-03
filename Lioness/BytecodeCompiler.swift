@@ -10,8 +10,7 @@ import Foundation
 
 public class BytecodeCompiler {
 	
-	// MARK: -
-	// MARK: Private 
+	// MARK: - Private
 	
 	fileprivate let ast: [ASTNode]
 	fileprivate var index = 0
@@ -24,8 +23,7 @@ public class BytecodeCompiler {
 		self.ast = ast
 	}
 	
-	// MARK: -
-	// MARK: Public
+	// MARK: - Public
 	
 	public func compile() throws -> [BytecodeInstruction] {
 		
@@ -41,8 +39,6 @@ public class BytecodeCompiler {
 		return bytecode
 	}
 	
-	// MARK: -
-
 	// MARK: - Labels
 
 	func nextIndexLabel() -> String {
