@@ -16,8 +16,6 @@ public class BytecodeCompiler {
 	fileprivate let ast: [ASTNode]
 	fileprivate var index = 0
 	
-	fileprivate var stack = [Int]()
-	
 	fileprivate var scopeStartStack = [String]()
 	
 	// MARK: -
@@ -30,14 +28,12 @@ public class BytecodeCompiler {
 	// MARK: Public
 	
 	public func compile() throws -> [BytecodeInstruction] {
-
-		stack = [Int]()
 		
 		var bytecode = [BytecodeInstruction]()
 
-		for a in ast {
+		for node in ast {
 			
-			let compiled = try a.compile(self)
+			let compiled = try node.compile(self)
 			bytecode.append(contentsOf: compiled)
 			
 		}
