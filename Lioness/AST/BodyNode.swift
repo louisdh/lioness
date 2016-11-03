@@ -43,11 +43,11 @@ public class BodyNode: ASTNode {
 		return "body"
 	}
 	
-	public override var childNodes: [(String?, ASTNode)] {
-		var children = [(String?, ASTNode)]()
+	public override var childNodes: [ASTChildNode] {
+		var children = [ASTChildNode]()
 		
 		for a in nodes {
-			children.append((nil, a))
+			children.append(ASTChildNode(node: a))
 		}
 		
 		return children

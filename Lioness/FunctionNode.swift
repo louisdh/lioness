@@ -43,8 +43,8 @@ public class FunctionNode: ASTNode {
 		return "Function"
 	}
 	
-	public override var childNodes: [(String?, ASTNode)] {
-		var children = [(String?, ASTNode)]()
+	public override var childNodes: [ASTChildNode] {
+		var children = [ASTChildNode]()
 		
 		children.append(contentsOf: body.childNodes)
 		

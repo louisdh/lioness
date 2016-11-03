@@ -1,11 +1,14 @@
+i = 0
+sum = 1
 
-func foo(x, y) {
-  x + y * 2 + (4 + 5)^3 / 3
-  x + y
+while i < 10 {
+	
+	i += 1
+	
+	if i > 5 {
+		continue
+	}
+	
+	sum *= i
+	
 }
-
-func bar(a, b) {
-  15 * 8
-}
-
-foo(3, 4)

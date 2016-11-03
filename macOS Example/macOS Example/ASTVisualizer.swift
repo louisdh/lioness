@@ -11,24 +11,81 @@ import CoreGraphics
 import Lioness
 import AppKit
 
-fileprivate let minNodeHeight: CGFloat = 50
-fileprivate let minNodeWidth: CGFloat = 80
+fileprivate let minNodeHeight: CGFloat = 40.0
+fileprivate let minNodeWidth: CGFloat = 40.0
 
-fileprivate let minNodeLevelSpacing: CGFloat = 30
-fileprivate let minNodeXSpacing: CGFloat = 20
+fileprivate let minNodeXSpacing: CGFloat = 20.0
+fileprivate let minNodeYSpacing: CGFloat = 50.0
 
-fileprivate extension ASTNode {
+fileprivate extension ASTNodeDescriptor {
 	
+	/// Includes children, and spacing
 	var drawSize: CGSize {
 		
-		let width: CGFloat = CGFloat(widestNumberOfChildNodes) * minNodeWidth + minNodeXSpacing * CGFloat(widestNumberOfChildNodes)
+		return CGSize(width: drawWidth, height: drawHeight)
+	}
+	
+	/// Includes children
+	var drawWidth: CGFloat {
 		
+		let spacing = minNodeXSpacing * CGFloat(widestNumberOfChildNodes)
+		
+		let width = nodeTreeDrawSize.width + spacing
+
+		return width
+	}
+	
+	/// Includes children
+	var drawHeight: CGFloat {
+
 		let totalNumberOfNodesDeep = CGFloat(deephestNumberOfChildNodes) + 1
-		let heightSpacing = minNodeLevelSpacing * (totalNumberOfNodesDeep + 1)
-		let height = totalNumberOfNodesDeep * minNodeHeight + heightSpacing
+		let spacing = minNodeYSpacing * (totalNumberOfNodesDeep + 1)
+		
+		let height = totalNumberOfNodesDeep * minNodeHeight + spacing
+		
+		return height
+	}
+
+	var drawSizeForDirectChildren: CGSize {
+		
+		var width: CGFloat = 0.0
+		var height: CGFloat = 0.0
+		
+		for c in childNodes {
+			
+			width += c.node.nodeSize.width
+			height += c.node.nodeSize.height
+			
+		}
 		
 		return CGSize(width: width, height: height)
+	
+	}
+	
+	/// Single node size
+	var nodeSize: CGSize {
 		
+		if let text = nodeDescription {
+			
+			let style = NSMutableParagraphStyle()
+			style.alignment = .center
+			
+			let attributes = [
+				NSFontAttributeName: NSFont.systemFont(ofSize: 14.0),
+				NSParagraphStyleAttributeName: style
+			]
+			
+			let attr = NSAttributedString(string: text, attributes: attributes)
+			
+			let size = attr.size()
+			let width = max(minNodeWidth, size.width + 20)
+			let height = max(minNodeHeight, size.height + 10)
+			
+			return CGSize(width: width, height: height)
+		}
+		
+		
+		return CGSize(width: minNodeWidth, height: minNodeHeight)
 	}
 	
 	
@@ -41,9 +98,9 @@ fileprivate extension ASTNode {
 		
 		var deephest = 1
 
-		for (_, node) in childNodes {
+		for childNode in childNodes {
 			
-			let d = 1 + node.deephestNumberOfChildNodes
+			let d = 1 + childNode.node.deephestNumberOfChildNodes
 			
 			if d > deephest {
 				deephest = d
@@ -64,9 +121,9 @@ fileprivate extension ASTNode {
 		
 		var wide = 0
 		
-		for (_, node) in childNodes {
+		for childNode in childNodes {
 			
-			wide += node.widestNumberOfChildNodes
+			wide += childNode.node.widestNumberOfChildNodes
 			
 		}
 		
@@ -74,6 +131,30 @@ fileprivate extension ASTNode {
 		
 	}
 	
+	// make lazy?
+	/// Without spacing
+	var nodeTreeDrawSize: CGSize {
+		
+		if childNodes.isEmpty {
+			return self.nodeSize
+		}
+		
+		var s = CGSize.zero
+		
+		for childNode in childNodes {
+			
+			s = s + childNode.node.nodeTreeDrawSize
+			
+		}
+		
+		return s
+		
+	}
+	
+}
+
+fileprivate func +(lhs: CGSize, rhs: CGSize) -> CGSize {
+	return CGSize(width: lhs.width + rhs.width, height: lhs.height + rhs.height)
 }
 
 class ASTVisualizer {
@@ -83,9 +164,6 @@ class ASTVisualizer {
 	init(body: BodyNode) {
 		
 		self.body = body
-
-		print("w: \(body.widestNumberOfChildNodes)")
-		print("h: \(body.deephestNumberOfChildNodes)")
 		
 	}
 	
@@ -99,8 +177,6 @@ class ASTVisualizer {
 		
 		let size = canvasSize
 		
-		print(size)
-
 		return draw(withSize: size)
 
 	}
@@ -115,7 +191,7 @@ class ASTVisualizer {
 		ctx?.shouldAntialias = true
 		
 		
-		let rect1 = CGRect(x: 0, y: 0, width: size.width, height: size.height)
+		let rect1 = CGRect(origin: .zero, size: size)
 		
 		let path = NSBezierPath(rect: normalizedRect(rect1))
 		
@@ -125,8 +201,9 @@ class ASTVisualizer {
 		
 		
 		let startX = size.width/2.0
+		let startPoint = CGPoint(x: startX, y: minNodeYSpacing)
 		
-		drawNode(body, atPosition: CGPoint(x: startX, y: minNodeLevelSpacing), atYLevel: 1, withAvailableWidth: size.width)
+		drawNode(body, atPosition: startPoint)
 
 		composedImage.unlockFocus()
 		
@@ -148,13 +225,12 @@ class ASTVisualizer {
 	}
 	
 	
-	// Don't need to pass availableWidth? (can just be childNode.drawSize.width?)
-	fileprivate func drawNode(_ node: ASTNode, atPosition point: CGPoint, atYLevel yLevel: CGFloat, withAvailableWidth availableWidth: CGFloat, withParentRect parentRect: CGRect? = nil) {
+	fileprivate func drawNode(_ node: ASTNodeDescriptor, atPosition point: CGPoint, withParentRect parentRect: CGRect? = nil, conditionalConnection: Bool = false) {
 		
-		let x: CGFloat = point.x - minNodeWidth/2.0
+		let x: CGFloat = point.x - node.nodeSize.width/2.0
 		let y: CGFloat = point.y
 		
-		let rect = CGRect(x: x, y: y, width: minNodeWidth, height: minNodeHeight)
+		let rect = CGRect(x: x, y: y, width: node.nodeSize.width, height: node.nodeSize.height)
 				
 		let path = NSBezierPath(roundedRect: normalizedRect(rect), xRadius: 12.0, yRadius: 12.0)
 		
@@ -162,7 +238,7 @@ class ASTVisualizer {
 
 		path.fill()
 		
-		NSColor.blue.withAlphaComponent(0.4).setStroke()
+		NSColor.blue.withAlphaComponent(0.6).setStroke()
 		path.lineWidth = 2.0
 		path.stroke()
 		
@@ -177,21 +253,33 @@ class ASTVisualizer {
 
 			linePath.line(to: normalizedPoint(pointB))
 			
-			NSColor.blue.withAlphaComponent(0.4).setStroke()
+			if conditionalConnection {
+				linePath.setLineDash([4.0], count: 1, phase: 2.0)
+			}
+			
+			NSColor.blue.withAlphaComponent(0.6).setStroke()
 			linePath.lineWidth = 2.0
 			linePath.stroke()
 		}
 		
 		
 		if let text = node.nodeDescription {
-		
-			let attr = NSAttributedString(string: text)
+			
+			let style = NSMutableParagraphStyle()
+			style.alignment = .center
+			
+			let attributes = [
+				NSFontAttributeName: NSFont.systemFont(ofSize: 14.0),
+				NSParagraphStyleAttributeName: style
+			]
+			
+			let attr = NSAttributedString(string: text, attributes: attributes)
 			
 			let size = attr.size()
 			
 			var textRect = rect
-			// TODO: max 0
-			textRect.origin.x += (rect.width - size.width) / 2.0
+			
+			// TODO: max 0?
 			textRect.origin.y += (rect.height - size.height) / 2.0
 			
 			attr.draw(in: normalizedRect(textRect))
@@ -201,33 +289,29 @@ class ASTVisualizer {
 		
 		var i: CGFloat = 0
 
-		for (_, childNode) in node.childNodes {
+		for childNode in node.childNodes {
 			
-			let newAvailableWidth = childNode.drawSize.width
-			
-			let farX = point.x - (availableWidth) / 2.0
+			let farX = point.x - node.drawSize.width / 2.0
 			
 			var newXPosition = farX
 			
 			for j in 0..<Int(i+1) {
 				
-				let jWidth = node.childNodes[j].1.drawSize.width
+				let jWidth = node.childNodes[j].node.drawSize.width
 				if CGFloat(j) == i {
 					newXPosition += jWidth / 2.0
 				} else {
 					newXPosition += jWidth
-
 				}
+				
 			}
 			
 			
-			let newYPosition = point.y + minNodeHeight + minNodeLevelSpacing
-
-			let newYLevel = yLevel + 1
+			let newYPosition = point.y + minNodeHeight + minNodeYSpacing
 			
 			let childPosition = CGPoint(x: newXPosition, y: newYPosition)
 			
-			drawNode(childNode, atPosition: childPosition, atYLevel: newYLevel, withAvailableWidth: newAvailableWidth, withParentRect: rect)
+			drawNode(childNode.node, atPosition: childPosition, withParentRect: rect, conditionalConnection: childNode.isConnectionConditional)
 			
 			i += 1
 		}

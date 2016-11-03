@@ -72,12 +72,15 @@ public class WhileStatementNode: ASTNode {
 		return "while"
 	}
 	
-	public override var childNodes: [(String?, ASTNode)] {
-		var children = [(String?, ASTNode)]()
+	public override var childNodes: [ASTChildNode] {
+		var children = [ASTChildNode]()
 		
-		children.append(("condition", condition))
+		let conditionChildNode = ASTChildNode(connectionToParent: "condition", isConnectionConditional: true, node: condition)
+		children.append(conditionChildNode)
 		
-		children.append((nil, body))
+		let bodyChildNode = ASTChildNode(connectionToParent: nil, isConnectionConditional: false, node: body)
+
+		children.append(bodyChildNode)
 		
 		return children
 	}

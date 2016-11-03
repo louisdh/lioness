@@ -32,11 +32,11 @@ public class CallNode: ASTNode {
 		return callee
 	}
 	
-	public override var childNodes: [(String?, ASTNode)] {
-		var children = [(String?, ASTNode)]()
+	public override var childNodes: [ASTChildNode] {
+		var children = [ASTChildNode]()
 		
 		for a in arguments {
-			children.append(("argument", a))
+			children.append(ASTChildNode(connectionToParent: "argument", node: a))
 		}
 		
 		return children

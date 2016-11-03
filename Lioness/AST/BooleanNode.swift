@@ -60,7 +60,7 @@ public class BooleanNode: ASTNode {
 		}
 	}
 	
-	public override var childNodes: [(String?, ASTNode)] {
+	public override var childNodes: [ASTChildNode] {
 		return []
 	}
 	

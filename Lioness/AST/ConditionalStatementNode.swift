@@ -89,15 +89,19 @@ public class ConditionalStatementNode: ASTNode {
 		return "if"
 	}
 	
-	public override var childNodes: [(String?, ASTNode)] {
-		var children = [(String?, ASTNode)]()
+	public override var childNodes: [ASTChildNode] {
+		var children = [ASTChildNode]()
 		
-		children.append(("condition", condition))
+		let conditionChildNode = ASTChildNode(connectionToParent: "condition", isConnectionConditional: false, node: condition)
+		children.append(conditionChildNode)
 		
-		children.append(("if", body))
+		
+		let ifChildNode = ASTChildNode(connectionToParent: "if", isConnectionConditional: true, node: body)
+		children.append(ifChildNode)
 
 		if let elseBody = elseBody {
-			children.append(("else", elseBody))
+			let elseChildNode = ASTChildNode(connectionToParent: "else", isConnectionConditional: true, node: elseBody)
+			children.append(elseChildNode)
 		}
 		
 		return children

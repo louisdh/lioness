@@ -26,7 +26,7 @@ public class PrototypeNode: ASTNode {
 		return "Prototype"
 	}
 	
-	public override var childNodes: [(String?, ASTNode)] {
+	public override var childNodes: [ASTChildNode] {
 		return []
 	}
 	

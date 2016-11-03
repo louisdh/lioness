@@ -79,8 +79,11 @@ public class BinaryOpNode: ASTNode {
 		return op
 	}
 	
-	public override var childNodes: [(String?, ASTNode)] {
-		return [("lhs", lhs), ("rhs", rhs)]
+	public override var childNodes: [ASTChildNode] {
+		let l = ASTChildNode(connectionToParent: "lhs", node: lhs)
+		let r = ASTChildNode(connectionToParent: "rhs", node: rhs)
+		
+		return [l, r]
 	}
 	
 	

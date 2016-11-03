@@ -36,7 +36,7 @@ public class VariableNode: ASTNode {
 		return "\(name)"
 	}
 	
-	public override var childNodes: [(String?, ASTNode)] {
+	public override var childNodes: [ASTChildNode] {
 		return []
 	}
 	

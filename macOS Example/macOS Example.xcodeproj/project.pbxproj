@@ -24,8 +24,8 @@
 		BE1412981DB253D300DAA385 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BE14129B1DB253D400DAA385 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		BE14129D1DB253D400DAA385 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		BE1412A61DB2545A00DAA385 /* A.lion */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = A.lion; sourceTree = "<group>"; };
-		BE1412A71DB2545A00DAA385 /* B.lion */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = B.lion; sourceTree = "<group>"; };
+		BE1412A61DB2545A00DAA385 /* A.lion */ = {isa = PBXFileReference; explicitFileType = sourcecode.glsl; fileEncoding = 4; path = A.lion; sourceTree = "<group>"; };
+		BE1412A71DB2545A00DAA385 /* B.lion */ = {isa = PBXFileReference; explicitFileType = sourcecode.glsl; fileEncoding = 4; path = B.lion; sourceTree = "<group>"; };
 		BE1412A81DB2545A00DAA385 /* C.lion */ = {isa = PBXFileReference; explicitFileType = sourcecode.glsl; fileEncoding = 4; path = C.lion; sourceTree = "<group>"; };
 		BEEB63721DC1545D0019BC50 /* ASTVisualizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ASTVisualizer.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */

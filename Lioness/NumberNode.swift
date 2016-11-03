@@ -32,7 +32,7 @@ public class NumberNode: ASTNode {
 		return "\(value)"
 	}
 	
-	public override var childNodes: [(String?, ASTNode)] {
+	public override var childNodes: [ASTChildNode] {
 		return []
 	}
 	

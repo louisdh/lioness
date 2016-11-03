@@ -69,11 +69,12 @@ public class BooleanOpNode: ASTNode {
 		return op
 	}
 	
-	public override var childNodes: [(String?, ASTNode)] {
-		var children: [(String?, ASTNode)]  = [("lhs", lhs)]
+	public override var childNodes: [ASTChildNode] {
+		
+		var children: [ASTChildNode]  = [ASTChildNode(connectionToParent: "lhs", node: lhs)]
 		
 		if let rhs = rhs {
-			children.append(("rhs", rhs))
+			children.append(ASTChildNode(connectionToParent: "rhs", node: rhs))
 		}
 		
 		return children

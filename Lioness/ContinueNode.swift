@@ -30,7 +30,7 @@ public class ContinueNode: ASTNode {
 		return "continue"
 	}
 	
-	public override var childNodes: [(String?, ASTNode)] {
+	public override var childNodes: [ASTChildNode] {
 		return []
 	}
 	

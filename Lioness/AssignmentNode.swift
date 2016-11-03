@@ -43,8 +43,11 @@ public class AssignmentNode: ASTNode {
 		return "="
 	}
 	
-	public override var childNodes: [(String?, ASTNode)] {
-		return [("lhs", variable), ("rhs", value)]
+	public override var childNodes: [ASTChildNode] {
+		let lhs = ASTChildNode(connectionToParent: "lhs", node: variable)
+		let rhs = ASTChildNode(connectionToParent: "rhs", node: value)
+		
+		return [lhs, rhs]
 	}
 	
 }
