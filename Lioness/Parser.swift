@@ -309,9 +309,9 @@ public class Parser {
 			throw ParseError.expectedCharacter("=")
 		}
 		
-		let exp = try parseExpression()
+		let expr = try parseExpression()
 		
-		let assign = AssignmentNode(variable: VariableNode(name: variable), value: exp)
+		let assign = AssignmentNode(variable: VariableNode(name: variable), value: expr)
 
 		return assign
 	}
@@ -363,21 +363,19 @@ public class Parser {
 
 	}
 	
-	// TODO: Refactor, always use "expr" as var name for expressions, "exp" is short for exponents
-
 	fileprivate func parseParensExpr() throws -> ASTNode {
 		
 		guard case Token.parensOpen = popCurrentToken() else {
 			throw ParseError.expectedCharacter("(")
 		}
 
-		let exp = try parseExpression()
+		let expr = try parseExpression()
 		
 		guard case Token.parensClose = popCurrentToken() else {
 			throw ParseError.expectedCharacter(")")
 		}
 		
-		return exp
+		return expr
 	}
 	
 	fileprivate func parseNotOperation() throws -> ASTNode {
@@ -392,9 +390,9 @@ public class Parser {
 		
 		if case Token.parensOpen = currentToken {
 			
-			let exp = try parseParensExpr()
+			let expr = try parseParensExpr()
 			
-			return BooleanOpNode(op: "!", lhs: exp)
+			return BooleanOpNode(op: "!", lhs: expr)
 			
 		} else {
 			
