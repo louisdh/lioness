@@ -63,7 +63,7 @@
 				BE1412A51DB2544E00DAA385 /* Examples */,
 				BE1412941DB253D300DAA385 /* AppDelegate.swift */,
 				BE1412961DB253D300DAA385 /* ViewController.swift */,
-				BEEB63721DC1545D0019BC50 /* ASTVisualizer.swift */,
+				BE446C4C1DCD3D650085EEE0 /* AST Visualizer */,
 				BE1412981DB253D300DAA385 /* Assets.xcassets */,
 				BE14129A1DB253D400DAA385 /* Main.storyboard */,
 				BE14129D1DB253D400DAA385 /* Info.plist */,
@@ -79,6 +79,14 @@
 				BE1412A81DB2545A00DAA385 /* C.lion */,
 			);
 			name = Examples;
+			sourceTree = "<group>";
+		};
+		BE446C4C1DCD3D650085EEE0 /* AST Visualizer */ = {
+			isa = PBXGroup;
+			children = (
+				BEEB63721DC1545D0019BC50 /* ASTVisualizer.swift */,
+			);
+			name = "AST Visualizer";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
