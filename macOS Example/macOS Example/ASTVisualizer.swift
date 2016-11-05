@@ -17,6 +17,27 @@ fileprivate let minNodeWidth: CGFloat = 40.0
 fileprivate let minNodeXSpacing: CGFloat = 20.0
 fileprivate let minNodeYSpacing: CGFloat = 50.0
 
+fileprivate let fontSize: CGFloat = 14.0
+
+
+fileprivate extension NSAttributedString {
+	
+	convenience init(withNodeDescription nodeDescription: String) {
+		
+		let style = NSMutableParagraphStyle()
+		style.alignment = .center
+		
+		let attributes = [
+			NSFontAttributeName: NSFont.systemFont(ofSize: fontSize),
+			NSParagraphStyleAttributeName: style
+		]
+		
+		self.init(string: nodeDescription, attributes: attributes)
+		
+	}
+	
+}
+
 fileprivate extension ASTNodeDescriptor {
 	
 	/// Includes children, and spacing
@@ -66,16 +87,8 @@ fileprivate extension ASTNodeDescriptor {
 	var nodeSize: CGSize {
 		
 		if let text = nodeDescription {
-			
-			let style = NSMutableParagraphStyle()
-			style.alignment = .center
-			
-			let attributes = [
-				NSFontAttributeName: NSFont.systemFont(ofSize: 14.0),
-				NSParagraphStyleAttributeName: style
-			]
-			
-			let attr = NSAttributedString(string: text, attributes: attributes)
+
+			let attr = NSAttributedString(withNodeDescription: text)
 			
 			let size = attr.size()
 			let width = max(minNodeWidth, size.width + 20)
@@ -265,15 +278,7 @@ class ASTVisualizer {
 		
 		if let text = node.nodeDescription {
 			
-			let style = NSMutableParagraphStyle()
-			style.alignment = .center
-			
-			let attributes = [
-				NSFontAttributeName: NSFont.systemFont(ofSize: 14.0),
-				NSParagraphStyleAttributeName: style
-			]
-			
-			let attr = NSAttributedString(string: text, attributes: attributes)
+			let attr = NSAttributedString(withNodeDescription: text)
 			
 			let size = attr.size()
 			
