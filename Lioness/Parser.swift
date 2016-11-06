@@ -33,7 +33,7 @@ public class Parser {
 				throw ParseError.internalInconsistencyOccurred
 			}
 			
-			switch currentToken {
+			switch currentToken.type {
 				
 				case .function:
 					let node = try parseFunction()
@@ -72,91 +72,91 @@ public class Parser {
 		"^": 60
 	]
 	
-	fileprivate func operatorString(for token: Token) -> String? {
+	fileprivate func operatorString(for tokenType: TokenType) -> String? {
 
-		if case let Token.other(op) = token {
+		if case let .other(op) = tokenType {
 			return op
 		}
 		
-		if case Token.comparatorEqual = token {
+		if case .comparatorEqual = tokenType {
 			return "=="
 		}
 		
-		if case Token.notEqual = token {
+		if case .notEqual = tokenType {
 			return "!="
 		}
 		
-		if case Token.comparatorLessThan = token {
+		if case .comparatorLessThan = tokenType {
 			return "<"
 		}
 		
-		if case Token.comparatorLessThanEqual = token {
+		if case .comparatorLessThanEqual = tokenType {
 			return "<="
 		}
 		
-		if case Token.comparatorGreaterThan = token {
+		if case .comparatorGreaterThan = tokenType {
 			return ">"
 		}
 		
-		if case Token.comparatorGreaterThanEqual = token {
+		if case .comparatorGreaterThanEqual = tokenType {
 			return ">="
 		}
 		
 		return nil
 	}
 	
-	fileprivate func operatorPrecedence(for token: Token) -> Int? {
+	fileprivate func operatorPrecedence(for tokenType: TokenType) -> Int? {
 		
-		if case let Token.other(op) = token {
+		if case let .other(op) = tokenType {
 			return operatorPrecedence[op]
 		}
 
-		if case Token.comparatorEqual = token {
+		if case .comparatorEqual = tokenType {
 			return 10
 		}
 		
-		if case Token.notEqual = token {
+		if case .notEqual = tokenType {
 			return 10
 		}
 		
-		if case Token.comparatorLessThan = token {
+		if case .comparatorLessThan = tokenType {
 			return 10
 		}
 		
-		if case Token.comparatorLessThanEqual = token {
+		if case .comparatorLessThanEqual = tokenType {
 			return 10
 		}
 		
-		if case Token.comparatorGreaterThan = token {
+		if case .comparatorGreaterThan = tokenType {
 			return 10
 		}
 		
-		if case Token.comparatorGreaterThanEqual = token {
+		if case .comparatorGreaterThanEqual = tokenType {
 			return 10
 		}
 		
 		return nil
 	}
 	
-	fileprivate func booleanOperatorString(for token: Token) -> String? {
+	fileprivate func booleanOperatorString(for tokenType: TokenType) -> String? {
 	
-		if case Token.booleanOr = token {
+		if case .booleanOr = tokenType {
 			return "||"
 		}
 		
-		if case Token.booleanAnd = token {
+		if case .booleanAnd = tokenType {
 			return "&&"
 		}
 		
-		if case Token.booleanNot = token {
+		if case .booleanNot = tokenType {
 			return "!"
 		}
 		
-		if case Token.comparatorEqual = token {
+		if case .comparatorEqual = tokenType {
 			return "=="
 		}
 		
-		if case Token.notEqual = token {
+		if case .notEqual = tokenType {
 			return "!="
 		}
 		
@@ -164,25 +164,25 @@ public class Parser {
 		
 	}
 	
-	fileprivate func booleanOperatorPrecedence(for token: Token) -> Int? {
+	fileprivate func booleanOperatorPrecedence(for tokenType: TokenType) -> Int? {
 		
-		if case Token.booleanOr = token {
+		if case .booleanOr = tokenType {
 			return 20
 		}
 		
-		if case Token.booleanAnd = token {
+		if case .booleanAnd = tokenType {
 			return 40
 		}
 		
-		if case Token.booleanNot = token {
+		if case .booleanNot = tokenType {
 			return 60
 		}
 		
-		if case Token.comparatorEqual = token {
+		if case .comparatorEqual = tokenType {
 			return 10
 		}
 		
-		if case Token.notEqual = token {
+		if case .notEqual = tokenType {
 			return 10
 		}
 		
@@ -190,25 +190,25 @@ public class Parser {
 	}
 	
 	/// Get operator for token (e.g. '+=' returns '+')
-	fileprivate func getOperator(for token: Token) -> String? {
+	fileprivate func getOperator(for tokenType: TokenType) -> String? {
 
-		if case .shortHandAdd = token {
+		if case .shortHandAdd = tokenType {
 			return "+"
 		}
 		
-		if case .shortHandSub = token {
+		if case .shortHandSub = tokenType {
 			return "-"
 		}
 		
-		if case .shortHandMul = token {
+		if case .shortHandMul = tokenType {
 			return "*"
 		}
 		
-		if case .shortHandDiv = token {
+		if case .shortHandDiv = tokenType {
 			return "/"
 		}
 		
-		if case .shortHandPow = token {
+		if case .shortHandPow = tokenType {
 			return "^"
 		}
 
@@ -248,28 +248,28 @@ public class Parser {
 		var i = 0
 		while let tokenAhead = peekToken(offset: i) {
 			
-			if case Token.true = tokenAhead {
+			if case .true = tokenAhead.type {
 				return true
 			}
 			
-			if case Token.false = tokenAhead {
+			if case .false = tokenAhead.type {
 				return true
 			}
 			
-			if let _ = booleanOperatorString(for: tokenAhead) {
+			if let _ = booleanOperatorString(for: tokenAhead.type) {
 				// Don't assume boolean op if op is also possible for binary ops
-				if operatorPrecedence(for: tokenAhead) == nil {
+				if operatorPrecedence(for: tokenAhead.type) == nil {
 					return true
 				}
 			}
 			
 			i += 1
 
-			if case Token.parensClose = tokenAhead {
+			if case .parensClose = tokenAhead.type {
 				continue
 			}
 			
-			if case Token.parensOpen = tokenAhead {
+			if case .parensOpen = tokenAhead.type {
 				continue
 			}
 			
@@ -283,7 +283,7 @@ public class Parser {
 	/// Look ahead to check if assignment should be parsed
 	fileprivate func shouldParseAssignment() -> Bool {
 
-		guard let currentToken = peekCurrentToken(), case Token.identifier = currentToken else {
+		guard let currentToken = peekCurrentToken(), case .identifier = currentToken.type else {
 			return false
 		}
 		
@@ -291,7 +291,7 @@ public class Parser {
 			return false
 		}
 		
-		guard case Token.equals = nextToken else {
+		guard case .equals = nextToken.type else {
 			return false
 		}
 		
@@ -301,11 +301,11 @@ public class Parser {
 	
 	fileprivate func parseAssignment() throws -> AssignmentNode {
 		
-		guard case let Token.identifier(variable) = popCurrentToken() else {
+		guard case let .identifier(variable) = popCurrentToken().type else {
 			throw ParseError.unexpectedToken
 		}
 		
-		guard case Token.equals = popCurrentToken() else {
+		guard case .equals = popCurrentToken().type else {
 			throw ParseError.expectedCharacter("=")
 		}
 		
@@ -318,7 +318,7 @@ public class Parser {
 	
 	fileprivate func parseNumber() throws -> ASTNode {
 		
-		guard case let Token.number(value) = popCurrentToken() else {
+		guard case let .number(value) = popCurrentToken().type else {
 			throw ParseError.unexpectedToken
 		}
 		
@@ -331,7 +331,7 @@ public class Parser {
 		let node = try parsePrimary()
 		
 		// Handles short hand operators (e.g. "+=")
-		if let currentToken = peekCurrentToken(), let op = getOperator(for: currentToken)  {
+		if let currentToken = peekCurrentToken(), let op = getOperator(for: currentToken.type) {
 			
 			popCurrentToken()
 
@@ -365,13 +365,13 @@ public class Parser {
 	
 	fileprivate func parseParensExpr() throws -> ASTNode {
 		
-		guard case Token.parensOpen = popCurrentToken() else {
+		guard case .parensOpen = popCurrentToken().type else {
 			throw ParseError.expectedCharacter("(")
 		}
 
 		let expr = try parseExpression()
 		
-		guard case Token.parensClose = popCurrentToken() else {
+		guard case .parensClose = popCurrentToken().type else {
 			throw ParseError.expectedCharacter(")")
 		}
 		
@@ -380,7 +380,7 @@ public class Parser {
 	
 	fileprivate func parseNotOperation() throws -> ASTNode {
 		
-		guard case Token.booleanNot = popCurrentToken() else {
+		guard case .booleanNot = popCurrentToken().type else {
 			throw ParseError.expectedCharacter("!")
 		}
 		
@@ -388,7 +388,7 @@ public class Parser {
 			throw ParseError.unexpectedToken
 		}
 		
-		if case Token.parensOpen = currentToken {
+		if case .parensOpen = currentToken.type {
 			
 			let expr = try parseParensExpr()
 			
@@ -398,7 +398,7 @@ public class Parser {
 			
 			let lhs: ASTNode
 			
-			switch currentToken {
+			switch currentToken.type {
 				
 				case .identifier:
 					lhs = try parseIdentifier()
@@ -422,11 +422,11 @@ public class Parser {
 	
 	fileprivate func parseIdentifier() throws -> ASTNode {
 		
-		guard case let Token.identifier(name) = popCurrentToken() else {
+		guard case let .identifier(name) = popCurrentToken().type else {
 			throw ParseError.unexpectedToken
 		}
 
-		guard let currentToken = peekCurrentToken(), case Token.parensOpen = currentToken else {
+		guard let currentToken = peekCurrentToken(), case .parensOpen = currentToken.type else {
 			return VariableNode(name: name)
 		}
 		
@@ -434,7 +434,7 @@ public class Parser {
 		
 		var arguments = [ASTNode]()
 		
-		if let currentToken = peekCurrentToken(), case Token.parensClose = currentToken {
+		if let currentToken = peekCurrentToken(), case .parensClose = currentToken.type {
 		
 		} else {
 			
@@ -443,11 +443,11 @@ public class Parser {
 				let argument = try parseExpression()
 				arguments.append(argument)
 
-				if let currentToken = peekCurrentToken(), case Token.parensClose = currentToken {
+				if let currentToken = peekCurrentToken(), case .parensClose = currentToken.type {
 					break
 				}
 				
-				guard case Token.comma = popCurrentToken() else {
+				guard case .comma = popCurrentToken().type else {
 					throw ParseError.expectedArgumentList
 				}
 				
@@ -467,7 +467,7 @@ public class Parser {
 			throw ParseError.unexpectedToken
 		}
 		
-		switch currentToken {
+		switch currentToken.type {
 			case .identifier:
 				return try parseIdentifier()
 		
@@ -500,7 +500,7 @@ public class Parser {
 	
 	fileprivate func parseContinue() throws -> ASTNode {
 
-		guard case Token.continue = popCurrentToken() else {
+		guard case .continue = popCurrentToken().type else {
 			throw ParseError.unexpectedToken
 		}
 		
@@ -509,7 +509,7 @@ public class Parser {
 	
 	fileprivate func parseIfStatement() throws -> ASTNode {
 		
-		guard case Token.if = popCurrentToken() else {
+		guard case .if = popCurrentToken().type else {
 			throw ParseError.unexpectedToken
 		}
 		
@@ -517,13 +517,13 @@ public class Parser {
 		
 		let body = try parseBodyWithCurlies()
 		
-		if let currentToken = peekCurrentToken(), case Token.else = currentToken {
+		if let currentToken = peekCurrentToken(), case .else = currentToken.type {
 			
-			guard case Token.else = popCurrentToken() else {
+			guard case .else = popCurrentToken().type else {
 				throw ParseError.unexpectedToken
 			}
 			
-			if let currentToken = peekCurrentToken(), case Token.if = currentToken {
+			if let currentToken = peekCurrentToken(), case .if = currentToken.type {
 				
 				let ifStatement = try parseIfStatement()
 				let elseBody = BodyNode(nodes: [ifStatement])
@@ -546,7 +546,7 @@ public class Parser {
 	
 	fileprivate func parseWhileStatement() throws -> ASTNode {
 		
-		guard case Token.while = popCurrentToken() else {
+		guard case .while = popCurrentToken().type else {
 			throw ParseError.unexpectedToken
 		}
 		
@@ -560,13 +560,13 @@ public class Parser {
 	
 	fileprivate func parseBodyWithCurlies() throws -> BodyNode {
 
-		guard case Token.curlyOpen = popCurrentToken() else {
+		guard case .curlyOpen = popCurrentToken().type else {
 			throw ParseError.expectedCharacter("{")
 		}
 		
 		let body = try parseBody()
 		
-		guard case Token.curlyClose = popCurrentToken() else {
+		guard case .curlyClose = popCurrentToken().type else {
 			throw ParseError.expectedCharacter("}")
 		}
 
@@ -592,7 +592,7 @@ public class Parser {
 				
 			}
 			
-			if let currentToken = peekCurrentToken(), case Token.curlyClose = currentToken {
+			if let currentToken = peekCurrentToken(), case .curlyClose = currentToken.type {
 				break
 			}
 			
@@ -609,12 +609,12 @@ public class Parser {
 			throw ParseError.unexpectedToken
 		}
 		
-		if case Token.true = currentToken {
+		if case .true = currentToken.type {
 			popCurrentToken()
 			return BooleanNode(bool: true)
 		}
 		
-		if case Token.false = currentToken {
+		if case .false = currentToken.type {
 			popCurrentToken()
 			return BooleanNode(bool: false)
 		}
@@ -632,7 +632,7 @@ public class Parser {
 			return -1
 		}
 		
-		guard let precedence = operatorPrecedence(for: currentToken) else {
+		guard let precedence = operatorPrecedence(for: currentToken.type) else {
 			return -1
 		}
 		
@@ -649,7 +649,7 @@ public class Parser {
 			return -1
 		}
 		
-		guard let precedence = booleanOperatorPrecedence(for: currentToken) else {
+		guard let precedence = booleanOperatorPrecedence(for: currentToken.type) else {
 			return -1
 		}
 		
@@ -668,7 +668,7 @@ public class Parser {
 				return lhs
 			}
 			
-			guard let op = operatorString(for: popCurrentToken()) else {
+			guard let op = operatorString(for: popCurrentToken().type) else {
 				throw ParseError.unexpectedToken
 			}
 			
@@ -698,7 +698,7 @@ public class Parser {
 				return lhs
 			}
 			
-			guard let op = booleanOperatorString(for: popCurrentToken()) else {
+			guard let op = booleanOperatorString(for: popCurrentToken().type) else {
 				throw ParseError.unexpectedToken
 			}
 			
@@ -717,33 +717,33 @@ public class Parser {
 	
 	fileprivate func parsePrototype() throws -> PrototypeNode {
 		
-		guard case let Token.identifier(name) = popCurrentToken() else {
+		guard case let .identifier(name) = popCurrentToken().type else {
 			throw ParseError.expectedFunctionName
 		}
 		
-		guard case Token.parensOpen = popCurrentToken() else {
+		guard case .parensOpen = popCurrentToken().type else {
 			throw ParseError.expectedCharacter("(")
 		}
 		
 		var argumentNames = [String]()
-		while let currentToken = peekCurrentToken(), case let Token.identifier(name) = currentToken {
+		while let currentToken = peekCurrentToken(), case let .identifier(name) = currentToken.type {
 			popCurrentToken()
 			argumentNames.append(name)
 			
-			if let currentToken = peekCurrentToken(), case Token.parensClose = currentToken {
+			if let currentToken = peekCurrentToken(), case .parensClose = currentToken.type {
 				break
 			}
 			
-			guard case Token.comma = popCurrentToken() else {
+			guard case .comma = popCurrentToken().type else {
 				throw ParseError.expectedArgumentList
 			}
 		}
 		
-		guard case Token.parensOpen = popCurrentToken() else {
+		guard case .parensOpen = popCurrentToken().type else {
 			throw ParseError.expectedCharacter(")")
 		}
 		
-		guard case Token.curlyOpen = popCurrentToken() else {
+		guard case .curlyOpen = popCurrentToken().type else {
 			throw ParseError.expectedCharacter("{")
 		}
 		
@@ -758,7 +758,7 @@ public class Parser {
 		
 		let body = try parseBody()
 		
-		guard case Token.curlyClose = popCurrentToken() else {
+		guard case .curlyClose = popCurrentToken().type else {
 			throw ParseError.expectedCharacter("}")
 		}
 		

@@ -10,7 +10,7 @@ import Foundation
 
 public class Lexer {
 	
-	fileprivate static let keywordTokens: [String : Token] = [
+	fileprivate static let keywordTokens: [String : TokenType] = [
 		"func": .function,
 		"while": .while,
 		"if": .if,
@@ -20,7 +20,7 @@ public class Lexer {
 		"continue": .continue
 	]
 	
-	fileprivate typealias TokenGenerator = (String) -> Token?
+	fileprivate typealias TokenGenerator = (String) -> TokenType?
 
 	/// The order of this list is important,
 	/// e.g. match identifiers before numbers
@@ -122,10 +122,17 @@ public class Lexer {
 					
                     if let t = generator(match) {
 						
-						if case Token.ignoreableToken = t {
+						if case TokenType.ignoreableToken = t {
 						
 						} else {
-							tokens.append(t)
+							
+							let start = content.startIndex
+							let end = content.index(start, offsetBy: match.characters.count)
+							let range = start..<end
+														
+							let token = Token(type: t, range: range)
+							
+							tokens.append(token)
 						}
 						
 						let index = content.characters.index(content.startIndex, offsetBy: match.characters.count)
@@ -141,8 +148,19 @@ public class Lexer {
             }
 
             if !matched {
+				
+				let start = content.startIndex
+				let end = content.index(start, offsetBy: 1)
+				let range = start..<end
+				
                 let index = content.characters.index(content.startIndex, offsetBy: 1)
-                tokens.append(.other(content.substring(to: index)))
+				
+				let type = TokenType.other(content.substring(to: index))
+				
+				let otherToken = Token(type: type, range: range)
+				
+				tokens.append(otherToken)
+				
                 content = content.substring(from: index)
             }
 			

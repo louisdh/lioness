@@ -42,19 +42,19 @@ class Lexer_Tests: BaseTestCase {
 		let token2 = tokens[1]
 		let token3 = tokens[2]
 		
-		if case let Token.identifier(t1) = token1 {
+		if case let TokenType.identifier(t1) = token1.type {
 			XCTAssert(t1 == "a", "Expected identifier 'a'")
 		} else {
 			XCTAssert(false, "Expected identifier 'a'")
 		}
 		
-		if case Token.equals = token2 {
+		if case TokenType.equals = token2.type {
 
 		} else {
 			XCTAssert(false, "Expected equals")
 		}
 		
-		if case let Token.number(t3) = token3 {
+		if case let TokenType.number(t3) = token3.type {
 			XCTAssert(t3 == 0.3, "Expected number '0.3'")
 		} else {
 			XCTAssert(false, "Expected number '0.3'")

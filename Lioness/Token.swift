@@ -8,7 +8,7 @@
 
 import Foundation
 
-public enum Token {
+public enum TokenType {
 	
 	/// Token which has no effect on program, such as white space
 	case ignoreableToken
@@ -55,5 +55,15 @@ public enum Token {
 	
 	// Fallback
 	case other(String)
+	
+}
+
+public struct Token {
+	
+	/// The token's type
+	var type: TokenType
+	
+	/// The range of the token in the original source code
+	var range: Range<String.Index>
 	
 }
