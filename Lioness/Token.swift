@@ -58,12 +58,16 @@ public enum TokenType {
 	
 }
 
-public struct Token {
+public struct Token: CustomStringConvertible {
 	
 	/// The token's type
 	var type: TokenType
 	
 	/// The range of the token in the original source code
 	var range: Range<String.Index>
+	
+	public var description: String {
+		return "\(type)"
+	}
 	
 }
