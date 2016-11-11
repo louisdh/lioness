@@ -12,11 +12,15 @@ public enum ParseErrorType {
 	case unexpectedToken
 	case undefinedOperator(String)
 	
-	case expectedCharacter(Character)
+	case expectedCharacter(String)
+	case expectedCharacterButFound(char: String, token: Token)
 	case expectedExpression
 	case expectedArgumentList
 	case expectedFunctionName
+	case expectedVariable
 	
+	case illegalBinaryOperation
+
 	case internalInconsistencyOccurred
 	
 	func description(atLine line: Int? = nil) -> String {
@@ -32,6 +36,9 @@ public enum ParseErrorType {
 				
 			case .expectedCharacter(let c):
 				return "Expected character \"\(c)\" on line \(line)"
+			
+			case .expectedCharacterButFound(let c1, let c2):
+				return "Expected character \"\(c1)\" but found \"\(c2)\" on line \(line)"
 				
 			case .expectedExpression:
 				return "Expected expression on line \(line)"
@@ -44,6 +51,12 @@ public enum ParseErrorType {
 				
 			case .internalInconsistencyOccurred:
 				return "Internal inconsistency occured on line \(line)"
+				
+			case .illegalBinaryOperation:
+				return "Illegal binary operation on line \(line)"
+				
+			case .expectedVariable:
+				return "Expected variable on line \(line)"
 				
 			}
 		
@@ -59,6 +72,9 @@ public enum ParseErrorType {
 		case .expectedCharacter(let c):
 			return "Expected character \"\(c)\""
 			
+		case .expectedCharacterButFound(let c1, let c2):
+			return "Expected character \"\(c1)\" but found \"\(c2)\""
+			
 		case .expectedExpression:
 			return "Expected expression"
 			
@@ -70,6 +86,12 @@ public enum ParseErrorType {
 			
 		case .internalInconsistencyOccurred:
 			return "Internal inconsistency occured"
+		
+		case .illegalBinaryOperation:
+			return "Illegal binary operation"
+		
+		case .expectedVariable:
+			return "Expected variable)"
 			
 		}
 	}

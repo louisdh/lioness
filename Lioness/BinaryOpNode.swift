@@ -8,14 +8,36 @@
 
 import Foundation
 
+fileprivate extension ASTNode {
+	
+	var isValidBinaryOpNode: Bool {
+		
+		if self is BinaryOpNode || self is NumberNode || self is VariableNode || self is BooleanNode {
+			return true
+		}
+		
+		return false
+	}
+	
+}
+
 public class BinaryOpNode: ASTNode {
 	
 	public let op: String
 	public let lhs: ASTNode
 	public let rhs: ASTNode
 	
-	public init(op: String, lhs: ASTNode, rhs: ASTNode) {
+	public init(op: String, lhs: ASTNode, rhs: ASTNode) throws {
 		self.op = op
+		
+		guard lhs.isValidBinaryOpNode else {
+			throw CompileError.unexpectedCommand
+		}
+		
+		guard rhs.isValidBinaryOpNode else {
+			throw CompileError.unexpectedCommand
+		}
+		
 		self.lhs = lhs
 		self.rhs = rhs
 	}
@@ -39,7 +61,7 @@ public class BinaryOpNode: ASTNode {
 		           "<=": .cmple]
 		
 		guard let type = opTypes[op] else {
-			throw CompileError.unexpectedCommand
+			throw CompileError.unexpectedBinaryOperator
 		}
 		
 		if op == ">" || op == ">=" {

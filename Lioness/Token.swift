@@ -56,6 +56,14 @@ public enum TokenType {
 	// Fallback
 	case other(String)
 	
+	var uniqueDescription: String {
+		return "\(self)"
+	}
+	
+}
+
+func ==(lhs: TokenType, rhs: TokenType) -> Bool {
+	return lhs.uniqueDescription == rhs.uniqueDescription
 }
 
 public struct Token: CustomStringConvertible {

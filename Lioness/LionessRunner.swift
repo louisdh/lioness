@@ -260,6 +260,10 @@ public class LionessRunner {
 			let errorDescription = error.description(inSource: source)
 			delegate?.log(errorDescription)
 			
+		} else {
+			
+			delegate?.log(error)
+
 		}
 		
 	}
