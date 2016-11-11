@@ -93,6 +93,7 @@ public class Lexer {
 	
     public func tokenize() -> [Token] {
 		
+		let fullContent = input
 		var content = input
 
 		var tokenListToUse = [(String, TokenGenerator)]()
@@ -107,6 +108,8 @@ public class Lexer {
 	
 		
         var tokens = [Token]()
+		
+		var contentCutLength = 0
 		
         while content.characters.count > 0 {
 			
@@ -126,8 +129,8 @@ public class Lexer {
 						
 						} else {
 							
-							let start = content.startIndex
-							let end = content.index(start, offsetBy: match.characters.count)
+							let start = fullContent.index(fullContent.startIndex, offsetBy: contentCutLength)
+							let end = fullContent.index(start, offsetBy: match.characters.count)
 							let range = start..<end
 														
 							let token = Token(type: t, range: range)
@@ -139,6 +142,8 @@ public class Lexer {
 						content = content.substring(from: index)
 						matched = true
 						
+						contentCutLength += match.characters.count
+						
 						break
 
 					}
@@ -149,8 +154,8 @@ public class Lexer {
 
             if !matched {
 				
-				let start = content.startIndex
-				let end = content.index(start, offsetBy: 1)
+				let start = fullContent.index(fullContent.startIndex, offsetBy: contentCutLength)
+				let end = fullContent.index(start, offsetBy: 1)
 				let range = start..<end
 				
                 let index = content.characters.index(content.startIndex, offsetBy: 1)
@@ -162,6 +167,9 @@ public class Lexer {
 				tokens.append(otherToken)
 				
                 content = content.substring(from: index)
+				
+				contentCutLength += 1
+
             }
 			
         }

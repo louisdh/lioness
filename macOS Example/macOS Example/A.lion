@@ -1,5 +1,7 @@
-testNumber = 1024
+a = 1024
 
-if testNumber > 2 {
+if a > 2^10 {
 	b = 1
+} else b {
+	c = 3
 }

@@ -23,6 +23,8 @@ public class LionessRunner {
 	
 	fileprivate var logDebug: Bool
 	
+	fileprivate var source: String?
+	
 	public var delegate: LionessRunnerDelegate?
 	
 	// MARK: -
@@ -39,6 +41,8 @@ public class LionessRunner {
 	}
 	
 	public func runSource(_ source: String) {
+		
+		self.source = source
 		
 		let startTime = CFAbsoluteTimeGetCurrent()
 		
@@ -245,7 +249,19 @@ public class LionessRunner {
 	}
 	
 	fileprivate func log(_ error: Error) {
-		delegate?.log(error)
+		
+		guard let source = source else {
+			delegate?.log(error)
+			return
+		}
+		
+		if let error = error as? ParseError {
+			
+			let errorDescription = error.description(inSource: source)
+			delegate?.log(errorDescription)
+			
+		}
+		
 	}
 	
 	fileprivate func log(_ token: Token) {

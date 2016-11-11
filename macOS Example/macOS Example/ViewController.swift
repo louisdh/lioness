@@ -23,7 +23,7 @@ class ViewController: NSViewController, LionessRunnerDelegate {
 
 		try! runner.runSource(atPath: path)
 		
-		drawASTGraph(for: "A")
+//		drawASTGraph(for: "A")
 	}
 	
 	func drawASTGraph(for testFile: String) {
@@ -73,6 +73,7 @@ class ViewController: NSViewController, LionessRunnerDelegate {
 	}
 	
 	@nonobjc func log(_ error: Error) {
+		
 		print(error)
 	}
 	
