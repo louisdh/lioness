@@ -591,6 +591,10 @@ public class Parser {
 		
 		while index < tokens.count {
 			
+			if let currentToken = peekCurrentToken(), case .curlyClose = currentToken.type {
+				break
+			}
+			
 			if shouldParseAssignment() {
 				
 				let assign = try parseAssignment()
@@ -601,11 +605,7 @@ public class Parser {
 				let expr = try parseExpression()
 				nodes.append(expr)
 				
-			}
-			
-			if let currentToken = peekCurrentToken(), case .curlyClose = currentToken.type {
-				break
-			}
+			}			
 			
 		}
 		

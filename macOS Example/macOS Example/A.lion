@@ -1,5 +1,5 @@
-a = true
+a = 1
 
-while a if {
-	b = 2
+while a > 2 {
+
 }
