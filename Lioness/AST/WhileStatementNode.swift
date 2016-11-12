@@ -8,12 +8,31 @@
 
 import Foundation
 
+fileprivate extension ASTNode {
+	
+	var isValidConditionNode: Bool {
+		
+		if self is BinaryOpNode || self is VariableNode || self is BooleanNode {
+			return true
+		}
+		
+		return false
+	}
+	
+}
+
+
 public class WhileStatementNode: ASTNode {
 	
 	public let condition: ASTNode
 	public let body: BodyNode
 	
-	public init(condition: ASTNode, body: BodyNode) {
+	public init(condition: ASTNode, body: BodyNode) throws {
+		
+		guard condition.isValidConditionNode else {
+			throw CompileError.unexpectedCommand
+		}
+		
 		self.condition = condition
 		self.body = body
 	}

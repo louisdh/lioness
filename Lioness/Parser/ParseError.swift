@@ -21,6 +21,8 @@ public enum ParseErrorType {
 	
 	case illegalBinaryOperation
 
+	case illegalStatement
+
 	case internalInconsistencyOccurred
 	
 	func description(atLine line: Int? = nil) -> String {
@@ -54,6 +56,9 @@ public enum ParseErrorType {
 				
 			case .illegalBinaryOperation:
 				return "Illegal binary operation on line \(line)"
+			
+			case .illegalStatement:
+				return "Illegal statement on line \(line)"
 				
 			case .expectedVariable:
 				return "Expected variable on line \(line)"
@@ -90,6 +95,9 @@ public enum ParseErrorType {
 		case .illegalBinaryOperation:
 			return "Illegal binary operation"
 		
+		case .illegalStatement:
+			return "Illegal statement"
+			
 		case .expectedVariable:
 			return "Expected variable)"
 			

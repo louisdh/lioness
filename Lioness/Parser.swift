@@ -561,7 +561,9 @@ public class Parser {
 	
 	fileprivate func parseWhileStatement() throws -> ASTNode {
 		
-		guard case .while = popCurrentToken().type else {
+		let whileToken = popCurrentToken()
+		
+		guard case .while = whileToken.type else {
 			throw error(.unexpectedToken)
 		}
 		
@@ -569,8 +571,15 @@ public class Parser {
 		
 		let body = try parseBodyWithCurlies()
 		
-		return WhileStatementNode(condition: condition, body: body)
+		let whileStatement: WhileStatementNode
+		
+		do {
+			whileStatement = try WhileStatementNode(condition: condition, body: body)
+		} catch {
+			throw self.error(.illegalStatement, token: whileToken)
+		}
 
+		return whileStatement
 	}
 	
 	fileprivate func parseBodyWithCurlies() throws -> BodyNode {
