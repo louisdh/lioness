@@ -131,7 +131,7 @@ public class BytecodeInterpreter {
 
 	fileprivate func executePushConst(_ instruction: BytecodeInstruction, pc: Int) throws -> Int {
 		guard let arg = instruction.arguments.first, let f = StackElement(arg) else {
-			throw InterpreterError.unexpectedArgument
+			throw error(.unexpectedArgument)
 		}
 		
 		push(f)
@@ -275,7 +275,7 @@ public class BytecodeInterpreter {
 	fileprivate func executeIfTrue(_ instruction: BytecodeInstruction, pc: Int) throws -> Int {
 		
 		guard let label = instruction.arguments.first else {
-			throw InterpreterError.unexpectedArgument
+			throw error(.unexpectedArgument)
 		}
 		
 		if try pop() == 1.0 {
@@ -295,7 +295,7 @@ public class BytecodeInterpreter {
 	fileprivate func executeIfFalse(_ instruction: BytecodeInstruction, pc: Int) throws -> Int {
 		
 		guard let label = instruction.arguments.first else {
-			throw InterpreterError.unexpectedArgument
+			throw error(.unexpectedArgument)
 		}
 		
 		if try pop() == 0.0 {
@@ -315,7 +315,7 @@ public class BytecodeInterpreter {
 	fileprivate func executeGoto(_ instruction: BytecodeInstruction) throws -> Int {
 		
 		guard let label = instruction.arguments.first else {
-			throw InterpreterError.unexpectedArgument
+			throw error(.unexpectedArgument)
 		}
 
 		if let newPc = progamCounter(for: label) {
@@ -329,7 +329,7 @@ public class BytecodeInterpreter {
 	fileprivate func executeStore(_ instruction: BytecodeInstruction, pc: Int) throws -> Int {
 		
 		guard let reg = instruction.arguments[safe: 0] else {
-			throw InterpreterError.unexpectedArgument
+			throw error(.unexpectedArgument)
 		}
 		
 		registers[reg] = try pop()
@@ -340,7 +340,7 @@ public class BytecodeInterpreter {
 	fileprivate func executeRegisterClear(_ instruction: BytecodeInstruction, pc: Int) throws -> Int {
 
 		guard let reg = instruction.arguments[safe: 0] else {
-			throw InterpreterError.unexpectedArgument
+			throw error(.unexpectedArgument)
 		}
 		
 		registers.removeValue(forKey: reg)
@@ -351,11 +351,11 @@ public class BytecodeInterpreter {
 	fileprivate func executeRegisterLoad(_ instruction: BytecodeInstruction, pc: Int) throws -> Int {
 		
 		guard let reg = instruction.arguments[safe: 0] else {
-			throw InterpreterError.unexpectedArgument
+			throw error(.unexpectedArgument)
 		}
 		
 		guard let regValue = registers[reg] else {
-			throw InterpreterError.unexpectedArgument
+			throw error(.unexpectedArgument)
 		}
 		
 		push(regValue)
@@ -374,7 +374,7 @@ public class BytecodeInterpreter {
 	fileprivate func pop() throws -> StackElement {
 		
 		guard let last = stack.popLast() else {
-			throw InterpreterError.illegalStackOperation
+			throw error(.illegalStackOperation)
 		}
 		
 		return last
@@ -384,4 +384,10 @@ public class BytecodeInterpreter {
 		stack.append(item)
 	}
 
+	// MARK -
+	
+	fileprivate func error(_ type: InterpreterError) -> Error {
+		return type
+	}
+	
 }

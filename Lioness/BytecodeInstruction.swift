@@ -21,11 +21,11 @@ public class BytecodeInstruction: CustomStringConvertible {
 		let substrings = instructionString.components(separatedBy: " ")
 		
 		guard var label = substrings[safe: 0] else {
-			throw BytecodeInstructionError.invalidDecoding
+			throw BytecodeInstruction.error(.invalidDecoding)
 		}
 		
 		guard let colonIndex = label.characters.index(of: ":") else {
-			throw BytecodeInstructionError.invalidDecoding
+			throw BytecodeInstruction.error(.invalidDecoding)
 		}
 		
 		label.remove(at: colonIndex)
@@ -33,11 +33,11 @@ public class BytecodeInstruction: CustomStringConvertible {
 		self.label = label
 		
 		guard let command = substrings[safe: 1] else {
-			throw BytecodeInstructionError.invalidDecoding
+			throw BytecodeInstruction.error(.invalidDecoding)
 		}
 		
 		guard let type = BytecodeInstructionType(rawValue: command) else {
-			throw BytecodeInstructionError.invalidDecoding
+			throw BytecodeInstruction.error(.invalidDecoding)
 		}
 		
 		self.type = type
@@ -76,6 +76,12 @@ public class BytecodeInstruction: CustomStringConvertible {
 		}
 		
 		return "\(label): \(type.command) \(args)"
+	}
+	
+	// MARK -
+	
+	fileprivate static func error(_ type: BytecodeInstructionError) -> Error {
+		return type
 	}
 	
 }
