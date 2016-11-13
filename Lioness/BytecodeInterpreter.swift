@@ -8,24 +8,42 @@
 
 import Foundation
 
+
+/// Interpreter Error
 public enum InterpreterError: Error {
+	/// Unexpected argument
 	case unexpectedArgument
+	
+	/// Illegal stack operation
 	case illegalStackOperation
 }
 
+/// Bytecode Interpreter
 public class BytecodeInterpreter {
 	
 	fileprivate let bytecode: [BytecodeInstruction]
 	
 	typealias StackElement = Double
 	
+	/// Stack
 	fileprivate(set) var stack = [StackElement]()
+	
+	/// Registers
 	fileprivate(set) var registers = [String : StackElement]()
 	
+	
+	/// Initalize a BytecodeInterpreter with an array of BytecodeInstruction
+	///
+	/// - Parameter bytecode: Array of BytecodeInstruction
 	public init(bytecode: [BytecodeInstruction]) {
 		self.bytecode = bytecode
 	}
 	
+	/// Initalize a BytecodeInterpreter with an array of String
+	///
+	/// The strings will be parsed into Bytecode Instructions
+	///
+	/// - Parameter bytecodeStrings: bytecode instructions as strings
 	public init?(bytecodeStrings: [String]) {
 		
 		var bytecode = [BytecodeInstruction]()
@@ -41,6 +59,9 @@ public class BytecodeInterpreter {
 		self.bytecode = bytecode
 	}
 	
+	/// Interpret the bytecode passed in the initializer
+	///
+	/// - Throws: InterpreterError
 	public func interpret() throws {
 		
 		stack = [StackElement]()
@@ -371,6 +392,7 @@ public class BytecodeInterpreter {
 		
 	}
 	
+	/// Pop from stack
 	fileprivate func pop() throws -> StackElement {
 		
 		guard let last = stack.popLast() else {
@@ -380,6 +402,7 @@ public class BytecodeInterpreter {
 		return last
 	}
 	
+	/// Push to stack
 	fileprivate func push(_ item: StackElement) {
 		stack.append(item)
 	}
