@@ -582,7 +582,17 @@ public class Parser {
 		
 		let body = try parseBodyWithCurlies()
 		
-		let forStatement = ForStatementNode(assignment: assignment, condition: condition, interval: interval, body: body)
+		let forStatement: ForStatementNode
+		
+		do {
+			
+			forStatement = try ForStatementNode(assignment: assignment, condition: condition, interval: interval, body: body)
+		
+		} catch {
+			
+			throw self.error(.illegalStatement, token: forToken)
+
+		}
 		
 		return forStatement
 	}

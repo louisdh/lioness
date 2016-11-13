@@ -8,7 +8,7 @@
 
 import Foundation
 
-fileprivate extension ASTNode {
+extension ASTNode {
 	
 	var isValidConditionNode: Bool {
 		

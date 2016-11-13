@@ -92,6 +92,7 @@ public class Lexer {
         self.input = input
     }
 	
+	// TODO: refactor needed
     public func tokenize() -> [Token] {
 		
 		let fullContent = input

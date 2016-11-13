@@ -16,7 +16,15 @@ public class ForStatementNode: ASTNode {
 
 	public let body: BodyNode
 	
-	public init(assignment: AssignmentNode, condition: ASTNode, interval: ASTNode, body: BodyNode) {
+	public init(assignment: AssignmentNode, condition: ASTNode, interval: ASTNode, body: BodyNode) throws {
+		
+		guard condition.isValidConditionNode else {
+			throw CompileError.unexpectedCommand
+		}
+		
+		guard interval is BinaryOpNode else {
+			throw CompileError.unexpectedCommand
+		}
 		
 		self.assignment = assignment
 		self.condition = condition
