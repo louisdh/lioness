@@ -507,6 +507,9 @@ public class Parser {
 			case .while:
 				return try parseWhileStatement()
 			
+			case .for:
+				return try parseForStatement()
+			
 			default:
 				throw error(.expectedExpression, token: currentToken)
 		}
@@ -557,6 +560,31 @@ public class Parser {
 
 		}
 		
+	}
+	
+	fileprivate func parseForStatement() throws -> ASTNode {
+		
+		let forToken = popCurrentToken()
+		
+		guard case .for = forToken.type else {
+			throw error(.unexpectedToken)
+		}
+		
+		let assignment = try parseAssignment()
+		
+		try popCurrentToken(andExpect: .comma, ",")
+		
+		let condition = try parseExpression()
+		
+		try popCurrentToken(andExpect: .comma, ",")
+
+		let interval = try parseExpression()
+		
+		let body = try parseBodyWithCurlies()
+		
+		let forStatement = ForStatementNode(assignment: assignment, condition: condition, interval: interval, body: body)
+		
+		return forStatement
 	}
 	
 	fileprivate func parseWhileStatement() throws -> ASTNode {

@@ -46,6 +46,7 @@ public enum TokenType {
 	
 	// Keywords
 	case `while`
+	case `for`
 	case `if`
 	case `else`
 	case function

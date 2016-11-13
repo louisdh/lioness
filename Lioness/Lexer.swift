@@ -13,6 +13,7 @@ public class Lexer {
 	fileprivate static let keywordTokens: [String : TokenType] = [
 		"func": .function,
 		"while": .while,
+		"for": .for,
 		"if": .if,
 		"else": .else,
 		"true": .true,
