@@ -53,6 +53,8 @@ public enum TokenType {
 	case `true`
 	case `false`
 	case `continue`
+	case `do`
+	case times
 	
 	// Fallback
 	case other(String)

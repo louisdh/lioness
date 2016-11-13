@@ -18,7 +18,9 @@ public class Lexer {
 		"else": .else,
 		"true": .true,
 		"false": .false,
-		"continue": .continue
+		"continue": .continue,
+		"do": .do,
+		"times": .times
 	]
 	
 	fileprivate typealias TokenGenerator = (String) -> TokenType?
