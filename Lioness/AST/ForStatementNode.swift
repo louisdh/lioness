@@ -22,7 +22,7 @@ public class ForStatementNode: ASTNode {
 			throw CompileError.unexpectedCommand
 		}
 		
-		guard interval is BinaryOpNode else {
+		guard interval is AssignmentNode else {
 			throw CompileError.unexpectedCommand
 		}
 		
