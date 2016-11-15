@@ -9,12 +9,12 @@
 import Cocoa
 import Lioness
 
-class ViewController: NSViewController, LionessRunnerDelegate {
+class ViewController: NSViewController, RunnerDelegate {
 
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
-		let runner = LionessRunner(logDebug: true)
+		let runner = Runner(logDebug: true)
 		runner.delegate = self
 		
 		let path = stringPath(for: "A")

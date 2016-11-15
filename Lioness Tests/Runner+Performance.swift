@@ -24,7 +24,7 @@ class FullRun_Performance: BaseTestCase {
 
     func testLargeMathPerformance() {
 		
-		let runner = LionessRunner(logDebug: false)
+		let runner = Runner(logDebug: false)
 		
 		let fileURL = getFilePath(for: "LargeMathOperation")
 		

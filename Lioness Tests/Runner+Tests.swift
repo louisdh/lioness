@@ -23,7 +23,7 @@ class Runner_Tests: BaseTestCase {
 	
 	func testBinaryOp() {
 		
-		let runner = LionessRunner(logDebug: false)
+		let runner = Runner(logDebug: false)
 		
 		let source = "1 + 3 * (8^4 - 2) / 6 / 4"
 		
@@ -40,7 +40,7 @@ class Runner_Tests: BaseTestCase {
 	
 	func testInnerWhileLoops() {
 		
-		let runner = LionessRunner(logDebug: false)
+		let runner = Runner(logDebug: false)
 
 		let fileURL = getFilePath(for: "InnerWhileLoops")
 

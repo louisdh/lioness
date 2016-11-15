@@ -46,7 +46,7 @@
 		BE446C4B1DCD3C8F0085EEE0 /* ASTChildNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE446C4A1DCD3C8F0085EEE0 /* ASTChildNode.swift */; };
 		BE736A8D1DBBEA5F00ADC83A /* BaseTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE736A8C1DBBEA5F00ADC83A /* BaseTestCase.swift */; };
 		BE736A911DBD3C0D00ADC83A /* Execution+Performance.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE736A901DBD3C0D00ADC83A /* Execution+Performance.swift */; };
-		BEAD9A7F1DB3A1A000A6DDC1 /* LionessRunner.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEAD9A7E1DB3A1A000A6DDC1 /* LionessRunner.swift */; };
+		BEAD9A7F1DB3A1A000A6DDC1 /* Runner.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEAD9A7E1DB3A1A000A6DDC1 /* Runner.swift */; };
 		BEEB63711DC14E570019BC50 /* BodyNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEEB63701DC14E570019BC50 /* BodyNode.swift */; };
 /* End PBXBuildFile section */
 
@@ -92,7 +92,7 @@
 		BE736A8C1DBBEA5F00ADC83A /* BaseTestCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseTestCase.swift; sourceTree = "<group>"; };
 		BE736A901DBD3C0D00ADC83A /* Execution+Performance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Execution+Performance.swift"; path = "Execution/Execution+Performance.swift"; sourceTree = "<group>"; };
 		BE9369FB1DA83AB000C0B3DF /* BytecodeCompiler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BytecodeCompiler.swift; sourceTree = "<group>"; };
-		BEAD9A7E1DB3A1A000A6DDC1 /* LionessRunner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LionessRunner.swift; sourceTree = "<group>"; };
+		BEAD9A7E1DB3A1A000A6DDC1 /* Runner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Runner.swift; sourceTree = "<group>"; };
 		BEEB63701DC14E570019BC50 /* BodyNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BodyNode.swift; path = AST/BodyNode.swift; sourceTree = "<group>"; };
 		BEF5BA401DAC15B100D9ADB7 /* AssignmentNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AssignmentNode.swift; sourceTree = "<group>"; };
 		BEFFCB8F1DAA77AE001EF8E4 /* BytecodeInterpreter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BytecodeInterpreter.swift; sourceTree = "<group>"; };
@@ -291,7 +291,7 @@
 		BEF913AB1DB151610075C6CC /* Lioness */ = {
 			isa = PBXGroup;
 			children = (
-				BEAD9A7E1DB3A1A000A6DDC1 /* LionessRunner.swift */,
+				BEAD9A7E1DB3A1A000A6DDC1 /* Runner.swift */,
 				BE446C431DCD3BF20085EEE0 /* Array+Safe.swift */,
 				BE1FD5F81DB1703C00B2A55B /* Lioness.h */,
 				BE22962B1DB16EE800EA477A /* Info.plist */,
@@ -435,7 +435,7 @@
 				BE22963F1DB16F2100EA477A /* BytecodeInterpreter.swift in Sources */,
 				BE37DFAD1DBBBAEA003F6A3E /* ContinueNode.swift in Sources */,
 				BE25BA1F1DD9228D00041A20 /* DoStatementNode.swift in Sources */,
-				BEAD9A7F1DB3A1A000A6DDC1 /* LionessRunner.swift in Sources */,
+				BEAD9A7F1DB3A1A000A6DDC1 /* Runner.swift in Sources */,
 				BE446C421DCD3BD40085EEE0 /* BytecodeInstructionError.swift in Sources */,
 				BEEB63711DC14E570019BC50 /* BodyNode.swift in Sources */,
 				BE1412AF1DB2B07200DAA385 /* BooleanOpNode.swift in Sources */,

@@ -8,7 +8,7 @@
 
 import Foundation
 
-public protocol LionessRunnerDelegate {
+public protocol RunnerDelegate {
 	
 	func log(_ message: String)
 	
@@ -19,13 +19,13 @@ public protocol LionessRunnerDelegate {
 }
 
 /// Runs through full pipeline, from lexer to interpreter
-public class LionessRunner {
+public class Runner {
 	
 	fileprivate var logDebug: Bool
 	
 	fileprivate var source: String?
 	
-	public var delegate: LionessRunnerDelegate?
+	public var delegate: RunnerDelegate?
 	
 	// MARK: -
 
