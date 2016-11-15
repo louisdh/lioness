@@ -8,6 +8,7 @@
 
 import Foundation
 
+/// Scorpion Bytecode Instruction Error
 public enum BytecodeInstructionError: Error {
 	case invalidDecoding
 }

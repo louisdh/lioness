@@ -8,6 +8,7 @@
 
 import Foundation
 
+/// Scorpion Bytecode Compiler
 public class BytecodeCompiler {
 	
 	// MARK: - Private
