@@ -27,7 +27,7 @@ public class AssignmentNode: ASTNode {
 		bytecode.append(contentsOf: v)
 		
 		let label = ctx.nextIndexLabel()
-		let instruction = BytecodeInstruction(label: label, type: .registerStore, arguments: [variable.name])
+		let instruction = BytecodeInstruction(label: label, type: .registerStore, arguments: [variable.name], comment: "\(variable.name)")
 		
 		bytecode.append(instruction)
 

@@ -11,10 +11,12 @@ import Foundation
 public class BytecodeInstruction: CustomStringConvertible {
 	
 	let label: String
+	
 	let type: BytecodeInstructionType
+	
 	let arguments: [String]
 	
-	// TODO: Comment support (';' as marker?)
+	let comment: String?
 	
 	public init(instructionString: String) throws {
 		
@@ -42,24 +44,51 @@ public class BytecodeInstruction: CustomStringConvertible {
 		
 		self.type = type
 		
+		let commentIndex: Int
+		
 		if let args = substrings[safe: 2]?.components(separatedBy: ",") {
 			self.arguments = args
+			commentIndex = 3
 		} else {
 			self.arguments = []
+			commentIndex = 2
 		}
 		
+		if var comment = substrings[safe: commentIndex] {
+			
+			guard let semiColonIndex = label.characters.index(of: ";") else {
+				throw BytecodeInstruction.error(.invalidDecoding)
+			}
+			
+			comment.remove(at: semiColonIndex)
+			
+			self.comment = comment
+			
+		} else {
+			self.comment = nil
+		}
+		
+	}
+	
+	init(label: String, type: BytecodeInstructionType, arguments: [String], comment: String?) {
+		self.label = label
+		self.type = type
+		self.arguments = arguments
+		self.comment = comment
 	}
 	
 	init(label: String, type: BytecodeInstructionType, arguments: [String]) {
 		self.label = label
 		self.type = type
 		self.arguments = arguments
+		self.comment = nil
 	}
 	
 	init(label: String, type: BytecodeInstructionType) {
 		self.label = label
 		self.type = type
 		self.arguments = []
+		self.comment = nil
 	}
 
 	public var description: String {
@@ -75,7 +104,17 @@ public class BytecodeInstruction: CustomStringConvertible {
 			}
 		}
 		
-		return "\(label): \(type.command) \(args)"
+		var descr = "\(label): \(type.command)"
+		
+		if !args.isEmpty {
+			descr += " \(args)"
+		}
+		
+		if let comment = comment {
+			descr += " ;\(comment)"
+		}
+		
+		return descr
 	}
 	
 	// MARK -
