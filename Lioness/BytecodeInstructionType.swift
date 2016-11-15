@@ -8,49 +8,115 @@
 
 import Foundation
 
-/// Bytecode Instruction Type
+/// Scorpion Bytecode Instruction Type
 ///
 /// Enum cases are lower camel case (per Swift guideline)
 ///
-/// Instruction commands are lower snake case
-public enum BytecodeInstructionType: String {
+/// Instruction command descriptions are lower snake case
+public enum BytecodeInstructionType: UInt8, CustomStringConvertible {
 	
-	case pushConst = "push_const"
-	case add = "add"
-	case sub = "sub"
-	case mul = "mul"
-	case div = "div"
-	case pow = "pow"
+	case pushConst = 0
+	case add = 1
+	case sub = 2
+	case mul = 3
+	case div = 4
+	case pow = 5
 	
-	case and = "and"
-	case or = "or"
-	case not = "not"
+	case and = 6
+	case or = 7
+	case not = 8
 	
 	/// Equal
-	case eq = "eq"
+	case eq = 9
 	/// Not equals
-	case neq = "neq"
+	case neq = 10
 	
-	case ifTrue = "if_true"
-	case ifFalse = "if_false"
+	case ifTrue = 11
+	case ifFalse = 12
 
 	/// Compare less than or equal
-	case cmple = "cmple"
+	case cmple = 13
+	
 	/// Compare less than
-	case cmplt = "cmplt"
+	case cmplt = 14
 
 	
-	case goto = "goto"
+	case goto = 15
 	
-	case registerStore = "reg_store"
-	case registerClear = "reg_clear"
-	case registerLoad = "reg_load"
+	case registerStore = 16
+	case registerClear = 17
+	case registerLoad = 18
 	
 	// TODO: To be implemented
 //	case invokeFunc = "invoke_func"
 	
-	public var command: String {
+	public var opCode: UInt8 {
 		return self.rawValue
+	}
+	
+	public var description: String {
+		
+		switch self {
+		
+		case .pushConst:
+			return "push_const"
+		
+		case .add:
+			return "add"
+			
+		case .sub:
+			return "sub"
+			
+		case .mul:
+			return "mul"
+			
+		case .div:
+			return "div"
+			
+		case .pow:
+			return "pow"
+			
+		case .and:
+			return "and"
+			
+		case .or:
+			return "or"
+			
+		case .not:
+			return "not"
+			
+		case .eq:
+			return "eq"
+			
+		case .neq:
+			return "neq"
+		
+		case .ifTrue:
+			return "if_true"
+		
+		case .ifFalse:
+			return "if_false"
+			
+		case .cmple:
+			return "cmple"
+		
+		case .cmplt:
+			return "cmplt"
+			
+		case .goto:
+			return "goto"
+			
+		case .registerStore:
+			return "reg_store"
+			
+		case .registerClear:
+			return "reg_clear"
+			
+		case .registerLoad:
+			return "reg_load"
+			
+		}
+		
 	}
 	
 }

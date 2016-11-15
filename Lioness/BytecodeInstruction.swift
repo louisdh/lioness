@@ -8,6 +8,7 @@
 
 import Foundation
 
+/// Scorpion Bytecode Instruction
 public class BytecodeInstruction: CustomStringConvertible {
 	
 	let label: String
@@ -18,56 +19,36 @@ public class BytecodeInstruction: CustomStringConvertible {
 	
 	let comment: String?
 	
+	/// Use for decoding compiled instructions.
+	/// Does not support comments.
 	public init(instructionString: String) throws {
 		
 		let substrings = instructionString.components(separatedBy: " ")
 		
-		guard var label = substrings[safe: 0] else {
+		guard let label = substrings[safe: 0] else {
 			throw BytecodeInstruction.error(.invalidDecoding)
 		}
-		
-		guard let colonIndex = label.characters.index(of: ":") else {
-			throw BytecodeInstruction.error(.invalidDecoding)
-		}
-		
-		label.remove(at: colonIndex)
 		
 		self.label = label
 		
-		guard let command = substrings[safe: 1] else {
+		guard let opCodeString = substrings[safe: 1], let opCode = UInt8(opCodeString) else {
 			throw BytecodeInstruction.error(.invalidDecoding)
 		}
 		
-		guard let type = BytecodeInstructionType(rawValue: command) else {
+		guard let type = BytecodeInstructionType(rawValue: opCode) else {
 			throw BytecodeInstruction.error(.invalidDecoding)
 		}
 		
 		self.type = type
 		
-		let commentIndex: Int
-		
 		if let args = substrings[safe: 2]?.components(separatedBy: ",") {
 			self.arguments = args
-			commentIndex = 3
 		} else {
 			self.arguments = []
-			commentIndex = 2
 		}
 		
-		if var comment = substrings[safe: commentIndex] {
-			
-			guard let semiColonIndex = label.characters.index(of: ";") else {
-				throw BytecodeInstruction.error(.invalidDecoding)
-			}
-			
-			comment.remove(at: semiColonIndex)
-			
-			self.comment = comment
-			
-		} else {
-			self.comment = nil
-		}
-		
+		self.comment = nil
+
 	}
 	
 	init(label: String, type: BytecodeInstructionType, arguments: [String], comment: String?) {
@@ -91,6 +72,30 @@ public class BytecodeInstruction: CustomStringConvertible {
 		self.comment = nil
 	}
 
+	/// Encoding string to use for saving compiled instruction to disk.
+	public var encoded: String {
+		var args = ""
+		
+		var i = 0
+		for a in arguments {
+			args += a
+			i += 1
+			
+			if i != arguments.count {
+				args += ","
+			}
+		}
+		
+		var descr = "\(label) \(type.opCode)"
+		
+		if !args.isEmpty {
+			descr += " \(args)"
+		}
+		
+		return descr
+	}
+	
+	/// Debug description
 	public var description: String {
 		var args = ""
 		
@@ -104,14 +109,14 @@ public class BytecodeInstruction: CustomStringConvertible {
 			}
 		}
 		
-		var descr = "\(label): \(type.command)"
+		var descr = "\(label): \(type.description)"
 		
 		if !args.isEmpty {
 			descr += " \(args)"
 		}
 		
 		if let comment = comment {
-			descr += " ;\(comment)"
+			descr += "\t\t\t;\(comment)"
 		}
 		
 		return descr
