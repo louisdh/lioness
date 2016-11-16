@@ -29,6 +29,7 @@
 		BE22963F1DB16F2100EA477A /* BytecodeInterpreter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEFFCB8F1DAA77AE001EF8E4 /* BytecodeInterpreter.swift */; };
 		BE25BA1D1DD8F5F500041A20 /* ForStatementNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE25BA1C1DD8F5F500041A20 /* ForStatementNode.swift */; };
 		BE25BA1F1DD9228D00041A20 /* DoStatementNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE25BA1E1DD9228D00041A20 /* DoStatementNode.swift */; };
+		BE25BA221DDBC83700041A20 /* ScopeNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE25BA211DDBC83700041A20 /* ScopeNode.swift */; };
 		BE295CEB1DB14DCE0019EC57 /* Lexer+Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE295CEA1DB14DCE0019EC57 /* Lexer+Tests.swift */; };
 		BE2CC65F1DB41E4400F74DBE /* ConditionalStatementNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE2CC65E1DB41E4400F74DBE /* ConditionalStatementNode.swift */; };
 		BE2CC6611DB94BF800F74DBE /* LargeMathOperation.lion in Resources */ = {isa = PBXBuildFile; fileRef = BE2CC6601DB94BF800F74DBE /* LargeMathOperation.lion */; };
@@ -60,6 +61,7 @@
 		BE22962B1DB16EE800EA477A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BE25BA1C1DD8F5F500041A20 /* ForStatementNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ForStatementNode.swift; path = AST/ForStatementNode.swift; sourceTree = "<group>"; };
 		BE25BA1E1DD9228D00041A20 /* DoStatementNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DoStatementNode.swift; path = AST/DoStatementNode.swift; sourceTree = "<group>"; };
+		BE25BA211DDBC83700041A20 /* ScopeNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ScopeNode.swift; path = Compiler/ScopeNode.swift; sourceTree = "<group>"; };
 		BE295CE21DAD87990019EC57 /* Token.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Token.swift; sourceTree = "<group>"; };
 		BE295CE81DB14DCE0019EC57 /* Lioness Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Lioness Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BE295CEA1DB14DCE0019EC57 /* Lexer+Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Lexer+Tests.swift"; sourceTree = "<group>"; };
@@ -123,6 +125,14 @@
 				BE1412571DB1755E00DAA385 /* Cocoa.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		BE25BA201DDBC81B00041A20 /* Scope Tree */ = {
+			isa = PBXGroup;
+			children = (
+				BE25BA211DDBC83700041A20 /* ScopeNode.swift */,
+			);
+			name = "Scope Tree";
 			sourceTree = "<group>";
 		};
 		BE295CE91DB14DCE0019EC57 /* Lioness Tests */ = {
@@ -272,6 +282,7 @@
 		BE9369F91DA8079C00C0B3DF /* Compiler */ = {
 			isa = PBXGroup;
 			children = (
+				BE25BA201DDBC81B00041A20 /* Scope Tree */,
 				BE9369FB1DA83AB000C0B3DF /* BytecodeCompiler.swift */,
 				BE04D6391DA99FC800DAEB84 /* BytecodeInstruction.swift */,
 				BE5653631DAAB86F006171B9 /* BytecodeInstructionType.swift */,
@@ -428,6 +439,7 @@
 				BE1412AD1DB27F6F00DAA385 /* BooleanNode.swift in Sources */,
 				BE2296361DB16F2100EA477A /* VariableNode.swift in Sources */,
 				BE2296321DB16F1B00EA477A /* String+RegEx.swift in Sources */,
+				BE25BA221DDBC83700041A20 /* ScopeNode.swift in Sources */,
 				BE446C461DCD3C5B0085EEE0 /* CompileError.swift in Sources */,
 				BE22963C1DB16F2100EA477A /* BytecodeCompiler.swift in Sources */,
 				BE37DFA51DBB8FBD003F6A3E /* ParseError.swift in Sources */,

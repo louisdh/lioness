@@ -8,6 +8,7 @@
 
 import Foundation
 
+/// Body that defines a scope
 public class BodyNode: ASTNode {
 	
 	public let nodes: [ASTNode]
@@ -18,12 +19,16 @@ public class BodyNode: ASTNode {
 	
 	public override func compile(with ctx: BytecodeCompiler) throws -> [BytecodeInstruction] {
 		
+		ctx.enterNewScope()
+		
 		var bytecode = [BytecodeInstruction]()
 		
 		for a in nodes {
 			let instructions = try a.compile(with: ctx)
 			bytecode.append(contentsOf: instructions)
 		}
+		
+		try ctx.leaveCurrentScope()
 		
 		return bytecode
 		

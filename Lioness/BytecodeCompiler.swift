@@ -17,16 +17,25 @@ public class BytecodeCompiler {
 	fileprivate var index = 0
 	
 	fileprivate var scopeStartStack = [String]()
+
+	fileprivate let scopeTreeRoot: ScopeNode
+
+	fileprivate var currentScopeNode: ScopeNode
+
 	
 	// MARK: -
 
 	public init(ast: [ASTNode]) {
 		self.ast = ast
+		scopeTreeRoot = ScopeNode(childNodes: [])
+		currentScopeNode = scopeTreeRoot
 	}
 	
 	// MARK: - Public
 	
 	public func compile() throws -> [BytecodeInstruction] {
+		
+		currentScopeNode = scopeTreeRoot
 		
 		var bytecode = [BytecodeInstruction]()
 
@@ -64,4 +73,58 @@ public class BytecodeCompiler {
 	func peekScopeStartStack() -> String? {
 		return scopeStartStack.last
 	}
+	
+	// MARK: - Scope tree
+
+	func enterNewScope() {
+		
+		let newScopeNode = ScopeNode(parentNode: currentScopeNode, childNodes: [])
+		currentScopeNode.childNodes.append(newScopeNode)
+		currentScopeNode = newScopeNode
+		
+	}
+
+	// TODO: make leave return the left scope map for register cleanup
+	func leaveCurrentScope() throws {
+		
+		guard let parentNode = currentScopeNode.parentNode else {
+			// End of program reached (top scope left)
+			return
+		}
+		
+		guard let i = parentNode.childNodes.index(where: { (s) -> Bool in
+			return s === currentScopeNode
+		}) else {
+			
+			// TODO: throw error
+			return
+		}
+		
+		parentNode.childNodes.remove(at: i)
+		currentScopeNode = parentNode
+
+	}
+	
+	// MARK: - Registers
+	
+	fileprivate var registerCount = 0
+
+	func getRegister(`for` varName: String) -> String {
+		
+		if let existingReg = currentScopeNode.deepRegisterMap()[varName] {
+			return existingReg
+		}
+		
+		let newReg = getNewRegister()
+		currentScopeNode.registerMap[varName] = newReg
+		
+		return newReg
+	}
+	
+	fileprivate func getNewRegister() -> String {
+		registerCount += 1
+		let newReg = "r\(registerCount)"
+		return newReg
+	}
+	
 }
