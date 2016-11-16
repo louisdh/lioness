@@ -1,7 +1,14 @@
 a = 1
 
-for i = 0, i < 10, i += 1 {
-	a *= 2
-}
+if a == 1 {
+// enter new scope
+	
+	b = 1
+	
+	for i = 0, i < 10, i += 1 {
+		b *= 2
+	}
+
+} // leave scope
 
 // 2^10 = 1024

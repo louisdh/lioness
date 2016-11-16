@@ -28,7 +28,8 @@ public class BodyNode: ASTNode {
 			bytecode.append(contentsOf: instructions)
 		}
 		
-		try ctx.leaveCurrentScope()
+		let cleanupInstructions = try ctx.leaveCurrentScope()
+		bytecode.append(contentsOf: cleanupInstructions)
 		
 		return bytecode
 		

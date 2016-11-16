@@ -84,12 +84,11 @@ public class BytecodeCompiler {
 		
 	}
 
-	// TODO: make leave return the left scope map for register cleanup
-	func leaveCurrentScope() throws {
+	func leaveCurrentScope() throws -> [BytecodeInstruction] {
 		
 		guard let parentNode = currentScopeNode.parentNode else {
 			// End of program reached (top scope left)
-			return
+			return []
 		}
 		
 		guard let i = parentNode.childNodes.index(where: { (s) -> Bool in
@@ -97,12 +96,31 @@ public class BytecodeCompiler {
 		}) else {
 			
 			// TODO: throw error
-			return
+			return []
 		}
+		
+		let cleanupInstructions = cleanupRegisterInstructions(for: currentScopeNode)
 		
 		parentNode.childNodes.remove(at: i)
 		currentScopeNode = parentNode
 
+		return cleanupInstructions
+	}
+	
+	fileprivate func cleanupRegisterInstructions(`for` scopeNode: ScopeNode) -> [BytecodeInstruction] {
+		
+		var instructions = [BytecodeInstruction]()
+		
+		for (_, reg) in scopeNode.registerMap {
+			
+			let label = nextIndexLabel()
+			let instr = BytecodeInstruction(label: label, type: .registerClear, arguments: [reg])
+			instructions.append(instr)
+			
+		}
+		
+		return instructions
+		
 	}
 	
 	// MARK: - Registers
