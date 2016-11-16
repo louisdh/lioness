@@ -8,20 +8,6 @@
 
 import Foundation
 
-extension ASTNode {
-	
-	var isValidConditionNode: Bool {
-		
-		if self is BinaryOpNode || self is VariableNode || self is BooleanNode {
-			return true
-		}
-		
-		return false
-	}
-	
-}
-
-
 public class WhileStatementNode: ASTNode {
 	
 	public let condition: ASTNode

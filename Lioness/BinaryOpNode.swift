@@ -8,19 +8,6 @@
 
 import Foundation
 
-fileprivate extension ASTNode {
-	
-	var isValidBinaryOpNode: Bool {
-		
-		if self is BinaryOpNode || self is NumberNode || self is VariableNode || self is BooleanNode {
-			return true
-		}
-		
-		return false
-	}
-	
-}
-
 public class BinaryOpNode: ASTNode {
 	
 	public let op: String
