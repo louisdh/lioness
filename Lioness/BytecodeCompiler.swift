@@ -111,7 +111,11 @@ public class BytecodeCompiler {
 		
 		var instructions = [BytecodeInstruction]()
 		
-		for (_, reg) in scopeNode.registerMap {
+		var registersToCleanup = scopeNode.registerMap.map { $0.1 }
+		
+		registersToCleanup.append(contentsOf: scopeNode.internalRegisters)
+		
+		for reg in registersToCleanup {
 			
 			let label = nextIndexLabel()
 			let instr = BytecodeInstruction(label: label, type: .registerClear, arguments: [reg])
@@ -137,6 +141,15 @@ public class BytecodeCompiler {
 		currentScopeNode.registerMap[varName] = newReg
 		
 		return newReg
+	}
+	
+	func getNewInternalRegisterAndStoreInScope() -> String {
+
+		let newReg = getNewRegister()
+		currentScopeNode.internalRegisters.append(newReg)
+		
+		return newReg
+		
 	}
 	
 	fileprivate func getNewRegister() -> String {

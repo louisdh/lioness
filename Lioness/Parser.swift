@@ -510,6 +510,9 @@ public class Parser {
 			case .for:
 				return try parseForStatement()
 			
+			case .do:
+				return try parseDoStatement()
+			
 			default:
 				throw error(.expectedExpression, token: currentToken)
 		}
@@ -560,6 +563,37 @@ public class Parser {
 
 		}
 		
+	}
+	
+	fileprivate func parseDoStatement() throws -> ASTNode {
+		
+		let doToken = popCurrentToken()
+
+		guard case .do = doToken.type else {
+			throw error(.unexpectedToken)
+		}
+		
+		let amount = try parseExpression()
+		
+		guard case .times = popCurrentToken().type else {
+			throw error(.unexpectedToken)
+		}
+		
+		let body = try parseBodyWithCurlies()
+		
+		let doStatement: DoStatementNode
+		
+		do {
+			
+			doStatement = try DoStatementNode(amount: amount, body: body)
+			
+		} catch {
+			
+			throw self.error(.illegalStatement, token: doToken)
+			
+		}
+		
+		return doStatement
 	}
 	
 	fileprivate func parseForStatement() throws -> ASTNode {

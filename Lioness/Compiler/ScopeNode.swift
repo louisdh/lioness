@@ -14,11 +14,13 @@ internal class ScopeNode {
 	var childNodes: [ScopeNode]
 	
 	var registerMap: [String : String]
+	var internalRegisters: [String]
 	
 	init(parentNode: ScopeNode? = nil, childNodes: [ScopeNode]) {
 		self.parentNode = parentNode
 		self.childNodes = childNodes
 		registerMap = [String : String]()
+		internalRegisters = [String]()
 	}
 	
 	/// Get deep register map (including parents' register map)
