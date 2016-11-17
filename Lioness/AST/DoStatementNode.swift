@@ -40,8 +40,27 @@ public class DoStatementNode: ASTNode {
 		
 		var bytecode = [BytecodeInstruction]()
 		
-		let varReg = ctx.getNewInternalRegisterAndStoreInScope()
+		// enter new scope for iterator variable
+		ctx.enterNewScope()
+		
+		let doStatementInstructions = try doStatementCompiled(with: ctx)
+		bytecode.append(contentsOf: doStatementInstructions)
+		
+		let cleanupInstructions = try ctx.leaveCurrentScope()
+		bytecode.append(contentsOf: cleanupInstructions)
+		
+		return bytecode
+		
+	}
+	
+	// MARK -
+	
+	fileprivate func doStatementCompiled(with ctx: BytecodeCompiler) throws -> [BytecodeInstruction] {
+		
+		var bytecode = [BytecodeInstruction]()
 
+		let varReg = ctx.getNewInternalRegisterAndStoreInScope()
+		
 		let assignInstructions = try assignmentInstructions(with: ctx, and: varReg)
 		bytecode.append(contentsOf: assignInstructions)
 		
@@ -54,25 +73,18 @@ public class DoStatementNode: ASTNode {
 		
 		let ifeqLabel = ctx.nextIndexLabel()
 		
-		var bodyBytecode = [BytecodeInstruction]()
-		
-		let bodyInstructions = try body.compile(with: ctx)
-		bodyBytecode.append(contentsOf: bodyInstructions)
+		let bodyBytecode = try body.compile(with: ctx)
 		
 		let intervalInstructions = try decrementInstructions(with: ctx, and: varReg)
 		
 		let goToEndLabel = ctx.nextIndexLabel()
 		
-		
 		let peekNextLabel = ctx.peekNextIndexLabel()
 		let ifeq = BytecodeInstruction(label: ifeqLabel, type: .ifFalse, arguments: [peekNextLabel])
+		
 		bytecode.append(ifeq)
-		
 		bytecode.append(contentsOf: bodyBytecode)
-		
-		
 		bytecode.append(contentsOf: intervalInstructions)
-		
 		
 		let goToStart = BytecodeInstruction(label: goToEndLabel, type: .goto, arguments: [firstLabelOfBody])
 		bytecode.append(goToStart)
@@ -82,10 +94,7 @@ public class DoStatementNode: ASTNode {
 		}
 		
 		return bytecode
-		
 	}
-	
-	// MARK -
 	
 	fileprivate func assignmentInstructions(with ctx: BytecodeCompiler, and regName: String) throws -> [BytecodeInstruction] {
 		

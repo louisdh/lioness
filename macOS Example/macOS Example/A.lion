@@ -1,5 +1,8 @@
-a = 0
+a = 1
 
-do 2^8 times {
-	a += 1
+// Factorial
+for i = 1, i <= 10, i += 1 {
+	a *= i
 }
+
+// a = 10! = 3628800

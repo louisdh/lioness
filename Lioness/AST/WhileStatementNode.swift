@@ -36,18 +36,15 @@ public class WhileStatementNode: ASTNode {
 		
 		let ifeqLabel = ctx.nextIndexLabel()
 		
-		var bodyBytecode = [BytecodeInstruction]()
-		
-		let bodyInstructions = try body.compile(with: ctx)
-		bodyBytecode.append(contentsOf: bodyInstructions)
+		let bodyBytecode = try body.compile(with: ctx)
+
 		
 		let goToEndLabel = ctx.nextIndexLabel()
 		
-		
 		let peekNextLabel = ctx.peekNextIndexLabel()
 		let ifeq = BytecodeInstruction(label: ifeqLabel, type: .ifFalse, arguments: [peekNextLabel])
+
 		bytecode.append(ifeq)
-	
 		bytecode.append(contentsOf: bodyBytecode)
 		
 		

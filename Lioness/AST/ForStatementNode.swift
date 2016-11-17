@@ -37,6 +37,9 @@ public class ForStatementNode: ASTNode {
 		
 		var bytecode = [BytecodeInstruction]()
 		
+		// enter new scope for iterator variable
+		ctx.enterNewScope()
+		
 		let assignInstructions = try assignment.compile(with: ctx)
 		bytecode.append(contentsOf: assignInstructions)
 
@@ -49,10 +52,7 @@ public class ForStatementNode: ASTNode {
 		
 		let ifeqLabel = ctx.nextIndexLabel()
 		
-		var bodyBytecode = [BytecodeInstruction]()
-		
-		let bodyInstructions = try body.compile(with: ctx)
-		bodyBytecode.append(contentsOf: bodyInstructions)
+		let bodyBytecode = try body.compile(with: ctx)
 		
 		let intervalInstructions = try interval.compile(with: ctx)
 
@@ -61,11 +61,9 @@ public class ForStatementNode: ASTNode {
 		
 		let peekNextLabel = ctx.peekNextIndexLabel()
 		let ifeq = BytecodeInstruction(label: ifeqLabel, type: .ifFalse, arguments: [peekNextLabel])
+		
 		bytecode.append(ifeq)
-		
 		bytecode.append(contentsOf: bodyBytecode)
-		
-		
 		bytecode.append(contentsOf: intervalInstructions)
 		
 		
@@ -75,6 +73,9 @@ public class ForStatementNode: ASTNode {
 		guard let _ = ctx.popScopeStartStack() else {
 			throw CompileError.unexpectedCommand
 		}
+		
+		let cleanupInstructions = try ctx.leaveCurrentScope()
+		bytecode.append(contentsOf: cleanupInstructions)
 		
 		return bytecode
 		
