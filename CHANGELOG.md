@@ -14,15 +14,25 @@ CHANGELOG
 Lioness 1.0
 -----------
 
+### 2016-11-17
+
+* Lioness now supports ```do times``` loops. Example:
+
+	```lioness
+	do 10 times {
+		// do something
+	}
+	```
+    
 ### 2016-11-13
 
 * Lioness now supports ```for``` loops. Example:
 
-    ```lioness
-    for i = 0, i < 10, i += 1 {
-    	// do something
-    }
-    ```
+	```lioness
+	for i = 0, i < 10, i += 1 {
+		// do something
+	}
+	```
 
 
 
