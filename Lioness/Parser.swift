@@ -856,7 +856,7 @@ public class Parser {
 		return FunctionNode(prototype: prototype, body: body)
 	}
 	
-	// MARK -
+	// MARK: -
 	
 	fileprivate func error(_ type: ParseErrorType, token: Token? = nil) -> ParseError {
 		

@@ -407,7 +407,7 @@ public class BytecodeInterpreter {
 		stack.append(item)
 	}
 
-	// MARK -
+	// MARK: -
 	
 	fileprivate func error(_ type: InterpreterError) -> Error {
 		return type

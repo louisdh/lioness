@@ -53,7 +53,7 @@ public class DoStatementNode: ASTNode {
 		
 	}
 	
-	// MARK -
+	// MARK: -
 	
 	fileprivate func doStatementCompiled(with ctx: BytecodeCompiler) throws -> [BytecodeInstruction] {
 		
@@ -144,7 +144,7 @@ public class DoStatementNode: ASTNode {
 		
 	}
 	
-	// MARK -
+	// MARK: -
 	
 	public override var description: String {
 		

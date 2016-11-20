@@ -122,7 +122,7 @@ public class BytecodeInstruction: CustomStringConvertible {
 		return descr
 	}
 	
-	// MARK -
+	// MARK: -
 	
 	fileprivate static func error(_ type: BytecodeInstructionError) -> Error {
 		return type
