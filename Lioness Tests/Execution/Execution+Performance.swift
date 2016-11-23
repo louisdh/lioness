@@ -59,4 +59,35 @@ class Execution_Performance: BaseTestCase {
 		}
 	}
 	
+	func testComplexPerformance() {
+		
+		let fileURL = getFilePath(for: "Complex")
+		
+		guard let path = fileURL?.path else {
+			XCTFail("Invalid path for test")
+			return
+		}
+		
+		guard let source = try? String(contentsOfFile: path, encoding: .utf8) else {
+			XCTFail("Failed to get source")
+			return
+		}
+		
+		let lexer = Lexer(input: source)
+		let tokens = lexer.tokenize()
+		
+		let parser = Parser(tokens: tokens)
+		let ast = try! parser.parse()
+		
+		self.measure {
+			
+			let compiler = BytecodeCompiler(ast: ast)
+			let bytecode = try! compiler.compile()
+			
+			let interpreter = BytecodeInterpreter(bytecode: bytecode)
+			try! interpreter.interpret()
+			
+		}
+	}
+	
 }

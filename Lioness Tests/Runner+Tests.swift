@@ -56,7 +56,7 @@ class Runner_Tests: BaseTestCase {
 			return
 		}
 		
-		guard let value = runner.interpreter?.registers["sum"] else {
+		guard let value = runner.interpreter?.registers["r2"] else {
 			XCTFail("Expected value in register for \"sum\"")
 			return
 		}

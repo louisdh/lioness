@@ -45,4 +45,27 @@ class FullRun_Performance: BaseTestCase {
 		}
     }
 
+	func testComplexPerformance() {
+		
+		let runner = Runner(logDebug: false)
+		
+		let fileURL = getFilePath(for: "Complex")
+		
+		guard let path = fileURL?.path else {
+			XCTFail("Invalid path for test")
+			return
+		}
+		
+		guard let source = try? String(contentsOfFile: path, encoding: .utf8) else {
+			XCTFail("Failed to get source")
+			return
+		}
+		
+		self.measure {
+			
+			runner.runSource(source)
+			
+		}
+	}
+	
 }

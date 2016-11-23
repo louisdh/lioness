@@ -47,6 +47,7 @@
 		BE446C461DCD3C5B0085EEE0 /* CompileError.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE446C451DCD3C5B0085EEE0 /* CompileError.swift */; };
 		BE446C491DCD3C7B0085EEE0 /* ASTNodeDescriptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE446C481DCD3C7B0085EEE0 /* ASTNodeDescriptor.swift */; };
 		BE446C4B1DCD3C8F0085EEE0 /* ASTChildNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE446C4A1DCD3C8F0085EEE0 /* ASTChildNode.swift */; };
+		BE62A8721DE6108F00A75453 /* Complex.lion in Resources */ = {isa = PBXBuildFile; fileRef = BE62A8711DE6108F00A75453 /* Complex.lion */; };
 		BE736A8D1DBBEA5F00ADC83A /* BaseTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE736A8C1DBBEA5F00ADC83A /* BaseTestCase.swift */; };
 		BE736A911DBD3C0D00ADC83A /* Execution+Performance.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE736A901DBD3C0D00ADC83A /* Execution+Performance.swift */; };
 		BEAD9A7F1DB3A1A000A6DDC1 /* Runner.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEAD9A7E1DB3A1A000A6DDC1 /* Runner.swift */; };
@@ -95,6 +96,7 @@
 		BE56536B1DAAE7CF006171B9 /* CallNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CallNode.swift; sourceTree = "<group>"; };
 		BE56536D1DAAE7D8006171B9 /* PrototypeNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrototypeNode.swift; sourceTree = "<group>"; };
 		BE56536F1DAAE822006171B9 /* FunctionNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FunctionNode.swift; sourceTree = "<group>"; };
+		BE62A8711DE6108F00A75453 /* Complex.lion */ = {isa = PBXFileReference; explicitFileType = sourcecode.glsl; fileEncoding = 4; path = Complex.lion; sourceTree = "<group>"; };
 		BE736A8C1DBBEA5F00ADC83A /* BaseTestCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseTestCase.swift; sourceTree = "<group>"; };
 		BE736A901DBD3C0D00ADC83A /* Execution+Performance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Execution+Performance.swift"; path = "Execution/Execution+Performance.swift"; sourceTree = "<group>"; };
 		BE9369FB1DA83AB000C0B3DF /* BytecodeCompiler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BytecodeCompiler.swift; sourceTree = "<group>"; };
@@ -281,6 +283,7 @@
 			children = (
 				BE2CC6601DB94BF800F74DBE /* LargeMathOperation.lion */,
 				BE37DFAE1DBBE2D3003F6A3E /* InnerWhileLoops.lion */,
+				BE62A8711DE6108F00A75453 /* Complex.lion */,
 			);
 			name = "Test source files";
 			sourceTree = "<group>";
@@ -423,6 +426,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BE62A8721DE6108F00A75453 /* Complex.lion in Resources */,
 				BE37DFAF1DBBE2D3003F6A3E /* InnerWhileLoops.lion in Resources */,
 				BE2CC6611DB94BF800F74DBE /* LargeMathOperation.lion in Resources */,
 			);
