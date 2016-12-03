@@ -55,6 +55,7 @@ public enum TokenType {
 	case `continue`
 	case `do`
 	case times
+	case `repeat`
 	
 	// Fallback
 	case other(String)

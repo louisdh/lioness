@@ -20,13 +20,28 @@ public class Lexer {
 		"false": .false,
 		"continue": .continue,
 		"do": .do,
-		"times": .times
+		"times": .times,
+		"repeat": .repeat
+	]
+	
+	/// Currently only works for 1 char tokens
+	fileprivate static let otherMapping: [String : TokenType] = [
+		"(": .parensOpen,
+		")": .parensClose,
+		"{": .curlyOpen,
+		"}": .curlyClose,
+		",": .comma,
+		"!": .booleanNot,
+		">": .comparatorGreaterThan,
+		"<": .comparatorLessThan,
+		"=": .equals
 	]
 	
 	fileprivate typealias TokenGenerator = (String) -> TokenType?
 
 	/// The order of this list is important,
 	/// e.g. match identifiers before numbers
+	/// The number of regexs should be kept low for performance reasons
 	fileprivate let tokenList: [(String, TokenGenerator)] = [
 		
 		// one line comment
@@ -36,7 +51,6 @@ public class Lexer {
 		("/\\*[^*]*\\*+(?:[^/*][^*]*\\*+)*/", { _ in .ignoreableToken }),
 
 		
-
 		("[ \t\n]", { _ in .ignoreableToken }),
 		
 		("[a-zA-Z][a-zA-Z0-9]*", {
@@ -59,32 +73,21 @@ public class Lexer {
 			return nil
 		}),
 		
-		("\\(", { _ in .parensOpen }),
-		("\\)", { _ in .parensClose }),
-		("\\{", { _ in .curlyOpen }),
-		("\\}", { _ in .curlyClose }),
-		
 		("==", { _ in .comparatorEqual }),
 		("!=", { _ in .notEqual }),
 		
 		("&&", { _ in .booleanAnd }),
 		("\\|\\|", { _ in .booleanOr }),
-		("!", { _ in .booleanNot }),
 		
 		(">=", { _ in .comparatorGreaterThanEqual }),
 		("<=", { _ in .comparatorLessThanEqual }),
-		(">", { _ in .comparatorGreaterThan }),
-		("<", { _ in .comparatorLessThan }),
 		
 		
 		("\\+=", { _ in .shortHandAdd }),
 		("\\-=", { _ in .shortHandSub }),
 		("\\*=", { _ in .shortHandMul }),
 		("\\/=", { _ in .shortHandDiv }),
-		("\\^=", { _ in .shortHandPow }),
-
-		("=", { _ in .equals }),
-		(",", { _ in .comma }),
+		("\\^=", { _ in .shortHandPow })
 		
 	]
 	
@@ -164,11 +167,22 @@ public class Lexer {
 				
                 let index = content.characters.index(content.startIndex, offsetBy: 1)
 				
-				let type = TokenType.other(content.substring(to: index))
+				let raw = content.substring(to: index)
 				
-				let otherToken = Token(type: type, range: range)
-				
-				tokens.append(otherToken)
+				if let mappedType = Lexer.otherMapping[raw] {
+					
+					let otherToken = Token(type: mappedType, range: range)
+					
+					tokens.append(otherToken)
+					
+				} else {
+					
+					let type = TokenType.other(raw)
+					
+					let otherToken = Token(type: type, range: range)
+					
+					tokens.append(otherToken)
+				}
 				
                 content = content.substring(from: index)
 				
