@@ -14,7 +14,7 @@ public class BytecodeCompiler {
 	// MARK: - Private
 	
 	fileprivate let ast: [ASTNode]
-	fileprivate var index = 0
+	fileprivate var index: UInt = 0
 	
 	fileprivate var scopeStartStack = [String]()
 
