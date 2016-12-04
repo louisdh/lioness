@@ -532,18 +532,14 @@ public class Parser {
 	
 	fileprivate func parseContinue() throws -> ASTNode {
 
-		guard case .continue = popCurrentToken().type else {
-			throw error(.unexpectedToken)
-		}
-		
+		try popCurrentToken(andExpect: .continue)
+
 		return ContinueNode()
 	}
 	
 	fileprivate func parseIfStatement() throws -> ASTNode {
 		
-		guard case .if = popCurrentToken().type else {
-			throw error(.unexpectedToken)
-		}
+		try popCurrentToken(andExpect: .if)
 		
 		let condition = try parseExpression()
 		
@@ -551,9 +547,7 @@ public class Parser {
 		
 		if let currentToken = peekCurrentToken(), case .else = currentToken.type {
 			
-			guard case .else = popCurrentToken().type else {
-				throw error(.unexpectedToken)
-			}
+			try popCurrentToken(andExpect: .else)
 			
 			if let currentToken = peekCurrentToken(), case .if = currentToken.type {
 				
@@ -578,17 +572,11 @@ public class Parser {
 	
 	fileprivate func parseDoStatement() throws -> ASTNode {
 		
-		let doToken = popCurrentToken()
+		let doToken = try popCurrentToken(andExpect: .do)
 
-		guard case .do = doToken.type else {
-			throw error(.unexpectedToken)
-		}
-		
 		let amount = try parseExpression()
 		
-		guard case .times = popCurrentToken().type else {
-			throw error(.unexpectedToken)
-		}
+		try popCurrentToken(andExpect: .times)
 		
 		let body = try parseBodyWithCurlies()
 		
@@ -609,11 +597,7 @@ public class Parser {
 	
 	fileprivate func parseForStatement() throws -> ASTNode {
 		
-		let forToken = popCurrentToken()
-		
-		guard case .for = forToken.type else {
-			throw error(.unexpectedToken)
-		}
+		let forToken = try popCurrentToken(andExpect: .for)
 		
 		let assignment = try parseAssignment()
 		
@@ -644,11 +628,7 @@ public class Parser {
 	
 	fileprivate func parseWhileStatement() throws -> ASTNode {
 		
-		let whileToken = popCurrentToken()
-		
-		guard case .while = whileToken.type else {
-			throw error(.unexpectedToken)
-		}
+		let whileToken = try popCurrentToken(andExpect: .while)
 		
 		let condition = try parseExpression()
 		
@@ -671,11 +651,7 @@ public class Parser {
 
 		let body = try parseBodyWithCurlies()
 
-		let whileToken = popCurrentToken()
-		
-		guard case .while = whileToken.type else {
-			throw error(.unexpectedToken)
-		}
+		let whileToken = try popCurrentToken(andExpect: .while)
 		
 		let condition = try parseExpression()
 		
