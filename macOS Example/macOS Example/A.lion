@@ -1,8 +1,16 @@
 a = 1
+i = 1
+
+repeat {
+	
+	a *= i
+	i += 1
+	
+} while i > 3
 
 // Factorial
-for i = 1, i <= 10, i += 1 {
-	a *= i
-}
+//for i = 1, i <= 10, i += 1 {
+//	a *= i
+//}
 
 // a = 10! = 3628800

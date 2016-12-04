@@ -10,6 +10,7 @@
 		BE14125A1DB1774900DAA385 /* Lioness.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE2296281DB16EE800EA477A /* Lioness.framework */; };
 		BE1412AD1DB27F6F00DAA385 /* BooleanNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1412AC1DB27F6F00DAA385 /* BooleanNode.swift */; };
 		BE1412AF1DB2B07200DAA385 /* BooleanOpNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1412AE1DB2B07200DAA385 /* BooleanOpNode.swift */; };
+		BE193A8A1DF47910002DCC77 /* RepeatWhileStatementNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE193A891DF47910002DCC77 /* RepeatWhileStatementNode.swift */; };
 		BE1FD5F91DB1703C00B2A55B /* Lioness.h in Headers */ = {isa = PBXBuildFile; fileRef = BE1FD5F81DB1703C00B2A55B /* Lioness.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		BE2296301DB16F1B00EA477A /* Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE295CE21DAD87990019EC57 /* Token.swift */; };
 		BE2296311DB16F1B00EA477A /* Lexer.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3FEBA41DA427800000648D /* Lexer.swift */; };
@@ -59,6 +60,7 @@
 		BE1412571DB1755E00DAA385 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		BE1412AC1DB27F6F00DAA385 /* BooleanNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BooleanNode.swift; path = AST/BooleanNode.swift; sourceTree = "<group>"; };
 		BE1412AE1DB2B07200DAA385 /* BooleanOpNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BooleanOpNode.swift; path = AST/BooleanOpNode.swift; sourceTree = "<group>"; };
+		BE193A891DF47910002DCC77 /* RepeatWhileStatementNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RepeatWhileStatementNode.swift; sourceTree = "<group>"; };
 		BE1FD5F81DB1703C00B2A55B /* Lioness.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Lioness.h; sourceTree = "<group>"; };
 		BE2296281DB16EE800EA477A /* Lioness.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Lioness.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BE22962B1DB16EE800EA477A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -253,6 +255,7 @@
 				BE56536D1DAAE7D8006171B9 /* PrototypeNode.swift */,
 				BE2CC65E1DB41E4400F74DBE /* ConditionalStatementNode.swift */,
 				BE2CC6661DBA79AD00F74DBE /* WhileStatementNode.swift */,
+				BE193A891DF47910002DCC77 /* RepeatWhileStatementNode.swift */,
 				BE25BA1C1DD8F5F500041A20 /* ForStatementNode.swift */,
 				BE25BA1E1DD9228D00041A20 /* DoStatementNode.swift */,
 				BE37DFAC1DBBBAEA003F6A3E /* ContinueNode.swift */,
@@ -465,6 +468,7 @@
 				BE1412AF1DB2B07200DAA385 /* BooleanOpNode.swift in Sources */,
 				BE2296301DB16F1B00EA477A /* Token.swift in Sources */,
 				BE2296351DB16F2100EA477A /* NumberNode.swift in Sources */,
+				BE193A8A1DF47910002DCC77 /* RepeatWhileStatementNode.swift in Sources */,
 				BE2296371DB16F2100EA477A /* AssignmentNode.swift in Sources */,
 				BE2296391DB16F2100EA477A /* CallNode.swift in Sources */,
 				BE22963D1DB16F2100EA477A /* BytecodeInstruction.swift in Sources */,

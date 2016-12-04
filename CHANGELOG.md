@@ -14,6 +14,18 @@ CHANGELOG
 Lioness 1.0
 -----------
 
+### 2016-12-04
+
+* Lioness now supports ```repeat while``` loops. Example:
+
+	```lioness
+	i = 0
+	repeat {
+		// will be evaluated at least once
+		i += 1
+	} while i < 10
+	```
+    
 ### 2016-11-17
 
 * Lioness now supports ```do times``` loops. Example:

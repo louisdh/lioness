@@ -245,19 +245,25 @@ public class Parser {
 	}
 	
 	@discardableResult
-	fileprivate func popCurrentToken(andExpect type: TokenType, _ tokenString: String) throws  -> Token {
+	fileprivate func popCurrentToken(andExpect type: TokenType, _ tokenString: String? = nil) throws  -> Token {
 		
 		let currentToken = popCurrentToken()
 		
 		guard type == currentToken.type else {
-			throw error(.expectedCharacterButFound(char: tokenString, token: currentToken))
+			
+			if let tokenString = tokenString {
+				throw error(.expectedCharacterButFound(char: tokenString, token: currentToken))
+			} else {
+				throw error(.unexpectedToken)
+			}
+			
 		}
 		
 		return currentToken
 
 	}
 	
-	// MARK: - Parsing
+	// MARK: - Parsing look ahead
 	
 	/// Look ahead to check if boolean operator should be parsed
 	fileprivate func shouldParseBooleanOp() -> Bool {
@@ -316,6 +322,8 @@ public class Parser {
 		
 	}
 	
+	// MARK: - Parsing
+
 	fileprivate func parseAssignment() throws -> AssignmentNode {
 		
 		guard case let .identifier(variable) = popCurrentToken().type else {
@@ -507,6 +515,9 @@ public class Parser {
 			case .while:
 				return try parseWhileStatement()
 			
+			case .repeat:
+				return try parseRepeatWhileStatement()
+			
 			case .for:
 				return try parseForStatement()
 			
@@ -651,6 +662,31 @@ public class Parser {
 			throw self.error(.illegalStatement, token: whileToken)
 		}
 
+		return whileStatement
+	}
+	
+	fileprivate func parseRepeatWhileStatement() throws -> ASTNode {
+
+		try popCurrentToken(andExpect: .repeat)
+
+		let body = try parseBodyWithCurlies()
+
+		let whileToken = popCurrentToken()
+		
+		guard case .while = whileToken.type else {
+			throw error(.unexpectedToken)
+		}
+		
+		let condition = try parseExpression()
+		
+		let whileStatement: RepeatWhileStatementNode
+		
+		do {
+			whileStatement = try RepeatWhileStatementNode(condition: condition, body: body)
+		} catch {
+			throw self.error(.illegalStatement, token: whileToken)
+		}
+		
 		return whileStatement
 	}
 	
