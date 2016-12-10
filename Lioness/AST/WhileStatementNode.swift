@@ -27,8 +27,7 @@ public class WhileStatementNode: LoopNode {
 		
 		var bytecode = [BytecodeInstruction]()
 		
-		let loopScopeStart = ctx.peekNextIndexLabel()
-		ctx.pushLoopContinue(loopScopeStart)
+		ctx.pushLoopContinue(scopeStart)
 		
 		let conditionInstruction = try condition.compile(with: ctx)
 		bytecode.append(contentsOf: conditionInstruction)

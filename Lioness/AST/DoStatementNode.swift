@@ -40,14 +40,8 @@ public class DoStatementNode: LoopNode {
 		
 		var bytecode = [BytecodeInstruction]()
 		
-		// enter new scope for iterator variable
-		ctx.enterNewScope()
-		
 		let doStatementInstructions = try doStatementCompiled(with: ctx)
 		bytecode.append(contentsOf: doStatementInstructions)
-		
-		let cleanupInstructions = try ctx.leaveCurrentScope()
-		bytecode.append(contentsOf: cleanupInstructions)
 		
 		return bytecode
 		

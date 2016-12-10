@@ -37,15 +37,11 @@ public class ForStatementNode: LoopNode {
 		
 		var bytecode = [BytecodeInstruction]()
 		
-		// enter new scope for iterator variable
-		ctx.enterNewScope()
 		
 		let assignInstructions = try assignment.compile(with: ctx)
 		bytecode.append(contentsOf: assignInstructions)
 
 		
-	
-
 		
 		// Interval
 		
@@ -96,9 +92,6 @@ public class ForStatementNode: LoopNode {
 		guard let _ = ctx.popLoopContinue() else {
 			throw CompileError.unexpectedCommand
 		}
-		
-		let cleanupInstructions = try ctx.leaveCurrentScope()
-		bytecode.append(contentsOf: cleanupInstructions)
 		
 		return bytecode
 		

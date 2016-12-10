@@ -19,6 +19,7 @@ public class Lexer {
 		"true": .true,
 		"false": .false,
 		"continue": .continue,
+		"break": .break,
 		"do": .do,
 		"times": .times,
 		"repeat": .repeat

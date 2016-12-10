@@ -512,6 +512,9 @@ public class Parser {
 			case .continue:
 				return try parseContinue()
 			
+			case .break:
+				return try parseBreak()
+			
 			case .while:
 				return try parseWhileStatement()
 			
@@ -535,6 +538,13 @@ public class Parser {
 		try popCurrentToken(andExpect: .continue)
 
 		return ContinueNode()
+	}
+	
+	fileprivate func parseBreak() throws -> ASTNode {
+		
+		try popCurrentToken(andExpect: .break)
+		
+		return BreakLoopNode()
 	}
 	
 	fileprivate func parseIfStatement() throws -> ASTNode {

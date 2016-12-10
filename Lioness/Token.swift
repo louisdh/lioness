@@ -53,6 +53,7 @@ public enum TokenType {
 	case `true`
 	case `false`
 	case `continue`
+	case `break`
 	case `do`
 	case times
 	case `repeat`

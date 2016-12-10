@@ -27,8 +27,7 @@ public class RepeatWhileStatementNode: LoopNode {
 		
 		var bytecode = [BytecodeInstruction]()
 		
-		let loopScopeStart = ctx.peekNextIndexLabel()
-		ctx.pushLoopContinue(loopScopeStart)
+		ctx.pushLoopContinue(scopeStart)
 		
 		let bodyBytecode = try body.compile(with: ctx)
 		bytecode.append(contentsOf: bodyBytecode)
