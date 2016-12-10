@@ -14,11 +14,11 @@ public class ContinueNode: ASTNode {
 		
 		let label = ctx.nextIndexLabel()
 		
-		guard let startOfScope = ctx.peekScopeStartStack() else {
+		guard let continueLabel = ctx.peekLoopContinue() else {
 			throw CompileError.unexpectedCommand
 		}
 		
-		return [BytecodeInstruction(label: label, type: .goto, arguments: [startOfScope])]
+		return [BytecodeInstruction(label: label, type: .goto, arguments: [continueLabel], comment: "continue")]
 		
 	}
 	

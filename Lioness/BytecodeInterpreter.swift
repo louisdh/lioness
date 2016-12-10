@@ -8,7 +8,6 @@
 
 import Foundation
 
-
 /// Interpreter Error
 public enum InterpreterError: Error {
 	/// Unexpected argument
@@ -149,6 +148,8 @@ public class BytecodeInterpreter {
 		
 		return newPc
 	}
+
+	// MARK: - Execution
 
 	fileprivate func executePushConst(_ instruction: BytecodeInstruction, pc: Int) throws -> Int {
 		guard let arg = instruction.arguments.first, let f = StackElement(arg) else {
@@ -392,6 +393,8 @@ public class BytecodeInterpreter {
 		
 	}
 	
+	// MARK: - Stack
+
 	/// Pop from stack
 	fileprivate func pop() throws -> StackElement {
 		

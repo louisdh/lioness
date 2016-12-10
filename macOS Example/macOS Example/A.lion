@@ -1,16 +1,34 @@
-a = 1
-i = 1
+a = 2
+i = 0
 
-repeat {
+while i < 10 {
 	
-	a *= i
 	i += 1
-	
-} while i > 3
 
-// Factorial
-//for i = 1, i <= 10, i += 1 {
-//	a *= i
+	if i == 5 {
+		continue
+	}
+	
+	a += 2
+
+}
+
+//do 10 times {
+//	
+//	if a >= 6 {
+////		continue
+//	}
+//
+//	a += 2
+//	
 //}
 
-// a = 10! = 3628800
+
+//for i = 1, i <= 10, i += 1 {
+//	
+//	if i > 4 {
+//		continue
+//	}
+//	
+//	a += 2
+//}

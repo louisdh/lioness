@@ -8,7 +8,7 @@
 
 import Foundation
 
-public class ForStatementNode: ASTNode {
+public class ForStatementNode: LoopNode {
 
 	public let assignment: AssignmentNode
 	public let condition: ASTNode
@@ -33,7 +33,7 @@ public class ForStatementNode: ASTNode {
 		self.body = body
 	}
 	
-	public override func compile(with ctx: BytecodeCompiler) throws -> [BytecodeInstruction] {
+	override func compileLoop(with ctx: BytecodeCompiler, scopeStart: String) throws -> [BytecodeInstruction] {
 		
 		var bytecode = [BytecodeInstruction]()
 		
@@ -43,18 +43,40 @@ public class ForStatementNode: ASTNode {
 		let assignInstructions = try assignment.compile(with: ctx)
 		bytecode.append(contentsOf: assignInstructions)
 
-		let firstLabelOfBody = ctx.peekNextIndexLabel()
 		
-		ctx.pushScopeStartStack(firstLabelOfBody)
+	
+
+		
+		// Interval
+		
+		let skipFirstIntervalLabel = ctx.nextIndexLabel()
+
+		let startOfLoopLabel = ctx.peekNextIndexLabel()
+
+		let intervalInstructions = try interval.compile(with: ctx)		
+		
+		let skippedIntervalLabel = ctx.peekNextIndexLabel()
+
+		ctx.pushLoopScopeStart(startOfLoopLabel)
+		ctx.pushLoopContinue(startOfLoopLabel)
+		
+		let skipFirstInterval = BytecodeInstruction(label: skipFirstIntervalLabel, type: .goto, arguments: [skippedIntervalLabel], comment: "skip first interval")
+		bytecode.append(skipFirstInterval)
+		
+		bytecode.append(contentsOf: intervalInstructions)
+
+		
+		
+		// Condition
 		
 		let conditionInstruction = try condition.compile(with: ctx)
 		bytecode.append(contentsOf: conditionInstruction)
 		
+		
+		
 		let ifeqLabel = ctx.nextIndexLabel()
 		
 		let bodyBytecode = try body.compile(with: ctx)
-		
-		let intervalInstructions = try interval.compile(with: ctx)
 
 		let goToEndLabel = ctx.nextIndexLabel()
 		
@@ -64,13 +86,19 @@ public class ForStatementNode: ASTNode {
 		
 		bytecode.append(ifeq)
 		bytecode.append(contentsOf: bodyBytecode)
-		bytecode.append(contentsOf: intervalInstructions)
 		
 		
-		let goToStart = BytecodeInstruction(label: goToEndLabel, type: .goto, arguments: [firstLabelOfBody])
+		let goToStart = BytecodeInstruction(label: goToEndLabel, type: .goto, arguments: [startOfLoopLabel], comment: "go to start of loop")
 		bytecode.append(goToStart)
 		
-		guard let _ = ctx.popScopeStartStack() else {
+		
+		// End of loop
+		
+		guard let _ = ctx.popLoopScopeStart() else {
+			throw CompileError.unexpectedCommand
+		}
+		
+		guard let _ = ctx.popLoopContinue() else {
 			throw CompileError.unexpectedCommand
 		}
 		

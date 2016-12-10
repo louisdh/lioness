@@ -16,7 +16,9 @@ public class BytecodeCompiler {
 	fileprivate let ast: [ASTNode]
 	fileprivate var index: UInt = 0
 	
-	fileprivate var scopeStartStack = [String]()
+	fileprivate var loopScopeStartStack = [String]()
+	fileprivate var loopHeaderStack = [String]()
+	fileprivate var loopContinueStack = [String]()
 
 	fileprivate let scopeTreeRoot: ScopeNode
 
@@ -60,18 +62,50 @@ public class BytecodeCompiler {
 		return "\(index + 1)"
 	}
 	
-	// MARK: - Scope start stack
+	// TODO: make stack operations throw?
 
-	func pushScopeStartStack(_ label: String) {
-		scopeStartStack.append(label)
+	// MARK: - Loop scope
+
+	// TODO: remove
+	
+	func pushLoopScopeStart(_ label: String) {
+		loopScopeStartStack.append(label)
 	}
 
-	func popScopeStartStack() -> String? {
-		return scopeStartStack.popLast()
+	func popLoopScopeStart() -> String? {
+		return loopScopeStartStack.popLast()
 	}
 	
-	func peekScopeStartStack() -> String? {
-		return scopeStartStack.last
+	func peekLoopScopeStart() -> String? {
+		return loopScopeStartStack.last
+	}
+	
+	// MARK: - Loop header
+	
+	func pushLoopHeader(_ label: String) {
+		loopHeaderStack.append(label)
+	}
+	
+	func popLoopHeader() -> String? {
+		return loopHeaderStack.popLast()
+	}
+	
+	func peekLoopHeader() -> String? {
+		return loopHeaderStack.last
+	}
+	
+	// MARK: - Loop continue
+	
+	func pushLoopContinue(_ label: String) {
+		loopContinueStack.append(label)
+	}
+	
+	func popLoopContinue() -> String? {
+		return loopContinueStack.popLast()
+	}
+	
+	func peekLoopContinue() -> String? {
+		return loopContinueStack.last
 	}
 	
 	// MARK: - Scope tree
@@ -107,7 +141,7 @@ public class BytecodeCompiler {
 		return cleanupInstructions
 	}
 	
-	fileprivate func cleanupRegisterInstructions(`for` scopeNode: ScopeNode) -> [BytecodeInstruction] {
+	fileprivate func cleanupRegisterInstructions(for scopeNode: ScopeNode) -> [BytecodeInstruction] {
 		
 		var instructions = [BytecodeInstruction]()
 		
@@ -131,7 +165,7 @@ public class BytecodeCompiler {
 	
 	fileprivate var registerCount = 0
 
-	func getRegister(`for` varName: String) -> String {
+	func getRegister(for varName: String) -> String {
 		
 		if let existingReg = currentScopeNode.deepRegisterMap()[varName] {
 			return existingReg

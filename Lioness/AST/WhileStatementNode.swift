@@ -8,7 +8,7 @@
 
 import Foundation
 
-public class WhileStatementNode: ASTNode {
+public class WhileStatementNode: LoopNode {
 	
 	public let condition: ASTNode
 	public let body: BodyNode
@@ -23,13 +23,12 @@ public class WhileStatementNode: ASTNode {
 		self.body = body
 	}
 	
-	public override func compile(with ctx: BytecodeCompiler) throws -> [BytecodeInstruction] {
+	override func compileLoop(with ctx: BytecodeCompiler, scopeStart: String) throws -> [BytecodeInstruction] {
 		
 		var bytecode = [BytecodeInstruction]()
 		
-		let firstLabelOfBody = ctx.peekNextIndexLabel()
-		
-		ctx.pushScopeStartStack(firstLabelOfBody)
+		let loopScopeStart = ctx.peekNextIndexLabel()
+		ctx.pushLoopContinue(loopScopeStart)
 		
 		let conditionInstruction = try condition.compile(with: ctx)
 		bytecode.append(contentsOf: conditionInstruction)
@@ -37,26 +36,24 @@ public class WhileStatementNode: ASTNode {
 		let ifeqLabel = ctx.nextIndexLabel()
 		
 		let bodyBytecode = try body.compile(with: ctx)
-
+		
 		
 		let goToEndLabel = ctx.nextIndexLabel()
 		
 		let peekNextLabel = ctx.peekNextIndexLabel()
 		let ifeq = BytecodeInstruction(label: ifeqLabel, type: .ifFalse, arguments: [peekNextLabel])
-
+		
 		bytecode.append(ifeq)
 		bytecode.append(contentsOf: bodyBytecode)
 		
-		
-		let goToStart = BytecodeInstruction(label: goToEndLabel, type: .goto, arguments: [firstLabelOfBody])
+		let goToStart = BytecodeInstruction(label: goToEndLabel, type: .goto, arguments: [scopeStart])
 		bytecode.append(goToStart)
 		
-		guard let _ = ctx.popScopeStartStack() else {
+		guard let _ = ctx.popLoopContinue() else {
 			throw CompileError.unexpectedCommand
 		}
-
-		return bytecode
 		
+		return bytecode
 	}
 	
 	public override var description: String {

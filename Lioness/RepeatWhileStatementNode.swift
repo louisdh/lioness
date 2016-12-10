@@ -8,7 +8,7 @@
 
 import Foundation
 
-public class RepeatWhileStatementNode: ASTNode {
+public class RepeatWhileStatementNode: LoopNode {
 	
 	public let condition: ASTNode
 	public let body: BodyNode
@@ -23,13 +23,12 @@ public class RepeatWhileStatementNode: ASTNode {
 		self.body = body
 	}
 	
-	public override func compile(with ctx: BytecodeCompiler) throws -> [BytecodeInstruction] {
+	override func compileLoop(with ctx: BytecodeCompiler, scopeStart: String) throws -> [BytecodeInstruction] {
 		
 		var bytecode = [BytecodeInstruction]()
 		
-		let firstLabelOfBody = ctx.peekNextIndexLabel()
-		
-		ctx.pushScopeStartStack(firstLabelOfBody)
+		let loopScopeStart = ctx.peekNextIndexLabel()
+		ctx.pushLoopContinue(loopScopeStart)
 		
 		let bodyBytecode = try body.compile(with: ctx)
 		bytecode.append(contentsOf: bodyBytecode)
@@ -47,11 +46,10 @@ public class RepeatWhileStatementNode: ASTNode {
 		
 		bytecode.append(ifeq)
 		
-		
-		let goToStart = BytecodeInstruction(label: goToEndLabel, type: .goto, arguments: [firstLabelOfBody])
+		let goToStart = BytecodeInstruction(label: goToEndLabel, type: .goto, arguments: [scopeStart])
 		bytecode.append(goToStart)
 		
-		guard let _ = ctx.popScopeStartStack() else {
+		guard let _ = ctx.popLoopContinue() else {
 			throw CompileError.unexpectedCommand
 		}
 		
