@@ -14,6 +14,10 @@ CHANGELOG
 Lioness 1.0
 -----------
 
+### 2016-12-10
+
+* Lioness now supports ```break``` and ```continue``` statements in loops. 
+    
 ### 2016-12-04
 
 * Lioness now supports ```repeat while``` loops. Example:
@@ -42,6 +46,16 @@ Lioness 1.0
 
 	```lioness
 	for i = 0, i < 10, i += 1 {
+		// do something
+	}
+	```
+
+### 2016-10-21
+
+* Lioness now supports ```while``` loops. Example:
+
+	```lioness
+	while true {
 		// do something
 	}
 	```
