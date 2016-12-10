@@ -64,22 +64,6 @@ public class BytecodeCompiler {
 	
 	// TODO: make stack operations throw?
 
-	// MARK: - Loop scope
-
-	// TODO: remove
-	
-	func pushLoopScopeStart(_ label: String) {
-		loopScopeStartStack.append(label)
-	}
-
-	func popLoopScopeStart() -> String? {
-		return loopScopeStartStack.popLast()
-	}
-	
-	func peekLoopScopeStart() -> String? {
-		return loopScopeStartStack.last
-	}
-	
 	// MARK: - Loop header
 	
 	func pushLoopHeader(_ label: String) {

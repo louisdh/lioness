@@ -16,15 +16,9 @@ public class LoopNode: ASTNode {
 
 		let loopScopeStart = ctx.peekNextIndexLabel()
 		
-		ctx.pushLoopScopeStart(loopScopeStart)
-		
 		let compiledLoop = try compileLoop(with: ctx, scopeStart: loopScopeStart)
 		
 		bytecode.append(contentsOf: compiledLoop)
-		
-		guard let _ = ctx.popLoopScopeStart() else {
-			throw CompileError.unexpectedCommand
-		}
 		
 		return bytecode
 	}

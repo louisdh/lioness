@@ -76,7 +76,6 @@ public class DoStatementNode: LoopNode {
 		
 		let skippedIntervalLabel = ctx.peekNextIndexLabel()
 
-		ctx.pushLoopScopeStart(startOfLoopLabel)
 		ctx.pushLoopContinue(startOfLoopLabel)
 		
 		let skipFirstInterval = BytecodeInstruction(label: skipFirstIntervalLabel, type: .goto, arguments: [skippedIntervalLabel], comment: "skip first interval")
@@ -106,10 +105,6 @@ public class DoStatementNode: LoopNode {
 		
 		let goToStart = BytecodeInstruction(label: goToEndLabel, type: .goto, arguments: [startOfLoopLabel])
 		bytecode.append(goToStart)
-		
-		guard let _ = ctx.popLoopScopeStart() else {
-			throw CompileError.unexpectedCommand
-		}
 		
 		guard let _ = ctx.popLoopContinue() else {
 			throw CompileError.unexpectedCommand
