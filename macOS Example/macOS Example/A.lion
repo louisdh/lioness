@@ -1,11 +1,13 @@
 a = 2
 
-while true {
+func foo() {
 	
-	if a > 1000 {
-		break
-	}
-	
-	a *= 2
+	a += 1
 	
 }
+
+do 10 times {
+	foo()
+}
+
+// a = 12

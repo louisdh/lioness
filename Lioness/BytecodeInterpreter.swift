@@ -20,13 +20,20 @@ public enum InterpreterError: Error {
 /// Bytecode Interpreter
 public class BytecodeInterpreter {
 	
-	fileprivate let bytecode: [BytecodeInstruction]
+	fileprivate let bytecode: BytecodeBody
 	
 	typealias StackElement = Double
 	
 	/// Stack
 	fileprivate(set) var stack = [StackElement]()
-	
+
+	/// Function map with id as key and program counter as value
+	fileprivate(set) var functionMap = [String : Int]()
+
+	fileprivate(set) var functionEndMap = [String : Int]()
+
+	fileprivate(set) var functionInvokeStack = [Int]()
+
 	/// Registers
 	fileprivate(set) var registers = [String : StackElement]()
 	
@@ -34,8 +41,10 @@ public class BytecodeInterpreter {
 	/// Initalize a BytecodeInterpreter with an array of BytecodeInstruction
 	///
 	/// - Parameter bytecode: Array of BytecodeInstruction
-	public init(bytecode: [BytecodeInstruction]) {
+	public init(bytecode: BytecodeBody) throws {
 		self.bytecode = bytecode
+
+		try createFunctionMap()
 	}
 	
 	/// Initalize a BytecodeInterpreter with an array of String
@@ -45,7 +54,7 @@ public class BytecodeInterpreter {
 	/// - Parameter bytecodeStrings: bytecode instructions as strings
 	public init?(bytecodeStrings: [String]) {
 		
-		var bytecode = [BytecodeInstruction]()
+		var bytecode = BytecodeBody()
 		
 		for s in bytecodeStrings {
 			if let instruction = try? BytecodeInstruction(instructionString: s) {
@@ -56,6 +65,47 @@ public class BytecodeInterpreter {
 		}
 		
 		self.bytecode = bytecode
+		
+		do {
+			try createFunctionMap()
+		} catch {
+			return nil
+		}
+		
+	}
+	
+	fileprivate func createFunctionMap() throws {
+		
+		var pc = 0
+		
+		var currentFunc: String? = nil
+		
+		for line in bytecode {
+			
+			if let funcLine = line as? BytecodeFunctionHeader {
+				// + 1 for first line in function
+				// header should never be jumped to
+				functionMap[funcLine.id] = pc + 1
+				currentFunc = funcLine.id
+			}
+
+			if line is BytecodeEnd {
+				
+				guard let currentFunc = currentFunc else {
+					throw error(.unexpectedArgument)
+				}
+				
+				functionEndMap[currentFunc] = pc
+				
+			}
+			
+			pc += 1
+		}
+		
+	}
+	
+	fileprivate var pcStart: Int {
+		return 0
 	}
 	
 	/// Interpret the bytecode passed in the initializer
@@ -67,13 +117,35 @@ public class BytecodeInterpreter {
 		registers = [String : StackElement]()
 		
 		// Program counter
-		var pc = 0
+		var pc = pcStart
 		
 		while pc < bytecode.count {
 			
-			let instruction = bytecode[pc]
-			
-			pc = try executeInstruction(instruction, pc: pc)
+			if let instruction = bytecode[pc] as? BytecodeInstruction {
+				
+				pc = try executeInstruction(instruction, pc: pc)
+				
+			} else if bytecode[pc] is BytecodeEnd {
+				
+				if let last = functionInvokeStack.popLast() {
+					pc = last
+				} else {
+					throw error(.unexpectedArgument)
+				}
+				
+			} else if let functionHeader = bytecode[pc] as? BytecodeFunctionHeader {
+
+				guard let funcEndPc = functionEndMap[functionHeader.id] else {
+					throw error(.unexpectedArgument)
+				}
+				
+				pc = funcEndPc + 1
+				
+			} else {
+				
+				throw error(.unexpectedArgument)
+				
+			}
 			
 		}
 		
@@ -143,6 +215,9 @@ public class BytecodeInterpreter {
 			
 			case .ifFalse:
 				newPc = try executeIfFalse(instruction, pc: pc)
+			
+			case .invokeFunc:
+				newPc = try executeInvokeFunction(instruction, pc: pc)
 			
 		}
 		
@@ -385,10 +460,29 @@ public class BytecodeInterpreter {
 		return pc + 1
 	}
 	
+	fileprivate func executeInvokeFunction(_ instruction: BytecodeInstruction, pc: Int) throws -> Int {
+		
+		guard let id = instruction.arguments[safe: 0] else {
+			throw error(.unexpectedArgument)
+		}
+		
+		guard let idPc = functionMap[id] else {
+			throw error(.unexpectedArgument)
+		}
+		
+		// return to next pc after function returns
+		functionInvokeStack.append(pc + 1)
+		
+		return idPc
+	}
+	
 	fileprivate func progamCounter(for label: String) -> Int? {
 		
 		return bytecode.index(where: { (b) -> Bool in
-			b.label == label
+			if let b = b as? BytecodeInstruction {
+				return b.label == label
+			}
+			return false
 		})
 		
 	}

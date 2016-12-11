@@ -18,11 +18,11 @@ public class AssignmentNode: ASTNode {
 		self.value = value
 	}
 	
-	public override func compile(with ctx: BytecodeCompiler) throws -> [BytecodeInstruction] {
+	public override func compile(with ctx: BytecodeCompiler) throws -> BytecodeBody {
 		
 		let v = try value.compile(with: ctx)
 		
-		var bytecode = [BytecodeInstruction]()
+		var bytecode = BytecodeBody()
 
 		bytecode.append(contentsOf: v)
 		

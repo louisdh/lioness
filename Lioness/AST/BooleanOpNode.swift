@@ -22,12 +22,12 @@ public class BooleanOpNode: ASTNode {
 		self.rhs = rhs
 	}
 	
-	public override func compile(with ctx: BytecodeCompiler) throws -> [BytecodeInstruction] {
+	public override func compile(with ctx: BytecodeCompiler) throws -> BytecodeBody {
 		
 		let l = try lhs.compile(with: ctx)
 		let r = try rhs?.compile(with: ctx)
 		
-		var bytecode = [BytecodeInstruction]()
+		var bytecode = BytecodeBody()
 		
 		bytecode.append(contentsOf: l)
 		

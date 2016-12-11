@@ -9,7 +9,7 @@
 import Foundation
 
 /// Scorpion Bytecode Instruction
-public class BytecodeInstruction: CustomStringConvertible {
+public class BytecodeInstruction: BytecodeLine {
 	
 	let label: String
 	

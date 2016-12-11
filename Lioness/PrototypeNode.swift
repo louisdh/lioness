@@ -13,7 +13,7 @@ public class PrototypeNode: ASTNode {
 	public let name: String
 	public let argumentNames: [String]
 	
-	public init(name: String, argumentNames: [String]) {
+	public init(name: String, argumentNames: [String] = []) {
 		self.name = name
 		self.argumentNames = argumentNames
 	}

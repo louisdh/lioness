@@ -35,11 +35,11 @@ public class BytecodeCompiler {
 	
 	// MARK: - Public
 	
-	public func compile() throws -> [BytecodeInstruction] {
+	public func compile() throws -> BytecodeBody {
 		
 		currentScopeNode = scopeTreeRoot
 		
-		var bytecode = [BytecodeInstruction]()
+		var bytecode = BytecodeBody()
 
 		for node in ast {
 			
@@ -102,7 +102,7 @@ public class BytecodeCompiler {
 		
 	}
 
-	func leaveCurrentScope() throws -> [BytecodeInstruction] {
+	func leaveCurrentScope() throws -> BytecodeBody {
 		
 		guard let parentNode = currentScopeNode.parentNode else {
 			// End of program reached (top scope left)
@@ -125,9 +125,9 @@ public class BytecodeCompiler {
 		return cleanupInstructions
 	}
 	
-	fileprivate func cleanupRegisterInstructions(for scopeNode: ScopeNode) -> [BytecodeInstruction] {
+	fileprivate func cleanupRegisterInstructions(for scopeNode: ScopeNode) -> BytecodeBody {
 		
-		var instructions = [BytecodeInstruction]()
+		var instructions = BytecodeBody()
 		
 		var registersToCleanup = scopeNode.registerMap.map { $0.1 }
 		
@@ -175,5 +175,28 @@ public class BytecodeCompiler {
 		let newReg = "r\(registerCount)"
 		return newReg
 	}
+	
+	// MARK: - Function ids
+	
+	fileprivate var functionCount = 0
+	
+	func getFunctionId(for functionName: String) -> String {
+		
+		if let existingReg = currentScopeNode.deepFunctionMap()[functionName] {
+			return existingReg
+		}
+		
+		let newReg = getNewFunctionId()
+		currentScopeNode.functionMap[functionName] = newReg
+		
+		return newReg
+	}
+	
+	fileprivate func getNewFunctionId() -> String {
+		functionCount += 1
+		let id = "\(functionCount)"
+		return id
+	}
+
 	
 }

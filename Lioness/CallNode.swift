@@ -18,6 +18,19 @@ public class CallNode: ASTNode {
 		self.arguments = arguments
 	}
 	
+	public override func compile(with ctx: BytecodeCompiler) throws -> BytecodeBody {
+
+		var bytecode = BytecodeBody()
+		
+		let id = ctx.getFunctionId(for: callee)
+		
+		let invokeInstruction = BytecodeInstruction(label: ctx.nextIndexLabel(), type: .invokeFunc, arguments: [id], comment: "\(callee)")
+		
+		bytecode.append(invokeInstruction)
+		
+		return bytecode
+	}
+	
 	public override var description: String {
 		var str = "CallNode(name: \(callee), argument: "
 		

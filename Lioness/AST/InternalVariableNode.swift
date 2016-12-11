@@ -16,9 +16,9 @@ public class InternalVariableNode: ASTNode {
 		self.register = register
 	}
 	
-	public override func compile(with ctx: BytecodeCompiler) throws -> [BytecodeInstruction] {
+	public override func compile(with ctx: BytecodeCompiler) throws -> BytecodeBody {
 		
-		var bytecode = [BytecodeInstruction]()
+		var bytecode = BytecodeBody()
 		
 		let load = BytecodeInstruction(label: ctx.nextIndexLabel(), type: .registerLoad, arguments: [register])
 		

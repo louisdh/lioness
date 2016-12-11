@@ -10,9 +10,9 @@ import Foundation
 
 public class LoopNode: ASTNode {
 	
-	public override func compile(with ctx: BytecodeCompiler) throws -> [BytecodeInstruction] {
+	public override func compile(with ctx: BytecodeCompiler) throws -> BytecodeBody {
 		
-		var bytecode = [BytecodeInstruction]()
+		var bytecode = BytecodeBody()
 		
 		ctx.enterNewScope()
 		
@@ -47,7 +47,7 @@ public class LoopNode: ASTNode {
 		return bytecode
 	}
 	
-	func compileLoop(with ctx: BytecodeCompiler, scopeStart: String) throws -> [BytecodeInstruction] {
+	func compileLoop(with ctx: BytecodeCompiler, scopeStart: String) throws -> BytecodeBody {
 		return []
 	}
 	

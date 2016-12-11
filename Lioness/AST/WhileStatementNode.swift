@@ -23,9 +23,9 @@ public class WhileStatementNode: LoopNode {
 		self.body = body
 	}
 	
-	override func compileLoop(with ctx: BytecodeCompiler, scopeStart: String) throws -> [BytecodeInstruction] {
+	override func compileLoop(with ctx: BytecodeCompiler, scopeStart: String) throws -> BytecodeBody {
 		
-		var bytecode = [BytecodeInstruction]()
+		var bytecode = BytecodeBody()
 		
 		ctx.pushLoopContinue(scopeStart)
 		

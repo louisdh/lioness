@@ -57,6 +57,15 @@ public class Parser {
 			
 		}
 		
+//		nodes.sort { (node1, node2) -> Bool in
+//			
+//			if node1 is FunctionNode || node2 is FunctionNode {
+//				return true
+//			}
+//			
+//			return false
+//		}
+		
 		return nodes
 	}
 

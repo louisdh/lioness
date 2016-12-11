@@ -12,7 +12,7 @@ import Foundation
 public class ASTNode: CustomStringConvertible, ASTNodeDescriptor {
 	
 	/// Compiles to Scorpion bytecode instructions
-	public func compile(with ctx: BytecodeCompiler) throws -> [BytecodeInstruction] {
+	public func compile(with ctx: BytecodeCompiler) throws -> BytecodeBody {
 		return []
 	}
 	

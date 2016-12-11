@@ -29,9 +29,9 @@ public class BinaryOpNode: ASTNode {
 		self.rhs = rhs
 	}
 	
-	public override func compile(with ctx: BytecodeCompiler) throws -> [BytecodeInstruction] {
+	public override func compile(with ctx: BytecodeCompiler) throws -> BytecodeBody {
 		
-		var bytecode = [BytecodeInstruction]()
+		var bytecode = BytecodeBody()
 		
 		var opTypes: [String : BytecodeInstructionType]
 		

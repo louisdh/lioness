@@ -47,8 +47,7 @@ public enum BytecodeInstructionType: UInt8, CustomStringConvertible {
 	case registerClear = 17
 	case registerLoad = 18
 	
-	// TODO: To be implemented
-//	case invokeFunc = "invoke_func"
+	case invokeFunc = 19
 	
 	public var opCode: UInt8 {
 		return self.rawValue
@@ -114,6 +113,9 @@ public enum BytecodeInstructionType: UInt8, CustomStringConvertible {
 			
 		case .registerLoad:
 			return "reg_load"
+			
+		case .invokeFunc:
+			return "invoke_func"
 			
 		}
 		

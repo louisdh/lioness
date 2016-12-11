@@ -17,11 +17,11 @@ public class BodyNode: ASTNode {
 		self.nodes = nodes
 	}
 	
-	public override func compile(with ctx: BytecodeCompiler) throws -> [BytecodeInstruction] {
+	public override func compile(with ctx: BytecodeCompiler) throws -> BytecodeBody {
 		
 		ctx.enterNewScope()
 		
-		var bytecode = [BytecodeInstruction]()
+		var bytecode = BytecodeBody()
 		
 		for a in nodes {
 			let instructions = try a.compile(with: ctx)

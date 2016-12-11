@@ -20,9 +20,9 @@ public class ConditionalStatementNode: ASTNode {
 		self.elseBody = elseBody
 	}
 	
-	public override func compile(with ctx: BytecodeCompiler) throws -> [BytecodeInstruction] {
+	public override func compile(with ctx: BytecodeCompiler) throws -> BytecodeBody {
 		
-		var bytecode = [BytecodeInstruction]()
+		var bytecode = BytecodeBody()
 
 		let conditionInstruction = try condition.compile(with: ctx)
 		bytecode.append(contentsOf: conditionInstruction)
@@ -30,9 +30,9 @@ public class ConditionalStatementNode: ASTNode {
 		let ifeqLabel = ctx.nextIndexLabel()
 		
 
-		var bodyBytecode = [BytecodeInstruction]()
+		var bodyBytecode = BytecodeBody()
 
-		var elseBodyBytecode = [BytecodeInstruction]()
+		var elseBodyBytecode = BytecodeBody()
 
 		let bodyInstructions = try body.compile(with: ctx)
 		bodyBytecode.append(contentsOf: bodyInstructions)

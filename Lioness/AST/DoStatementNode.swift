@@ -36,9 +36,9 @@ public class DoStatementNode: LoopNode {
 		self.body = body
 	}
 	
-	override func compileLoop(with ctx: BytecodeCompiler, scopeStart: String) throws -> [BytecodeInstruction] {
+	override func compileLoop(with ctx: BytecodeCompiler, scopeStart: String) throws -> BytecodeBody {
 		
-		var bytecode = [BytecodeInstruction]()
+		var bytecode = BytecodeBody()
 		
 		let doStatementInstructions = try doStatementCompiled(with: ctx)
 		bytecode.append(contentsOf: doStatementInstructions)
@@ -49,9 +49,9 @@ public class DoStatementNode: LoopNode {
 	
 	// MARK: -
 	
-	fileprivate func doStatementCompiled(with ctx: BytecodeCompiler) throws -> [BytecodeInstruction] {
+	fileprivate func doStatementCompiled(with ctx: BytecodeCompiler) throws -> BytecodeBody {
 		
-		var bytecode = [BytecodeInstruction]()
+		var bytecode = BytecodeBody()
 
 		let varReg = ctx.getNewInternalRegisterAndStoreInScope()
 		
@@ -107,11 +107,11 @@ public class DoStatementNode: LoopNode {
 		return bytecode
 	}
 	
-	fileprivate func assignmentInstructions(with ctx: BytecodeCompiler, and regName: String) throws -> [BytecodeInstruction] {
+	fileprivate func assignmentInstructions(with ctx: BytecodeCompiler, and regName: String) throws -> BytecodeBody {
 		
 		let v = try amount.compile(with: ctx)
 		
-		var bytecode = [BytecodeInstruction]()
+		var bytecode = BytecodeBody()
 		
 		bytecode.append(contentsOf: v)
 		
@@ -124,7 +124,7 @@ public class DoStatementNode: LoopNode {
 		
 	}
 	
-	fileprivate func conditionInstructions(with ctx: BytecodeCompiler, and regName: String) throws -> [BytecodeInstruction] {
+	fileprivate func conditionInstructions(with ctx: BytecodeCompiler, and regName: String) throws -> BytecodeBody {
 		
 		let varNode = InternalVariableNode(register: regName)
 		let conditionNode = try BinaryOpNode(op: ">", lhs: varNode, rhs: NumberNode(value: 0.0))
@@ -135,14 +135,14 @@ public class DoStatementNode: LoopNode {
 		
 	}
 	
-	fileprivate func decrementInstructions(with ctx: BytecodeCompiler, and regName: String) throws -> [BytecodeInstruction] {
+	fileprivate func decrementInstructions(with ctx: BytecodeCompiler, and regName: String) throws -> BytecodeBody {
 		
 		let varNode = InternalVariableNode(register: regName)
 		let decrementNode = try BinaryOpNode(op: "-", lhs: varNode, rhs: NumberNode(value: 1.0))
 		
 		let v = try decrementNode.compile(with: ctx)
 		
-		var bytecode = [BytecodeInstruction]()
+		var bytecode = BytecodeBody()
 		
 		bytecode.append(contentsOf: v)
 		

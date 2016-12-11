@@ -160,7 +160,7 @@ public class Runner {
 		
 	}
 	
-	fileprivate func compileToBytecode(ast: [ASTNode]) -> [BytecodeInstruction]? {
+	fileprivate func compileToBytecode(ast: [ASTNode]) -> BytecodeBody? {
 		
 		if logDebug {
 			
@@ -172,7 +172,7 @@ public class Runner {
 		
 		let bytecodeCompiler = BytecodeCompiler(ast: ast)
 		
-		var bytecode: [BytecodeInstruction]? = nil
+		var bytecode: BytecodeBody? = nil
 		
 		do {
 			
@@ -206,7 +206,7 @@ public class Runner {
 	
 	var interpreter: BytecodeInterpreter!
 	
-	fileprivate func interpretBytecode(_ bytecode: [BytecodeInstruction]) {
+	fileprivate func interpretBytecode(_ bytecode: BytecodeBody) {
 		
 		if logDebug {
 			
@@ -216,10 +216,10 @@ public class Runner {
 			
 		}
 		
-		interpreter = BytecodeInterpreter(bytecode: bytecode)
-		
 		do {
 			
+			interpreter = try BytecodeInterpreter(bytecode: bytecode)
+
 			try interpreter.interpret()
 			
 			if logDebug {

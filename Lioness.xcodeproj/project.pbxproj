@@ -48,6 +48,8 @@
 		BE446C461DCD3C5B0085EEE0 /* CompileError.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE446C451DCD3C5B0085EEE0 /* CompileError.swift */; };
 		BE446C491DCD3C7B0085EEE0 /* ASTNodeDescriptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE446C481DCD3C7B0085EEE0 /* ASTNodeDescriptor.swift */; };
 		BE446C4B1DCD3C8F0085EEE0 /* ASTChildNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE446C4A1DCD3C8F0085EEE0 /* ASTChildNode.swift */; };
+		BE4AF05D1DFD855F00ECE275 /* BytecodeHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE4AF05B1DFD855F00ECE275 /* BytecodeHeader.swift */; };
+		BE4AF0601DFD88B900ECE275 /* BytecodeLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE4AF05F1DFD88B900ECE275 /* BytecodeLine.swift */; };
 		BE62A8721DE6108F00A75453 /* Complex.lion in Resources */ = {isa = PBXBuildFile; fileRef = BE62A8711DE6108F00A75453 /* Complex.lion */; };
 		BE736A8D1DBBEA5F00ADC83A /* BaseTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE736A8C1DBBEA5F00ADC83A /* BaseTestCase.swift */; };
 		BE736A911DBD3C0D00ADC83A /* Execution+Performance.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE736A901DBD3C0D00ADC83A /* Execution+Performance.swift */; };
@@ -93,6 +95,8 @@
 		BE446C451DCD3C5B0085EEE0 /* CompileError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompileError.swift; sourceTree = "<group>"; };
 		BE446C481DCD3C7B0085EEE0 /* ASTNodeDescriptor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ASTNodeDescriptor.swift; sourceTree = "<group>"; };
 		BE446C4A1DCD3C8F0085EEE0 /* ASTChildNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ASTChildNode.swift; sourceTree = "<group>"; };
+		BE4AF05B1DFD855F00ECE275 /* BytecodeHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BytecodeHeader.swift; sourceTree = "<group>"; };
+		BE4AF05F1DFD88B900ECE275 /* BytecodeLine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BytecodeLine.swift; path = Compiler/BytecodeLine.swift; sourceTree = "<group>"; };
 		BE5653631DAAB86F006171B9 /* BytecodeInstructionType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BytecodeInstructionType.swift; sourceTree = "<group>"; };
 		BE5653651DAAE7AD006171B9 /* NumberNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NumberNode.swift; sourceTree = "<group>"; };
 		BE5653671DAAE7BD006171B9 /* VariableNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VariableNode.swift; sourceTree = "<group>"; };
@@ -294,11 +298,11 @@
 		BE9369F91DA8079C00C0B3DF /* Compiler */ = {
 			isa = PBXGroup;
 			children = (
+				BE4AF05F1DFD88B900ECE275 /* BytecodeLine.swift */,
+				BE4AF05B1DFD855F00ECE275 /* BytecodeHeader.swift */,
+				BED616D81DFD7EA000A70820 /* Instruction */,
 				BE25BA201DDBC81B00041A20 /* Scope Tree */,
 				BE9369FB1DA83AB000C0B3DF /* BytecodeCompiler.swift */,
-				BE04D6391DA99FC800DAEB84 /* BytecodeInstruction.swift */,
-				BE5653631DAAB86F006171B9 /* BytecodeInstructionType.swift */,
-				BE446C411DCD3BD40085EEE0 /* BytecodeInstructionError.swift */,
 			);
 			name = Compiler;
 			sourceTree = "<group>";
@@ -323,6 +327,16 @@
 				BED616D31DFA03CF00A70820 /* BreakLoopNode.swift */,
 			);
 			name = Loops;
+			sourceTree = "<group>";
+		};
+		BED616D81DFD7EA000A70820 /* Instruction */ = {
+			isa = PBXGroup;
+			children = (
+				BE04D6391DA99FC800DAEB84 /* BytecodeInstruction.swift */,
+				BE5653631DAAB86F006171B9 /* BytecodeInstructionType.swift */,
+				BE446C411DCD3BD40085EEE0 /* BytecodeInstructionError.swift */,
+			);
+			name = Instruction;
 			sourceTree = "<group>";
 		};
 		BEF913AB1DB151610075C6CC /* Lioness */ = {
@@ -478,11 +492,13 @@
 				BE22963F1DB16F2100EA477A /* BytecodeInterpreter.swift in Sources */,
 				BE37DFAD1DBBBAEA003F6A3E /* ContinueNode.swift in Sources */,
 				BE25BA1F1DD9228D00041A20 /* DoStatementNode.swift in Sources */,
+				BE4AF0601DFD88B900ECE275 /* BytecodeLine.swift in Sources */,
 				BEAD9A7F1DB3A1A000A6DDC1 /* Runner.swift in Sources */,
 				BE446C421DCD3BD40085EEE0 /* BytecodeInstructionError.swift in Sources */,
 				BEEB63711DC14E570019BC50 /* BodyNode.swift in Sources */,
 				BE1412AF1DB2B07200DAA385 /* BooleanOpNode.swift in Sources */,
 				BE2296301DB16F1B00EA477A /* Token.swift in Sources */,
+				BE4AF05D1DFD855F00ECE275 /* BytecodeHeader.swift in Sources */,
 				BE2296351DB16F2100EA477A /* NumberNode.swift in Sources */,
 				BE193A8A1DF47910002DCC77 /* RepeatWhileStatementNode.swift in Sources */,
 				BE2296371DB16F2100EA477A /* AssignmentNode.swift in Sources */,
