@@ -180,9 +180,29 @@ public class Runner {
 			
 			if logDebug {
 				
+				var indentLevel = 0
+				
 				if let bytecode = bytecode {
 					for b in bytecode {
-						log(b.description)
+						
+						if b is BytecodeEnd {
+							indentLevel -= 1
+						}
+						
+						var description = ""
+						
+						for _ in 0..<indentLevel {
+							description += "\t"
+						}
+						
+						description += b.description
+						
+						log(description)
+						
+						if b is BytecodeFunctionHeader {
+							indentLevel += 1
+						}
+						
 					}
 				}
 				
