@@ -1,2 +1,9 @@
+//
+//  Geometry.lion
+//  Lioness Standard Library
+//
+
+// Constants
+
 pi = 3.14159265358979
 tau = 2 * pi
