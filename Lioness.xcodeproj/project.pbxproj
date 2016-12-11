@@ -50,6 +50,8 @@
 		BE446C4B1DCD3C8F0085EEE0 /* ASTChildNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE446C4A1DCD3C8F0085EEE0 /* ASTChildNode.swift */; };
 		BE4AF05D1DFD855F00ECE275 /* BytecodeHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE4AF05B1DFD855F00ECE275 /* BytecodeHeader.swift */; };
 		BE4AF0601DFD88B900ECE275 /* BytecodeLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE4AF05F1DFD88B900ECE275 /* BytecodeLine.swift */; };
+		BE4AF0631DFE019F00ECE275 /* Geometry.lion in Resources */ = {isa = PBXBuildFile; fileRef = BE4AF0621DFE019F00ECE275 /* Geometry.lion */; };
+		BE4AF0651DFE05E000ECE275 /* StdLib.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE4AF0641DFE05E000ECE275 /* StdLib.swift */; };
 		BE62A8721DE6108F00A75453 /* Complex.lion in Resources */ = {isa = PBXBuildFile; fileRef = BE62A8711DE6108F00A75453 /* Complex.lion */; };
 		BE736A8D1DBBEA5F00ADC83A /* BaseTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE736A8C1DBBEA5F00ADC83A /* BaseTestCase.swift */; };
 		BE736A911DBD3C0D00ADC83A /* Execution+Performance.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE736A901DBD3C0D00ADC83A /* Execution+Performance.swift */; };
@@ -97,6 +99,8 @@
 		BE446C4A1DCD3C8F0085EEE0 /* ASTChildNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ASTChildNode.swift; sourceTree = "<group>"; };
 		BE4AF05B1DFD855F00ECE275 /* BytecodeHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BytecodeHeader.swift; sourceTree = "<group>"; };
 		BE4AF05F1DFD88B900ECE275 /* BytecodeLine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BytecodeLine.swift; path = Compiler/BytecodeLine.swift; sourceTree = "<group>"; };
+		BE4AF0621DFE019F00ECE275 /* Geometry.lion */ = {isa = PBXFileReference; explicitFileType = sourcecode.glsl; fileEncoding = 4; name = Geometry.lion; path = "Standard Library/Geometry.lion"; sourceTree = "<group>"; };
+		BE4AF0641DFE05E000ECE275 /* StdLib.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StdLib.swift; path = "Standard Library/StdLib.swift"; sourceTree = "<group>"; };
 		BE5653631DAAB86F006171B9 /* BytecodeInstructionType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BytecodeInstructionType.swift; sourceTree = "<group>"; };
 		BE5653651DAAE7AD006171B9 /* NumberNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NumberNode.swift; sourceTree = "<group>"; };
 		BE5653671DAAE7BD006171B9 /* VariableNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VariableNode.swift; sourceTree = "<group>"; };
@@ -268,6 +272,15 @@
 			name = Nodes;
 			sourceTree = "<group>";
 		};
+		BE4AF0611DFE009A00ECE275 /* Standard Library */ = {
+			isa = PBXGroup;
+			children = (
+				BE4AF0621DFE019F00ECE275 /* Geometry.lion */,
+				BE4AF0641DFE05E000ECE275 /* StdLib.swift */,
+			);
+			name = "Standard Library";
+			sourceTree = "<group>";
+		};
 		BE736A8E1DBD3B5200ADC83A /* Execution */ = {
 			isa = PBXGroup;
 			children = (
@@ -342,6 +355,7 @@
 		BEF913AB1DB151610075C6CC /* Lioness */ = {
 			isa = PBXGroup;
 			children = (
+				BE4AF0611DFE009A00ECE275 /* Standard Library */,
 				BEAD9A7E1DB3A1A000A6DDC1 /* Runner.swift */,
 				BE446C431DCD3BF20085EEE0 /* Array+Safe.swift */,
 				BE1FD5F81DB1703C00B2A55B /* Lioness.h */,
@@ -450,6 +464,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BE4AF0631DFE019F00ECE275 /* Geometry.lion in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -479,6 +494,7 @@
 				BED616D61DFB622300A70820 /* LoopNode.swift in Sources */,
 				BE446C441DCD3BF20085EEE0 /* Array+Safe.swift in Sources */,
 				BE446C4B1DCD3C8F0085EEE0 /* ASTChildNode.swift in Sources */,
+				BE4AF0651DFE05E000ECE275 /* StdLib.swift in Sources */,
 				BE1412AD1DB27F6F00DAA385 /* BooleanNode.swift in Sources */,
 				BE2296361DB16F2100EA477A /* VariableNode.swift in Sources */,
 				BE2296321DB16F1B00EA477A /* String+RegEx.swift in Sources */,

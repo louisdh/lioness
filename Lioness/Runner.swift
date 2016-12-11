@@ -37,11 +37,14 @@ public class Runner {
 		
 		let source = try String(contentsOfFile: path, encoding: .utf8)
 		
-		runSource(source)
+		try runSource(source)
 	}
 	
-	public func runSource(_ source: String) {
+	public func runSource(_ source: String) throws {
 		
+		let stdLib = try StdLib().stdLibCode()
+		
+		let source = stdLib.appending(source)
 		self.source = source
 		
 		let startTime = CFAbsoluteTimeGetCurrent()
