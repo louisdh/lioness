@@ -1,13 +1,16 @@
 a = 2
 
-do 10 times {
-	foo()
-}
 
 func foo() {
 	
 	a += 1
+
+	if a <= 10 {
+		foo()
+	}
 	
 }
 
-// a = 12
+foo()
+
+c = 2

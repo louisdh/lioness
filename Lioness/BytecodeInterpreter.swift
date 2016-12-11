@@ -478,12 +478,22 @@ public class BytecodeInterpreter {
 	
 	fileprivate func progamCounter(for label: String) -> Int? {
 		
-		return bytecode.index(where: { (b) -> Bool in
+		let foundLabel = bytecode.index(where: { (b) -> Bool in
 			if let b = b as? BytecodeInstruction {
 				return b.label == label
 			}
 			return false
 		})
+		
+		if foundLabel == nil {
+			
+			if let exitFunctionLabel = functionInvokeStack.popLast() {
+				return exitFunctionLabel
+			}
+			
+		}
+		
+		return foundLabel
 		
 	}
 	

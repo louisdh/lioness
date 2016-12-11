@@ -22,6 +22,7 @@ public class FunctionNode: ASTNode {
 		
 		var bytecode = BytecodeBody()
 		
+		let _ = ctx.nextIndexLabel()
 		let functionId = ctx.getFunctionId(for: prototype.name)
 		
 		let headerInstruction = BytecodeFunctionHeader(name: prototype.name, id: functionId)
@@ -31,6 +32,7 @@ public class FunctionNode: ASTNode {
 		let instructions = try body.compile(with: ctx)
 		bytecode.append(contentsOf: instructions)
 	
+		let _ = ctx.nextIndexLabel()
 		bytecode.append(BytecodeEnd())
 
 		return bytecode
