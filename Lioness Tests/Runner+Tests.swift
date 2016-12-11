@@ -27,7 +27,7 @@ class Runner_Tests: BaseTestCase {
 		
 		let source = "1 + 3 * (8^4 - 2) / 6 / 4"
 		
-		runner.runSource(source)
+		try! runner.runSource(source)
 
 		guard let value = runner.interpreter?.stack.first else {
 			XCTFail("Expected value at top of stack")
@@ -56,7 +56,8 @@ class Runner_Tests: BaseTestCase {
 			return
 		}
 		
-		guard let value = runner.interpreter?.registers["r2"] else {
+		// TODO: find better way to get register for variable name, right now this will break when stdlib adds vars
+		guard let value = runner.interpreter?.registers["r6"] else {
 			XCTFail("Expected value in register for \"sum\"")
 			return
 		}

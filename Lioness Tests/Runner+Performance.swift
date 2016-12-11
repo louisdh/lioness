@@ -40,7 +40,7 @@ class FullRun_Performance: BaseTestCase {
 		
         self.measure {
 
-			runner.runSource(source)
+			try! runner.runSource(source)
 
 		}
     }
@@ -63,7 +63,7 @@ class FullRun_Performance: BaseTestCase {
 		
 		self.measure {
 			
-			runner.runSource(source)
+			try! runner.runSource(source)
 			
 		}
 	}

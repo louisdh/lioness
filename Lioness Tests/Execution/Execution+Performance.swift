@@ -53,7 +53,7 @@ class Execution_Performance: BaseTestCase {
 			let compiler = BytecodeCompiler(ast: ast)
 			let bytecode = try! compiler.compile()
 			
-			let interpreter = BytecodeInterpreter(bytecode: bytecode)
+			let interpreter = try! BytecodeInterpreter(bytecode: bytecode)
 			try! interpreter.interpret()
 			
 		}
@@ -84,7 +84,7 @@ class Execution_Performance: BaseTestCase {
 			let compiler = BytecodeCompiler(ast: ast)
 			let bytecode = try! compiler.compile()
 			
-			let interpreter = BytecodeInterpreter(bytecode: bytecode)
+			let interpreter = try! BytecodeInterpreter(bytecode: bytecode)
 			try! interpreter.interpret()
 			
 		}
