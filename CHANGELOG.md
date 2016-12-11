@@ -14,6 +14,24 @@ CHANGELOG
 Lioness 1.0
 -----------
 
+### 2016-12-11
+
+* Lioness now supports functions. Example:
+
+	```lioness
+	a = 2
+
+	do 10 times {
+		foo()
+	}
+
+	func foo() {
+		a += 1
+	}
+
+	// a = 12
+	```
+	
 ### 2016-12-10
 
 * Lioness now supports ```break``` and ```continue``` statements in loops. 
