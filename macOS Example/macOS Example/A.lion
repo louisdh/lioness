@@ -1,13 +1,13 @@
 a = 2
 
+do 10 times {
+	foo()
+}
+
 func foo() {
 	
 	a += 1
 	
-}
-
-do 10 times {
-	foo()
 }
 
 // a = 12

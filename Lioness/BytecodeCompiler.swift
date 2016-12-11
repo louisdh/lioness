@@ -39,6 +39,8 @@ public class BytecodeCompiler {
 		
 		currentScopeNode = scopeTreeRoot
 		
+		try compileFunctionPrototypes()
+		
 		var bytecode = BytecodeBody()
 
 		for node in ast {
@@ -49,6 +51,22 @@ public class BytecodeCompiler {
 		}
 		
 		return bytecode
+	}
+	
+	// MARK: -
+	
+	fileprivate func compileFunctionPrototypes() throws {
+		
+		for node in ast {
+			
+			if let funcNode = node as? FunctionNode {
+				
+				let _ = getFunctionId(for: funcNode.prototype.name)
+				
+			}
+			
+		}
+		
 	}
 	
 	// MARK: - Labels
