@@ -116,7 +116,7 @@ public class BytecodeInstruction: BytecodeLine {
 		}
 		
 		if let comment = comment {
-			descr += "\t\t\t;\(comment)"
+			descr += ";\(comment)".byAppendingLeading(" ", max(1, 30 - descr.characters.count))
 		}
 		
 		return descr
@@ -129,3 +129,12 @@ public class BytecodeInstruction: BytecodeLine {
 	}
 	
 }
+
+extension String {
+	
+	func byAppendingLeading(_ string: String, _ times: Int) -> String {
+		return times > 0 ? String(repeating: string, count: times) + self : self
+	}
+	
+}
+

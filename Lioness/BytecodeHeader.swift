@@ -43,7 +43,7 @@ public class BytecodeFunctionHeader: BytecodeLine {
 		
 		descr += ":"
 		
-		descr += "\t\t; virtual #\(id)"
+		descr += "; virtual #\(id)".byAppendingLeading(" ", max(1, 30 - descr.characters.count))
 
 		return descr
 	}
