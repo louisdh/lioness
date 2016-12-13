@@ -12,7 +12,7 @@ public class BytecodeEnd: BytecodeLine {
 
 	/// Debug description
 	public var description: String {
-		return "end"
+		return "end\n"
 	}
 	
 	public var encoded: String {
@@ -25,20 +25,36 @@ public class BytecodeEnd: BytecodeLine {
 
 public class BytecodeFunctionHeader: BytecodeLine {
 
-	let name: String?
 	let id: String
+	let name: String?
 	
-	init(name: String? = nil, id: String) {
-		self.name = name
+	let arguments: [String]
+
+	init(id: String, name: String? = nil, arguments: [String] = []) {
 		self.id = id
+		self.name = name
+		self.arguments = arguments
 	}
 	
 	/// Debug description
 	public var description: String {
-		var descr = ""
+		var descr = "\n"
 		
 		if let name = name {
-			descr += "\(name)()"
+			descr += "\(name)("
+			
+			var isFirstArg = true
+			
+			for arg in arguments {
+				if !isFirstArg {
+					descr += ","
+				}
+				descr += arg
+				
+				isFirstArg = false
+			}
+			
+			descr += ")"
 		}
 		
 		descr += ":"

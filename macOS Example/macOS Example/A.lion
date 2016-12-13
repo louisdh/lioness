@@ -1,16 +1,9 @@
 a = 2
 
-
-func foo() {
-	
-	a += 1
-
-	if a <= 10 {
-		foo()
-	}
-	
+func add(c) {
+	a += c
 }
 
-foo()
-
-c = 2
+do 10 times {
+	add(2)
+}

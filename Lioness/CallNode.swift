@@ -26,6 +26,13 @@ public class CallNode: ASTNode {
 		
 		let invokeInstruction = BytecodeInstruction(label: ctx.nextIndexLabel(), type: .invokeFunc, arguments: [id], comment: "\(callee)")
 		
+		for arg in arguments {
+			
+			let argInstructions = try arg.compile(with: ctx)
+			bytecode.append(contentsOf: argInstructions)
+			
+		}
+		
 		bytecode.append(invokeInstruction)
 		
 		return bytecode
