@@ -1,9 +1,13 @@
 a = 2
 
-func add(c) {
-	a += c
-}
+//func add(c) returns {
+//	a += c
+//}
 
-do 10 times {
+func add(c)  {
+	a += c
+	
 	add(2)
 }
+
+add(2)

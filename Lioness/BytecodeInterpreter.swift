@@ -8,17 +8,10 @@
 
 import Foundation
 
-/// Interpreter Error
-public enum InterpreterError: Error {
-	/// Unexpected argument
-	case unexpectedArgument
-	
-	/// Illegal stack operation
-	case illegalStackOperation
-}
-
 /// Bytecode Interpreter
 public class BytecodeInterpreter {
+	
+	fileprivate let stackLimit = 65_536
 	
 	fileprivate let bytecode: BytecodeBody
 	
@@ -26,17 +19,26 @@ public class BytecodeInterpreter {
 	
 	/// Stack
 	fileprivate(set) var stack = [StackElement]()
+	
+	/// Manual stack size counting for performance
+	fileprivate var stackSize = 0
+	
 
 	/// Function map with id as key and program counter as value
-	fileprivate(set) var functionMap = [String : Int]()
+	fileprivate var functionMap = [String : Int]()
 
-	fileprivate(set) var functionEndMap = [String : Int]()
+	fileprivate var functionEndMap = [String : Int]()
 
-	fileprivate(set) var functionInvokeStack = [Int]()
+	fileprivate var functionInvokeStack = [Int]()
 
+	/// Manual stack size counting for performance
+	fileprivate var functionInvokeStackSize = 0
+	
 	/// Registers
 	fileprivate(set) var registers = [String : StackElement]()
 	
+	
+	// MARK: - Init
 	
 	/// Initalize a BytecodeInterpreter with an array of BytecodeInstruction
 	///
@@ -127,11 +129,7 @@ public class BytecodeInterpreter {
 				
 			} else if bytecode[pc] is BytecodeEnd {
 				
-				if let last = functionInvokeStack.popLast() {
-					pc = last
-				} else {
-					throw error(.unexpectedArgument)
-				}
+				pc = try popFunctionInvoke()
 				
 			} else if let functionHeader = bytecode[pc] as? BytecodeFunctionHeader {
 
@@ -231,7 +229,7 @@ public class BytecodeInterpreter {
 			throw error(.unexpectedArgument)
 		}
 		
-		push(f)
+		try push(f)
 		
 		return pc + 1
 	}
@@ -241,7 +239,7 @@ public class BytecodeInterpreter {
 		let lhs = try pop()
 		let rhs = try pop()
 		
-		push(lhs + rhs)
+		try push(lhs + rhs)
 		
 		return pc + 1
 	}
@@ -251,7 +249,7 @@ public class BytecodeInterpreter {
 		let rhs = try pop()
 		let lhs = try pop()
 		
-		push(lhs - rhs)
+		try push(lhs - rhs)
 		
 		return pc + 1
 	}
@@ -261,7 +259,7 @@ public class BytecodeInterpreter {
 		let lhs = try pop()
 		let rhs = try pop()
 		
-		push(lhs * rhs)
+		try push(lhs * rhs)
 		
 		return pc + 1
 	}
@@ -271,7 +269,7 @@ public class BytecodeInterpreter {
 		let rhs = try pop()
 		let lhs = try pop()
 
-		push(lhs / rhs)
+		try push(lhs / rhs)
 		
 		return pc + 1
 	}
@@ -281,7 +279,7 @@ public class BytecodeInterpreter {
 		let rhs = try pop()
 		let lhs = try pop()
 		
-		push(pow(lhs, rhs))
+		try push(pow(lhs, rhs))
 		
 		return pc + 1
 	}
@@ -293,7 +291,7 @@ public class BytecodeInterpreter {
 		
 		let and: StackElement = (rhs && lhs) == true ? 1.0 : 0.0
 		
-		push(and)
+		try push(and)
 		
 		return pc + 1
 	}
@@ -305,7 +303,7 @@ public class BytecodeInterpreter {
 		
 		let and: StackElement = (rhs || lhs) == true ? 1.0 : 0.0
 		
-		push(and)
+		try push(and)
 		
 		return pc + 1
 	}
@@ -316,7 +314,7 @@ public class BytecodeInterpreter {
 		
 		let not: StackElement = (!b) == true ? 1.0 : 0.0
 		
-		push(not)
+		try push(not)
 		
 		return pc + 1
 	}
@@ -328,7 +326,7 @@ public class BytecodeInterpreter {
 		
 		let eq: StackElement = (lhs == rhs) ? 1.0 : 0.0
 		
-		push(eq)
+		try push(eq)
 		
 		return pc + 1
 	}
@@ -340,7 +338,7 @@ public class BytecodeInterpreter {
 		
 		let neq: StackElement = (lhs != rhs) ? 1.0 : 0.0
 		
-		push(neq)
+		try push(neq)
 		
 		return pc + 1
 	}
@@ -352,7 +350,7 @@ public class BytecodeInterpreter {
 		
 		let cmp: StackElement = (lhs <= rhs) ? 1.0 : 0.0
 		
-		push(cmp)
+		try push(cmp)
 		
 		return pc + 1
 	}
@@ -364,7 +362,7 @@ public class BytecodeInterpreter {
 		
 		let cmp: StackElement = (lhs < rhs) ? 1.0 : 0.0
 		
-		push(cmp)
+		try push(cmp)
 		
 		return pc + 1
 	}
@@ -425,7 +423,7 @@ public class BytecodeInterpreter {
 	
 	fileprivate func executeStore(_ instruction: BytecodeInstruction, pc: Int) throws -> Int {
 		
-		guard let reg = instruction.arguments[safe: 0] else {
+		guard let reg = instruction.arguments.first else {
 			throw error(.unexpectedArgument)
 		}
 		
@@ -436,7 +434,7 @@ public class BytecodeInterpreter {
 	
 	fileprivate func executeRegisterClear(_ instruction: BytecodeInstruction, pc: Int) throws -> Int {
 
-		guard let reg = instruction.arguments[safe: 0] else {
+		guard let reg = instruction.arguments.first else {
 			throw error(.unexpectedArgument)
 		}
 		
@@ -447,7 +445,7 @@ public class BytecodeInterpreter {
 	
 	fileprivate func executeRegisterLoad(_ instruction: BytecodeInstruction, pc: Int) throws -> Int {
 		
-		guard let reg = instruction.arguments[safe: 0] else {
+		guard let reg = instruction.arguments.first else {
 			throw error(.unexpectedArgument)
 		}
 		
@@ -455,14 +453,14 @@ public class BytecodeInterpreter {
 			throw error(.unexpectedArgument)
 		}
 		
-		push(regValue)
+		try push(regValue)
 		
 		return pc + 1
 	}
 	
 	fileprivate func executeInvokeFunction(_ instruction: BytecodeInstruction, pc: Int) throws -> Int {
 		
-		guard let id = instruction.arguments[safe: 0] else {
+		guard let id = instruction.arguments.first else {
 			throw error(.unexpectedArgument)
 		}
 		
@@ -471,7 +469,7 @@ public class BytecodeInterpreter {
 		}
 		
 		// return to next pc after function returns
-		functionInvokeStack.append(pc + 1)
+		try pushFunctionInvoke(pc + 1)
 		
 		return idPc
 	}
@@ -506,14 +504,48 @@ public class BytecodeInterpreter {
 			throw error(.illegalStackOperation)
 		}
 		
+		stackSize -= 1
+
 		return last
 	}
 	
 	/// Push to stack
-	fileprivate func push(_ item: StackElement) {
+	fileprivate func push(_ item: StackElement) throws {
+		
+		if stackSize >= stackLimit {
+			throw error(.stackOverflow)
+		}
+		
 		stack.append(item)
+		stackSize += 1
 	}
 
+	// MARK: - Function invoke stack
+
+	/// Pop from function invoke stack
+	fileprivate func popFunctionInvoke() throws -> Int {
+		
+		guard let last = functionInvokeStack.popLast() else {
+			throw error(.illegalStackOperation)
+		}
+		
+		functionInvokeStackSize -= 1
+		
+		return last
+	}
+	
+	/// Push to function invoke stack
+	fileprivate func pushFunctionInvoke(_ item: Int) throws {
+		
+		if functionInvokeStackSize >= stackLimit {
+			throw error(.stackOverflow)
+		}
+		
+		functionInvokeStack.append(item)
+		functionInvokeStackSize += 1
+	}
+
+	
 	// MARK: -
 	
 	fileprivate func error(_ type: InterpreterError) -> Error {
