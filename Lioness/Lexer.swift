@@ -22,7 +22,9 @@ public class Lexer {
 		"break": .break,
 		"do": .do,
 		"times": .times,
-		"repeat": .repeat
+		"repeat": .repeat,
+		"return": .return,
+		"returns": .returns
 	]
 	
 	/// Currently only works for 1 char tokens
