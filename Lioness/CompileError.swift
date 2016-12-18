@@ -11,4 +11,5 @@ import Foundation
 public enum CompileError: Error {
 	case unexpectedCommand
 	case unexpectedBinaryOperator
+	case functionNotFound
 }

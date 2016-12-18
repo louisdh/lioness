@@ -14,14 +14,14 @@ internal class ScopeNode {
 	var childNodes: [ScopeNode]
 	
 	var registerMap: [String : String]
-	var functionMap: [String : String]
+	var functionMap: [String : FunctionMapped]
 	var internalRegisters: [String]
 	
 	init(parentNode: ScopeNode? = nil, childNodes: [ScopeNode]) {
 		self.parentNode = parentNode
 		self.childNodes = childNodes
 		registerMap = [String : String]()
-		functionMap = [String : String]()
+		functionMap = [String : FunctionMapped]()
 		internalRegisters = [String]()
 	}
 	
@@ -45,7 +45,7 @@ internal class ScopeNode {
 	}
 	
 	/// Get deep function map (including parents' function map)
-	func deepFunctionMap() -> [String : String] {
+	func deepFunctionMap() -> [String : FunctionMapped] {
 		
 		if let parentNode = parentNode {
 			
@@ -64,3 +64,11 @@ internal class ScopeNode {
 	}
 	
 }
+
+struct FunctionMapped {
+	
+	let id: String
+	let returns: Bool
+	
+}
+

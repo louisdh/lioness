@@ -20,7 +20,7 @@ public class BytecodeCompiler {
 	fileprivate var loopContinueStack = [String]()
 
 	fileprivate var functionExitStack = [String]()
-
+	
 	fileprivate let scopeTreeRoot: ScopeNode
 
 	fileprivate var currentScopeNode: ScopeNode
@@ -62,7 +62,7 @@ public class BytecodeCompiler {
 			
 			if let funcNode = node as? FunctionNode {
 				
-				let _ = getFunctionId(for: funcNode.prototype.name)
+				let _ = getFunctionId(for: funcNode)
 				
 			}
 			
@@ -213,16 +213,29 @@ public class BytecodeCompiler {
 	
 	fileprivate var functionCount = 0
 	
-	func getFunctionId(for functionName: String) -> String {
+	/// Will make new id if needed
+	func getFunctionId(for functionNode: FunctionNode) -> String {
 		
-		if let existingReg = currentScopeNode.deepFunctionMap()[functionName] {
-			return existingReg
+		let name = functionNode.prototype.name
+		
+		if let functionMapped = currentScopeNode.deepFunctionMap()[name] {
+			return functionMapped.id
 		}
 		
 		let newReg = getNewFunctionId()
-		currentScopeNode.functionMap[functionName] = newReg
+		currentScopeNode.functionMap[name] = FunctionMapped(id: newReg, returns: functionNode.prototype.returns)
 		
 		return newReg
+	}
+	
+	/// Expects function id to exist
+	func getCallFunctionId(for functionName: String) throws -> String {
+
+		if let functionMapped = currentScopeNode.deepFunctionMap()[functionName] {
+			return functionMapped.id
+		}
+		
+		throw CompileError.functionNotFound
 	}
 	
 	fileprivate func getNewFunctionId() -> String {

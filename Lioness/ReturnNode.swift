@@ -10,7 +10,24 @@ import Foundation
 
 public class ReturnNode: ASTNode {
 	
+	public let value: ASTNode?
+	
+	init(value: ASTNode? = nil) {
+		self.value = value
+	}
+	
 	public override func compile(with ctx: BytecodeCompiler) throws -> BytecodeBody {
+		
+		var bytecode = BytecodeBody()
+
+		if let value = value {
+			
+			let compiledValue = try value.compile(with: ctx)
+			
+			bytecode.append(contentsOf: compiledValue)
+			
+		}
+		
 		
 		let label = ctx.nextIndexLabel()
 		
@@ -18,8 +35,11 @@ public class ReturnNode: ASTNode {
 			throw CompileError.unexpectedCommand
 		}
 		
-		return [BytecodeInstruction(label: label, type: .goto, arguments: [cleanupLabel], comment: "return")]
+		let exitInstruction = BytecodeInstruction(label: label, type: .goto, arguments: [cleanupLabel], comment: "return")
+	
+		bytecode.append(exitInstruction)
 		
+		return bytecode
 	}
 	
 	public override var description: String {

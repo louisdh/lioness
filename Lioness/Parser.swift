@@ -648,12 +648,19 @@ public class Parser {
 		return forStatement
 	}
 	
-	fileprivate func parseReturnStatement() throws -> ASTNode {
+	fileprivate func parseReturnStatement() throws -> ReturnNode {
 		
 		try popCurrentToken(andExpect: .return)
 
+		var expr: ASTNode?
 		
-		return ReturnNode()
+		if currentFunctionReturns {
+			
+			expr = try parseExpression()
+			
+		}
+		
+		return ReturnNode(value: expr)
 	}
 	
 	fileprivate func parseWhileStatement() throws -> ASTNode {

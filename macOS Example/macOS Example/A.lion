@@ -1,12 +1,20 @@
-a = 2
 
-func add(c)  {
-	a += c
+func min(a, b) returns {
+	if a < b {
+		return a
+	}
 	
-	return
-
-	a += c
-
+	return b
 }
 
-add(2)
+func max(a, b) returns {
+	if a > b {
+		return a
+	}
+	
+	return b
+}
+
+a = min(6, 10) // a = 6
+b = max(6, 10) // b = 10
+c = min(a, b)  // c = 6

@@ -27,7 +27,7 @@ public class FunctionNode: ASTNode {
 		
 		
 		let _ = ctx.nextIndexLabel()
-		let functionId = ctx.getFunctionId(for: prototype.name)
+		let functionId = ctx.getFunctionId(for: self)
 		
 		let headerInstruction = BytecodeFunctionHeader(id: functionId, name: prototype.name, arguments: prototype.argumentNames)
 		

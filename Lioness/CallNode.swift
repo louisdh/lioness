@@ -22,7 +22,7 @@ public class CallNode: ASTNode {
 
 		var bytecode = BytecodeBody()
 		
-		let id = ctx.getFunctionId(for: callee)
+		let id = try ctx.getCallFunctionId(for: callee)
 		
 		for arg in arguments {
 			
