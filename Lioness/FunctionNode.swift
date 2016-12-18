@@ -72,7 +72,7 @@ public class FunctionNode: ASTNode {
 		
 		var bytecode = BytecodeBody()
 		
-		for arg in prototype.argumentNames {
+		for arg in prototype.argumentNames.reversed() {
 			
 			let label = ctx.nextIndexLabel()
 			let varReg = ctx.getRegister(for: arg)
