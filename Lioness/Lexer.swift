@@ -52,7 +52,7 @@ public class Lexer {
 
 		// multiline comment
 		("/\\*[^*]*\\*+(?:[^/*][^*]*\\*+)*/", { _ in .ignoreableToken }),
-
+		
 		
 		("[ \t\n]", { _ in .ignoreableToken }),
 		

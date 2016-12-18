@@ -16,9 +16,10 @@ public class BytecodeCompiler {
 	fileprivate let ast: [ASTNode]
 	fileprivate var index: UInt = 0
 	
-	fileprivate var loopScopeStartStack = [String]()
 	fileprivate var loopHeaderStack = [String]()
 	fileprivate var loopContinueStack = [String]()
+
+	fileprivate var functionExitStack = [String]()
 
 	fileprivate let scopeTreeRoot: ScopeNode
 
@@ -108,6 +109,20 @@ public class BytecodeCompiler {
 	
 	func peekLoopContinue() -> String? {
 		return loopContinueStack.last
+	}
+	
+	// MARK: - Return stack
+	
+	func pushFunctionExit(_ label: String) {
+		functionExitStack.append(label)
+	}
+	
+	func popFunctionExit() -> String? {
+		return functionExitStack.popLast()
+	}
+	
+	func peekFunctionExit() -> String? {
+		return functionExitStack.last
 	}
 	
 	// MARK: - Scope tree

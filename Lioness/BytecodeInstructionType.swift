@@ -15,6 +15,8 @@ import Foundation
 /// Instruction command descriptions are lower snake case
 public enum BytecodeInstructionType: UInt8, CustomStringConvertible {
 	
+	// TODO: add documentation with stack before/after execution
+	
 	case pushConst = 0
 	case add = 1
 	case sub = 2

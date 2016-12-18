@@ -527,6 +527,9 @@ public class Parser {
 			case .while:
 				return try parseWhileStatement()
 			
+			case .return:
+				return try parseReturnStatement()
+			
 			case .repeat:
 				return try parseRepeatWhileStatement()
 			
@@ -643,6 +646,14 @@ public class Parser {
 		}
 		
 		return forStatement
+	}
+	
+	fileprivate func parseReturnStatement() throws -> ASTNode {
+		
+		try popCurrentToken(andExpect: .return)
+
+		
+		return ReturnNode()
 	}
 	
 	fileprivate func parseWhileStatement() throws -> ASTNode {
@@ -844,6 +855,11 @@ public class Parser {
 		
 	}
 	
+	// MARK: - Functions
+	
+	// TODO: use stack once we allow functions in functions
+	fileprivate var currentFunctionReturns = false
+	
 	fileprivate func parsePrototype() throws -> PrototypeNode {
 		
 		guard case let .identifier(name) = popCurrentToken().type else {
@@ -868,9 +884,17 @@ public class Parser {
 		
 		try popCurrentToken(andExpect: .parensClose, ")")
 
+		var returns = false
+		if let type = peekCurrentToken()?.type, type == .returns {
+			self.popCurrentToken()
+			returns = true
+		}
+		
+		currentFunctionReturns = returns
+		
 		try popCurrentToken(andExpect: .curlyOpen, "{")
 		
-		return PrototypeNode(name: name, argumentNames: argumentNames)
+		return PrototypeNode(name: name, argumentNames: argumentNames, returns: returns)
 	}
 	
 	fileprivate func parseFunction() throws -> FunctionNode {

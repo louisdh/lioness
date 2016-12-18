@@ -8,20 +8,6 @@
 
 import Foundation
 
-public class BytecodeEnd: BytecodeLine {
-
-	/// Debug description
-	public var description: String {
-		return "end\n"
-	}
-	
-	public var encoded: String {
-		// TODO: encode properly
-
-		return ""
-	}
-	
-}
 
 public class BytecodeFunctionHeader: BytecodeLine {
 
@@ -79,22 +65,4 @@ public class BytecodeFunctionHeader: BytecodeLine {
 	
 }
 
-public class BytecodeMainHeader: BytecodeLine {
 
-	init() {
-		
-	}
-	
-	/// Debug description
-	public var description: String {
-		return "main:"
-	}
-	
-	public var encoded: String {
-		
-		// TODO: encode properly
-
-		return ""
-	}
-	
-}
