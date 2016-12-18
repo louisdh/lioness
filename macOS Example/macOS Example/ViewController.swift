@@ -21,6 +21,9 @@ class ViewController: NSViewController, RunnerDelegate {
 		
 		print(path)
 
+		// remainder
+//		print(-21 % 4)
+		
 		try! runner.runSource(atPath: path)
 		
 //		drawASTGraph(for: "A")

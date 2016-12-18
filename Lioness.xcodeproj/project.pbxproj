@@ -56,6 +56,7 @@
 		BE62A8721DE6108F00A75453 /* Complex.lion in Resources */ = {isa = PBXBuildFile; fileRef = BE62A8711DE6108F00A75453 /* Complex.lion */; };
 		BE736A8D1DBBEA5F00ADC83A /* BaseTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE736A8C1DBBEA5F00ADC83A /* BaseTestCase.swift */; };
 		BE736A911DBD3C0D00ADC83A /* Execution+Performance.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE736A901DBD3C0D00ADC83A /* Execution+Performance.swift */; };
+		BE7940331E06BE24008FCCBB /* Algorithm.lion in Resources */ = {isa = PBXBuildFile; fileRef = BE7940321E06BE24008FCCBB /* Algorithm.lion */; };
 		BEAD9A7F1DB3A1A000A6DDC1 /* Runner.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEAD9A7E1DB3A1A000A6DDC1 /* Runner.swift */; };
 		BED616D41DFA03CF00A70820 /* BreakLoopNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = BED616D31DFA03CF00A70820 /* BreakLoopNode.swift */; };
 		BED616D61DFB622300A70820 /* LoopNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = BED616D51DFB622300A70820 /* LoopNode.swift */; };
@@ -116,6 +117,7 @@
 		BE62A8711DE6108F00A75453 /* Complex.lion */ = {isa = PBXFileReference; explicitFileType = sourcecode.glsl; fileEncoding = 4; path = Complex.lion; sourceTree = "<group>"; };
 		BE736A8C1DBBEA5F00ADC83A /* BaseTestCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseTestCase.swift; sourceTree = "<group>"; };
 		BE736A901DBD3C0D00ADC83A /* Execution+Performance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Execution+Performance.swift"; path = "Execution/Execution+Performance.swift"; sourceTree = "<group>"; };
+		BE7940321E06BE24008FCCBB /* Algorithm.lion */ = {isa = PBXFileReference; explicitFileType = sourcecode.glsl; fileEncoding = 4; name = Algorithm.lion; path = "Standard Library/Algorithm.lion"; sourceTree = "<group>"; };
 		BE9369FB1DA83AB000C0B3DF /* BytecodeCompiler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BytecodeCompiler.swift; sourceTree = "<group>"; };
 		BEAD9A7E1DB3A1A000A6DDC1 /* Runner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Runner.swift; sourceTree = "<group>"; };
 		BED616D31DFA03CF00A70820 /* BreakLoopNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BreakLoopNode.swift; sourceTree = "<group>"; };
@@ -285,6 +287,7 @@
 			isa = PBXGroup;
 			children = (
 				BE4AF0621DFE019F00ECE275 /* Geometry.lion */,
+				BE7940321E06BE24008FCCBB /* Algorithm.lion */,
 				BE4AF0641DFE05E000ECE275 /* StdLib.swift */,
 			);
 			name = "Standard Library";
@@ -478,6 +481,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BE4AF0631DFE019F00ECE275 /* Geometry.lion in Resources */,
+				BE7940331E06BE24008FCCBB /* Algorithm.lion in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

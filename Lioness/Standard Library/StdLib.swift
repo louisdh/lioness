@@ -10,7 +10,7 @@ import Foundation
 
 class StdLib {
 	
-	fileprivate let sources = ["Geometry"]
+	fileprivate let sources = ["Geometry", "Algorithm"]
 	
 	func stdLibCode() throws -> String {
 		

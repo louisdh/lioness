@@ -1,20 +1,7 @@
+a = rem(-13, 3)
+b = mod(-13, 3)
 
-func min(a, b) returns {
-	if a < b {
-		return a
-	}
-	
-	return b
-}
-
-func max(a, b) returns {
-	if a > b {
-		return a
-	}
-	
-	return b
-}
-
-a = min(6, 10) // a = 6
-b = max(6, 10) // b = 10
-c = min(a, b)  // c = 6
+c = floor(-3.3)
+d = round(3.2)
+e = round(-2.423)
+g = round(pi)
