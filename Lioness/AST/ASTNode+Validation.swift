@@ -12,7 +12,7 @@ extension ASTNode {
 	
 	var isValidConditionNode: Bool {
 		
-		if self is BinaryOpNode || self is VariableNode || self is InternalVariableNode || self is BooleanNode {
+		if self is BinaryOpNode || self is VariableNode || self is InternalVariableNode || self is BooleanNode || self is CallNode {
 			return true
 		}
 		
@@ -25,7 +25,7 @@ extension ASTNode {
 	
 	var isValidBinaryOpNode: Bool {
 		
-		if self is BinaryOpNode || self is NumberNode || self is VariableNode || self is InternalVariableNode || self is BooleanNode {
+		if self is BinaryOpNode || self is NumberNode || self is VariableNode || self is InternalVariableNode || self is BooleanNode || self is CallNode {
 			return true
 		}
 		
