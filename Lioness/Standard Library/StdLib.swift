@@ -28,7 +28,9 @@ class StdLib {
 			stdLib += source
 			
 		}
-			
+		
+		stdLib = ""
+		
 		return stdLib
 	}
 

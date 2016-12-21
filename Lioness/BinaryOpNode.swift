@@ -12,17 +12,21 @@ public class BinaryOpNode: ASTNode {
 	
 	public let op: String
 	public let lhs: ASTNode
-	public let rhs: ASTNode
 	
-	public init(op: String, lhs: ASTNode, rhs: ASTNode) throws {
+	/// Can be nil, e.g. for 'not' operation
+	public let rhs: ASTNode?
+	
+	public init(op: String, lhs: ASTNode, rhs: ASTNode? = nil) throws {
 		self.op = op
 		
 		guard lhs.isValidBinaryOpNode else {
 			throw CompileError.unexpectedCommand
 		}
 		
-		guard rhs.isValidBinaryOpNode else {
-			throw CompileError.unexpectedCommand
+		if let rhs = rhs {
+			guard rhs.isValidBinaryOpNode else {
+				throw CompileError.unexpectedCommand
+			}
 		}
 		
 		self.lhs = lhs
@@ -45,7 +49,10 @@ public class BinaryOpNode: ASTNode {
 		           ">": .cmplt,
 		           "<": .cmplt,
 		           ">=": .cmple,
-		           "<=": .cmple]
+		           "<=": .cmple,
+		           "&&" : .and,
+		           "||" : .or,
+		           "!" : .not]
 		
 		guard let type = opTypes[op] else {
 			throw CompileError.unexpectedBinaryOperator
@@ -55,19 +62,25 @@ public class BinaryOpNode: ASTNode {
 			
 			// flip l and r
 
-			let r = try rhs.compile(with: ctx)
+			let r = try rhs?.compile(with: ctx)
 			let l = try lhs.compile(with: ctx)
 			
-			bytecode.append(contentsOf: r)
+			if let r = r {
+				bytecode.append(contentsOf: r)
+			}
+			
 			bytecode.append(contentsOf: l)
 			
 		} else {
 			
 			let l = try lhs.compile(with: ctx)
-			let r = try rhs.compile(with: ctx)
+			let r = try rhs?.compile(with: ctx)
 			
 			bytecode.append(contentsOf: l)
-			bytecode.append(contentsOf: r)
+			
+			if let r = r {
+				bytecode.append(contentsOf: r)
+			}
 			
 		}
 		
@@ -90,9 +103,13 @@ public class BinaryOpNode: ASTNode {
 	
 	public override var childNodes: [ASTChildNode] {
 		let l = ASTChildNode(connectionToParent: "lhs", node: lhs)
-		let r = ASTChildNode(connectionToParent: "rhs", node: rhs)
 		
-		return [l, r]
+		if let rhs = rhs {
+			let r = ASTChildNode(connectionToParent: "rhs", node: rhs)
+			return [l, r]
+		}
+		
+		return [l]
 	}
 	
 	

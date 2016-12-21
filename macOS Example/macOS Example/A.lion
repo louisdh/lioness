@@ -1,7 +1,49 @@
-a = rem(-13, 3)
-b = mod(-13, 3)
+//a = rem(-13, 3)
+//b = mod(-13, 3)
+//
+//c = floor(-3.3)
+//d = round(3.2)
+//e = round(-2.423)
+//g = round(pi)
 
-c = floor(-3.3)
-d = round(3.2)
-e = round(-2.423)
-g = round(pi)
+//func sin(x) returns {
+//	
+//	res = 0
+//	pow = x
+//	fact = 1
+//	
+//	i = 0
+//	while i < 4 {
+//		
+//		
+//		res += pow / fact
+//		pow *= x * x
+//		fact *= (2 * (i + 1)) * (2 * (i + 1) + 1)
+//		
+//		i += 1
+//	}
+//								
+//	return res
+//}
+//								
+//a = sin(1.4)
+
+func factorial(x) returns {
+	
+	if x > 1 {
+		return x * factorial(x - 1)
+	}
+	
+	return 1
+}
+
+
+x = 7000
+y = 20000
+
+a = x <= y && x >= factorial(6)
+
+if a {
+	x -= 1
+}
+

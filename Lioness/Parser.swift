@@ -111,6 +111,26 @@ public class Parser {
 			return ">="
 		}
 		
+		if case .booleanOr = tokenType {
+			return "||"
+		}
+		
+		if case .booleanAnd = tokenType {
+			return "&&"
+		}
+		
+		if case .booleanNot = tokenType {
+			return "!"
+		}
+		
+		if case .comparatorEqual = tokenType {
+			return "=="
+		}
+		
+		if case .notEqual = tokenType {
+			return "!="
+		}
+		
 		return nil
 	}
 	
@@ -144,47 +164,16 @@ public class Parser {
 			return 10
 		}
 		
-		return nil
-	}
-	
-	fileprivate func booleanOperatorString(for tokenType: TokenType) -> String? {
-	
 		if case .booleanOr = tokenType {
-			return "||"
+			return 2
 		}
 		
 		if case .booleanAnd = tokenType {
-			return "&&"
+			return 4
 		}
 		
 		if case .booleanNot = tokenType {
-			return "!"
-		}
-		
-		if case .comparatorEqual = tokenType {
-			return "=="
-		}
-		
-		if case .notEqual = tokenType {
-			return "!="
-		}
-		
-		return nil
-		
-	}
-	
-	fileprivate func booleanOperatorPrecedence(for tokenType: TokenType) -> Int? {
-		
-		if case .booleanOr = tokenType {
-			return 20
-		}
-		
-		if case .booleanAnd = tokenType {
-			return 40
-		}
-		
-		if case .booleanNot = tokenType {
-			return 60
+			return 80
 		}
 		
 		if case .comparatorEqual = tokenType {
@@ -274,44 +263,6 @@ public class Parser {
 	
 	// MARK: - Parsing look ahead
 	
-	/// Look ahead to check if boolean operator should be parsed
-	fileprivate func shouldParseBooleanOp() -> Bool {
-
-		var i = 0
-		while let tokenAhead = peekToken(offset: i) {
-			
-			if case .true = tokenAhead.type {
-				return true
-			}
-			
-			if case .false = tokenAhead.type {
-				return true
-			}
-			
-			if let _ = booleanOperatorString(for: tokenAhead.type) {
-				// Don't assume boolean op if op is also possible for binary ops
-				if operatorPrecedence(for: tokenAhead.type) == nil {
-					return true
-				}
-			}
-			
-			i += 1
-
-			if case .parensClose = tokenAhead.type {
-				continue
-			}
-			
-			if case .parensOpen = tokenAhead.type {
-				continue
-			}
-			
-			return false
-		}
-		
-		return false
-		
-	}
-
 	/// Look ahead to check if assignment should be parsed
 	fileprivate func shouldParseAssignment() -> Bool {
 
@@ -388,13 +339,6 @@ public class Parser {
 		
 		}
 		
-		if shouldParseBooleanOp() {
-			
-			let expr = try parseBooleanOp(node)
-			return expr
-			
-		}
-		
 		let expr = try parseBinaryOp(node)
 		
 		return expr
@@ -412,7 +356,7 @@ public class Parser {
 		return expr
 	}
 	
-	fileprivate func parseNotOperation() throws -> BooleanOpNode {
+	fileprivate func parseNotOperation() throws -> BinaryOpNode {
 		
 		try popCurrentToken(andExpect: .booleanNot, "!")
 		
@@ -424,7 +368,7 @@ public class Parser {
 			
 			let expr = try parseParensExpr()
 			
-			return BooleanOpNode(op: "!", lhs: expr)
+			return try BinaryOpNode(op: "!", lhs: expr)
 			
 		} else {
 			
@@ -446,7 +390,7 @@ public class Parser {
 
 			}
 			
-			return BooleanOpNode(op: "!", lhs: lhs)
+			return try BinaryOpNode(op: "!", lhs: lhs)
 			
 		}
 
@@ -744,7 +688,7 @@ public class Parser {
 	}
 	
 	/// Parse "true" or "false"
-	fileprivate func parseRawBoolean() throws -> ASTNode {
+	fileprivate func parseRawBoolean() throws -> BooleanNode {
 		
 		guard let currentToken = peekCurrentToken() else {
 			throw error(.unexpectedToken)
@@ -779,24 +723,7 @@ public class Parser {
 		
 		return precedence
 	}
-	
-	fileprivate func getCurrentTokenBooleanOpPrecedence() -> Int {
-		
-		guard index < tokens.count else {
-			return -1
-		}
-		
-		guard let currentToken = peekCurrentToken() else {
-			return -1
-		}
-		
-		guard let precedence = booleanOperatorPrecedence(for: currentToken.type) else {
-			return -1
-		}
-		
-		return precedence
-	}
-	
+
 	/// Recursive
 	fileprivate func parseBinaryOp(_ node: ASTNode, exprPrecedence: Int = 0) throws -> ASTNode {
 		
@@ -831,37 +758,7 @@ public class Parser {
 		}
 		
 	}
-	
-	/// Recursive
-	fileprivate func parseBooleanOp(_ node: ASTNode, exprPrecedence: Int = 0) throws -> ASTNode {
-		
-		var lhs = node
-		
-		while true {
-			
-			let tokenPrecedence = getCurrentTokenBooleanOpPrecedence()
-			if tokenPrecedence < exprPrecedence {
-				
-				return lhs
-			}
-			
-			guard let op = booleanOperatorString(for: popCurrentToken().type) else {
-				throw error(.unexpectedToken)
-			}
-			
-			var rhs = try parsePrimary()
-			let nextPrecedence = getCurrentTokenBooleanOpPrecedence()
-			
-			if tokenPrecedence < nextPrecedence {
-				rhs = try parseBooleanOp(rhs, exprPrecedence: tokenPrecedence + 1)
-			}
-			
-			lhs = BooleanOpNode(op: op, lhs: lhs, rhs: rhs)
-			
-		}
-		
-	}
-	
+
 	// MARK: - Functions
 	
 	// TODO: use stack once we allow functions in functions
