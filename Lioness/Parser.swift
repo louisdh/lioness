@@ -348,7 +348,7 @@ public class Parser {
 		return assign
 	}
 	
-	fileprivate func parseNumber() throws -> ASTNode {
+	fileprivate func parseNumber() throws -> NumberNode {
 		
 		guard case let .number(value) = popCurrentToken().type else {
 			throw error(.unexpectedToken)
@@ -412,7 +412,7 @@ public class Parser {
 		return expr
 	}
 	
-	fileprivate func parseNotOperation() throws -> ASTNode {
+	fileprivate func parseNotOperation() throws -> BooleanOpNode {
 		
 		try popCurrentToken(andExpect: .booleanNot, "!")
 		
@@ -545,21 +545,21 @@ public class Parser {
 		
 	}
 	
-	fileprivate func parseContinue() throws -> ASTNode {
+	fileprivate func parseContinue() throws -> ContinueNode {
 
 		try popCurrentToken(andExpect: .continue)
 
 		return ContinueNode()
 	}
 	
-	fileprivate func parseBreak() throws -> ASTNode {
+	fileprivate func parseBreak() throws -> BreakLoopNode {
 		
 		try popCurrentToken(andExpect: .break)
 		
 		return BreakLoopNode()
 	}
 	
-	fileprivate func parseIfStatement() throws -> ASTNode {
+	fileprivate func parseIfStatement() throws -> ConditionalStatementNode {
 		
 		try popCurrentToken(andExpect: .if)
 		
@@ -592,7 +592,7 @@ public class Parser {
 		
 	}
 	
-	fileprivate func parseDoStatement() throws -> ASTNode {
+	fileprivate func parseDoStatement() throws -> DoStatementNode {
 		
 		let doToken = try popCurrentToken(andExpect: .do)
 
@@ -617,7 +617,7 @@ public class Parser {
 		return doStatement
 	}
 	
-	fileprivate func parseForStatement() throws -> ASTNode {
+	fileprivate func parseForStatement() throws -> ForStatementNode {
 		
 		let forToken = try popCurrentToken(andExpect: .for)
 		
@@ -663,7 +663,7 @@ public class Parser {
 		return ReturnNode(value: expr)
 	}
 	
-	fileprivate func parseWhileStatement() throws -> ASTNode {
+	fileprivate func parseWhileStatement() throws -> WhileStatementNode {
 		
 		let whileToken = try popCurrentToken(andExpect: .while)
 		
@@ -682,7 +682,7 @@ public class Parser {
 		return whileStatement
 	}
 	
-	fileprivate func parseRepeatWhileStatement() throws -> ASTNode {
+	fileprivate func parseRepeatWhileStatement() throws -> RepeatWhileStatementNode {
 
 		try popCurrentToken(andExpect: .repeat)
 
