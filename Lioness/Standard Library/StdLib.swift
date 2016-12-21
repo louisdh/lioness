@@ -29,8 +29,6 @@ class StdLib {
 			
 		}
 		
-		stdLib = ""
-		
 		return stdLib
 	}
 
