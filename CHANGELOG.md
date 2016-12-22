@@ -14,6 +14,24 @@ CHANGELOG
 Lioness 1.0
 -----------
 
+### 2016-12-18
+
+* Lioness now supports functions with arguments. As well as functions that have a return value, with the new ```returns``` keyword. Example:
+
+	```lioness
+	func factorial(x) returns {
+	
+		if x > 1 {
+			return x * factorial(x - 1)
+		}
+	
+		return 1
+	}
+	
+	a = factorial(5) // a = 120
+
+	```
+		
 ### 2016-12-11
 
 * Lioness now supports functions. Example:
