@@ -28,6 +28,8 @@
 //								
 //a = sin(1.4)
 
+a = factorial(5) // a = 120
+
 func factorial(x) returns {
 	
 	if x > 1 {
@@ -35,15 +37,5 @@ func factorial(x) returns {
 	}
 	
 	return 1
-}
-
-
-x = 7000
-y = 20000
-
-a = x <= y && x >= factorial(6)
-
-if a {
-	x -= 1
 }
 

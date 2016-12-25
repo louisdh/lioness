@@ -27,10 +27,13 @@ public class Runner {
 	
 	public var delegate: RunnerDelegate?
 	
+	fileprivate let compiler: BytecodeCompiler
+
 	// MARK: -
 
 	public init(logDebug: Bool = false) {
 		self.logDebug = logDebug
+		compiler = BytecodeCompiler()
 	}
 	
 	public func runSource(atPath path: String) throws {
@@ -44,7 +47,11 @@ public class Runner {
 		
 		let stdLib = try StdLib().stdLibCode()
 		
-		let source = stdLib.appending(source)
+		guard let compiledStdLib = compileLionessSourceCode(stdLib) else {
+			// TODO: throw error
+			return
+		}
+		
 		self.source = source
 		
 		let startTime = CFAbsoluteTimeGetCurrent()
@@ -53,7 +60,15 @@ public class Runner {
 			logSourceCode(source)
 		}
 		
-		runLionessSourceCode(source)
+		guard let compiledSource = compileLionessSourceCode(source) else {
+			// TODO: throw error
+			return
+		}
+
+		var fullBytecode = compiledStdLib
+		fullBytecode.append(contentsOf: compiledSource)
+		
+		interpret(fullBytecode)
 		
 		if logDebug {
 			
@@ -66,19 +81,29 @@ public class Runner {
 	
 	// MARK: -
 	
-	fileprivate func runLionessSourceCode(_ source: String) {
+	fileprivate func compileLionessSourceCode(_ source: String) -> BytecodeBody? {
 		
 		let tokens = runLexer(withSource: source)
 		
 		guard let ast = parseTokens(tokens) else {
-			return
+			return nil
 		}
 		
 		guard let bytecode = compileToBytecode(ast: ast) else {
+			return nil
+		}
+		
+		return bytecode
+		
+	}
+	
+	fileprivate func runLionessSourceCode(_ source: String) {
+		
+		guard let bytecode = compileLionessSourceCode(source) else {
 			return
 		}
 		
-		interpretBytecode(bytecode)
+		interpret(bytecode)
 		
 	}
 	
@@ -173,13 +198,12 @@ public class Runner {
 			
 		}
 		
-		let bytecodeCompiler = BytecodeCompiler(ast: ast)
 		
 		var bytecode: BytecodeBody? = nil
 		
 		do {
 			
-			bytecode = try bytecodeCompiler.compile()
+			bytecode = try compiler.compile(ast)
 			
 			if logDebug {
 				
@@ -229,7 +253,7 @@ public class Runner {
 	
 	var interpreter: BytecodeInterpreter!
 	
-	fileprivate func interpretBytecode(_ bytecode: BytecodeBody) {
+	fileprivate func interpret(_ bytecode: BytecodeBody) {
 		
 		if logDebug {
 			

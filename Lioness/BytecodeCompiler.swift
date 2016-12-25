@@ -13,34 +13,37 @@ public class BytecodeCompiler {
 	
 	// MARK: - Private
 	
-	fileprivate let ast: [ASTNode]
-	fileprivate var index: UInt = 0
+	fileprivate var index: UInt
 	
-	fileprivate var loopHeaderStack = [String]()
-	fileprivate var loopContinueStack = [String]()
+	fileprivate var loopHeaderStack: [String]
+	fileprivate var loopContinueStack: [String]
 
-	fileprivate var functionExitStack = [String]()
+	fileprivate var functionExitStack: [String]
 	
 	fileprivate let scopeTreeRoot: ScopeNode
 
 	fileprivate var currentScopeNode: ScopeNode
 
-	
 	// MARK: -
 
-	public init(ast: [ASTNode]) {
-		self.ast = ast
+	public init() {
+		
+		index = 0
+		
+		loopHeaderStack = [String]()
+		loopContinueStack = [String]()
+		functionExitStack = [String]()
+
 		scopeTreeRoot = ScopeNode(childNodes: [])
 		currentScopeNode = scopeTreeRoot
+		
 	}
 	
 	// MARK: - Public
 	
-	public func compile() throws -> BytecodeBody {
+	public func compile(_ ast: [ASTNode]) throws -> BytecodeBody {
 		
-		currentScopeNode = scopeTreeRoot
-		
-		try compileFunctionPrototypes()
+		try compileFunctionPrototypes(for: ast)
 		
 		var bytecode = BytecodeBody()
 
@@ -56,7 +59,7 @@ public class BytecodeCompiler {
 	
 	// MARK: -
 	
-	fileprivate func compileFunctionPrototypes() throws {
+	fileprivate func compileFunctionPrototypes(for ast: [ASTNode]) throws {
 		
 		for node in ast {
 			
@@ -142,12 +145,10 @@ public class BytecodeCompiler {
 			return []
 		}
 		
-		guard let i = parentNode.childNodes.index(where: { (s) -> Bool in
-			return s === currentScopeNode
+		guard let i = parentNode.childNodes.index(where: {
+			$0 === currentScopeNode
 		}) else {
-			
-			// TODO: throw error
-			return []
+			throw error(.unbalancedScope)
 		}
 		
 		let cleanupInstructions = cleanupRegisterInstructions(for: currentScopeNode)
@@ -235,7 +236,7 @@ public class BytecodeCompiler {
 			return functionMapped.id
 		}
 		
-		throw CompileError.functionNotFound
+		throw error(.functionNotFound)
 	}
 	
 	fileprivate func getNewFunctionId() -> String {
@@ -244,5 +245,10 @@ public class BytecodeCompiler {
 		return id
 	}
 
+	// MARK: -
+	
+	fileprivate func error(_ type: CompileError) -> Error {
+		return type
+	}
 	
 }

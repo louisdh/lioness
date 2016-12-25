@@ -250,7 +250,6 @@
 		BE3FEBA31DA427440000648D /* AST */ = {
 			isa = PBXGroup;
 			children = (
-				BE446C451DCD3C5B0085EEE0 /* CompileError.swift */,
 				BE446C481DCD3C7B0085EEE0 /* ASTNodeDescriptor.swift */,
 				BE3FEBA51DA427800000648D /* ASTNode.swift */,
 				BE446C4A1DCD3C8F0085EEE0 /* ASTChildNode.swift */,
@@ -320,6 +319,7 @@
 		BE9369F91DA8079C00C0B3DF /* Compiler */ = {
 			isa = PBXGroup;
 			children = (
+				BE446C451DCD3C5B0085EEE0 /* CompileError.swift */,
 				BE4AF05F1DFD88B900ECE275 /* BytecodeLine.swift */,
 				BE4AF05B1DFD855F00ECE275 /* BytecodeFunctionHeader.swift */,
 				BEE50BAC1E05EC43006D8EE3 /* BytecodeMainHeader.swift */,

@@ -48,10 +48,11 @@ class Execution_Performance: BaseTestCase {
 		let parser = Parser(tokens: tokens)
 		let ast = try! parser.parse()
 		
+		let compiler = BytecodeCompiler()
+
 		self.measure {
 			
-			let compiler = BytecodeCompiler(ast: ast)
-			let bytecode = try! compiler.compile()
+			let bytecode = try! compiler.compile(ast)
 			
 			let interpreter = try! BytecodeInterpreter(bytecode: bytecode)
 			try! interpreter.interpret()
@@ -79,10 +80,11 @@ class Execution_Performance: BaseTestCase {
 		let parser = Parser(tokens: tokens)
 		let ast = try! parser.parse()
 		
+		let compiler = BytecodeCompiler()
+
 		self.measure {
 			
-			let compiler = BytecodeCompiler(ast: ast)
-			let bytecode = try! compiler.compile()
+			let bytecode = try! compiler.compile(ast)
 			
 			let interpreter = try! BytecodeInterpreter(bytecode: bytecode)
 			try! interpreter.interpret()
