@@ -116,7 +116,7 @@ public class BytecodeInstruction: BytecodeLine {
 		}
 		
 		if let comment = comment {
-			descr += ";\(comment)".byAppendingLeading(" ", max(1, 30 - descr.characters.count))
+			descr += "; \(comment)".byAppendingLeading(" ", max(1, 30 - descr.characters.count))
 		}
 		
 		return descr

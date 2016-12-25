@@ -170,7 +170,7 @@ public class BytecodeCompiler {
 		for reg in registersToCleanup {
 			
 			let label = nextIndexLabel()
-			let instr = BytecodeInstruction(label: label, type: .registerClear, arguments: [reg])
+			let instr = BytecodeInstruction(label: label, type: .registerClear, arguments: [reg], comment: "cleanup")
 			instructions.append(instr)
 			
 		}
