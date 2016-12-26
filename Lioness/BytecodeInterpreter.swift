@@ -80,7 +80,7 @@ public class BytecodeInterpreter {
 		
 		var pc = 0
 		
-		var currentFunc: String? = nil
+		var funcStack = [String]()
 		
 		for line in bytecode {
 			
@@ -88,12 +88,13 @@ public class BytecodeInterpreter {
 				// + 1 for first line in function
 				// header should never be jumped to
 				functionMap[funcLine.id] = pc + 1
-				currentFunc = funcLine.id
+
+				funcStack.append(funcLine.id)
 			}
 
 			if line is BytecodeEnd {
 				
-				guard let currentFunc = currentFunc else {
+				guard let currentFunc = funcStack.popLast() else {
 					throw error(.unexpectedArgument)
 				}
 				

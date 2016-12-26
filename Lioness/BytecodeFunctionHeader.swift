@@ -24,7 +24,7 @@ public class BytecodeFunctionHeader: BytecodeLine {
 	
 	/// Debug description
 	public var description: String {
-		var descr = "\n"
+		var descr = ""
 		
 		if let name = name {
 			descr += "\(name)("

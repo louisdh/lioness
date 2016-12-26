@@ -68,6 +68,7 @@ internal class ScopeNode {
 struct FunctionMapped {
 	
 	let id: String
+	let exitId: String
 	let returns: Bool
 	
 }

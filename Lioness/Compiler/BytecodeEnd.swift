@@ -12,7 +12,7 @@ public class BytecodeEnd: BytecodeLine {
 	
 	/// Debug description
 	public var description: String {
-		return "end\n"
+		return "end"
 	}
 	
 	public var encoded: String {

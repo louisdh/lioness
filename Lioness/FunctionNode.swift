@@ -28,7 +28,8 @@ public class FunctionNode: ASTNode {
 		
 		let _ = ctx.nextIndexLabel()
 		let functionId = ctx.getFunctionId(for: self)
-		
+		let exitId = try ctx.getExitScopeFunctionId(for: self)
+
 		let headerInstruction = BytecodeFunctionHeader(id: functionId, name: prototype.name, arguments: prototype.argumentNames)
 		
 		
@@ -37,20 +38,37 @@ public class FunctionNode: ASTNode {
 		
 		let skipExitInstrLabel = ctx.nextIndexLabel()
 		
+		let cleanupFunctionCallInstrLabel = ctx.nextIndexLabel()
+
 		let exitFunctionInstrLabel = ctx.nextIndexLabel()
-		
-		ctx.pushFunctionExit(exitFunctionInstrLabel)
+
+
+		ctx.pushFunctionExit(cleanupFunctionCallInstrLabel)
 		
 		
 		let functionScopeStart = ctx.peekNextIndexLabel()
 		
 		let compiledFunction = try compileFunction(with: ctx)
 		
+		
+		let _ = ctx.nextIndexLabel()
+		
+		let exitHeaderInstruction = BytecodeFunctionHeader(id: exitId, name: "cleanup_\(prototype.name)")
+		
+		let cleanupInstructions = try ctx.leaveCurrentScope()
+		
+		let _ = ctx.nextIndexLabel()
+		
+		
 		let functionEndLabel = ctx.peekNextIndexLabel()
 		
+		
+
 		let skipExitInstruction = BytecodeInstruction(label: skipExitInstrLabel, type: .goto, arguments: [functionScopeStart], comment: "skip exit instruction")
 		bytecode.append(skipExitInstruction)
 		
+		let invokeInstruction = BytecodeInstruction(label: cleanupFunctionCallInstrLabel, type: .invokeFunc, arguments: [exitId])
+		bytecode.append(invokeInstruction)
 		
 		let exitFunctionInstruction = BytecodeInstruction(label: exitFunctionInstrLabel, type: .goto, arguments: [functionEndLabel], comment: "exit function")
 		bytecode.append(exitFunctionInstruction)
@@ -58,8 +76,19 @@ public class FunctionNode: ASTNode {
 		
 		bytecode.append(contentsOf: compiledFunction)
 		
-		let cleanupInstructions = try ctx.leaveCurrentScope()
+		
+		// Cleanup
+		
+	
+		
+		bytecode.append(exitHeaderInstruction)
 		bytecode.append(contentsOf: cleanupInstructions)
+
+		bytecode.append(BytecodeEnd())
+		
+		//
+		
+		
 		
 		let _ = ctx.nextIndexLabel()
 		bytecode.append(BytecodeEnd())

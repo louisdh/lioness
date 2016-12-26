@@ -224,9 +224,23 @@ public class BytecodeCompiler {
 		}
 		
 		let newReg = getNewFunctionId()
-		currentScopeNode.functionMap[name] = FunctionMapped(id: newReg, returns: functionNode.prototype.returns)
+		let exitReg = getNewFunctionId()
+
+		currentScopeNode.functionMap[name] = FunctionMapped(id: newReg, exitId: exitReg, returns: functionNode.prototype.returns)
 		
 		return newReg
+	}
+	
+	func getExitScopeFunctionId(for functionNode: FunctionNode) throws -> String {
+		
+		let name = functionNode.prototype.name
+		
+		guard let functionMapped = currentScopeNode.deepFunctionMap()[name] else {
+			throw error(.functionNotFound)
+		}
+		
+		return functionMapped.exitId
+
 	}
 	
 	/// Expects function id to exist

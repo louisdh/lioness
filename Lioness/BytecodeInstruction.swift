@@ -72,7 +72,7 @@ public class BytecodeInstruction: BytecodeLine {
 		self.comment = nil
 	}
 
-	/// Encoding string to use for saving compiled instruction to disk.
+	/// Encoding string to use for saving compiled instruction (e.g. to disk).
 	public var encoded: String {
 		var args = ""
 		

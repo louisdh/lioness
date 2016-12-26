@@ -107,26 +107,10 @@ public class Runner {
 		
 	}
 	
-	fileprivate func logSourceCode(_ source: String) {
-		
-		log("================================")
-		log("Source code")
-		log("================================\n")
-		
-		for s in source.components(separatedBy: "\n") {
-			log(s)
-		}
-		
-	}
-	
 	fileprivate func runLexer(withSource source: String) -> [Token] {
 		
 		if logDebug {
-			
-			log("\n================================")
-			log("Start lexer")
-			log("================================\n")
-			
+			logTitle("Start lexer")
 		}
 		
 		let lexer = Lexer(input: source)
@@ -149,9 +133,7 @@ public class Runner {
 	fileprivate func parseTokens(_ tokens: [Token]) -> [ASTNode]? {
 		
 		if logDebug {
-			log("\n================================")
-			log("Start parser")
-			log("================================\n")
+			logTitle("Start parser")
 		}
 		
 		let parser = Parser(tokens: tokens)
@@ -191,48 +173,15 @@ public class Runner {
 	fileprivate func compileToBytecode(ast: [ASTNode]) -> BytecodeBody? {
 		
 		if logDebug {
-			
-			log("\n================================")
-			log("Start bytecode compiler")
-			log("================================\n")
-			
+			logTitle("Start bytecode compiler")
 		}
-		
-		
-		var bytecode: BytecodeBody? = nil
 		
 		do {
 			
-			bytecode = try compiler.compile(ast)
+			let bytecode = try compiler.compile(ast)
 			
 			if logDebug {
-				
-				var indentLevel = 0
-				
-				if let bytecode = bytecode {
-					for b in bytecode {
-						
-						if b is BytecodeEnd {
-							indentLevel -= 1
-						}
-						
-						var description = ""
-						
-						for _ in 0..<indentLevel {
-							description += "\t"
-						}
-						
-						description += b.description
-						
-						log(description)
-						
-						if b is BytecodeFunctionHeader {
-							indentLevel += 1
-						}
-						
-					}
-				}
-				
+				logBytecode(bytecode)
 			}
 			
 			return bytecode
@@ -256,11 +205,7 @@ public class Runner {
 	fileprivate func interpret(_ bytecode: BytecodeBody) {
 		
 		if logDebug {
-			
-			log("\n================================")
-			log("Start bytecode interpreter")
-			log("================================\n")
-			
+			logTitle("Start bytecode interpreter")
 		}
 		
 		do {
@@ -291,6 +236,60 @@ public class Runner {
 	// MARK: -
 	// MARK: Logging
 	
+	fileprivate func logSourceCode(_ source: String) {
+		
+		logTitle("Source code")
+		
+		for s in source.components(separatedBy: "\n") {
+			log(s)
+		}
+		
+	}
+	
+	fileprivate func logTitle(_ title: String) {
+		
+		log("================================")
+		log(title)
+		log("================================\n")
+		
+	}
+	
+	fileprivate func logBytecode(_ bytecode: BytecodeBody) {
+		
+		var indentLevel = 0
+		
+		for b in bytecode {
+			
+			if b is BytecodeEnd {
+				indentLevel -= 1
+			}
+			
+			var description = ""
+			
+			if b is BytecodeFunctionHeader {
+				description += "\n"
+			}
+			
+			for _ in 0..<indentLevel {
+				description += "\t"
+			}
+			
+			description += b.description
+			
+			if b is BytecodeEnd {
+				description += "\n"
+			}
+			
+			log(description)
+			
+			if b is BytecodeFunctionHeader {
+				indentLevel += 1
+			}
+			
+		}
+		
+	}
+	
 	fileprivate func log(_ message: String) {
 		delegate?.log(message)
 	}
@@ -302,9 +301,9 @@ public class Runner {
 			return
 		}
 		
-		if let error = error as? ParseError {
+		if let parseError = error as? ParseError {
 			
-			let errorDescription = error.description(inSource: source)
+			let errorDescription = parseError.description(inSource: source)
 			delegate?.log(errorDescription)
 			
 		} else {
