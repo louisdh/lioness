@@ -28,7 +28,6 @@
 //								
 //a = sin(1.4)
 
-a = factorial(5) // a = 120
 
 func factorial(x) returns {
 	
@@ -39,3 +38,4 @@ func factorial(x) returns {
 	return 1
 }
 
+a = factorial(5) // a = 120

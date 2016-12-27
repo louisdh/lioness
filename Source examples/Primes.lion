@@ -19,4 +19,4 @@ func isPrime(num) returns {
 	return true
 }
 
-a = isPrime(6)
+a = isPrime(6) // a = false
