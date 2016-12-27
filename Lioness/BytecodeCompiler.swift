@@ -169,8 +169,20 @@ public class BytecodeCompiler {
 		
 		for reg in registersToCleanup {
 			
+			// TODO: add compile option (e.g. for release mode) which doesn't add these types of comments
+			let decompiledVarName = scopeNode.deepRegisterMap().first(where: { (keyValue: (key: String, value: String)) -> Bool in
+				return keyValue.value == reg
+			})?.key
+			
 			let label = nextIndexLabel()
-			let instr = BytecodeInstruction(label: label, type: .registerClear, arguments: [reg], comment: "cleanup")
+			
+			var comment = "cleanup"
+			
+			if let decompiledVarName = decompiledVarName {
+				comment += " \(decompiledVarName)"
+			}
+			
+			let instr = BytecodeInstruction(label: label, type: .registerClear, arguments: [reg], comment: comment)
 			instructions.append(instr)
 			
 		}
