@@ -27,7 +27,7 @@ public class Runner {
 	
 	public var delegate: RunnerDelegate?
 	
-	fileprivate let compiler: BytecodeCompiler
+	let compiler: BytecodeCompiler
 
 	// MARK: -
 

@@ -56,8 +56,12 @@ class Runner_Tests: BaseTestCase {
 			return
 		}
 		
-		// TODO: find better way to get register for variable name, right now this will break when stdlib adds vars
-		guard let value = runner.interpreter?.registers["r6"] else {
+		guard let regKey = runner.compiler.getCompiledRegister(for: "sum") else {
+			XCTFail("Expected value in register for \"sum\"")
+			return
+		}
+		
+		guard let value = runner.interpreter?.registers[regKey] else {
 			XCTFail("Expected value in register for \"sum\"")
 			return
 		}
