@@ -17,8 +17,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "BE295CE71DB14DCE0019EC57"
-               BuildableName = "Lioness Tests.xctest"
-               BlueprintName = "Lioness Tests"
+               BuildableName = "Lioness macOS Tests.xctest"
+               BlueprintName = "Lioness macOS Tests"
                ReferencedContainer = "container:Lioness.xcodeproj">
             </BuildableReference>
          </TestableReference>

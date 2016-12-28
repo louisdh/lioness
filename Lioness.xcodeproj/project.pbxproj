@@ -79,7 +79,7 @@
 		BE25BA231DDD1F0000041A20 /* ASTNode+Validation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "ASTNode+Validation.swift"; path = "AST/ASTNode+Validation.swift"; sourceTree = "<group>"; };
 		BE25BA251DDD2B7A00041A20 /* InternalVariableNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = InternalVariableNode.swift; path = AST/InternalVariableNode.swift; sourceTree = "<group>"; };
 		BE295CE21DAD87990019EC57 /* Token.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Token.swift; sourceTree = "<group>"; };
-		BE295CE81DB14DCE0019EC57 /* Lioness Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Lioness Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		BE295CE81DB14DCE0019EC57 /* Lioness macOS Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Lioness macOS Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BE295CEA1DB14DCE0019EC57 /* Lexer+Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Lexer+Tests.swift"; sourceTree = "<group>"; };
 		BE295CEC1DB14DCE0019EC57 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BE2CC65E1DB41E4400F74DBE /* ConditionalStatementNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ConditionalStatementNode.swift; path = AST/ConditionalStatementNode.swift; sourceTree = "<group>"; };
@@ -222,7 +222,7 @@
 		BE3FEB971DA425A30000648D /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				BE295CE81DB14DCE0019EC57 /* Lioness Tests.xctest */,
+				BE295CE81DB14DCE0019EC57 /* Lioness macOS Tests.xctest */,
 				BE2296281DB16EE800EA477A /* Lioness.framework */,
 			);
 			name = Products;
@@ -395,9 +395,9 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		BE2296271DB16EE800EA477A /* Lioness */ = {
+		BE2296271DB16EE800EA477A /* Lioness macOS */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = BE22962D1DB16EE800EA477A /* Build configuration list for PBXNativeTarget "Lioness" */;
+			buildConfigurationList = BE22962D1DB16EE800EA477A /* Build configuration list for PBXNativeTarget "Lioness macOS" */;
 			buildPhases = (
 				BE2296231DB16EE800EA477A /* Sources */,
 				BE2296241DB16EE800EA477A /* Frameworks */,
@@ -408,14 +408,14 @@
 			);
 			dependencies = (
 			);
-			name = Lioness;
+			name = "Lioness macOS";
 			productName = Lioness;
 			productReference = BE2296281DB16EE800EA477A /* Lioness.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		BE295CE71DB14DCE0019EC57 /* Lioness Tests */ = {
+		BE295CE71DB14DCE0019EC57 /* Lioness macOS Tests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = BE295CEF1DB14DCE0019EC57 /* Build configuration list for PBXNativeTarget "Lioness Tests" */;
+			buildConfigurationList = BE295CEF1DB14DCE0019EC57 /* Build configuration list for PBXNativeTarget "Lioness macOS Tests" */;
 			buildPhases = (
 				BE295CE41DB14DCE0019EC57 /* Sources */,
 				BE295CE51DB14DCE0019EC57 /* Frameworks */,
@@ -425,9 +425,9 @@
 			);
 			dependencies = (
 			);
-			name = "Lioness Tests";
+			name = "Lioness macOS Tests";
 			productName = "Lioness Tests";
-			productReference = BE295CE81DB14DCE0019EC57 /* Lioness Tests.xctest */;
+			productReference = BE295CE81DB14DCE0019EC57 /* Lioness macOS Tests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -466,8 +466,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				BE295CE71DB14DCE0019EC57 /* Lioness Tests */,
-				BE2296271DB16EE800EA477A /* Lioness */,
+				BE295CE71DB14DCE0019EC57 /* Lioness macOS Tests */,
+				BE2296271DB16EE800EA477A /* Lioness macOS */,
 			);
 		};
 /* End PBXProject section */
@@ -580,7 +580,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited)";
 				MACOSX_DEPLOYMENT_TARGET = 10.12;
 				PRODUCT_BUNDLE_IDENTIFIER = be.silverfox.Lioness;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_MODULE_NAME = Lioness;
+				PRODUCT_NAME = Lioness;
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_INSTALL_OBJC_HEADER = YES;
@@ -610,7 +611,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited)";
 				MACOSX_DEPLOYMENT_TARGET = 10.12;
 				PRODUCT_BUNDLE_IDENTIFIER = be.silverfox.Lioness;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_MODULE_NAME = Lioness;
+				PRODUCT_NAME = Lioness;
 				SKIP_INSTALL = YES;
 				SWIFT_INSTALL_OBJC_HEADER = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
@@ -746,7 +748,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		BE22962D1DB16EE800EA477A /* Build configuration list for PBXNativeTarget "Lioness" */ = {
+		BE22962D1DB16EE800EA477A /* Build configuration list for PBXNativeTarget "Lioness macOS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				BE22962E1DB16EE800EA477A /* Debug */,
@@ -755,7 +757,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		BE295CEF1DB14DCE0019EC57 /* Build configuration list for PBXNativeTarget "Lioness Tests" */ = {
+		BE295CEF1DB14DCE0019EC57 /* Build configuration list for PBXNativeTarget "Lioness macOS Tests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				BE295CED1DB14DCE0019EC57 /* Debug */,

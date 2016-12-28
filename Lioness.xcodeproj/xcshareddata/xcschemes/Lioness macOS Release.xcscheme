@@ -15,8 +15,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "BE2296271DB16EE800EA477A"
-               BuildableName = "Lioness.framework"
-               BlueprintName = "Lioness"
+               BuildableName = "Lioness macOS.framework"
+               BlueprintName = "Lioness macOS"
                ReferencedContainer = "container:Lioness.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -34,8 +34,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "BE295CE71DB14DCE0019EC57"
-               BuildableName = "Lioness Tests.xctest"
-               BlueprintName = "Lioness Tests"
+               BuildableName = "Lioness macOS Tests.xctest"
+               BlueprintName = "Lioness macOS Tests"
                ReferencedContainer = "container:Lioness.xcodeproj">
             </BuildableReference>
          </TestableReference>
@@ -44,8 +44,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "BE2296271DB16EE800EA477A"
-            BuildableName = "Lioness.framework"
-            BlueprintName = "Lioness"
+            BuildableName = "Lioness macOS.framework"
+            BlueprintName = "Lioness macOS"
             ReferencedContainer = "container:Lioness.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -53,7 +53,7 @@
       </AdditionalOptions>
    </TestAction>
    <LaunchAction
-      buildConfiguration = "Debug"
+      buildConfiguration = "Release"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       launchStyle = "0"
@@ -66,8 +66,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "BE2296271DB16EE800EA477A"
-            BuildableName = "Lioness.framework"
-            BlueprintName = "Lioness"
+            BuildableName = "Lioness macOS.framework"
+            BlueprintName = "Lioness macOS"
             ReferencedContainer = "container:Lioness.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -84,8 +84,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "BE2296271DB16EE800EA477A"
-            BuildableName = "Lioness.framework"
-            BlueprintName = "Lioness"
+            BuildableName = "Lioness macOS.framework"
+            BlueprintName = "Lioness macOS"
             ReferencedContainer = "container:Lioness.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
