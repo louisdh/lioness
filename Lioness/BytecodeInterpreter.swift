@@ -475,8 +475,16 @@ public class BytecodeInterpreter {
 		return idPc
 	}
 	
+	// TODO: max cache size?
+	fileprivate var labelProgramCountersCache = [String : Int]()
+	
 	fileprivate func progamCounter(for label: String) -> Int? {
 		
+		if let pc = labelProgramCountersCache[label] {
+			return pc
+		}
+		
+		// TODO: cache
 		let foundLabel = bytecode.index(where: { (b) -> Bool in
 			if let b = b as? BytecodeInstruction {
 				return b.label == label
@@ -491,6 +499,8 @@ public class BytecodeInterpreter {
 			}
 			
 		}
+		
+		labelProgramCountersCache[label] = foundLabel
 		
 		return foundLabel
 		
