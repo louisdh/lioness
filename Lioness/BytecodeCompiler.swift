@@ -159,6 +159,14 @@ public class BytecodeCompiler {
 		return cleanupInstructions
 	}
 	
+	func getDecompiledVarName(for register: String) -> String? {
+		let decompiledVarName = currentScopeNode.deepRegisterMap().first(where: { (keyValue: (key: String, value: String)) -> Bool in
+			return keyValue.value == register
+		})?.key
+		
+		return decompiledVarName
+	}
+	
 	fileprivate func cleanupRegisterInstructions(for scopeNode: ScopeNode) -> BytecodeBody {
 		
 		var instructions = BytecodeBody()
@@ -170,10 +178,7 @@ public class BytecodeCompiler {
 		for reg in registersToCleanup {
 			
 			// TODO: add compile option (e.g. for release mode) which doesn't add these types of comments
-			let decompiledVarName = scopeNode.deepRegisterMap().first(where: { (keyValue: (key: String, value: String)) -> Bool in
-				return keyValue.value == reg
-			})?.key
-			
+			let decompiledVarName = getDecompiledVarName(for: reg)
 			let label = nextIndexLabel()
 			
 			var comment = "cleanup"

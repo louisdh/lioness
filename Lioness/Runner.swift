@@ -68,6 +68,8 @@ public class Runner {
 		var fullBytecode = compiledStdLib
 		fullBytecode.append(contentsOf: compiledSource)
 		
+		let interpretStartTime = CFAbsoluteTimeGetCurrent()
+
 		interpret(fullBytecode)
 		
 		if logDebug {
@@ -75,6 +77,9 @@ public class Runner {
 			let timeElapsed = CFAbsoluteTimeGetCurrent() - startTime
 			log("\nTotal execution time: \(timeElapsed)s")
 			
+			let interpretTimeElapsed = CFAbsoluteTimeGetCurrent() - interpretStartTime
+			log("\nInterpret execution time: \(interpretTimeElapsed)s")
+
 		}
 		
 	}
@@ -216,8 +221,19 @@ public class Runner {
 			
 			if logDebug {
 
-				log("Stack at end of execution:\n\(interpreter.stack)")
-				log("Registers at end of execution:\n\(interpreter.registers)")
+				log("Stack at end of execution:\n\(interpreter.stack)\n")
+
+				log("Registers at end of execution:")
+
+				for (key, value) in interpreter.registers {
+					
+					if let varReg = compiler.getDecompiledVarName(for: key) {
+						log("\(varReg) (\(key)) = \(value)")
+					} else {
+						log("\(key) = \(value)")
+					}
+					
+				}
 
 			}
 			
