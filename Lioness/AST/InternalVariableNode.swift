@@ -11,16 +11,18 @@ import Foundation
 public class InternalVariableNode: ASTNode {
 	
 	public let register: String
+	public let debugName: String?
 	
-	public init(register: String) {
+	public init(register: String, debugName: String? = nil) {
 		self.register = register
+		self.debugName = debugName
 	}
 	
 	public override func compile(with ctx: BytecodeCompiler) throws -> BytecodeBody {
 		
 		var bytecode = BytecodeBody()
 		
-		let load = BytecodeInstruction(label: ctx.nextIndexLabel(), type: .registerLoad, arguments: [register])
+		let load = BytecodeInstruction(label: ctx.nextIndexLabel(), type: .registerLoad, arguments: [register], comment: debugName)
 		
 		bytecode.append(load)
 		

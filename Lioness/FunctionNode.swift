@@ -67,7 +67,7 @@ public class FunctionNode: ASTNode {
 		let skipExitInstruction = BytecodeInstruction(label: skipExitInstrLabel, type: .goto, arguments: [functionScopeStart], comment: "skip exit instruction")
 		bytecode.append(skipExitInstruction)
 		
-		let invokeInstruction = BytecodeInstruction(label: cleanupFunctionCallInstrLabel, type: .invokeFunc, arguments: [exitId])
+		let invokeInstruction = BytecodeInstruction(label: cleanupFunctionCallInstrLabel, type: .invokeFunc, arguments: [exitId], comment: "cleanup_\(prototype.name)()")
 		bytecode.append(invokeInstruction)
 		
 		let exitFunctionInstruction = BytecodeInstruction(label: exitFunctionInstrLabel, type: .goto, arguments: [functionEndLabel], comment: "exit function")

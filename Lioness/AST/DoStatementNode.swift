@@ -92,12 +92,12 @@ public class DoStatementNode: LoopNode {
 		let goToEndLabel = ctx.nextIndexLabel()
 		
 		let peekNextLabel = ctx.peekNextIndexLabel()
-		let ifeq = BytecodeInstruction(label: ifeqLabel, type: .ifFalse, arguments: [peekNextLabel])
+		let ifeq = BytecodeInstruction(label: ifeqLabel, type: .ifFalse, arguments: [peekNextLabel], comment: "if false: exit loop")
 		
 		bytecode.append(ifeq)
 		bytecode.append(contentsOf: bodyBytecode)
 		
-		let goToStart = BytecodeInstruction(label: goToEndLabel, type: .goto, arguments: [startOfLoopLabel])
+		let goToStart = BytecodeInstruction(label: goToEndLabel, type: .goto, arguments: [startOfLoopLabel], comment: "loop")
 		bytecode.append(goToStart)
 		
 		guard let _ = ctx.popLoopContinue() else {
@@ -126,7 +126,7 @@ public class DoStatementNode: LoopNode {
 	
 	fileprivate func conditionInstructions(with ctx: BytecodeCompiler, and regName: String) throws -> BytecodeBody {
 		
-		let varNode = InternalVariableNode(register: regName)
+		let varNode = InternalVariableNode(register: regName, debugName: "do repeat iterator")
 		let conditionNode = try BinaryOpNode(op: ">", lhs: varNode, rhs: NumberNode(value: 0.0))
 		
 		let bytecode = try conditionNode.compile(with: ctx)
@@ -137,7 +137,7 @@ public class DoStatementNode: LoopNode {
 	
 	fileprivate func decrementInstructions(with ctx: BytecodeCompiler, and regName: String) throws -> BytecodeBody {
 		
-		let varNode = InternalVariableNode(register: regName)
+		let varNode = InternalVariableNode(register: regName, debugName: "do repeat iterator")
 		let decrementNode = try BinaryOpNode(op: "-", lhs: varNode, rhs: NumberNode(value: 1.0))
 		
 		let v = try decrementNode.compile(with: ctx)
@@ -147,7 +147,7 @@ public class DoStatementNode: LoopNode {
 		bytecode.append(contentsOf: v)
 		
 		let label = ctx.nextIndexLabel()
-		let instruction = BytecodeInstruction(label: label, type: .registerStore, arguments: [regName])
+		let instruction = BytecodeInstruction(label: label, type: .registerStore, arguments: [regName], comment: "do repeat iterator")
 		
 		bytecode.append(instruction)
 		
