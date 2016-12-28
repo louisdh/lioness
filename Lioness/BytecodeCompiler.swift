@@ -159,8 +159,22 @@ public class BytecodeCompiler {
 		return cleanupInstructions
 	}
 	
+	func getCompiledRegister(for varName: String) -> String? {
+		
+		let deepRegMap = currentScopeNode.deepRegisterMap()
+		
+		let decompiledVarName = deepRegMap.first(where: { (keyValue: (key: String, value: String)) -> Bool in
+			return keyValue.key == varName
+		})?.value
+		
+		return decompiledVarName
+	}
+	
 	func getDecompiledVarName(for register: String) -> String? {
-		let decompiledVarName = currentScopeNode.deepRegisterMap().first(where: { (keyValue: (key: String, value: String)) -> Bool in
+		
+		let deepRegMap = currentScopeNode.deepRegisterMap()
+		
+		let decompiledVarName = deepRegMap.first(where: { (keyValue: (key: String, value: String)) -> Bool in
 			return keyValue.value == register
 		})?.key
 		
