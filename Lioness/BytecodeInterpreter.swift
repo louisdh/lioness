@@ -536,6 +536,9 @@ public class BytecodeInterpreter {
 	/// Pop from function invoke stack
 	fileprivate func popFunctionInvoke() throws -> Int {
 		
+		// TODO: is this faster than popLast()?
+//		let last = functionInvokeStack.remove(at: functionInvokeStackSize - 1)
+		
 		guard let last = functionInvokeStack.popLast() else {
 			throw error(.illegalStackOperation)
 		}
