@@ -24,7 +24,15 @@ class ViewController: NSViewController, RunnerDelegate {
 		// remainder
 //		print(-21 % 4)
 		
-		try! runner.runSource(atPath: path)
+		do {
+			
+			try runner.runSource(atPath: path)
+			
+		} catch {
+			print("error: \(error)")
+			return
+		}
+		
 		
 //		drawASTGraph(for: "A")
 	}
