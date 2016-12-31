@@ -20,11 +20,13 @@ class StdLib {
 		
 		for sourceName in sources {
 			
-			guard let path = bundle.path(forResource: sourceName, ofType: "lion", inDirectory: "Resources") else {
+			guard let resourcesPath = bundle.resourcePath else {
 				throw StdLibError.resourceNotFound
 			}
 			
-			let source = try String(contentsOfFile: path, encoding: .utf8)
+			let resourcePath = "\(resourcesPath)/\(sourceName).lion"
+			
+			let source = try String(contentsOfFile: resourcePath, encoding: .utf8)
 			stdLib += source
 			
 		}

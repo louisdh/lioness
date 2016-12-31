@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "BE2296271DB16EE800EA477A"
-               BuildableName = "Lioness macOS.framework"
+               BuildableName = "Lioness.framework"
                BlueprintName = "Lioness macOS"
                ReferencedContainer = "container:Lioness.xcodeproj">
             </BuildableReference>
@@ -44,7 +44,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "BE2296271DB16EE800EA477A"
-            BuildableName = "Lioness macOS.framework"
+            BuildableName = "Lioness.framework"
             BlueprintName = "Lioness macOS"
             ReferencedContainer = "container:Lioness.xcodeproj">
          </BuildableReference>
@@ -66,7 +66,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "BE2296271DB16EE800EA477A"
-            BuildableName = "Lioness macOS.framework"
+            BuildableName = "Lioness.framework"
             BlueprintName = "Lioness macOS"
             ReferencedContainer = "container:Lioness.xcodeproj">
          </BuildableReference>
@@ -84,7 +84,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "BE2296271DB16EE800EA477A"
-            BuildableName = "Lioness macOS.framework"
+            BuildableName = "Lioness.framework"
             BlueprintName = "Lioness macOS"
             ReferencedContainer = "container:Lioness.xcodeproj">
          </BuildableReference>
