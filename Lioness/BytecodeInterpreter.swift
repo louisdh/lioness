@@ -15,10 +15,10 @@ public class BytecodeInterpreter {
 	
 	fileprivate let bytecode: BytecodeBody
 	
-	typealias StackElement = Double
+	public typealias StackElement = Double
 	
 	/// Stack
-	fileprivate(set) var stack = [StackElement]()
+	fileprivate(set) public var stack = [StackElement]()
 	
 	/// Manual stack size counting for performance
 	fileprivate var stackSize = 0
@@ -35,7 +35,7 @@ public class BytecodeInterpreter {
 	fileprivate var functionInvokeStackSize = 0
 	
 	/// Registers
-	fileprivate(set) var registers = [String : StackElement]()
+	fileprivate(set) public var registers = [String : StackElement]()
 	
 	
 	// MARK: - Init

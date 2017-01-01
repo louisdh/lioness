@@ -159,7 +159,7 @@ public class BytecodeCompiler {
 		return cleanupInstructions
 	}
 	
-	func getCompiledRegister(for varName: String) -> String? {
+	public func getCompiledRegister(for varName: String) -> String? {
 		
 		let deepRegMap = currentScopeNode.deepRegisterMap()
 		
