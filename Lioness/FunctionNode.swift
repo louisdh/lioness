@@ -111,8 +111,10 @@ public class FunctionNode: ASTNode {
 			
 		}
 		
-		let instructions = try body.compile(with: ctx)
-		bytecode.append(contentsOf: instructions)
+		for a in body.nodes {
+			let instructions = try a.compile(with: ctx)
+			bytecode.append(contentsOf: instructions)
+		}
 		
 		return bytecode
 		

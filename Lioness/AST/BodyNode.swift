@@ -8,7 +8,7 @@
 
 import Foundation
 
-/// Body that defines a scope
+/// Body that defines a scope, `compile(with ctx)` includes cleanup of the defined scope.
 public class BodyNode: ASTNode {
 	
 	public let nodes: [ASTNode]
