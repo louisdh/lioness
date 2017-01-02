@@ -16,13 +16,23 @@ internal class ScopeNode {
 	var registerMap: [String : String]
 	var functionMap: [String : FunctionMapped]
 	var internalRegisters: [String]
-	
+
+	// TODO: make Set?
+	var registersToClean: [(String, String?)]
+
 	init(parentNode: ScopeNode? = nil, childNodes: [ScopeNode]) {
 		self.parentNode = parentNode
 		self.childNodes = childNodes
 		registerMap = [String : String]()
 		functionMap = [String : FunctionMapped]()
 		internalRegisters = [String]()
+		registersToClean = [(String, String?)]()
+	}
+	
+	func addRegistersToCleanToParent() {
+		
+		parentNode?.registersToClean.append(contentsOf: registersToClean)
+		
 	}
 	
 	/// Get deep register map (including parents' register map)

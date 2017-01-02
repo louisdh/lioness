@@ -41,8 +41,7 @@ public class LoopNode: ASTNode {
 		
 		bytecode.append(contentsOf: compiledLoop)
 		
-		let cleanupInstructions = try ctx.leaveCurrentScope()
-		bytecode.append(contentsOf: cleanupInstructions)
+		try ctx.leaveCurrentScope()
 		
 		return bytecode
 	}

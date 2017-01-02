@@ -8,7 +8,7 @@
 
 import Foundation
 
-/// Body that defines a scope, `compile(with ctx)` includes cleanup of the defined scope.
+/// Body that defines a scope, `compile(with ctx)`.
 public class BodyNode: ASTNode {
 	
 	public let nodes: [ASTNode]
@@ -28,8 +28,7 @@ public class BodyNode: ASTNode {
 			bytecode.append(contentsOf: instructions)
 		}
 		
-		let cleanupInstructions = try ctx.leaveCurrentScope()
-		bytecode.append(contentsOf: cleanupInstructions)
+		try ctx.leaveCurrentScope()
 		
 		return bytecode
 		

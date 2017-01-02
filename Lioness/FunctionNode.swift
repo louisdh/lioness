@@ -55,7 +55,9 @@ public class FunctionNode: ASTNode {
 		
 		let exitHeaderInstruction = BytecodeFunctionHeader(id: exitId, name: "cleanup_\(prototype.name)")
 		
-		let cleanupInstructions = try ctx.leaveCurrentScope()
+		ctx.addCleanupRegistersToCurrentScope()
+		let cleanupInstructions = ctx.cleanupRegisterInstructions()
+		try ctx.leaveCurrentScope()
 		
 		let _ = ctx.nextIndexLabel()
 		
@@ -111,10 +113,7 @@ public class FunctionNode: ASTNode {
 			
 		}
 		
-		for a in body.nodes {
-			let instructions = try a.compile(with: ctx)
-			bytecode.append(contentsOf: instructions)
-		}
+		bytecode.append(contentsOf: try body.compile(with: ctx))
 		
 		return bytecode
 		

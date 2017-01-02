@@ -54,6 +54,9 @@ public class BytecodeCompiler {
 			
 		}
 		
+		let cleanupGlobal = cleanupRegisterInstructions()
+		bytecode.append(contentsOf: cleanupGlobal)
+		
 		return bytecode
 	}
 	
@@ -137,12 +140,25 @@ public class BytecodeCompiler {
 		currentScopeNode = newScopeNode
 		
 	}
+	
+	func addCleanupRegistersToCurrentScope() {
 
-	func leaveCurrentScope() throws -> BytecodeBody {
+		let regsToClean = registersToClean(for: currentScopeNode)
+		currentScopeNode.registersToClean.append(contentsOf: regsToClean)
+
+	}
+
+	func addCleanupRegistersToParentScope() {
+		
+		currentScopeNode.addRegistersToCleanToParent()
+		
+	}
+	
+	func leaveCurrentScope() throws {
 		
 		guard let parentNode = currentScopeNode.parentNode else {
 			// End of program reached (top scope left)
-			return []
+			return
 		}
 		
 		guard let i = parentNode.childNodes.index(where: {
@@ -151,12 +167,12 @@ public class BytecodeCompiler {
 			throw error(.unbalancedScope)
 		}
 		
-		let cleanupInstructions = cleanupRegisterInstructions(for: currentScopeNode)
+		addCleanupRegistersToCurrentScope()
+		addCleanupRegistersToParentScope()
 		
 		parentNode.childNodes.remove(at: i)
 		currentScopeNode = parentNode
 
-		return cleanupInstructions
 	}
 	
 	public func getCompiledRegister(for varName: String) -> String? {
@@ -181,18 +197,31 @@ public class BytecodeCompiler {
 		return decompiledVarName
 	}
 	
-	fileprivate func cleanupRegisterInstructions(for scopeNode: ScopeNode) -> BytecodeBody {
+	func cleanupRegisterInstructions() -> [BytecodeLine] {
+		return cleanupRegisterInstructions(for: currentScopeNode)
+	}
+	
+	fileprivate func registersToClean(for scopeNode: ScopeNode) -> [(String, String?)] {
+
+		var registersToCleanup = scopeNode.registerMap.map { (kv) -> (String, String?) in
+			return (kv.1, kv.0)
+		}
 		
-		var instructions = BytecodeBody()
+		registersToCleanup.append(contentsOf: scopeNode.internalRegisters.map {
+			return ($0, nil)
+		})
 		
-		var registersToCleanup = scopeNode.registerMap.map { $0.1 }
+		return registersToCleanup
+	}
 		
-		registersToCleanup.append(contentsOf: scopeNode.internalRegisters)
+	fileprivate func cleanupRegisterInstructions(for scopeNode: ScopeNode) -> [BytecodeInstruction] {
 		
-		for reg in registersToCleanup {
+		var instructions = [BytecodeInstruction]()
+	
+		for (reg, decompiledVarName) in scopeNode.registersToClean {
 			
 			// TODO: add compile option (e.g. for release mode) which doesn't add these types of comments
-			let decompiledVarName = getDecompiledVarName(for: reg)
+//			let decompiledVarName = getDecompiledVarName(for: reg)
 			let label = nextIndexLabel()
 			
 			var comment = "cleanup"
@@ -205,6 +234,15 @@ public class BytecodeCompiler {
 			instructions.append(instr)
 			
 		}
+				
+		for (_, key) in scopeNode.registersToClean {
+			if let key = key {
+				scopeNode.registerMap.removeValue(forKey: key)
+			}
+		}
+		
+		scopeNode.internalRegisters.removeAll()
+		scopeNode.registersToClean.removeAll()
 		
 		return instructions
 		
