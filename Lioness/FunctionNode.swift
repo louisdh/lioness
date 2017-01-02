@@ -115,6 +115,11 @@ public class FunctionNode: ASTNode {
 		
 		bytecode.append(contentsOf: try body.compile(with: ctx))
 		
+		if !prototype.returns {
+			let returnNode = ReturnNode()
+			bytecode.append(contentsOf: try returnNode.compile(with: ctx))
+		}
+		
 		return bytecode
 		
 	}
