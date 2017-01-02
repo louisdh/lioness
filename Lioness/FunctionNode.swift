@@ -55,6 +55,8 @@ public class FunctionNode: ASTNode {
 		
 		let exitHeaderInstruction = BytecodeFunctionHeader(id: exitId, name: "cleanup_\(prototype.name)")
 		
+		ctx.popFunctionExit()
+		
 		ctx.addCleanupRegistersToCurrentScope()
 		let cleanupInstructions = ctx.cleanupRegisterInstructions()
 		try ctx.leaveCurrentScope()

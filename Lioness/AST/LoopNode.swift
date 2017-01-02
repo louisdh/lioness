@@ -41,6 +41,8 @@ public class LoopNode: ASTNode {
 		
 		bytecode.append(contentsOf: compiledLoop)
 		
+		ctx.popLoopHeader()
+		
 		try ctx.leaveCurrentScope()
 		
 		return bytecode

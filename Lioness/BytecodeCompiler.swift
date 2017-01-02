@@ -95,6 +95,7 @@ public class BytecodeCompiler {
 		loopHeaderStack.append(label)
 	}
 	
+	@discardableResult
 	func popLoopHeader() -> String? {
 		return loopHeaderStack.popLast()
 	}
@@ -123,6 +124,7 @@ public class BytecodeCompiler {
 		functionExitStack.append(label)
 	}
 	
+	@discardableResult
 	func popFunctionExit() -> String? {
 		return functionExitStack.popLast()
 	}
