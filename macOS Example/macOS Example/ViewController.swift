@@ -17,29 +17,29 @@ class ViewController: NSViewController, RunnerDelegate {
 		let runner = Runner(logDebug: true)
 		runner.delegate = self
 		
-		let path = stringPath(for: "A")
+		guard let path = stringPath(for: "A") else {
+			return
+		}
 		
 		print(path)
-
-		// remainder
-//		print(-21 % 4)
 		
 		do {
 			
-			try runner.runSource(atPath: path)
+			try runner.runSource(at: path)
 			
 		} catch {
 			print("error: \(error)")
 			return
 		}
 		
-		
 //		drawASTGraph(for: "A")
 	}
 	
 	func drawASTGraph(for testFile: String) {
 		
-		let path = stringPath(for: testFile)
+		guard let path = stringPath(for: testFile) else {
+			return
+		}
 		
 		let source = try! String(contentsOfFile: path, encoding: .utf8)
 
@@ -59,13 +59,13 @@ class ViewController: NSViewController, RunnerDelegate {
 	}
 	
 	/// Load .lion file in resources of "macOS Example" target
-	fileprivate func stringPath(for testFile: String) -> String {
+	fileprivate func stringPath(for fileName: String) -> String? {
 	
-		let fileManager = FileManager.default
+		guard let resourcePath = Bundle.main.resourcePath else {
+			return nil
+		}
 		
-		let current = fileManager.currentDirectoryPath
-		let resources = "\(current)/macOS Example.app/Contents/Resources/"
-		let path = "\(resources)\(testFile).lion"
+		let path = "\(resourcePath)/\(fileName).lion"
 		
 		return path
 	}

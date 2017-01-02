@@ -27,7 +27,12 @@ class Runner_Tests: BaseTestCase {
 		
 		let source = "1 + 3 * (8^4 - 2) / 6 / 4"
 		
-		try! runner.runSource(source)
+		do {
+			try runner.run(source)
+		} catch {
+			XCTFail("Expected value at top of stack")
+			return
+		}
 
 		guard let value = runner.interpreter?.stack.first else {
 			XCTFail("Expected value at top of stack")
@@ -50,24 +55,16 @@ class Runner_Tests: BaseTestCase {
 		}
 		
 		do {
-			try runner.runSource(atPath: path)
+			
+			let sum = try runner.runSource(at: path, andGetVar: "sum")
+			
+			XCTAssert(sum == 7_255_941_120, "Binary operation returned wrong result")
+		
 		} catch {
 			XCTFail("Failed to run")
 			return
 		}
-		
-		guard let regKey = runner.compiler.getCompiledRegister(for: "sum") else {
-			XCTFail("Expected value in register for \"sum\"")
-			return
-		}
-		
-		guard let value = runner.interpreter?.registers[regKey] else {
-			XCTFail("Expected value in register for \"sum\"")
-			return
-		}
-		
-		XCTAssert(value == 7_255_941_120, "Binary operation returned wrong result")
-		
+	
 	}
 	
 }

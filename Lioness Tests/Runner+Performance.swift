@@ -37,10 +37,10 @@ class FullRun_Performance: BaseTestCase {
 			XCTFail("Failed to get source")
 			return
 		}
-		
+				
         self.measure {
 
-			try! runner.runSource(source)
+			try! runner.run(source)
 
 		}
     }
@@ -63,7 +63,7 @@ class FullRun_Performance: BaseTestCase {
 		
 		self.measure {
 			
-			try! runner.runSource(source)
+			try! runner.run(source)
 			
 		}
 	}

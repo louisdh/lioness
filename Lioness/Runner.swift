@@ -18,6 +18,10 @@ public protocol RunnerDelegate {
 	
 }
 
+public enum RunnerError: Error {
+	case registerNotFound
+}
+
 /// Runs through full pipeline, from lexer to interpreter
 public class Runner {
 	
@@ -36,14 +40,46 @@ public class Runner {
 		compiler = BytecodeCompiler()
 	}
 	
-	public func runSource(atPath path: String) throws {
+	public func runSource(at path: String, get varName: String) throws -> Double {
 		
 		let source = try String(contentsOfFile: path, encoding: .utf8)
 		
-		try runSource(source)
+		return try run(source, get: varName)
 	}
 	
-	public func runSource(_ source: String) throws {
+	func run(_ source: String, get varName: String) throws -> Double {
+		
+		let lexer = Lexer(input: source)
+		let tokens = lexer.tokenize()
+		
+		let parser = Parser(tokens: tokens)
+		let ast = try parser.parse()
+		
+		let bytecode = try compiler.compile(ast)
+		
+		guard let reg = compiler.getCompiledRegister(for: varName) else {
+			throw RunnerError.registerNotFound
+		}
+		
+		let interpreter = try BytecodeInterpreter(bytecode: bytecode)
+		try interpreter.interpret()
+		
+		guard let result = interpreter.registers[reg] else {
+			throw RunnerError.registerNotFound
+		}
+		
+		return result
+		
+	}
+	
+	public func runSource(at path: String) throws {
+		
+		let source = try String(contentsOfFile: path, encoding: .utf8)
+		
+		try run(source)
+	}
+	
+	public func run(_ source: String) throws {
 		
 		let stdLib = try StdLib().stdLibCode()
 		
