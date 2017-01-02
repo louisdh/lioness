@@ -53,9 +53,11 @@ public class ConditionalStatementNode: ASTNode {
 
 		bytecode.append(contentsOf: bodyBytecode)
 
-		let goToEnd = BytecodeInstruction(label: goToEndLabel, type: .goto, arguments: [ctx.peekNextIndexLabel()])
-		bytecode.append(goToEnd)
-
+		if let elseBody = elseBody, elseBody.nodes.count > 0 {
+			let goToEnd = BytecodeInstruction(label: goToEndLabel, type: .goto, arguments: [ctx.peekNextIndexLabel()])
+			bytecode.append(goToEnd)
+		}
+		
 		bytecode.append(contentsOf: elseBodyBytecode)
 	
 		return bytecode
