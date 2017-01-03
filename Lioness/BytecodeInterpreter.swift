@@ -30,6 +30,8 @@ public class BytecodeInterpreter {
 	fileprivate var functionEndMap = [String : Int]()
 
 	fileprivate var functionInvokeStack = [Int]()
+	
+	fileprivate var functionDepth = 0
 
 	/// Manual stack size counting for performance
 	fileprivate var functionInvokeStackSize = 0
@@ -132,11 +134,15 @@ public class BytecodeInterpreter {
 				
 				pc = try popFunctionInvoke()
 				
+				functionDepth -= 1
+				
 			} else if let functionHeader = bytecode[pc] as? BytecodeFunctionHeader {
 
 				guard let funcEndPc = functionEndMap[functionHeader.id] else {
 					throw error(.unexpectedArgument)
 				}
+				
+				functionDepth += 1
 				
 				pc = funcEndPc + 1
 				
@@ -428,7 +434,7 @@ public class BytecodeInterpreter {
 			throw error(.unexpectedArgument)
 		}
 		
-		registers[reg] = try pop()
+		setRegValue(try pop(), for: reg)
 		
 		return pc + 1
 	}
@@ -439,7 +445,7 @@ public class BytecodeInterpreter {
 			throw error(.unexpectedArgument)
 		}
 		
-		registers.removeValue(forKey: reg)
+		try removeRegValue(in: reg)
 		
 		return pc + 1
 	}
@@ -450,9 +456,7 @@ public class BytecodeInterpreter {
 			throw error(.unexpectedArgument)
 		}
 		
-		guard let regValue = registers[reg] else {
-			throw error(.unexpectedArgument)
-		}
+		let regValue = try getRegValue(for: reg)
 		
 		try push(regValue)
 		
@@ -474,6 +478,45 @@ public class BytecodeInterpreter {
 		
 		return idPc
 	}
+	
+	// MARK: - Registers
+	
+	fileprivate func removeRegValue(in reg: String) throws {
+		
+		let key = privateReg(for: reg)
+
+		registers.removeValue(forKey: key)
+
+		// TODO: throw error?
+//		guard let _ = registers.removeValue(forKey: key) else {
+//			throw error(.unexpectedArgument)
+//		}
+	}
+	
+	fileprivate func getRegValue(for reg: String) throws -> StackElement {
+		
+		let key = privateReg(for: reg)
+
+		guard let regValue = registers[key] else {
+			throw error(.unexpectedArgument)
+		}
+		
+		return regValue
+	}
+	
+	fileprivate func setRegValue(_ value: StackElement, for reg: String) {
+		
+		let key = privateReg(for: reg)
+		registers[key] = value
+		
+	}
+	
+	fileprivate func privateReg(for reg: String) -> String {
+//		return "\(functionDepth)_\(reg)"
+		return "\(reg)"
+	}
+	
+	// MARK: -
 	
 	// TODO: max cache size?
 	fileprivate var labelProgramCountersCache = [String : Int]()
