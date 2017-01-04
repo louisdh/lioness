@@ -4,9 +4,11 @@
 ![Platform](https://img.shields.io/badge/Platforms-iOS%20%7C%20macOS%20%7C%20tvOS%20%7C%20watchOS-lightgrey.svg)
 [![Twitter](https://img.shields.io/badge/Twitter-@LouisDhauwe-blue.svg?style=flat)](http://twitter.com/LouisDhauwe)
 
-Lioness is a programming language, this project includes the lexer, parser, compiler and interpreter. All of these are 100% written in Swift with no depedencies. 
+Lioness is a high-level programming language designed for mathematical purposes. This project includes a lexer, parser, compiler and interpreter. All of these are 100% written in Swift with no depedencies. 
 
-Lioness is inspired by Swift in terms of its syntax, and inspired by shader languages (e.g. GLSL) for its feature set. 
+Lioness is inspired by Swift in terms of its syntax, and inspired by shader languages (e.g. GLSL) for its feature set.
+
+The standard library (abbreviated: stdlib) contains basic functions for number manipulation, such as: max/min, ceil, floor, trigonometric functions, etc. However, functions to calculate prime numbers and the like are not considered relevant for the standard library.
 
 ## Inner workings
 Lioness source code is compiled to bytecode, called Scorpion. Scorpion is a simple instruction language, with a very small instruction set (currently 20). <!-- TODO: add list -->
