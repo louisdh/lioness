@@ -38,6 +38,10 @@
 		BE2CC6631DB94D3500F74DBE /* Runner+Performance.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE2CC6621DB94D3500F74DBE /* Runner+Performance.swift */; };
 		BE2CC6651DB94F7100F74DBE /* Lexer+Performance.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE2CC6641DB94F7100F74DBE /* Lexer+Performance.swift */; };
 		BE2CC6671DBA79AD00F74DBE /* WhileStatementNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE2CC6661DBA79AD00F74DBE /* WhileStatementNode.swift */; };
+		BE2ECC461E1C54CD00CCD588 /* BytecodePrivateEnd.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE2ECC451E1C54CD00CCD588 /* BytecodePrivateEnd.swift */; };
+		BE2ECC471E1C54CD00CCD588 /* BytecodePrivateEnd.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE2ECC451E1C54CD00CCD588 /* BytecodePrivateEnd.swift */; };
+		BE2ECC491E1C552300CCD588 /* BytecodePrivateFunctionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE2ECC481E1C552300CCD588 /* BytecodePrivateFunctionHeader.swift */; };
+		BE2ECC4A1E1C552300CCD588 /* BytecodePrivateFunctionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE2ECC481E1C552300CCD588 /* BytecodePrivateFunctionHeader.swift */; };
 		BE37DFA51DBB8FBD003F6A3E /* ParseError.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE37DFA41DBB8FBD003F6A3E /* ParseError.swift */; };
 		BE37DFAB1DBB96CF003F6A3E /* Runner+Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE37DFAA1DBB96CF003F6A3E /* Runner+Tests.swift */; };
 		BE37DFAD1DBBBAEA003F6A3E /* ContinueNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE37DFAC1DBBBAEA003F6A3E /* ContinueNode.swift */; };
@@ -133,6 +137,8 @@
 		BE2CC6621DB94D3500F74DBE /* Runner+Performance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = "Runner+Performance.swift"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		BE2CC6641DB94F7100F74DBE /* Lexer+Performance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = "Lexer+Performance.swift"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		BE2CC6661DBA79AD00F74DBE /* WhileStatementNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = WhileStatementNode.swift; path = AST/WhileStatementNode.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		BE2ECC451E1C54CD00CCD588 /* BytecodePrivateEnd.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BytecodePrivateEnd.swift; path = Interpreter/BytecodePrivateEnd.swift; sourceTree = "<group>"; };
+		BE2ECC481E1C552300CCD588 /* BytecodePrivateFunctionHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BytecodePrivateFunctionHeader.swift; path = Interpreter/BytecodePrivateFunctionHeader.swift; sourceTree = "<group>"; };
 		BE37DFA41DBB8FBD003F6A3E /* ParseError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = ParseError.swift; path = Parser/ParseError.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		BE37DFAA1DBB96CF003F6A3E /* Runner+Tests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = "Runner+Tests.swift"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		BE37DFAC1DBBBAEA003F6A3E /* ContinueNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContinueNode.swift; sourceTree = "<group>"; };
@@ -402,6 +408,8 @@
 				BE4AF05B1DFD855F00ECE275 /* BytecodeFunctionHeader.swift */,
 				BEE50BAC1E05EC43006D8EE3 /* BytecodeMainHeader.swift */,
 				BEE50BAE1E05EC5B006D8EE3 /* BytecodeEnd.swift */,
+				BE2ECC451E1C54CD00CCD588 /* BytecodePrivateEnd.swift */,
+				BE2ECC481E1C552300CCD588 /* BytecodePrivateFunctionHeader.swift */,
 				BED616D81DFD7EA000A70820 /* Instruction */,
 				BE25BA201DDBC81B00041A20 /* Scope Tree */,
 				BE9369FB1DA83AB000C0B3DF /* BytecodeCompiler.swift */,
@@ -618,6 +626,7 @@
 				BE22963A1DB16F2100EA477A /* FunctionNode.swift in Sources */,
 				BE22963B1DB16F2100EA477A /* PrototypeNode.swift in Sources */,
 				BEE50BAD1E05EC43006D8EE3 /* BytecodeMainHeader.swift in Sources */,
+				BE2ECC461E1C54CD00CCD588 /* BytecodePrivateEnd.swift in Sources */,
 				BE25BA241DDD1F0000041A20 /* ASTNode+Validation.swift in Sources */,
 				BE25BA1D1DD8F5F500041A20 /* ForStatementNode.swift in Sources */,
 				BE2296311DB16F1B00EA477A /* Lexer.swift in Sources */,
@@ -656,6 +665,7 @@
 				BE2296341DB16F2100EA477A /* ASTNode.swift in Sources */,
 				BE2CC6671DBA79AD00F74DBE /* WhileStatementNode.swift in Sources */,
 				BE22963E1DB16F2100EA477A /* BytecodeInstructionType.swift in Sources */,
+				BE2ECC491E1C552300CCD588 /* BytecodePrivateFunctionHeader.swift in Sources */,
 				BE446C491DCD3C7B0085EEE0 /* ASTNodeDescriptor.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -681,6 +691,7 @@
 				BE58C1681E16D7F900BC73CA /* ScopeNode.swift in Sources */,
 				BE58C1711E16D80500BC73CA /* VariableNode.swift in Sources */,
 				BE58C15D1E16D7EC00BC73CA /* Array+Safe.swift in Sources */,
+				BE2ECC471E1C54CD00CCD588 /* BytecodePrivateEnd.swift in Sources */,
 				BE58C1771E16D80500BC73CA /* ReturnNode.swift in Sources */,
 				BE58C15F1E16D7F100BC73CA /* BytecodeInterpreter.swift in Sources */,
 				BE58C16D1E16D80500BC73CA /* ASTNode+Validation.swift in Sources */,
@@ -719,6 +730,7 @@
 				BE58C1631E16D7F900BC73CA /* BytecodeMainHeader.swift in Sources */,
 				BE58C1661E16D7F900BC73CA /* BytecodeInstructionType.swift in Sources */,
 				BE58C1781E16D80500BC73CA /* ConditionalStatementNode.swift in Sources */,
+				BE2ECC4A1E1C552300CCD588 /* BytecodePrivateFunctionHeader.swift in Sources */,
 				BE58C16A1E16D80500BC73CA /* ASTNodeDescriptor.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

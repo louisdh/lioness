@@ -8,7 +8,6 @@
 
 import Foundation
 
-
 public class BytecodeFunctionHeader: BytecodeLine {
 
 	let id: String

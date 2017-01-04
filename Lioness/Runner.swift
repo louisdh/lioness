@@ -63,13 +63,13 @@ public class Runner {
 		
 		let interpreter = try BytecodeInterpreter(bytecode: bytecode)
 		try interpreter.interpret()
-		
-		guard let result = interpreter.registers[reg] else {
+	
+		do {
+			return try interpreter.getRegValue(for: reg)
+		} catch {
 			throw RunnerError.registerNotFound
 		}
-		
-		return result
-		
+	
 	}
 	
 	public func runSource(at path: String) throws {
@@ -263,10 +263,15 @@ public class Runner {
 
 				for (key, value) in interpreter.registers {
 					
-					if let varReg = compiler.getDecompiledVarName(for: key) {
-						log("\(varReg) (\(key)) = \(value)")
+					if let compiledKey = interpreter.regName(for: key),
+						let varName = compiler.getDecompiledVarName(for: compiledKey) {
+						
+						log("\(varName) (\(key)) = \(value)")
+						
 					} else {
+						
 						log("\(key) = \(value)")
+						
 					}
 					
 				}
@@ -277,6 +282,14 @@ public class Runner {
 			
 			if logDebug {
 				
+				log("pc trace:")
+
+				for pc in interpreter.pcTrace {
+					log(bytecode[pc].description)
+				}
+				
+				log("\n")
+
 				log(error)
 				
 			}
@@ -312,13 +325,13 @@ public class Runner {
 		
 		for b in bytecode {
 			
-			if b is BytecodeEnd {
+			if b is BytecodeEnd || b is BytecodePrivateEnd {
 				indentLevel -= 1
 			}
 			
 			var description = ""
 			
-			if b is BytecodeFunctionHeader {
+			if b is BytecodeFunctionHeader || b is BytecodePrivateFunctionHeader {
 				description += "\n"
 			}
 			
@@ -328,13 +341,13 @@ public class Runner {
 			
 			description += b.description
 			
-			if b is BytecodeEnd {
+			if b is BytecodeEnd || b is BytecodePrivateEnd {
 				description += "\n"
 			}
 			
 			log(description)
 			
-			if b is BytecodeFunctionHeader {
+			if b is BytecodeFunctionHeader || b is BytecodePrivateFunctionHeader {
 				indentLevel += 1
 			}
 			

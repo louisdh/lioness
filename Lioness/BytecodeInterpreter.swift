@@ -39,7 +39,8 @@ public class BytecodeInterpreter {
 	/// Registers
 	fileprivate(set) public var registers = [String : StackElement]()
 	
-	
+	fileprivate(set) var pcTrace = [Int]()
+
 	// MARK: - Init
 	
 	/// Initalize a BytecodeInterpreter with an array of BytecodeInstruction
@@ -94,7 +95,15 @@ public class BytecodeInterpreter {
 				funcStack.append(funcLine.id)
 			}
 
-			if line is BytecodeEnd {
+			if let funcLine = line as? BytecodePrivateFunctionHeader {
+				// + 1 for first line in function
+				// header should never be jumped to
+				functionMap[funcLine.id] = pc + 1
+				
+				funcStack.append(funcLine.id)
+			}
+			
+			if line is BytecodeEnd || line is BytecodePrivateEnd {
 				
 				guard let currentFunc = funcStack.popLast() else {
 					throw error(.unexpectedArgument)
@@ -126,31 +135,47 @@ public class BytecodeInterpreter {
 		
 		while pc < bytecode.count {
 			
-			if let instruction = bytecode[pc] as? BytecodeInstruction {
-				
-				pc = try executeInstruction(instruction, pc: pc)
-				
-			} else if bytecode[pc] is BytecodeEnd {
-				
-				pc = try popFunctionInvoke()
-				
-				functionDepth -= 1
-				
-			} else if let functionHeader = bytecode[pc] as? BytecodeFunctionHeader {
-
-				guard let funcEndPc = functionEndMap[functionHeader.id] else {
-					throw error(.unexpectedArgument)
-				}
-				
-				functionDepth += 1
-				
-				pc = funcEndPc + 1
-				
-			} else {
-				
+			pcTrace.append(pc)
+			pc = try executeLine(bytecode[pc], pc: pc)
+			
+		}
+		
+	}
+	
+	fileprivate func executeLine(_ line: BytecodeLine, pc: Int) throws -> Int {
+		
+		if let instruction = line as? BytecodeInstruction {
+			
+			return try executeInstruction(instruction, pc: pc)
+			
+		} else if line is BytecodeEnd {
+			
+			// In theory should never be called?
+			return try popFunctionInvoke()
+			
+		} else if let functionHeader = line as? BytecodeFunctionHeader {
+			
+			guard let funcEndPc = functionEndMap[functionHeader.id] else {
 				throw error(.unexpectedArgument)
-				
 			}
+			
+			return funcEndPc + 1
+			
+		} else if line is BytecodePrivateEnd {
+			
+			return try popFunctionInvoke()
+			
+		} else if let functionHeader = line as? BytecodePrivateFunctionHeader {
+			
+			guard let funcEndPc = functionEndMap[functionHeader.id] else {
+				throw error(.unexpectedArgument)
+			}
+			
+			return funcEndPc + 1
+			
+		} else {
+			
+			throw error(.unexpectedArgument)
 			
 		}
 		
@@ -476,6 +501,11 @@ public class BytecodeInterpreter {
 		// return to next pc after function returns
 		try pushFunctionInvoke(pc + 1)
 		
+		// TODO: if not private function {
+		if bytecode[idPc - 1] is BytecodeFunctionHeader {
+			functionDepth += 1
+		}
+
 		return idPc
 	}
 	
@@ -483,7 +513,12 @@ public class BytecodeInterpreter {
 	
 	fileprivate func removeRegValue(in reg: String) throws {
 		
-		let key = privateReg(for: reg)
+		guard let key = privateReg(for: reg) else {
+			return
+//			throw error(.unexpectedArgument)
+		}
+		
+		regMap[reg]?.removeLast()
 
 		registers.removeValue(forKey: key)
 
@@ -493,9 +528,11 @@ public class BytecodeInterpreter {
 //		}
 	}
 	
-	fileprivate func getRegValue(for reg: String) throws -> StackElement {
+	public func getRegValue(for reg: String) throws -> StackElement {
 		
-		let key = privateReg(for: reg)
+		guard let key = privateReg(for: reg) else {
+			throw error(.unexpectedArgument)
+		}
 
 		guard let regValue = registers[key] else {
 			throw error(.unexpectedArgument)
@@ -506,14 +543,40 @@ public class BytecodeInterpreter {
 	
 	fileprivate func setRegValue(_ value: StackElement, for reg: String) {
 		
-		let key = privateReg(for: reg)
-		registers[key] = value
+		let privateKey = "\(functionDepth)_\(reg)"
+		
+		// FIXME: make faster?
+		if regMap[reg] != nil {
+			regMap[reg]?.append(privateKey)
+		} else {
+			regMap[reg] = [privateKey]
+		}
+		
+		registers[privateKey] = value
 		
 	}
 	
-	fileprivate func privateReg(for reg: String) -> String {
-//		return "\(functionDepth)_\(reg)"
-		return "\(reg)"
+	fileprivate var regMap = [String : [String]]()
+	
+	fileprivate func privateReg(for reg: String) -> String? {
+		return regMap[reg]?.last
+	}
+	
+	public func regName(for privateReg: String) -> String? {
+		
+		for (k, v) in regMap {
+			
+			for reg in v {
+				
+				if reg == privateReg {
+					return k
+				}
+				
+			}
+			
+		}
+		
+		return nil
 	}
 	
 	// MARK: -
@@ -538,6 +601,9 @@ public class BytecodeInterpreter {
 		if foundLabel == nil {
 			
 			if let exitFunctionLabel = functionInvokeStack.popLast() {
+				
+				functionDepth -= 1
+				
 				return exitFunctionLabel
 			}
 			

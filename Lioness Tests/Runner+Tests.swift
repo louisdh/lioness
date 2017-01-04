@@ -56,7 +56,7 @@ class Runner_Tests: BaseTestCase {
 		
 		do {
 			
-			let sum = try runner.runSource(at: path, andGetVar: "sum")
+			let sum = try runner.runSource(at: path, get: "sum")
 			
 			XCTAssert(sum == 7_255_941_120, "Binary operation returned wrong result")
 		
