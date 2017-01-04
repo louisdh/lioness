@@ -545,6 +545,8 @@ public class BytecodeInterpreter {
 		
 		let privateKey = "\(functionDepth)_\(reg)"
 		
+		// FIXME: don't always set to new depth (only for function parameters?, else check if var already defined)
+		
 		// FIXME: make faster?
 		if regMap[reg] != nil {
 			regMap[reg]?.append(privateKey)
