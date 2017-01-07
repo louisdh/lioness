@@ -105,8 +105,7 @@ public class Runner {
 			throw RunnerError.runFailed
 		}
 
-		var fullBytecode = compiledStdLib
-		fullBytecode.append(contentsOf: compiledSource)
+		let fullBytecode = compiledStdLib + compiledSource
 		
 		let interpretStartTime = CFAbsoluteTimeGetCurrent()
 

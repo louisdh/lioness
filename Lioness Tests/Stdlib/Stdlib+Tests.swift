@@ -48,10 +48,8 @@ class Stdlib_Tests: BaseTestCase {
 
 	func testStdlibValidation() {
 		
-		do {
-			
+		do {			
 			_ = try getStdlibSource()
-			
 		} catch {
 			XCTAssert(false, "Stdlib source error")
 		}
