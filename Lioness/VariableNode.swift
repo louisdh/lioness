@@ -20,7 +20,7 @@ public class VariableNode: ASTNode {
 		
 		var bytecode = BytecodeBody()
 
-		let varReg = ctx.getRegister(for: name)
+		let (varReg, _) = ctx.getRegister(for: name)
 		let load = BytecodeInstruction(label: ctx.nextIndexLabel(), type: .registerLoad, arguments: [varReg], comment: name)
 		
 		bytecode.append(load)

@@ -44,12 +44,13 @@ public enum BytecodeInstructionType: UInt8, CustomStringConvertible {
 
 	
 	case goto = 15
-	
+
 	case registerStore = 16
-	case registerClear = 17
-	case registerLoad = 18
+	case registerUpdate = 17
+	case registerClear = 18
+	case registerLoad = 19
 	
-	case invokeFunc = 19
+	case invokeFunc = 20
 	
 	public var opCode: UInt8 {
 		return self.rawValue
@@ -109,6 +110,9 @@ public enum BytecodeInstructionType: UInt8, CustomStringConvertible {
 			
 		case .registerStore:
 			return "reg_store"
+			
+		case .registerUpdate:
+			return "reg_update"
 			
 		case .registerClear:
 			return "reg_clear"

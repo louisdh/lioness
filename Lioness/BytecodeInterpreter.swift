@@ -234,6 +234,9 @@ public class BytecodeInterpreter {
 			case .registerStore:
 				newPc = try executeStore(instruction, pc: pc)
 			
+			case .registerUpdate:
+				newPc = try executeRegisterUpdate(instruction, pc: pc)
+			
 			case .registerClear:
 				newPc = try executeRegisterClear(instruction, pc: pc)
 			
@@ -464,6 +467,17 @@ public class BytecodeInterpreter {
 		return pc + 1
 	}
 	
+	fileprivate func executeRegisterUpdate(_ instruction: BytecodeInstruction, pc: Int) throws -> Int {
+		
+		guard let reg = instruction.arguments.first else {
+			throw error(.unexpectedArgument)
+		}
+		
+		try updateRegValue(try pop(), for: reg)
+		
+		return pc + 1
+	}
+	
 	fileprivate func executeRegisterClear(_ instruction: BytecodeInstruction, pc: Int) throws -> Int {
 
 		guard let reg = instruction.arguments.first else {
@@ -545,13 +559,21 @@ public class BytecodeInterpreter {
 		
 		let privateKey = "\(functionDepth)_\(reg)"
 		
-		// FIXME: don't always set to new depth (only for function parameters?, else check if var already defined)
-		
 		// FIXME: make faster?
 		if regMap[reg] != nil {
 			regMap[reg]?.append(privateKey)
 		} else {
 			regMap[reg] = [privateKey]
+		}
+		
+		registers[privateKey] = value
+		
+	}
+	
+	fileprivate func updateRegValue(_ value: StackElement, for reg: String) throws {
+
+		guard let privateKey = privateReg(for: reg) else {
+			throw error(.unexpectedArgument)
 		}
 		
 		registers[privateKey] = value

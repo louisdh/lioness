@@ -108,7 +108,7 @@ public class FunctionNode: ASTNode {
 		for arg in prototype.argumentNames.reversed() {
 			
 			let label = ctx.nextIndexLabel()
-			let varReg = ctx.getRegister(for: arg)
+			let (varReg, _) = ctx.getRegister(for: arg)
 			let instruction = BytecodeInstruction(label: label, type: .registerStore, arguments: [varReg], comment: "\(arg)")
 			
 			bytecode.append(instruction)

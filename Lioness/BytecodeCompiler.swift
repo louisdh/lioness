@@ -254,16 +254,20 @@ public class BytecodeCompiler {
 	
 	fileprivate var registerCount = 0
 
-	func getRegister(for varName: String) -> String {
+	/// Get register for var name
+	///
+	/// - Parameter varName: var name
+	/// - Returns: Register and boolean (true = register is new, false = reused)
+	func getRegister(for varName: String) -> (String, Bool) {
 		
 		if let existingReg = currentScopeNode.deepRegisterMap()[varName] {
-			return existingReg
+			return (existingReg, false)
 		}
 		
 		let newReg = getNewRegister()
 		currentScopeNode.registerMap[varName] = newReg
 		
-		return newReg
+		return (newReg, true)
 	}
 	
 	func getNewInternalRegisterAndStoreInScope() -> String {
