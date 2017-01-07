@@ -1,4 +1,4 @@
-<center><img src="readme-resources/logo.png" style="max-height: 300px; margin-bottom:-55px; margin-top:-50px;"></center>
+<center><img src="doc-resources/readme/logo.png" style="max-height: 300px; margin-bottom:-55px; margin-top:-50px;"></center>
 
 #<center>The Lioness Programming Language</center>
 
