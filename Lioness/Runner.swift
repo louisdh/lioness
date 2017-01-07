@@ -20,12 +20,14 @@ public protocol RunnerDelegate {
 
 public enum RunnerError: Error {
 	case registerNotFound
+	case stdlibFailed
+	case runFailed
 }
 
 /// Runs through full pipeline, from lexer to interpreter
 public class Runner {
 	
-	fileprivate var logDebug: Bool
+	fileprivate let logDebug: Bool
 	
 	fileprivate var source: String?
 	
@@ -49,21 +51,25 @@ public class Runner {
 	
 	func run(_ source: String, get varName: String) throws -> Double {
 		
-		let lexer = Lexer(input: source)
-		let tokens = lexer.tokenize()
+		let stdLib = try StdLib().stdLibCode()
 		
-		let parser = Parser(tokens: tokens)
-		let ast = try parser.parse()
-		
-		let bytecode = try compiler.compile(ast)
-		
-		guard let reg = compiler.getCompiledRegister(for: varName) else {
-			throw RunnerError.registerNotFound
+		guard let compiledStdLib = compileLionessSourceCode(stdLib) else {
+			throw RunnerError.stdlibFailed
 		}
+		
+		guard let compiledSource = compileLionessSourceCode(source) else {
+			throw RunnerError.runFailed
+		}
+
+		let bytecode = compiledStdLib + compiledSource
 		
 		let interpreter = try BytecodeInterpreter(bytecode: bytecode)
 		try interpreter.interpret()
 	
+		guard let reg = compiler.getCompiledRegister(for: varName) else {
+			throw RunnerError.registerNotFound
+		}
+		
 		do {
 			return try interpreter.getRegValue(for: reg)
 		} catch {
@@ -84,8 +90,7 @@ public class Runner {
 		let stdLib = try StdLib().stdLibCode()
 		
 		guard let compiledStdLib = compileLionessSourceCode(stdLib) else {
-			// TODO: throw error
-			return
+			throw RunnerError.stdlibFailed
 		}
 		
 		self.source = source
@@ -97,8 +102,7 @@ public class Runner {
 		}
 		
 		guard let compiledSource = compileLionessSourceCode(source) else {
-			// TODO: throw error
-			return
+			throw RunnerError.runFailed
 		}
 
 		var fullBytecode = compiledStdLib
