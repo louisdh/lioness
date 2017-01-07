@@ -79,11 +79,12 @@ class Runner_Tests: BaseTestCase {
 		
 	}
 	
-	func assert(in file: String, that varName: String, equals expectedValue: Double) {
+	func assert(in file: String, that `var`: String, equals expectedValue: Double) {
 		
-		let result = try? execute(file, get: varName)
+		let result = try? execute(file, get: `var`)
 		
-		XCTAssert(result == expectedValue, "Wrong result")
+		let message = "[\(file).lion]: Expected \(expectedValue) as the value of \(`var`), but found: \(result)"
+		XCTAssert(result == expectedValue, message)
 		
 	}
 	
