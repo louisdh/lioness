@@ -73,6 +73,13 @@ class Runner_Tests: BaseTestCase {
 		
 	}
 	
+	func testFunctionGlobalVar() {
+		
+		let a = try? execute("FunctionGlobalVar", get: "a")
+		
+		XCTAssert(a == 12, "Wrong result")
+	}
+	
 	func execute(_ file: String, get varName: String) throws -> Double {
 	
 		let runner = Runner(logDebug: false)

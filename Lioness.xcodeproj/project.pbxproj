@@ -33,6 +33,7 @@
 		BE25BA241DDD1F0000041A20 /* ASTNode+Validation.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE25BA231DDD1F0000041A20 /* ASTNode+Validation.swift */; };
 		BE25BA261DDD2B7A00041A20 /* InternalVariableNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE25BA251DDD2B7A00041A20 /* InternalVariableNode.swift */; };
 		BE295CEB1DB14DCE0019EC57 /* Lexer+Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE295CEA1DB14DCE0019EC57 /* Lexer+Tests.swift */; };
+		BE2B29151E21A627007978BE /* FunctionGlobalVar.lion in Resources */ = {isa = PBXBuildFile; fileRef = BE2B29141E21A627007978BE /* FunctionGlobalVar.lion */; };
 		BE2CC65F1DB41E4400F74DBE /* ConditionalStatementNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE2CC65E1DB41E4400F74DBE /* ConditionalStatementNode.swift */; };
 		BE2CC6611DB94BF800F74DBE /* LargeMathOperation.lion in Resources */ = {isa = PBXBuildFile; fileRef = BE2CC6601DB94BF800F74DBE /* LargeMathOperation.lion */; };
 		BE2CC6631DB94D3500F74DBE /* Runner+Performance.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE2CC6621DB94D3500F74DBE /* Runner+Performance.swift */; };
@@ -135,6 +136,7 @@
 		BE295CE81DB14DCE0019EC57 /* Lioness macOS Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Lioness macOS Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BE295CEA1DB14DCE0019EC57 /* Lexer+Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Lexer+Tests.swift"; sourceTree = "<group>"; };
 		BE295CEC1DB14DCE0019EC57 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BE2B29141E21A627007978BE /* FunctionGlobalVar.lion */ = {isa = PBXFileReference; explicitFileType = sourcecode.glsl; fileEncoding = 4; path = FunctionGlobalVar.lion; sourceTree = "<group>"; };
 		BE2CC65E1DB41E4400F74DBE /* ConditionalStatementNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ConditionalStatementNode.swift; path = AST/ConditionalStatementNode.swift; sourceTree = "<group>"; };
 		BE2CC6601DB94BF800F74DBE /* LargeMathOperation.lion */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LargeMathOperation.lion; sourceTree = "<group>"; };
 		BE2CC6621DB94D3500F74DBE /* Runner+Performance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = "Runner+Performance.swift"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
@@ -413,6 +415,7 @@
 				BE2CC6601DB94BF800F74DBE /* LargeMathOperation.lion */,
 				BE37DFAE1DBBE2D3003F6A3E /* InnerWhileLoops.lion */,
 				BE62A8711DE6108F00A75453 /* Complex.lion */,
+				BE2B29141E21A627007978BE /* FunctionGlobalVar.lion */,
 			);
 			name = "Test source files";
 			sourceTree = "<group>";
@@ -620,6 +623,7 @@
 				BE2ED01E1E211C1D00CCD588 /* Fibonacci.lion in Resources */,
 				BE62A8721DE6108F00A75453 /* Complex.lion in Resources */,
 				BE37DFAF1DBBE2D3003F6A3E /* InnerWhileLoops.lion in Resources */,
+				BE2B29151E21A627007978BE /* FunctionGlobalVar.lion in Resources */,
 				BE2ED01F1E211C1D00CCD588 /* GreatestCommonDivisor.lion in Resources */,
 				BE2CC6611DB94BF800F74DBE /* LargeMathOperation.lion in Resources */,
 			);
