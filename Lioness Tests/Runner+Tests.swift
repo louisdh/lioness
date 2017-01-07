@@ -80,6 +80,14 @@ class Runner_Tests: BaseTestCase {
 		XCTAssert(a == 12, "Wrong result")
 	}
 	
+	func testDoTimesLoops() {
+
+		let a = try? execute("DoTimesLoops", get: "a")
+		
+		XCTAssert(a == 10000, "Wrong result")
+		
+	}
+	
 	func execute(_ file: String, get varName: String) throws -> Double {
 	
 		let runner = Runner(logDebug: false)
