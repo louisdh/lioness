@@ -11,6 +11,12 @@ import XCTest
 
 class Runner_Tests: BaseTestCase {
 	
+	enum RunnerTestError: Error {
+		case sourceNotFound
+		case executionFailed
+		case resultNotFound
+	}
+	
 	override func setUp() {
 		super.setUp()
 		// Put setup code here. This method is called before the invocation of each test method in the class.
@@ -45,26 +51,48 @@ class Runner_Tests: BaseTestCase {
 	
 	func testInnerWhileLoops() {
 		
+		let sum = try? execute("InnerWhileLoops", get: "sum")
+		
+		XCTAssert(sum == 7_255_941_120, "Binary operation returned wrong result")
+	
+	}
+	
+	func testGCD() {
+		
+		let a = try? execute("GreatestCommonDivisor", get: "a")
+		
+		XCTAssert(a == 4, "Wrong result")
+		
+	}
+	
+	func testFibonacci() {
+		
+		let a = try? execute("Fibonacci", get: "a")
+		
+		XCTAssert(a == 55, "Wrong result")
+		
+	}
+	
+	func execute(_ file: String, get varName: String) throws -> Double {
+	
 		let runner = Runner(logDebug: false)
-
-		let fileURL = getFilePath(for: "InnerWhileLoops")
-
+		
+		let fileURL = getFilePath(for: file)
+		
 		guard let path = fileURL?.path else {
-			XCTFail("Invalid path for test")
-			return
+			throw RunnerTestError.sourceNotFound
 		}
 		
 		do {
 			
-			let sum = try runner.runSource(at: path, get: "sum")
+			let result = try runner.runSource(at: path, get: varName)
 			
-			XCTAssert(sum == 7_255_941_120, "Binary operation returned wrong result")
-		
+			return result
+			
 		} catch {
-			XCTFail("Failed to run")
-			return
+			throw RunnerTestError.executionFailed
 		}
-	
+		
 	}
 	
 }

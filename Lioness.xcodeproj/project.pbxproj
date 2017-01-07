@@ -43,6 +43,8 @@
 		BE2ECC491E1C552300CCD588 /* BytecodePrivateFunctionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE2ECC481E1C552300CCD588 /* BytecodePrivateFunctionHeader.swift */; };
 		BE2ECC4A1E1C552300CCD588 /* BytecodePrivateFunctionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE2ECC481E1C552300CCD588 /* BytecodePrivateFunctionHeader.swift */; };
 		BE2ED01B1E202E1D00CCD588 /* Stdlib+Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE2ED01A1E202E1D00CCD588 /* Stdlib+Tests.swift */; };
+		BE2ED01E1E211C1D00CCD588 /* Fibonacci.lion in Resources */ = {isa = PBXBuildFile; fileRef = BE2ED01C1E211C1D00CCD588 /* Fibonacci.lion */; };
+		BE2ED01F1E211C1D00CCD588 /* GreatestCommonDivisor.lion in Resources */ = {isa = PBXBuildFile; fileRef = BE2ED01D1E211C1D00CCD588 /* GreatestCommonDivisor.lion */; };
 		BE37DFA51DBB8FBD003F6A3E /* ParseError.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE37DFA41DBB8FBD003F6A3E /* ParseError.swift */; };
 		BE37DFAB1DBB96CF003F6A3E /* Runner+Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE37DFAA1DBB96CF003F6A3E /* Runner+Tests.swift */; };
 		BE37DFAD1DBBBAEA003F6A3E /* ContinueNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE37DFAC1DBBBAEA003F6A3E /* ContinueNode.swift */; };
@@ -141,6 +143,8 @@
 		BE2ECC451E1C54CD00CCD588 /* BytecodePrivateEnd.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BytecodePrivateEnd.swift; path = Interpreter/BytecodePrivateEnd.swift; sourceTree = "<group>"; };
 		BE2ECC481E1C552300CCD588 /* BytecodePrivateFunctionHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BytecodePrivateFunctionHeader.swift; path = Interpreter/BytecodePrivateFunctionHeader.swift; sourceTree = "<group>"; };
 		BE2ED01A1E202E1D00CCD588 /* Stdlib+Tests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Stdlib+Tests.swift"; path = "Stdlib/Stdlib+Tests.swift"; sourceTree = "<group>"; };
+		BE2ED01C1E211C1D00CCD588 /* Fibonacci.lion */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Fibonacci.lion; sourceTree = "<group>"; };
+		BE2ED01D1E211C1D00CCD588 /* GreatestCommonDivisor.lion */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = GreatestCommonDivisor.lion; sourceTree = "<group>"; };
 		BE37DFA41DBB8FBD003F6A3E /* ParseError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = ParseError.swift; path = Parser/ParseError.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		BE37DFAA1DBB96CF003F6A3E /* Runner+Tests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = "Runner+Tests.swift"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		BE37DFAC1DBBBAEA003F6A3E /* ContinueNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContinueNode.swift; sourceTree = "<group>"; };
@@ -404,6 +408,8 @@
 		BE736A921DBD3C3000ADC83A /* Test source files */ = {
 			isa = PBXGroup;
 			children = (
+				BE2ED01C1E211C1D00CCD588 /* Fibonacci.lion */,
+				BE2ED01D1E211C1D00CCD588 /* GreatestCommonDivisor.lion */,
 				BE2CC6601DB94BF800F74DBE /* LargeMathOperation.lion */,
 				BE37DFAE1DBBE2D3003F6A3E /* InnerWhileLoops.lion */,
 				BE62A8711DE6108F00A75453 /* Complex.lion */,
@@ -611,8 +617,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BE2ED01E1E211C1D00CCD588 /* Fibonacci.lion in Resources */,
 				BE62A8721DE6108F00A75453 /* Complex.lion in Resources */,
 				BE37DFAF1DBBE2D3003F6A3E /* InnerWhileLoops.lion in Resources */,
+				BE2ED01F1E211C1D00CCD588 /* GreatestCommonDivisor.lion in Resources */,
 				BE2CC6611DB94BF800F74DBE /* LargeMathOperation.lion in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
