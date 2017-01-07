@@ -51,40 +51,39 @@ class Runner_Tests: BaseTestCase {
 	
 	func testInnerWhileLoops() {
 		
-		let sum = try? execute("InnerWhileLoops", get: "sum")
-		
-		XCTAssert(sum == 7_255_941_120, "Binary operation returned wrong result")
-	
+		assert(in: "InnerWhileLoops", that: "sum", equals: 7_255_941_120)
+
 	}
 	
 	func testGCD() {
 		
-		let a = try? execute("GreatestCommonDivisor", get: "a")
-		
-		XCTAssert(a == 4, "Wrong result")
-		
+		assert(in: "GreatestCommonDivisor", that: "a", equals: 4)
+
 	}
 	
 	func testFibonacci() {
 		
-		let a = try? execute("Fibonacci", get: "a")
-		
-		XCTAssert(a == 55, "Wrong result")
-		
+		assert(in: "Fibonacci", that: "a", equals: 55)
+
 	}
 	
 	func testFunctionGlobalVar() {
 		
-		let a = try? execute("FunctionGlobalVar", get: "a")
+		assert(in: "FunctionGlobalVar", that: "a", equals: 12)
 		
-		XCTAssert(a == 12, "Wrong result")
 	}
 	
 	func testDoTimesLoops() {
-
-		let a = try? execute("DoTimesLoops", get: "a")
 		
-		XCTAssert(a == 10000, "Wrong result")
+		assert(in: "DoTimesLoops", that: "a", equals: 10000)
+		
+	}
+	
+	func assert(in file: String, that varName: String, equals expectedValue: Double) {
+		
+		let result = try? execute(file, get: varName)
+		
+		XCTAssert(result == expectedValue, "Wrong result")
 		
 	}
 	
