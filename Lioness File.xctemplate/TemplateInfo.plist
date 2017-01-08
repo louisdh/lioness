@@ -17,6 +17,6 @@
 	<key>DefaultCompletionName</key>
 	<string>File</string>
 	<key>MainTemplateFile</key>
-	<string>___FILEBASENAME___.swift</string>
+	<string>___FILEBASENAME___.lion</string>
 </dict>
 </plist>
