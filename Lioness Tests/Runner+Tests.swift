@@ -65,6 +65,12 @@ class Runner_Tests: BaseTestCase {
 		
 	}
 	
+	func testFunctionReturnGlobalVar() {
+		
+		assert(in: "FunctionReturnGlobalVar", that: "a", equals: 12)
+		
+	}
+	
 	// MARK: - Boilerplate
 	
 	// TODO: Maybe set expectedValue in source file?
