@@ -29,6 +29,14 @@ class Runner_Tests: BaseTestCase {
 	
 	// MARK: - Tests
 	
+	func testUnusedFunctionResult() {
+		
+		let interpreter = try? execute("UnusedFunctionResult")
+		
+		XCTAssert(interpreter?.stack.isEmpty == true, "Expected stack to be empty")
+		
+	}
+	
 	func testBinaryOp() {
 		
 		assert(in: "BinaryOp", that: "a", equals: 512.75)
@@ -98,6 +106,28 @@ class Runner_Tests: BaseTestCase {
 			let result = try runner.runSource(at: path, get: varName)
 			
 			return result
+			
+		} catch {
+			throw RunnerTestError.executionFailed
+		}
+		
+	}
+	
+	func execute(_ file: String) throws -> BytecodeInterpreter {
+		
+		let runner = Runner(logDebug: false)
+		
+		let fileURL = getFilePath(for: file)
+		
+		guard let path = fileURL?.path else {
+			throw RunnerTestError.sourceNotFound
+		}
+		
+		do {
+			
+			try runner.runSource(at: path)
+			
+			return runner.interpreter
 			
 		} catch {
 			throw RunnerTestError.executionFailed
