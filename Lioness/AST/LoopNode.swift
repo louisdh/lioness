@@ -10,7 +10,7 @@ import Foundation
 
 public class LoopNode: ASTNode {
 	
-	public func compile(with ctx: BytecodeCompiler) throws -> BytecodeBody {
+	public func compile(with ctx: BytecodeCompiler, in parent: ASTNode?) throws -> BytecodeBody {
 		
 		var bytecode = BytecodeBody()
 		

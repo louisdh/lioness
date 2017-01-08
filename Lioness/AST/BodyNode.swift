@@ -17,14 +17,14 @@ public class BodyNode: ASTNode {
 		self.nodes = nodes
 	}
 	
-	public func compile(with ctx: BytecodeCompiler) throws -> BytecodeBody {
+	public func compile(with ctx: BytecodeCompiler, in parent: ASTNode?) throws -> BytecodeBody {
 		
 		ctx.enterNewScope()
 		
 		var bytecode = BytecodeBody()
 		
 		for a in nodes {
-			let instructions = try a.compile(with: ctx)
+			let instructions = try a.compile(with: ctx, in: self)
 			bytecode.append(contentsOf: instructions)
 		}
 		

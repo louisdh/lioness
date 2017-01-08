@@ -49,7 +49,7 @@ public class BytecodeCompiler {
 
 		for node in ast {
 			
-			let compiled = try node.compile(with: self)
+			let compiled = try node.compile(with: self, in: nil)
 			bytecode.append(contentsOf: compiled)
 			
 		}

@@ -21,7 +21,7 @@ public class PrototypeNode: ASTNode {
 	}
 	
 	// TODO: make ASTNode protocol without compile function? (and make one with compile func)
-	public func compile(with ctx: BytecodeCompiler) throws -> BytecodeBody {
+	public func compile(with ctx: BytecodeCompiler, in parent: ASTNode?) throws -> BytecodeBody {
 		return []
 	}
 	

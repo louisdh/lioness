@@ -33,7 +33,7 @@ public class BinaryOpNode: ASTNode {
 		self.rhs = rhs
 	}
 	
-	public func compile(with ctx: BytecodeCompiler) throws -> BytecodeBody {
+	public func compile(with ctx: BytecodeCompiler, in parent: ASTNode?) throws -> BytecodeBody {
 		
 		var bytecode = BytecodeBody()
 		
@@ -62,8 +62,8 @@ public class BinaryOpNode: ASTNode {
 			
 			// flip l and r
 
-			let r = try rhs?.compile(with: ctx)
-			let l = try lhs.compile(with: ctx)
+			let r = try rhs?.compile(with: ctx, in: self)
+			let l = try lhs.compile(with: ctx, in: self)
 			
 			if let r = r {
 				bytecode.append(contentsOf: r)
@@ -73,8 +73,8 @@ public class BinaryOpNode: ASTNode {
 			
 		} else {
 			
-			let l = try lhs.compile(with: ctx)
-			let r = try rhs?.compile(with: ctx)
+			let l = try lhs.compile(with: ctx, in: self)
+			let r = try rhs?.compile(with: ctx, in: self)
 			
 			bytecode.append(contentsOf: l)
 			

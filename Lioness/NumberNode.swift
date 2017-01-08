@@ -16,7 +16,7 @@ public class NumberNode: ASTNode {
 		self.value = value
 	}
 	
-	public func compile(with ctx: BytecodeCompiler) throws -> BytecodeBody {
+	public func compile(with ctx: BytecodeCompiler, in parent: ASTNode?) throws -> BytecodeBody {
 		
 		let i = self.value
 		let label = ctx.nextIndexLabel()

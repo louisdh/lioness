@@ -18,7 +18,7 @@ public class CallNode: ASTNode {
 		self.arguments = arguments
 	}
 	
-	public func compile(with ctx: BytecodeCompiler) throws -> BytecodeBody {
+	public func compile(with ctx: BytecodeCompiler, in parent: ASTNode?) throws -> BytecodeBody {
 
 		var bytecode = BytecodeBody()
 		
@@ -26,7 +26,7 @@ public class CallNode: ASTNode {
 		
 		for arg in arguments {
 			
-			let argInstructions = try arg.compile(with: ctx)
+			let argInstructions = try arg.compile(with: ctx, in: self)
 			bytecode.append(contentsOf: argInstructions)
 			
 		}

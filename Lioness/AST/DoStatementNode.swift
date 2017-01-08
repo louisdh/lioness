@@ -87,7 +87,7 @@ public class DoStatementNode: LoopNode {
 		
 		let ifeqLabel = ctx.nextIndexLabel()
 		
-		let bodyBytecode = try body.compile(with: ctx)
+		let bodyBytecode = try body.compile(with: ctx, in: self)
 		
 		let goToEndLabel = ctx.nextIndexLabel()
 		
@@ -109,7 +109,7 @@ public class DoStatementNode: LoopNode {
 	
 	fileprivate func assignmentInstructions(with ctx: BytecodeCompiler, and regName: String) throws -> BytecodeBody {
 		
-		let v = try amount.compile(with: ctx)
+		let v = try amount.compile(with: ctx, in: self)
 		
 		var bytecode = BytecodeBody()
 		
@@ -129,7 +129,7 @@ public class DoStatementNode: LoopNode {
 		let varNode = InternalVariableNode(register: regName, debugName: "do repeat iterator")
 		let conditionNode = try BinaryOpNode(op: ">", lhs: varNode, rhs: NumberNode(value: 0.0))
 		
-		let bytecode = try conditionNode.compile(with: ctx)
+		let bytecode = try conditionNode.compile(with: ctx, in: self)
 		
 		return bytecode
 		
@@ -140,7 +140,7 @@ public class DoStatementNode: LoopNode {
 		let varNode = InternalVariableNode(register: regName, debugName: "do repeat iterator")
 		let decrementNode = try BinaryOpNode(op: "-", lhs: varNode, rhs: NumberNode(value: 1.0))
 		
-		let v = try decrementNode.compile(with: ctx)
+		let v = try decrementNode.compile(with: ctx, in: self)
 		
 		var bytecode = BytecodeBody()
 		

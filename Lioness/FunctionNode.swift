@@ -18,7 +18,7 @@ public class FunctionNode: ASTNode {
 		self.body = body
 	}
 	
-	public func compile(with ctx: BytecodeCompiler) throws -> BytecodeBody {
+	public func compile(with ctx: BytecodeCompiler, in parent: ASTNode?) throws -> BytecodeBody {
 		
 		var bytecode = BytecodeBody()
 		
@@ -115,11 +115,11 @@ public class FunctionNode: ASTNode {
 			
 		}
 		
-		bytecode.append(contentsOf: try body.compile(with: ctx))
+		bytecode.append(contentsOf: try body.compile(with: ctx, in: self))
 		
 		if !prototype.returns {
 			let returnNode = ReturnNode()
-			bytecode.append(contentsOf: try returnNode.compile(with: ctx))
+			bytecode.append(contentsOf: try returnNode.compile(with: ctx, in: self))
 		}
 		
 		return bytecode

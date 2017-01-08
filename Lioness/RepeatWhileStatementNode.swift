@@ -29,10 +29,10 @@ public class RepeatWhileStatementNode: LoopNode {
 		
 		ctx.pushLoopContinue(scopeStart)
 		
-		let bodyBytecode = try body.compile(with: ctx)
+		let bodyBytecode = try body.compile(with: ctx, in: self)
 		bytecode.append(contentsOf: bodyBytecode)
 
-		let conditionInstruction = try condition.compile(with: ctx)
+		let conditionInstruction = try condition.compile(with: ctx, in: self)
 		bytecode.append(contentsOf: conditionInstruction)
 		
 		let ifeqLabel = ctx.nextIndexLabel()

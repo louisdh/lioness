@@ -16,13 +16,13 @@ public class ReturnNode: ASTNode {
 		self.value = value
 	}
 	
-	public func compile(with ctx: BytecodeCompiler) throws -> BytecodeBody {
+	public func compile(with ctx: BytecodeCompiler, in parent: ASTNode?) throws -> BytecodeBody {
 		
 		var bytecode = BytecodeBody()
 
 		if let value = value {
 			
-			let compiledValue = try value.compile(with: ctx)
+			let compiledValue = try value.compile(with: ctx, in: self)
 			
 			bytecode.append(contentsOf: compiledValue)
 			

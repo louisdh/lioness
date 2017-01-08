@@ -38,7 +38,7 @@ public class ForStatementNode: LoopNode {
 		var bytecode = BytecodeBody()
 		
 		
-		let assignInstructions = try assignment.compile(with: ctx)
+		let assignInstructions = try assignment.compile(with: ctx, in: self)
 		bytecode.append(contentsOf: assignInstructions)
 
 		
@@ -49,7 +49,7 @@ public class ForStatementNode: LoopNode {
 
 		let startOfLoopLabel = ctx.peekNextIndexLabel()
 
-		let intervalInstructions = try interval.compile(with: ctx)		
+		let intervalInstructions = try interval.compile(with: ctx, in: self)
 		
 		let skippedIntervalLabel = ctx.peekNextIndexLabel()
 
@@ -64,14 +64,14 @@ public class ForStatementNode: LoopNode {
 		
 		// Condition
 		
-		let conditionInstruction = try condition.compile(with: ctx)
+		let conditionInstruction = try condition.compile(with: ctx, in: self)
 		bytecode.append(contentsOf: conditionInstruction)
 		
 		
 		
 		let ifeqLabel = ctx.nextIndexLabel()
 		
-		let bodyBytecode = try body.compile(with: ctx)
+		let bodyBytecode = try body.compile(with: ctx, in: self)
 
 		let goToEndLabel = ctx.nextIndexLabel()
 		

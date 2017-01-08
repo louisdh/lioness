@@ -29,12 +29,12 @@ public class WhileStatementNode: LoopNode {
 		
 		ctx.pushLoopContinue(scopeStart)
 		
-		let conditionInstruction = try condition.compile(with: ctx)
+		let conditionInstruction = try condition.compile(with: ctx, in: self)
 		bytecode.append(contentsOf: conditionInstruction)
 		
 		let ifeqLabel = ctx.nextIndexLabel()
 		
-		let bodyBytecode = try body.compile(with: ctx)
+		let bodyBytecode = try body.compile(with: ctx, in: self)
 		
 		
 		let goToEndLabel = ctx.nextIndexLabel()

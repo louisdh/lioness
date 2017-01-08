@@ -18,9 +18,9 @@ public class AssignmentNode: ASTNode {
 		self.value = value
 	}
 	
-	public func compile(with ctx: BytecodeCompiler) throws -> BytecodeBody {
+	public func compile(with ctx: BytecodeCompiler, in parent: ASTNode?) throws -> BytecodeBody {
 		
-		let v = try value.compile(with: ctx)
+		let v = try value.compile(with: ctx, in: self)
 		
 		var bytecode = BytecodeBody()
 
