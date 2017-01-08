@@ -811,7 +811,6 @@ public class Parser {
 		
 		try popCurrentToken(andExpect: .curlyClose, "}")
 
-		
 		return FunctionNode(prototype: prototype, body: body)
 	}
 	
