@@ -118,6 +118,7 @@
 		BEE50BAD1E05EC43006D8EE3 /* BytecodeMainHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEE50BAC1E05EC43006D8EE3 /* BytecodeMainHeader.swift */; };
 		BEE50BAF1E05EC5B006D8EE3 /* BytecodeEnd.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEE50BAE1E05EC5B006D8EE3 /* BytecodeEnd.swift */; };
 		BEEB63711DC14E570019BC50 /* BodyNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEEB63701DC14E570019BC50 /* BodyNode.swift */; };
+		BEFD84131E21BB8500A6DB92 /* BinaryOp.lion in Resources */ = {isa = PBXBuildFile; fileRef = BEFD84121E21BB8500A6DB92 /* BinaryOp.lion */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -190,6 +191,7 @@
 		BEE50BAE1E05EC5B006D8EE3 /* BytecodeEnd.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = BytecodeEnd.swift; path = Compiler/BytecodeEnd.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		BEEB63701DC14E570019BC50 /* BodyNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = BodyNode.swift; path = AST/BodyNode.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		BEF5BA401DAC15B100D9ADB7 /* AssignmentNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = AssignmentNode.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		BEFD84121E21BB8500A6DB92 /* BinaryOp.lion */ = {isa = PBXFileReference; explicitFileType = sourcecode.glsl; fileEncoding = 4; path = BinaryOp.lion; sourceTree = "<group>"; };
 		BEFFCB8F1DAA77AE001EF8E4 /* BytecodeInterpreter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BytecodeInterpreter.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -419,6 +421,7 @@
 				BE62A8711DE6108F00A75453 /* Complex.lion */,
 				BE2B29141E21A627007978BE /* FunctionGlobalVar.lion */,
 				BE854DAB1E21B439003D251D /* DoTimesLoops.lion */,
+				BEFD84121E21BB8500A6DB92 /* BinaryOp.lion */,
 			);
 			name = "Test source files";
 			sourceTree = "<group>";
@@ -624,6 +627,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BE2ED01E1E211C1D00CCD588 /* Fibonacci.lion in Resources */,
+				BEFD84131E21BB8500A6DB92 /* BinaryOp.lion in Resources */,
 				BE854DAC1E21B439003D251D /* DoTimesLoops.lion in Resources */,
 				BE62A8721DE6108F00A75453 /* Complex.lion in Resources */,
 				BE37DFAF1DBBE2D3003F6A3E /* InnerWhileLoops.lion in Resources */,

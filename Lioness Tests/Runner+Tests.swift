@@ -27,26 +27,12 @@ class Runner_Tests: BaseTestCase {
 		super.tearDown()
 	}
 	
+	// MARK: - Tests
+	
 	func testBinaryOp() {
 		
-		let runner = Runner(logDebug: false)
-		
-		let source = "1 + 3 * (8^4 - 2) / 6 / 4"
-		
-		do {
-			try runner.run(source)
-		} catch {
-			XCTFail("Expected value at top of stack")
-			return
-		}
+		assert(in: "BinaryOp", that: "a", equals: 512.75)
 
-		guard let value = runner.interpreter?.stack.first else {
-			XCTFail("Expected value at top of stack")
-			return
-		}
-		
-		XCTAssert(value == 512.75, "Binary operation returned wrong result")
-		
 	}
 	
 	func testInnerWhileLoops() {
@@ -79,6 +65,9 @@ class Runner_Tests: BaseTestCase {
 		
 	}
 	
+	// MARK: - Boilerplate
+	
+	// TODO: Maybe set expectedValue in source file?
 	func assert(in file: String, that `var`: String, equals expectedValue: Double) {
 		
 		let result = try? execute(file, get: `var`)
