@@ -252,6 +252,9 @@ public class BytecodeInterpreter {
 			case .invokeFunc:
 				newPc = try executeInvokeFunction(instruction, pc: pc)
 			
+			case .pop:
+				newPc = try executePop(instruction, pc: pc)
+			
 		}
 		
 		return newPc
@@ -521,6 +524,13 @@ public class BytecodeInterpreter {
 		}
 
 		return idPc
+	}
+	
+	fileprivate func executePop(_ instruction: BytecodeInstruction, pc: Int) throws -> Int {
+		
+		_ = try pop()
+		
+		return pc + 1
 	}
 	
 	// MARK: - Registers

@@ -51,7 +51,9 @@ public enum BytecodeInstructionType: UInt8, CustomStringConvertible {
 	case registerLoad = 19
 	
 	case invokeFunc = 20
-	
+
+	case pop = 21
+
 	public var opCode: UInt8 {
 		return self.rawValue
 	}
@@ -122,6 +124,9 @@ public enum BytecodeInstructionType: UInt8, CustomStringConvertible {
 			
 		case .invokeFunc:
 			return "invoke_func"
+			
+		case .pop:
+			return "pop"
 			
 		}
 		
