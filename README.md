@@ -13,6 +13,23 @@ Lioness is inspired by Swift in terms of its syntax, and inspired by shader lang
 
 The standard library (abbreviated: stdlib) contains basic functions for number manipulation, such as: max/min, ceil, floor, trigonometric functions, etc. However, functions to calculate prime numbers and the like are not considered relevant for the standard library.
 
+## Example
+The following calculates factorials recursively:
+
+```
+func factorial(x) returns {
+	
+	if x > 1 {
+		return x * factorial(x - 1)
+	}
+	
+	return 1
+}
+
+a = factorial(5) // a = 120
+```
+*More examples can be found [here](Source examples).*
+
 ## Xcode file template
 Lioness source files can easily be created with Xcode, see [XcodeTemplate.md](XcodeTemplate.md) for instructions.
 
