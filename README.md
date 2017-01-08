@@ -13,6 +13,10 @@ Lioness is inspired by Swift in terms of its syntax, and inspired by shader lang
 
 The standard library (abbreviated: stdlib) contains basic functions for number manipulation, such as: max/min, ceil, floor, trigonometric functions, etc. However, functions to calculate prime numbers and the like are not considered relevant for the standard library.
 
+## Xcode file template
+Lioness source files can easily be created with Xcode, see [XcodeTemplate.md](XcodeTemplate.md) for instructions.
+
+
 ## Inner workings
 Lioness source code is compiled to bytecode, called Scorpion. Scorpion is a simple instruction language, with a very small instruction set (currently 20). <!-- TODO: add list -->
 
