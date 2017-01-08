@@ -25,6 +25,10 @@ public class PrototypeNode: ASTNode {
 		return []
 	}
 	
+	public var childNodes: [ASTNode] {
+		return []
+	}
+	
 	public var description: String {
 		return "PrototypeNode(name: \(name), argumentNames: \(argumentNames), returns: \(returns))"
 	}
@@ -33,7 +37,7 @@ public class PrototypeNode: ASTNode {
 		return "Prototype"
 	}
 	
-	public var childNodes: [ASTChildNode] {
+	public var descriptionChildNodes: [ASTChildNode] {
 		return []
 	}
 	

@@ -48,6 +48,10 @@ public class LoopNode: ASTNode {
 		return bytecode
 	}
 	
+	public var childNodes: [ASTNode] {
+		return []
+	}
+	
 	func compileLoop(with ctx: BytecodeCompiler, scopeStart: String) throws -> BytecodeBody {
 		return []
 	}
@@ -60,7 +64,7 @@ public class LoopNode: ASTNode {
 		return nil
 	}
 	
-	public var childNodes: [ASTChildNode] {
+	public var descriptionChildNodes: [ASTChildNode] {
 		return []
 	}
 	

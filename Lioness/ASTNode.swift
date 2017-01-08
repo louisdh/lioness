@@ -14,4 +14,6 @@ public protocol ASTNode: CustomStringConvertible, ASTNodeDescriptor {
 	/// Compiles to Scorpion bytecode instructions
 	func compile(with ctx: BytecodeCompiler, in parent: ASTNode?) throws -> BytecodeBody
 	
+	var childNodes: [ASTNode] { get }
+	
 }

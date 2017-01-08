@@ -72,7 +72,7 @@ fileprivate extension ASTNodeDescriptor {
 		var width: CGFloat = 0.0
 		var height: CGFloat = 0.0
 		
-		for c in childNodes {
+		for c in descriptionChildNodes {
 			
 			width += c.node.nodeSize.width
 			height += c.node.nodeSize.height
@@ -105,13 +105,13 @@ fileprivate extension ASTNodeDescriptor {
 	// make lazy?
 	var deephestNumberOfChildNodes: Int {
 		
-		if childNodes.isEmpty {
+		if descriptionChildNodes.isEmpty {
 			return 0
 		}
 		
 		var deephest = 1
 
-		for childNode in childNodes {
+		for childNode in descriptionChildNodes {
 			
 			let d = 1 + childNode.node.deephestNumberOfChildNodes
 			
@@ -128,13 +128,13 @@ fileprivate extension ASTNodeDescriptor {
 	// make lazy?
 	var widestNumberOfChildNodes: Int {
 		
-		if childNodes.isEmpty {
+		if descriptionChildNodes.isEmpty {
 			return 1
 		}
 		
 		var wide = 0
 		
-		for childNode in childNodes {
+		for childNode in descriptionChildNodes {
 			
 			wide += childNode.node.widestNumberOfChildNodes
 			
@@ -148,13 +148,13 @@ fileprivate extension ASTNodeDescriptor {
 	/// Without spacing
 	var nodeTreeDrawSize: CGSize {
 		
-		if childNodes.isEmpty {
+		if descriptionChildNodes.isEmpty {
 			return self.nodeSize
 		}
 		
 		var s = CGSize.zero
 		
-		for childNode in childNodes {
+		for childNode in descriptionChildNodes {
 			
 			s = s + childNode.node.nodeTreeDrawSize
 			
@@ -294,7 +294,7 @@ class ASTVisualizer {
 		
 		var i: CGFloat = 0
 
-		for childNode in node.childNodes {
+		for childNode in node.descriptionChildNodes {
 			
 			let farX = point.x - node.drawSize.width / 2.0
 			
@@ -302,7 +302,7 @@ class ASTVisualizer {
 			
 			for j in 0..<Int(i+1) {
 				
-				let jWidth = node.childNodes[j].node.drawSize.width
+				let jWidth = node.descriptionChildNodes[j].node.drawSize.width
 				if CGFloat(j) == i {
 					newXPosition += jWidth / 2.0
 				} else {

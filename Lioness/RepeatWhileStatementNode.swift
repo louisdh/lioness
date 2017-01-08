@@ -56,6 +56,10 @@ public class RepeatWhileStatementNode: LoopNode {
 		
 	}
 	
+	public override var childNodes: [ASTNode] {
+		return [condition, body]
+	}
+	
 	public override var description: String {
 		
 		var str = "RepeatWhileStatementNode(condition: \(condition), body: "
@@ -71,7 +75,7 @@ public class RepeatWhileStatementNode: LoopNode {
 		return "repeat"
 	}
 	
-	public override var childNodes: [ASTChildNode] {
+	public override var descriptionChildNodes: [ASTChildNode] {
 		var children = [ASTChildNode]()
 		
 		let bodyChildNode = ASTChildNode(node: body)

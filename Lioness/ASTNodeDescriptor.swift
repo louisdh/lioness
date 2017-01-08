@@ -14,7 +14,7 @@ public protocol ASTNodeDescriptor {
 		get
 	}
 	
-	var childNodes: [ASTChildNode] {
+	var descriptionChildNodes: [ASTChildNode] {
 		get
 	}
 	

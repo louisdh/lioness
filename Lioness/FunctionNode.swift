@@ -126,6 +126,10 @@ public class FunctionNode: ASTNode {
 		
 	}
 	
+	public var childNodes: [ASTNode] {
+		return [prototype, body]
+	}
+	
 	public var description: String {
 		
 		var str = "FunctionNode(prototype: \(prototype), "
@@ -139,10 +143,10 @@ public class FunctionNode: ASTNode {
 		return "Function"
 	}
 	
-	public var childNodes: [ASTChildNode] {
+	public var descriptionChildNodes: [ASTChildNode] {
 		var children = [ASTChildNode]()
 		
-		children.append(contentsOf: body.childNodes)
+		children.append(contentsOf: body.descriptionChildNodes)
 		
 		return children
 	}

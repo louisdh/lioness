@@ -48,6 +48,11 @@ public class BooleanNode: ASTNode {
 		
 	}
 	
+	public var childNodes: [ASTNode] {
+		return []
+	}
+	
+	
 	public var description: String {
 		return "BooleanNode(\(value))"
 	}
@@ -60,7 +65,7 @@ public class BooleanNode: ASTNode {
 		}
 	}
 	
-	public var childNodes: [ASTChildNode] {
+	public var descriptionChildNodes: [ASTChildNode] {
 		return []
 	}
 	

@@ -29,6 +29,10 @@ public class VariableNode: ASTNode {
 		
 	}
 	
+	public var childNodes: [ASTNode] {
+		return []
+	}
+	
 	public var description: String {
 		return "VariableNode(\(name))"
 	}
@@ -37,7 +41,7 @@ public class VariableNode: ASTNode {
 		return "\(name)"
 	}
 	
-	public var childNodes: [ASTChildNode] {
+	public var descriptionChildNodes: [ASTChildNode] {
 		return []
 	}
 	

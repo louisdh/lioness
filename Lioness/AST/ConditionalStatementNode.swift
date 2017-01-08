@@ -64,6 +64,16 @@ public class ConditionalStatementNode: ASTNode {
 		
 	}
 	
+	public var childNodes: [ASTNode] {
+		var children = [condition, body]
+		
+		if let elseBody = elseBody {
+			children.append(elseBody)
+		}
+		
+		return children
+	}
+	
 	public var description: String {
 		
 		var str = "ConditionalStatementNode(condition: \(condition), body: ["
@@ -91,7 +101,7 @@ public class ConditionalStatementNode: ASTNode {
 		return "if"
 	}
 	
-	public var childNodes: [ASTChildNode] {
+	public var descriptionChildNodes: [ASTChildNode] {
 		var children = [ASTChildNode]()
 		
 		let conditionChildNode = ASTChildNode(connectionToParent: "condition", isConnectionConditional: false, node: condition)

@@ -97,6 +97,10 @@ public class ForStatementNode: LoopNode {
 		
 	}
 	
+	public override var childNodes: [ASTNode] {
+		return [assignment, condition, interval, body]
+	}
+	
 	public override var description: String {
 		
 		var str = "ForStatementNode(assignment: \(assignment), "
@@ -116,7 +120,7 @@ public class ForStatementNode: LoopNode {
 		return "for"
 	}
 	
-	public override var childNodes: [ASTChildNode] {
+	public override var descriptionChildNodes: [ASTChildNode] {
 		var children = [ASTChildNode]()
 		
 		let assignmentChildNode = ASTChildNode(connectionToParent: "assignment", isConnectionConditional: false, node: assignment)

@@ -34,6 +34,10 @@ public class BodyNode: ASTNode {
 		
 	}
 	
+	public var childNodes: [ASTNode] {
+		return nodes
+	}
+	
 	public var description: String {
 		var str = ""
 		
@@ -48,7 +52,7 @@ public class BodyNode: ASTNode {
 		return "body"
 	}
 	
-	public var childNodes: [ASTChildNode] {
+	public var descriptionChildNodes: [ASTChildNode] {
 		var children = [ASTChildNode]()
 		
 		for a in nodes {

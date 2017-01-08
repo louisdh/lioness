@@ -42,6 +42,10 @@ public class ReturnNode: ASTNode {
 		return bytecode
 	}
 	
+	public var childNodes: [ASTNode] {
+		return []
+	}
+	
 	public var description: String {
 		return "ReturnNode"
 	}
@@ -50,7 +54,7 @@ public class ReturnNode: ASTNode {
 		return "return"
 	}
 	
-	public var childNodes: [ASTChildNode] {
+	public var descriptionChildNodes: [ASTChildNode] {
 		return []
 	}
 	

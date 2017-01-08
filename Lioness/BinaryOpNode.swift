@@ -95,6 +95,14 @@ public class BinaryOpNode: ASTNode {
 		
 	}
 	
+	public var childNodes: [ASTNode] {
+		if let rhs = rhs {
+			return [lhs, rhs]
+		}
+		
+		return [lhs]
+	}
+	
 	public var description: String {
 		return "BinaryOpNode(\(op), lhs: \(lhs), rhs: \(rhs))"
 	}
@@ -103,7 +111,7 @@ public class BinaryOpNode: ASTNode {
 		return op
 	}
 	
-	public var childNodes: [ASTChildNode] {
+	public var descriptionChildNodes: [ASTChildNode] {
 		let l = ASTChildNode(connectionToParent: "lhs", node: lhs)
 		
 		if let rhs = rhs {

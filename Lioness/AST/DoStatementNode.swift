@@ -155,6 +155,10 @@ public class DoStatementNode: LoopNode {
 		
 	}
 	
+	public override var childNodes: [ASTNode] {
+		return [amount, body]
+	}
+	
 	// MARK: -
 	
 	public override var description: String {
@@ -172,7 +176,7 @@ public class DoStatementNode: LoopNode {
 		return "do"
 	}
 	
-	public override var childNodes: [ASTChildNode] {
+	public override var descriptionChildNodes: [ASTChildNode] {
 		var children = [ASTChildNode]()
 
 		let amountChildNode = ASTChildNode(connectionToParent: "amount", isConnectionConditional: false, node: amount)

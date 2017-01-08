@@ -30,6 +30,10 @@ public class InternalVariableNode: ASTNode {
 		
 	}
 	
+	public var childNodes: [ASTNode] {
+		return []
+	}
+	
 	public var description: String {
 		return "InternalVariableNode(\(register))"
 	}
@@ -38,7 +42,7 @@ public class InternalVariableNode: ASTNode {
 		return "\(register)"
 	}
 	
-	public var childNodes: [ASTChildNode] {
+	public var descriptionChildNodes: [ASTChildNode] {
 		return []
 	}
 	

@@ -22,6 +22,10 @@ public class BreakLoopNode: ASTNode {
 		
 	}
 	
+	public var childNodes: [ASTNode] {
+		return []
+	}
+	
 	public var description: String {
 		return "BreakLoopNode"
 	}
@@ -30,7 +34,7 @@ public class BreakLoopNode: ASTNode {
 		return "break"
 	}
 	
-	public var childNodes: [ASTChildNode] {
+	public var descriptionChildNodes: [ASTChildNode] {
 		return []
 	}
 	

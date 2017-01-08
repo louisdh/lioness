@@ -39,6 +39,10 @@ public class AssignmentNode: ASTNode {
 		
 	}
 	
+	public var childNodes: [ASTNode] {
+		return [variable, value]
+	}
+	
 	public var description: String {
 		return "\(variable.description) = \(value.description)"
 	}
@@ -47,7 +51,7 @@ public class AssignmentNode: ASTNode {
 		return "="
 	}
 	
-	public var childNodes: [ASTChildNode] {
+	public var descriptionChildNodes: [ASTChildNode] {
 		let lhs = ASTChildNode(connectionToParent: "lhs", node: variable)
 		let rhs = ASTChildNode(connectionToParent: "rhs", node: value)
 		

@@ -55,6 +55,10 @@ public class WhileStatementNode: LoopNode {
 		return bytecode
 	}
 	
+	public override var childNodes: [ASTNode] {
+		return [condition, body]
+	}
+	
 	public override var description: String {
 		
 		var str = "WhileStatementNode(condition: \(condition), body: "
@@ -70,7 +74,7 @@ public class WhileStatementNode: LoopNode {
 		return "while"
 	}
 	
-	public override var childNodes: [ASTChildNode] {
+	public override var descriptionChildNodes: [ASTChildNode] {
 		var children = [ASTChildNode]()
 		
 		let conditionChildNode = ASTChildNode(connectionToParent: "condition", isConnectionConditional: false, node: condition)

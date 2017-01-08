@@ -59,6 +59,10 @@ public class CallNode: ASTNode {
 		
 	}
 	
+	public var childNodes: [ASTNode] {
+		return arguments
+	}
+	
 	public var description: String {
 		var str = "CallNode(name: \(callee), argument: "
 		
@@ -73,7 +77,7 @@ public class CallNode: ASTNode {
 		return callee
 	}
 	
-	public var childNodes: [ASTChildNode] {
+	public var descriptionChildNodes: [ASTChildNode] {
 		var children = [ASTChildNode]()
 		
 		for a in arguments {

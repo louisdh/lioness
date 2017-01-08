@@ -22,6 +22,10 @@ public class ContinueNode: ASTNode {
 		
 	}
 	
+	public var childNodes: [ASTNode] {
+		return []
+	}
+	
 	public var description: String {
 		return "ContinueNode"
 	}
@@ -30,7 +34,7 @@ public class ContinueNode: ASTNode {
 		return "continue"
 	}
 	
-	public var childNodes: [ASTChildNode] {
+	public var descriptionChildNodes: [ASTChildNode] {
 		return []
 	}
 	

@@ -23,6 +23,10 @@ public class NumberNode: ASTNode {
 		return [BytecodeInstruction(label: label, type: .pushConst, arguments: ["\(i)"])]
 		
 	}
+
+	public var childNodes: [ASTNode] {
+		return []
+	}
 	
 	public var description: String {
 		return "NumberNode(\(value))"
@@ -32,7 +36,7 @@ public class NumberNode: ASTNode {
 		return "\(value)"
 	}
 	
-	public var childNodes: [ASTChildNode] {
+	public var descriptionChildNodes: [ASTChildNode] {
 		return []
 	}
 	
