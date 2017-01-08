@@ -328,6 +328,16 @@ public class BytecodeCompiler {
 		throw error(.functionNotFound)
 	}
 	
+	func doesFunctionReturn(for functionName: String) throws -> Bool {
+		
+		if let functionMapped = currentScopeNode.deepFunctionMap()[functionName] {
+			return functionMapped.returns
+		}
+	
+		throw error(.functionNotFound)
+
+	}
+	
 	fileprivate func getNewFunctionId() -> String {
 		functionCount += 1
 		let id = "\(functionCount)"

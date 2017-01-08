@@ -34,7 +34,7 @@ public class CallNode: ASTNode {
 		let invokeInstruction = BytecodeInstruction(label: ctx.nextIndexLabel(), type: .invokeFunc, arguments: [id], comment: "\(callee)")
 		bytecode.append(invokeInstruction)
 
-		if isResultUnused(in: parent) {
+		if try isResultUnused(with: ctx, in: parent) {
 			let popInstr = BytecodeInstruction(label: ctx.nextIndexLabel(), type: .pop, arguments: [], comment: "pop unused function result")
 			bytecode.append(popInstr)
 		}
@@ -42,13 +42,18 @@ public class CallNode: ASTNode {
 		return bytecode
 	}
 	
-	fileprivate func isResultUnused(in parent: ASTNode?) -> Bool {
+	fileprivate func isResultUnused(with ctx: BytecodeCompiler, in parent: ASTNode?) throws -> Bool {
+		
+		guard try ctx.doesFunctionReturn(for: callee) else {
+			// No result
+			return false
+		}
 		
 		guard let parent = parent else {
 			return true
 		}
 		
-		let isResultUsed = parent is BinaryOpNode || parent is AssignmentNode || parent is ReturnNode || parent is ConditionalStatementNode
+		let isResultUsed = parent is BinaryOpNode || parent is AssignmentNode || parent is ReturnNode || parent is ConditionalStatementNode || parent is CallNode
 		
 		return !isResultUsed
 		
