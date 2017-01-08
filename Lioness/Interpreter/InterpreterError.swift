@@ -16,6 +16,9 @@ public enum InterpreterError: Error {
 	/// Illegal stack operation
 	case illegalStackOperation
 	
+	/// Invalid register
+	case invalidRegister
+	
 	/// Stack overflow occured
 	case stackOverflow
 }

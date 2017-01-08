@@ -545,11 +545,11 @@ public class BytecodeInterpreter {
 	public func getRegValue(for reg: String) throws -> StackElement {
 		
 		guard let key = privateReg(for: reg) else {
-			throw error(.unexpectedArgument)
+			throw error(.invalidRegister)
 		}
 
 		guard let regValue = registers[key] else {
-			throw error(.unexpectedArgument)
+			throw error(.invalidRegister)
 		}
 		
 		return regValue
@@ -573,7 +573,7 @@ public class BytecodeInterpreter {
 	fileprivate func updateRegValue(_ value: StackElement, for reg: String) throws {
 
 		guard let privateKey = privateReg(for: reg) else {
-			throw error(.unexpectedArgument)
+			throw error(.invalidRegister)
 		}
 		
 		registers[privateKey] = value
