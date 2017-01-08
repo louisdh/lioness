@@ -123,6 +123,38 @@ public class Runner {
 		
 	}
 	
+	public func runWithoutStdlib(_ source: String) throws {
+		
+		self.source = source
+		
+		let startTime = CFAbsoluteTimeGetCurrent()
+		
+		if logDebug {
+			logSourceCode(source)
+		}
+		
+		guard let compiledSource = compileLionessSourceCode(source) else {
+			throw RunnerError.runFailed
+		}
+		
+		let fullBytecode = compiledSource
+		
+		let interpretStartTime = CFAbsoluteTimeGetCurrent()
+		
+		interpret(fullBytecode)
+		
+		if logDebug {
+			
+			let timeElapsed = CFAbsoluteTimeGetCurrent() - startTime
+			log("\nTotal execution time: \(timeElapsed)s")
+			
+			let interpretTimeElapsed = CFAbsoluteTimeGetCurrent() - interpretStartTime
+			log("\nInterpret execution time: \(interpretTimeElapsed)s")
+			
+		}
+		
+	}
+	
 	// MARK: -
 	
 	fileprivate func compileLionessSourceCode(_ source: String) -> BytecodeBody? {

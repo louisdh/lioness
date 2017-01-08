@@ -66,8 +66,7 @@ class Stdlib_Tests: BaseTestCase {
 		let runner = Runner()
 		
 		do {
-			// FIXME: this actually compiles the stdlib twice
-			try runner.run(source)
+			try runner.runWithoutStdlib(source)
 		} catch {
 			XCTAssert(false, "Stdlib run error")
 		}
