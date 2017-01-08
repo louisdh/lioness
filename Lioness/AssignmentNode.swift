@@ -18,7 +18,7 @@ public class AssignmentNode: ASTNode {
 		self.value = value
 	}
 	
-	public override func compile(with ctx: BytecodeCompiler) throws -> BytecodeBody {
+	public func compile(with ctx: BytecodeCompiler) throws -> BytecodeBody {
 		
 		let v = try value.compile(with: ctx)
 		
@@ -39,15 +39,15 @@ public class AssignmentNode: ASTNode {
 		
 	}
 	
-	public override var description: String {
+	public var description: String {
 		return "\(variable.description) = \(value.description)"
 	}
 	
-	public override var nodeDescription: String? {
+	public var nodeDescription: String? {
 		return "="
 	}
 	
-	public override var childNodes: [ASTChildNode] {
+	public var childNodes: [ASTChildNode] {
 		let lhs = ASTChildNode(connectionToParent: "lhs", node: variable)
 		let rhs = ASTChildNode(connectionToParent: "rhs", node: value)
 		

@@ -16,7 +16,7 @@ public class ReturnNode: ASTNode {
 		self.value = value
 	}
 	
-	public override func compile(with ctx: BytecodeCompiler) throws -> BytecodeBody {
+	public func compile(with ctx: BytecodeCompiler) throws -> BytecodeBody {
 		
 		var bytecode = BytecodeBody()
 
@@ -42,15 +42,15 @@ public class ReturnNode: ASTNode {
 		return bytecode
 	}
 	
-	public override var description: String {
+	public var description: String {
 		return "ReturnNode"
 	}
 	
-	public override var nodeDescription: String? {
+	public var nodeDescription: String? {
 		return "return"
 	}
 	
-	public override var childNodes: [ASTChildNode] {
+	public var childNodes: [ASTChildNode] {
 		return []
 	}
 	

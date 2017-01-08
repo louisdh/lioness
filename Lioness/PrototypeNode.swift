@@ -20,15 +20,20 @@ public class PrototypeNode: ASTNode {
 		self.returns = returns
 	}
 	
-	public override var description: String {
+	// TODO: make ASTNode protocol without compile function? (and make one with compile func)
+	public func compile(with ctx: BytecodeCompiler) throws -> BytecodeBody {
+		return []
+	}
+	
+	public var description: String {
 		return "PrototypeNode(name: \(name), argumentNames: \(argumentNames), returns: \(returns))"
 	}
 	
-	public override var nodeDescription: String? {
+	public var nodeDescription: String? {
 		return "Prototype"
 	}
 	
-	public override var childNodes: [ASTChildNode] {
+	public var childNodes: [ASTChildNode] {
 		return []
 	}
 	

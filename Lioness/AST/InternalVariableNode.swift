@@ -18,7 +18,7 @@ public class InternalVariableNode: ASTNode {
 		self.debugName = debugName
 	}
 	
-	public override func compile(with ctx: BytecodeCompiler) throws -> BytecodeBody {
+	public func compile(with ctx: BytecodeCompiler) throws -> BytecodeBody {
 		
 		var bytecode = BytecodeBody()
 		
@@ -30,15 +30,15 @@ public class InternalVariableNode: ASTNode {
 		
 	}
 	
-	public override var description: String {
+	public var description: String {
 		return "InternalVariableNode(\(register))"
 	}
 	
-	public override var nodeDescription: String? {
+	public var nodeDescription: String? {
 		return "\(register)"
 	}
 	
-	public override var childNodes: [ASTChildNode] {
+	public var childNodes: [ASTChildNode] {
 		return []
 	}
 	

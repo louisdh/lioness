@@ -40,7 +40,7 @@ public class BooleanNode: ASTNode {
 		
 	}
 	
-	public override func compile(with ctx: BytecodeCompiler) throws -> BytecodeBody {
+	public func compile(with ctx: BytecodeCompiler) throws -> BytecodeBody {
 		
 		let i = self.value
 		let label = ctx.nextIndexLabel()
@@ -48,11 +48,11 @@ public class BooleanNode: ASTNode {
 		
 	}
 	
-	public override var description: String {
+	public var description: String {
 		return "BooleanNode(\(value))"
 	}
 	
-	public override var nodeDescription: String? {
+	public var nodeDescription: String? {
 		if boolValue == true {
 			return "true"
 		} else {
@@ -60,7 +60,7 @@ public class BooleanNode: ASTNode {
 		}
 	}
 	
-	public override var childNodes: [ASTChildNode] {
+	public var childNodes: [ASTChildNode] {
 		return []
 	}
 	

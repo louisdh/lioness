@@ -10,7 +10,7 @@ import Foundation
 
 public class BreakLoopNode: ASTNode {
 	
-	public override func compile(with ctx: BytecodeCompiler) throws -> BytecodeBody {
+	public func compile(with ctx: BytecodeCompiler) throws -> BytecodeBody {
 		
 		let label = ctx.nextIndexLabel()
 		
@@ -22,15 +22,15 @@ public class BreakLoopNode: ASTNode {
 		
 	}
 	
-	public override var description: String {
+	public var description: String {
 		return "BreakLoopNode"
 	}
 	
-	public override var nodeDescription: String? {
+	public var nodeDescription: String? {
 		return "break"
 	}
 	
-	public override var childNodes: [ASTChildNode] {
+	public var childNodes: [ASTChildNode] {
 		return []
 	}
 	

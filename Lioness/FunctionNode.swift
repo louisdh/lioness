@@ -18,7 +18,7 @@ public class FunctionNode: ASTNode {
 		self.body = body
 	}
 	
-	public override func compile(with ctx: BytecodeCompiler) throws -> BytecodeBody {
+	public func compile(with ctx: BytecodeCompiler) throws -> BytecodeBody {
 		
 		var bytecode = BytecodeBody()
 		
@@ -126,7 +126,7 @@ public class FunctionNode: ASTNode {
 		
 	}
 	
-	public override var description: String {
+	public var description: String {
 		
 		var str = "FunctionNode(prototype: \(prototype), "
 		
@@ -135,11 +135,11 @@ public class FunctionNode: ASTNode {
 		return str + ")"
 	}
 	
-	public override var nodeDescription: String? {
+	public var nodeDescription: String? {
 		return "Function"
 	}
 	
-	public override var childNodes: [ASTChildNode] {
+	public var childNodes: [ASTChildNode] {
 		var children = [ASTChildNode]()
 		
 		children.append(contentsOf: body.childNodes)

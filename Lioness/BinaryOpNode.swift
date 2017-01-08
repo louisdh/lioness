@@ -33,7 +33,7 @@ public class BinaryOpNode: ASTNode {
 		self.rhs = rhs
 	}
 	
-	public override func compile(with ctx: BytecodeCompiler) throws -> BytecodeBody {
+	public func compile(with ctx: BytecodeCompiler) throws -> BytecodeBody {
 		
 		var bytecode = BytecodeBody()
 		
@@ -95,15 +95,15 @@ public class BinaryOpNode: ASTNode {
 		
 	}
 	
-	public override var description: String {
+	public var description: String {
 		return "BinaryOpNode(\(op), lhs: \(lhs), rhs: \(rhs))"
 	}
 	
-	public override var nodeDescription: String? {
+	public var nodeDescription: String? {
 		return op
 	}
 	
-	public override var childNodes: [ASTChildNode] {
+	public var childNodes: [ASTChildNode] {
 		let l = ASTChildNode(connectionToParent: "lhs", node: lhs)
 		
 		if let rhs = rhs {

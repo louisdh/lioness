@@ -20,7 +20,7 @@ public class ConditionalStatementNode: ASTNode {
 		self.elseBody = elseBody
 	}
 	
-	public override func compile(with ctx: BytecodeCompiler) throws -> BytecodeBody {
+	public func compile(with ctx: BytecodeCompiler) throws -> BytecodeBody {
 		
 		var bytecode = BytecodeBody()
 
@@ -64,7 +64,7 @@ public class ConditionalStatementNode: ASTNode {
 		
 	}
 	
-	public override var description: String {
+	public var description: String {
 		
 		var str = "ConditionalStatementNode(condition: \(condition), body: ["
 		
@@ -87,11 +87,11 @@ public class ConditionalStatementNode: ASTNode {
 		return str
 	}
 	
-	public override var nodeDescription: String? {
+	public var nodeDescription: String? {
 		return "if"
 	}
 	
-	public override var childNodes: [ASTChildNode] {
+	public var childNodes: [ASTChildNode] {
 		var children = [ASTChildNode]()
 		
 		let conditionChildNode = ASTChildNode(connectionToParent: "condition", isConnectionConditional: false, node: condition)

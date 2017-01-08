@@ -9,23 +9,15 @@
 import Foundation
 
 /// AST node with a compile function to compile to Scorpion
-public class ASTNode: CustomStringConvertible, ASTNodeDescriptor {
+public protocol ASTNode: CustomStringConvertible, ASTNodeDescriptor {
 	
 	/// Compiles to Scorpion bytecode instructions
-	public func compile(with ctx: BytecodeCompiler) throws -> BytecodeBody {
-		return []
-	}
+	func compile(with ctx: BytecodeCompiler) throws -> BytecodeBody
 	
-	public var description: String {
-		return ""
-	}
+	var description: String { get }
 	
-	public var nodeDescription: String? {
-		return nil
-	}
+	var nodeDescription: String? { get }
 	
-	public var childNodes: [ASTChildNode] {
-		return []
-	}
+	var childNodes: [ASTChildNode] { get }
 
 }

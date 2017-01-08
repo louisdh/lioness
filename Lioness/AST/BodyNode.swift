@@ -17,7 +17,7 @@ public class BodyNode: ASTNode {
 		self.nodes = nodes
 	}
 	
-	public override func compile(with ctx: BytecodeCompiler) throws -> BytecodeBody {
+	public func compile(with ctx: BytecodeCompiler) throws -> BytecodeBody {
 		
 		ctx.enterNewScope()
 		
@@ -34,7 +34,7 @@ public class BodyNode: ASTNode {
 		
 	}
 	
-	public override var description: String {
+	public var description: String {
 		var str = ""
 		
 		for a in nodes {
@@ -44,11 +44,11 @@ public class BodyNode: ASTNode {
 		return str
 	}
 	
-	public override var nodeDescription: String? {
+	public var nodeDescription: String? {
 		return "body"
 	}
 	
-	public override var childNodes: [ASTChildNode] {
+	public var childNodes: [ASTChildNode] {
 		var children = [ASTChildNode]()
 		
 		for a in nodes {

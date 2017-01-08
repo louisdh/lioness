@@ -18,7 +18,7 @@ public class CallNode: ASTNode {
 		self.arguments = arguments
 	}
 	
-	public override func compile(with ctx: BytecodeCompiler) throws -> BytecodeBody {
+	public func compile(with ctx: BytecodeCompiler) throws -> BytecodeBody {
 
 		var bytecode = BytecodeBody()
 		
@@ -38,7 +38,7 @@ public class CallNode: ASTNode {
 		return bytecode
 	}
 	
-	public override var description: String {
+	public var description: String {
 		var str = "CallNode(name: \(callee), argument: "
 		
 		for a in arguments {
@@ -48,11 +48,11 @@ public class CallNode: ASTNode {
 		return str + ")"
 	}
 	
-	public override var nodeDescription: String? {
+	public var nodeDescription: String? {
 		return callee
 	}
 	
-	public override var childNodes: [ASTChildNode] {
+	public var childNodes: [ASTChildNode] {
 		var children = [ASTChildNode]()
 		
 		for a in arguments {
