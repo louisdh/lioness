@@ -45,9 +45,7 @@ public class FunctionNode: ASTNode {
 
 		ctx.pushFunctionExit(cleanupFunctionCallInstrLabel)
 		
-		
-		let functionScopeStart = ctx.peekNextIndexLabel()
-		
+				
 		let compiledFunction = try compileFunction(with: ctx)
 		
 		
@@ -63,18 +61,15 @@ public class FunctionNode: ASTNode {
 		
 		let _ = ctx.nextIndexLabel()
 		
-		
-		let functionEndLabel = ctx.peekNextIndexLabel()
-		
-		
+	
 
-		let skipExitInstruction = BytecodeInstruction(label: skipExitInstrLabel, type: .goto, arguments: [functionScopeStart], comment: "skip exit instruction")
+		let skipExitInstruction = BytecodeInstruction(label: skipExitInstrLabel, type: .skipPast, arguments: [exitFunctionInstrLabel], comment: "skip exit instruction")
 		bytecode.append(skipExitInstruction)
 		
 		let invokeInstruction = BytecodeInstruction(label: cleanupFunctionCallInstrLabel, type: .invokeFunc, arguments: [exitId], comment: "cleanup_\(prototype.name)()")
 		bytecode.append(invokeInstruction)
 		
-		let exitFunctionInstruction = BytecodeInstruction(label: exitFunctionInstrLabel, type: .goto, arguments: [functionEndLabel], comment: "exit function")
+		let exitFunctionInstruction = BytecodeInstruction(label: exitFunctionInstrLabel, type: .exitFunc, arguments: [], comment: "exit function")
 		bytecode.append(exitFunctionInstruction)
 		
 		
