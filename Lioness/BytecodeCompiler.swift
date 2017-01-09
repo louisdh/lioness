@@ -70,6 +70,12 @@ public class BytecodeCompiler {
 				
 				let _ = getFunctionId(for: funcNode)
 				
+				try compileFunctionPrototypes(for: funcNode.childNodes)
+				
+			} else {
+				
+				try compileFunctionPrototypes(for: node.childNodes)
+				
 			}
 			
 		}
