@@ -51,25 +51,11 @@ public class BytecodeInstruction: BytecodeLine {
 
 	}
 	
-	init(label: String, type: BytecodeInstructionType, arguments: [String], comment: String?) {
+	init(label: String, type: BytecodeInstructionType, arguments: [String] = [], comment: String? = nil) {
 		self.label = label
 		self.type = type
 		self.arguments = arguments
 		self.comment = comment
-	}
-	
-	init(label: String, type: BytecodeInstructionType, arguments: [String]) {
-		self.label = label
-		self.type = type
-		self.arguments = arguments
-		self.comment = nil
-	}
-	
-	init(label: String, type: BytecodeInstructionType) {
-		self.label = label
-		self.type = type
-		self.arguments = []
-		self.comment = nil
 	}
 
 	/// Encoding string to use for saving compiled instruction (e.g. to disk).

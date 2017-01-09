@@ -35,7 +35,7 @@ public class CallNode: ASTNode {
 		bytecode.append(invokeInstruction)
 
 		if try isResultUnused(with: ctx, in: parent) {
-			let popInstr = BytecodeInstruction(label: ctx.nextIndexLabel(), type: .pop, arguments: [], comment: "pop unused function result")
+			let popInstr = BytecodeInstruction(label: ctx.nextIndexLabel(), type: .pop, comment: "pop unused function result")
 			bytecode.append(popInstr)
 		}
 		

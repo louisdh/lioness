@@ -87,7 +87,7 @@ public class BinaryOpNode: ASTNode {
 		let label = ctx.nextIndexLabel()
 		
 		// FIXME: comment "op" is wrong for ">" and ">="
-		let operation = BytecodeInstruction(label: label, type: type, arguments: [], comment: op)
+		let operation = BytecodeInstruction(label: label, type: type, comment: op)
 		
 		bytecode.append(operation)
 		

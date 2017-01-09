@@ -69,7 +69,7 @@ public class FunctionNode: ASTNode {
 		let invokeInstruction = BytecodeInstruction(label: cleanupFunctionCallInstrLabel, type: .invokeFunc, arguments: [exitId], comment: "cleanup_\(prototype.name)()")
 		bytecode.append(invokeInstruction)
 		
-		let exitFunctionInstruction = BytecodeInstruction(label: exitFunctionInstrLabel, type: .exitFunc, arguments: [], comment: "exit function")
+		let exitFunctionInstruction = BytecodeInstruction(label: exitFunctionInstrLabel, type: .exitFunc, comment: "exit function")
 		bytecode.append(exitFunctionInstruction)
 		
 		
