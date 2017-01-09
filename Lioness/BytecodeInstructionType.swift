@@ -52,8 +52,12 @@ public enum BytecodeInstructionType: UInt8, CustomStringConvertible {
 	
 	case invokeFunc = 20
 
-	case pop = 21
+	case exitFunc = 21
 
+	case pop = 22
+
+	case skipPast = 23
+	
 	public var opCode: UInt8 {
 		return self.rawValue
 	}
@@ -125,8 +129,14 @@ public enum BytecodeInstructionType: UInt8, CustomStringConvertible {
 		case .invokeFunc:
 			return "invoke_func"
 			
+		case .exitFunc:
+			return "exit_func"
+			
 		case .pop:
 			return "pop"
+			
+		case .skipPast:
+			return "skip_past"
 			
 		}
 		

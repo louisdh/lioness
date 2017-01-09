@@ -252,8 +252,14 @@ public class BytecodeInterpreter {
 			case .invokeFunc:
 				newPc = try executeInvokeFunction(instruction, pc: pc)
 			
+			case .exitFunc:
+				newPc = try executeExitFunction(instruction, pc: pc)
+
 			case .pop:
 				newPc = try executePop(instruction, pc: pc)
+			
+			case .skipPast:
+				newPc = try executeSkipPast(instruction, pc: pc)
 			
 		}
 		
@@ -526,12 +532,39 @@ public class BytecodeInterpreter {
 		return idPc
 	}
 	
+	fileprivate func executeExitFunction(_ instruction: BytecodeInstruction, pc: Int) throws -> Int {
+		
+		guard let exitFunctionLabel = functionInvokeStack.popLast() else {
+			throw error(.unexpectedArgument)
+		}
+		
+		functionDepth -= 1
+		
+		return exitFunctionLabel
+	}
+	
 	fileprivate func executePop(_ instruction: BytecodeInstruction, pc: Int) throws -> Int {
 		
 		_ = try pop()
 		
 		return pc + 1
 	}
+	
+	fileprivate func executeSkipPast(_ instruction: BytecodeInstruction, pc: Int) throws -> Int {
+		
+		guard let label = instruction.arguments.first else {
+			throw error(.unexpectedArgument)
+		}
+		
+		if let newPc = progamCounter(for: label) {
+			// FIXME: need to check if newPc >= bytecode.count?
+			return newPc + 1
+		} else {
+			return bytecode.count
+		}
+		
+	}
+	
 	
 	// MARK: - Registers
 	
@@ -624,7 +657,6 @@ public class BytecodeInterpreter {
 			return pc
 		}
 		
-		// TODO: cache
 		let foundLabel = bytecode.index(where: { (b) -> Bool in
 			if let b = b as? BytecodeInstruction {
 				return b.label == label
@@ -646,7 +678,6 @@ public class BytecodeInterpreter {
 		labelProgramCountersCache[label] = foundLabel
 		
 		return foundLabel
-		
 	}
 	
 	// MARK: - Stack
