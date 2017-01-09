@@ -29,32 +29,18 @@ public class Parser {
 		
 		while index < tokens.count {
 			
-			guard let currentToken = peekCurrentToken() else {
-				throw error(.internalInconsistencyOccurred)
-			}
+			if shouldParseAssignment() {
+				
+				let assign = try parseAssignment()
+				nodes.append(assign)
+				
+			} else {
+				
+				let expr = try parseExpression()
+				nodes.append(expr)
 			
-			switch currentToken.type {
-				
-				case .function:
-					let node = try parseFunction()
-					nodes.append(node)
-				
-				default:
-					
-					if shouldParseAssignment() {
-						
-						let assign = try parseAssignment()
-						nodes.append(assign)
-						
-					} else {
-						
-						let expr = try parseExpression()
-						nodes.append(expr)
-					
-					}
-				
 			}
-			
+		
 		}
 		
 //		nodes.sort { (node1, node2) -> Bool in
@@ -482,6 +468,9 @@ public class Parser {
 			
 			case .do:
 				return try parseDoStatement()
+			
+			case .function:
+				return try parseFunction()
 			
 			default:
 				throw error(.expectedExpression, token: currentToken)
