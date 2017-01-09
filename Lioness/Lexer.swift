@@ -24,7 +24,8 @@ public class Lexer {
 		"times": .times,
 		"repeat": .repeat,
 		"return": .return,
-		"returns": .returns
+		"returns": .returns,
+		"struct": .struct
 	]
 	
 	/// Currently only works for 1 char tokens

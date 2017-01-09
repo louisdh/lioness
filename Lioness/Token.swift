@@ -59,6 +59,7 @@ public enum TokenType {
 	case `repeat`
 	case `return`
 	case returns
+	case `struct`
 	
 	// Fallback
 	case other(String)
