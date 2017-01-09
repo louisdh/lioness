@@ -14,6 +14,28 @@ CHANGELOG
 Lioness 1.0
 -----------
 
+### 2017-01-09
+* Lioness now supports non-global functions. Example:
+
+	```lioness
+	a = 0
+	
+	func foo() {
+		
+		func bar() {
+			a += 1
+		}
+		
+		do 10 times {
+			bar()
+		}
+		
+	}
+	
+	foo() // a = 10
+
+	```
+
 ### 2016-12-18
 
 * Lioness now supports functions with arguments. As well as functions that have a return value, with the new ```returns``` keyword. Example:
