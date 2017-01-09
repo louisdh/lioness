@@ -112,6 +112,7 @@
 		BE7940331E06BE24008FCCBB /* Arithmetic.lion in Resources */ = {isa = PBXBuildFile; fileRef = BE7940321E06BE24008FCCBB /* Arithmetic.lion */; };
 		BE809A151E2274610005370D /* FunctionReturnGlobalVar.lion in Resources */ = {isa = PBXBuildFile; fileRef = BE809A141E2274610005370D /* FunctionReturnGlobalVar.lion */; };
 		BE809A171E22C5C80005370D /* UnusedFunctionResult.lion in Resources */ = {isa = PBXBuildFile; fileRef = BE809A161E22C5C80005370D /* UnusedFunctionResult.lion */; };
+		BE809A191E2428270005370D /* FunctionInFunction.lion in Resources */ = {isa = PBXBuildFile; fileRef = BE809A181E2428270005370D /* FunctionInFunction.lion */; };
 		BE854DAC1E21B439003D251D /* DoTimesLoops.lion in Resources */ = {isa = PBXBuildFile; fileRef = BE854DAB1E21B439003D251D /* DoTimesLoops.lion */; };
 		BEAD9A7F1DB3A1A000A6DDC1 /* Runner.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEAD9A7E1DB3A1A000A6DDC1 /* Runner.swift */; };
 		BED616D41DFA03CF00A70820 /* BreakLoopNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = BED616D31DFA03CF00A70820 /* BreakLoopNode.swift */; };
@@ -184,7 +185,8 @@
 		BE736A901DBD3C0D00ADC83A /* Execution+Performance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Execution+Performance.swift"; path = "Execution/Execution+Performance.swift"; sourceTree = "<group>"; };
 		BE7940321E06BE24008FCCBB /* Arithmetic.lion */ = {isa = PBXFileReference; explicitFileType = sourcecode.glsl; fileEncoding = 4; name = Arithmetic.lion; path = "Standard Library/Arithmetic.lion"; sourceTree = "<group>"; };
 		BE809A141E2274610005370D /* FunctionReturnGlobalVar.lion */ = {isa = PBXFileReference; explicitFileType = sourcecode.glsl; fileEncoding = 4; path = FunctionReturnGlobalVar.lion; sourceTree = "<group>"; };
-		BE809A161E22C5C80005370D /* UnusedFunctionResult.lion */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = UnusedFunctionResult.lion; sourceTree = "<group>"; };
+		BE809A161E22C5C80005370D /* UnusedFunctionResult.lion */ = {isa = PBXFileReference; explicitFileType = sourcecode.glsl; fileEncoding = 4; path = UnusedFunctionResult.lion; sourceTree = "<group>"; };
+		BE809A181E2428270005370D /* FunctionInFunction.lion */ = {isa = PBXFileReference; explicitFileType = sourcecode.glsl; fileEncoding = 4; path = FunctionInFunction.lion; sourceTree = "<group>"; };
 		BE854DAB1E21B439003D251D /* DoTimesLoops.lion */ = {isa = PBXFileReference; explicitFileType = sourcecode.glsl; fileEncoding = 4; path = DoTimesLoops.lion; sourceTree = "<group>"; };
 		BE9369FB1DA83AB000C0B3DF /* BytecodeCompiler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = BytecodeCompiler.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		BEAD9A7E1DB3A1A000A6DDC1 /* Runner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = Runner.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
@@ -428,6 +430,7 @@
 				BEFD84121E21BB8500A6DB92 /* BinaryOp.lion */,
 				BE809A141E2274610005370D /* FunctionReturnGlobalVar.lion */,
 				BE809A161E22C5C80005370D /* UnusedFunctionResult.lion */,
+				BE809A181E2428270005370D /* FunctionInFunction.lion */,
 			);
 			name = "Test source files";
 			sourceTree = "<group>";
@@ -636,6 +639,7 @@
 				BE2ED01E1E211C1D00CCD588 /* Fibonacci.lion in Resources */,
 				BEFD84131E21BB8500A6DB92 /* BinaryOp.lion in Resources */,
 				BE854DAC1E21B439003D251D /* DoTimesLoops.lion in Resources */,
+				BE809A191E2428270005370D /* FunctionInFunction.lion in Resources */,
 				BE809A171E22C5C80005370D /* UnusedFunctionResult.lion in Resources */,
 				BE62A8721DE6108F00A75453 /* Complex.lion in Resources */,
 				BE37DFAF1DBBE2D3003F6A3E /* InnerWhileLoops.lion in Resources */,

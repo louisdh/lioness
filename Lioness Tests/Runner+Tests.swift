@@ -79,6 +79,12 @@ class Runner_Tests: BaseTestCase {
 		
 	}
 	
+	func testFunctionInFunction() {
+		
+		assert(in: "FunctionInFunction", that: "a", equals: 100)
+		
+	}
+	
 	// MARK: - Boilerplate
 	
 	// TODO: Maybe set expectedValue in source file?
