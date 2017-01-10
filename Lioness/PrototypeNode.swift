@@ -8,6 +8,7 @@
 
 import Foundation
 
+// TODO: rename to FunctionPrototypeNode
 public class PrototypeNode: ASTNode {
 	
 	public let name: String
