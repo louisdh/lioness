@@ -8,6 +8,28 @@
 
 import Foundation
 
+public typealias NumberType = Double
+
+public enum ValueType: Equatable {
+	
+	case number(NumberType)
+	case `enum`([ValueType])
+	
+}
+
+public func ==(lhs: ValueType, rhs: ValueType) -> Bool {
+	
+	if case let ValueType.number(l) = lhs, case let ValueType.number(r) = rhs {
+		return l == r
+	}
+	
+	if case let ValueType.enum(l) = lhs, case let ValueType.enum(r) = rhs {
+		return l == r
+	}
+	
+	return false
+}
+
 /// Bytecode Interpreter
 public class BytecodeInterpreter {
 	
@@ -15,10 +37,8 @@ public class BytecodeInterpreter {
 	
 	fileprivate let bytecode: BytecodeBody
 	
-	public typealias StackElement = Double
-	
 	/// Stack
-	fileprivate(set) public var stack = [StackElement]()
+	fileprivate(set) public var stack = [ValueType]()
 	
 	/// Manual stack size counting for performance
 	fileprivate var stackSize = 0
@@ -37,7 +57,7 @@ public class BytecodeInterpreter {
 	fileprivate var functionInvokeStackSize = 0
 	
 	/// Registers
-	fileprivate(set) public var registers = [String : StackElement]()
+	fileprivate(set) public var registers = [String : ValueType]()
 	
 	fileprivate(set) var pcTrace = [Int]()
 
@@ -127,8 +147,8 @@ public class BytecodeInterpreter {
 	/// - Throws: InterpreterError
 	public func interpret() throws {
 		
-		stack = [StackElement]()
-		registers = [String : StackElement]()
+		stack = [ValueType]()
+		registers = [String : ValueType]()
 		
 		// Program counter
 		var pc = pcStart
@@ -269,144 +289,145 @@ public class BytecodeInterpreter {
 	// MARK: - Execution
 
 	fileprivate func executePushConst(_ instruction: BytecodeInstruction, pc: Int) throws -> Int {
-		guard let arg = instruction.arguments.first, let f = StackElement(arg) else {
+		// TODO: add enum support
+		guard let arg = instruction.arguments.first, let f = NumberType(arg) else {
 			throw error(.unexpectedArgument)
 		}
 		
-		try push(f)
+		try push(.number(f))
 		
 		return pc + 1
 	}
 	
 	fileprivate func executeAdd(pc: Int) throws -> Int {
 		
-		let lhs = try pop()
-		let rhs = try pop()
+		let lhs = try popNumber()
+		let rhs = try popNumber()
 		
-		try push(lhs + rhs)
+		try push(.number(lhs + rhs))
 		
 		return pc + 1
 	}
 	
 	fileprivate func executeSub(pc: Int) throws -> Int {
 
-		let rhs = try pop()
-		let lhs = try pop()
+		let rhs = try popNumber()
+		let lhs = try popNumber()
 		
-		try push(lhs - rhs)
+		try push(.number(lhs - rhs))
 		
 		return pc + 1
 	}
 	
 	fileprivate func executeMul(pc: Int) throws -> Int {
 		
-		let lhs = try pop()
-		let rhs = try pop()
+		let lhs = try popNumber()
+		let rhs = try popNumber()
 		
-		try push(lhs * rhs)
+		try push(.number(lhs * rhs))
 		
 		return pc + 1
 	}
 	
 	fileprivate func executeDiv(pc: Int) throws -> Int {
 		
-		let rhs = try pop()
-		let lhs = try pop()
+		let rhs = try popNumber()
+		let lhs = try popNumber()
 
-		try push(lhs / rhs)
+		try push(.number(lhs / rhs))
 		
 		return pc + 1
 	}
 	
 	fileprivate func executePow(pc: Int) throws -> Int {
 		
-		let rhs = try pop()
-		let lhs = try pop()
+		let rhs = try popNumber()
+		let lhs = try popNumber()
 		
-		try push(pow(lhs, rhs))
+		try push(.number(pow(lhs, rhs)))
 		
 		return pc + 1
 	}
 	
 	fileprivate func executeAnd(pc: Int) throws -> Int {
 		
-		let rhs = try pop() == 1.0
-		let lhs = try pop() == 1.0
+		let rhs = try popNumber() == 1.0
+		let lhs = try popNumber() == 1.0
 		
-		let and: StackElement = (rhs && lhs) == true ? 1.0 : 0.0
+		let and: NumberType = (rhs && lhs) == true ? 1.0 : 0.0
 		
-		try push(and)
+		try push(.number(and))
 		
 		return pc + 1
 	}
 	
 	fileprivate func executeOr(pc: Int) throws -> Int {
 		
-		let rhs = try pop() == 1.0
-		let lhs = try pop() == 1.0
+		let rhs = try popNumber() == 1.0
+		let lhs = try popNumber() == 1.0
 		
-		let and: StackElement = (rhs || lhs) == true ? 1.0 : 0.0
+		let and: NumberType = (rhs || lhs) == true ? 1.0 : 0.0
 		
-		try push(and)
+		try push(.number(and))
 		
 		return pc + 1
 	}
 	
 	fileprivate func executeNot(pc: Int) throws -> Int {
 		
-		let b = try pop() == 1.0
+		let b = try popNumber() == 1.0
 		
-		let not: StackElement = (!b) == true ? 1.0 : 0.0
+		let not: NumberType = (!b) == true ? 1.0 : 0.0
 		
-		try push(not)
+		try push(.number(not))
 		
 		return pc + 1
 	}
 	
 	fileprivate func executeEqual(pc: Int) throws -> Int {
 		
-		let rhs = try pop()
-		let lhs = try pop()
+		let rhs = try popNumber()
+		let lhs = try popNumber()
 		
-		let eq: StackElement = (lhs == rhs) ? 1.0 : 0.0
+		let eq: NumberType = (lhs == rhs) ? 1.0 : 0.0
 		
-		try push(eq)
+		try push(.number(eq))
 		
 		return pc + 1
 	}
 	
 	fileprivate func executeNotEqual(pc: Int) throws -> Int {
 		
-		let rhs = try pop()
-		let lhs = try pop()
+		let rhs = try popNumber()
+		let lhs = try popNumber()
 		
-		let neq: StackElement = (lhs != rhs) ? 1.0 : 0.0
+		let neq: NumberType = (lhs != rhs) ? 1.0 : 0.0
 		
-		try push(neq)
+		try push(.number(neq))
 		
 		return pc + 1
 	}
 	
 	fileprivate func executeCmpLe(pc: Int) throws -> Int {
 
-		let rhs = try pop()
-		let lhs = try pop()
+		let rhs = try popNumber()
+		let lhs = try popNumber()
 		
-		let cmp: StackElement = (lhs <= rhs) ? 1.0 : 0.0
+		let cmp: NumberType = (lhs <= rhs) ? 1.0 : 0.0
 		
-		try push(cmp)
+		try push(.number(cmp))
 		
 		return pc + 1
 	}
 	
 	fileprivate func executeCmpLt(pc: Int) throws -> Int {
 
-		let rhs = try pop()
-		let lhs = try pop()
+		let rhs = try popNumber()
+		let lhs = try popNumber()
 		
-		let cmp: StackElement = (lhs < rhs) ? 1.0 : 0.0
+		let cmp: NumberType = (lhs < rhs) ? 1.0 : 0.0
 		
-		try push(cmp)
+		try push(.number(cmp))
 		
 		return pc + 1
 	}
@@ -417,7 +438,7 @@ public class BytecodeInterpreter {
 			throw error(.unexpectedArgument)
 		}
 		
-		if try pop() == 1.0 {
+		if try popNumber() == 1.0 {
 			
 			if let newPc = progamCounter(for: label) {
 				return newPc
@@ -437,7 +458,7 @@ public class BytecodeInterpreter {
 			throw error(.unexpectedArgument)
 		}
 		
-		if try pop() == 0.0 {
+		if try popNumber() == 0.0 {
 			
 			if let newPc = progamCounter(for: label) {
 				return newPc
@@ -585,7 +606,7 @@ public class BytecodeInterpreter {
 //		}
 	}
 	
-	public func getRegValue(for reg: String) throws -> StackElement {
+	public func getRegValue(for reg: String) throws -> ValueType {
 		
 		guard let key = privateReg(for: reg) else {
 			throw error(.invalidRegister)
@@ -598,7 +619,7 @@ public class BytecodeInterpreter {
 		return regValue
 	}
 	
-	fileprivate func setRegValue(_ value: StackElement, for reg: String) {
+	fileprivate func setRegValue(_ value: ValueType, for reg: String) {
 		
 		let privateKey = "\(functionDepth)_\(reg)"
 		
@@ -613,7 +634,7 @@ public class BytecodeInterpreter {
 		
 	}
 	
-	fileprivate func updateRegValue(_ value: StackElement, for reg: String) throws {
+	fileprivate func updateRegValue(_ value: ValueType, for reg: String) throws {
 
 		guard let privateKey = privateReg(for: reg) else {
 			throw error(.invalidRegister)
@@ -681,9 +702,24 @@ public class BytecodeInterpreter {
 	}
 	
 	// MARK: - Stack
+	
+	fileprivate func popNumber() throws -> NumberType {
+		
+		guard let last = stack.popLast() else {
+			throw error(.illegalStackOperation)
+		}
+		
+		guard case let ValueType.number(number) = last else {
+			throw error(.unexpectedArgument)
+		}
+		
+		stackSize -= 1
+		
+		return number
+	}
 
 	/// Pop from stack
-	fileprivate func pop() throws -> StackElement {
+	fileprivate func pop() throws -> ValueType {
 		
 		guard let last = stack.popLast() else {
 			throw error(.illegalStackOperation)
@@ -695,7 +731,7 @@ public class BytecodeInterpreter {
 	}
 	
 	/// Push to stack
-	fileprivate func push(_ item: StackElement) throws {
+	fileprivate func push(_ item: ValueType) throws {
 		
 		if stackSize >= stackLimit {
 			throw error(.stackOverflow)

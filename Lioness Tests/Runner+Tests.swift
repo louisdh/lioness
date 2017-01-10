@@ -39,65 +39,72 @@ class Runner_Tests: BaseTestCase {
 	
 	func testBinaryOp() {
 		
-		assert(in: "BinaryOp", that: "a", equals: 512.75)
+		assert(in: "BinaryOp", that: "a", equals: .number(512.75))
 
 	}
 	
 	func testInnerWhileLoops() {
 		
-		assert(in: "InnerWhileLoops", that: "sum", equals: 7_255_941_120)
+		assert(in: "InnerWhileLoops", that: "sum", equals: .number(7_255_941_120))
 
 	}
 	
 	func testGCD() {
 		
-		assert(in: "GreatestCommonDivisor", that: "a", equals: 4)
+		assert(in: "GreatestCommonDivisor", that: "a", equals: .number(4))
 
 	}
 	
 	func testFibonacci() {
 		
-		assert(in: "Fibonacci", that: "a", equals: 55)
+		assert(in: "Fibonacci", that: "a", equals: .number(55))
 
 	}
 	
 	func testFunctionGlobalVar() {
 		
-		assert(in: "FunctionGlobalVar", that: "a", equals: 12)
+		assert(in: "FunctionGlobalVar", that: "a", equals: .number(12))
 		
 	}
 	
 	func testDoTimesLoops() {
 		
-		assert(in: "DoTimesLoops", that: "a", equals: 10000)
+		assert(in: "DoTimesLoops", that: "a", equals: .number(10000))
 		
 	}
 	
 	func testFunctionReturnGlobalVar() {
 		
-		assert(in: "FunctionReturnGlobalVar", that: "a", equals: 12)
+		assert(in: "FunctionReturnGlobalVar", that: "a", equals: .number(12))
 		
 	}
 	
 	func testFunctionInFunction() {
 		
-		assert(in: "FunctionInFunction", that: "a", equals: 100)
+		assert(in: "FunctionInFunction", that: "a", equals: .number(100))
 		
 	}
 	
 	// MARK: - Boilerplate
 	
 	// TODO: Maybe set expectedValue in source file?
-	func assert(in file: String, that `var`: String, equals expectedValue: Double) {
+	func assert(in file: String, that `var`: String, equals expectedValue: ValueType) {
 		
-		let result = try? execute(file, get: `var`)
+		guard let result = try? execute(file, get: `var`) else {
+			
+			let message = "[\(file).lion]: Expected \(expectedValue) as the value of \(`var`), but found: nil"
+
+			XCTAssert(false, message)
+			
+			return
+		}
 		
 		let message = "[\(file).lion]: Expected \(expectedValue) as the value of \(`var`), but found: \(result)"
 		XCTAssert(result == expectedValue, message)
 		
 	}
 	
-	func execute(_ file: String, get varName: String) throws -> Double {
+	func execute(_ file: String, get varName: String) throws -> ValueType {
 	
 		let runner = Runner(logDebug: false)
 		

@@ -42,14 +42,14 @@ public class Runner {
 		compiler = BytecodeCompiler()
 	}
 	
-	public func runSource(at path: String, get varName: String) throws -> Double {
+	public func runSource(at path: String, get varName: String) throws -> ValueType {
 		
 		let source = try String(contentsOfFile: path, encoding: .utf8)
 		
 		return try run(source, get: varName)
 	}
 	
-	func run(_ source: String, get varName: String) throws -> Double {
+	func run(_ source: String, get varName: String) throws -> ValueType {
 		
 		let stdLib = try StdLib().stdLibCode()
 		
