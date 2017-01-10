@@ -8,14 +8,16 @@
 
 import Foundation
 
-// TODO: not needed, just use string?
 public class StructMemberNode: ASTNode {
-	
-	public init() {
 
+	public let variable: VariableNode
+	public let name: String
+	
+	public init(variable: VariableNode, name: String) {
+		self.variable = variable
+		self.name = name
 	}
 	
-	// TODO: make ASTNode protocol without compile function? (and make one with compile func)
 	public func compile(with ctx: BytecodeCompiler, in parent: ASTNode?) throws -> BytecodeBody {
 		return []
 	}

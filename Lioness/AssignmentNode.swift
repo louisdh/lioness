@@ -10,6 +10,7 @@ import Foundation
 
 public class AssignmentNode: ASTNode {
 	
+	// TODO: make ASTNode (can be StructMemberNode)
 	public let variable: VariableNode
 	public let value: ASTNode
 	

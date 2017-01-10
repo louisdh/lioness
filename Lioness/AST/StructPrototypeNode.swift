@@ -18,7 +18,6 @@ public class StructPrototypeNode: ASTNode {
 		self.members = members
 	}
 	
-	// TODO: make ASTNode protocol without compile function? (and make one with compile func)
 	public func compile(with ctx: BytecodeCompiler, in parent: ASTNode?) throws -> BytecodeBody {
 		return []
 	}
