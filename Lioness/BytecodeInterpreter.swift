@@ -625,9 +625,9 @@ public class BytecodeInterpreter {
 		
 		// FIXME: make faster?
 		if regMap[reg] != nil {
-			regMap[reg]?.append(privateKey)
+			regMap[reg]?.append(functionDepth)
 		} else {
-			regMap[reg] = [privateKey]
+			regMap[reg] = [functionDepth]
 		}
 		
 		registers[privateKey] = value
@@ -644,10 +644,15 @@ public class BytecodeInterpreter {
 		
 	}
 	
-	fileprivate var regMap = [String : [String]]()
+	fileprivate var regMap = [String : [Int]]()
 	
 	fileprivate func privateReg(for reg: String) -> String? {
-		return regMap[reg]?.last
+		
+		guard let id = regMap[reg]?.last else {
+			return nil
+		}
+		
+		return "\(id)_\(reg)"
 	}
 	
 	public func regName(for privateReg: String) -> String? {
@@ -656,7 +661,9 @@ public class BytecodeInterpreter {
 			
 			for reg in v {
 				
-				if reg == privateReg {
+				let privateKey = "\(reg)_\(k)"
+
+				if privateKey == privateReg {
 					return k
 				}
 				
