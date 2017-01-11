@@ -157,7 +157,7 @@ public class Runner {
 	
 	// MARK: -
 	
-	fileprivate func compileLionessSourceCode(_ source: String) -> BytecodeBody? {
+	func compileLionessSourceCode(_ source: String) -> BytecodeBody? {
 		
 		let tokens = runLexer(withSource: source)
 		

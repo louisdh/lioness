@@ -12,8 +12,7 @@ import XCTest
 /// Performance tests for execution.
 /// (running of bytecode)
 ///
-/// This will test the performance of compiled bytecode,
-/// as well as the execution of it.
+/// This will test the execution performance of compiled bytecode.
 ///
 /// Compiler optimizations should be tested here.
 class Execution_Performance: BaseTestCase {
@@ -28,68 +27,87 @@ class Execution_Performance: BaseTestCase {
 		super.tearDown()
 	}
 	
-	func testLargeMathPerformance() {
+	// TODO: make tests generic
+	
+	func testModulusPerformance() {
 		
-		let fileURL = getFilePath(for: "LargeMathOperation")
-		
-		guard let path = fileURL?.path else {
-			XCTFail("Invalid path for test")
+		guard let bytecode = preparePerformanceTest(for: "Modulus") else {
 			return
 		}
-		
-		guard let source = try? String(contentsOfFile: path, encoding: .utf8) else {
-			XCTFail("Failed to get source")
-			return
-		}
-		
-		let lexer = Lexer(input: source)
-		let tokens = lexer.tokenize()
-		
-		let parser = Parser(tokens: tokens)
-		let ast = try! parser.parse()
 		
 		self.measure {
-			
-			let compiler = BytecodeCompiler()
-
-			let bytecode = try! compiler.compile(ast)
-			
-			let interpreter = try! BytecodeInterpreter(bytecode: bytecode)
-			try! interpreter.interpret()
-			
+			self.execute(bytecode)
 		}
+		
+	}
+	
+	func testLargeMathPerformance() {
+		
+		guard let bytecode = preparePerformanceTest(for: "LargeMathOperation") else {
+			return
+		}
+		
+		self.measure {
+			self.execute(bytecode)
+		}
+
 	}
 	
 	func testComplexPerformance() {
 		
-		let fileURL = getFilePath(for: "Complex")
+		guard let bytecode = preparePerformanceTest(for: "Complex") else {
+			return
+		}
+	
+		self.measure {
+			self.execute(bytecode)
+		}
+		
+	}
+	
+	func preparePerformanceTest(for file: String) -> [BytecodeLine]? {
+		
+		let runner = Runner()
+		
+		guard let stdLib = try? StdLib().stdLibCode() else {
+			XCTFail("Failed to get stdlib")
+			return nil
+		}
+		
+		guard let compiledStdLib = runner.compileLionessSourceCode(stdLib) else {
+			XCTFail("Failed to compile stdlib")
+			return nil
+		}
+
+		
+		let fileURL = getFilePath(for: file)
 		
 		guard let path = fileURL?.path else {
 			XCTFail("Invalid path for test")
-			return
+			return nil
 		}
 		
 		guard let source = try? String(contentsOfFile: path, encoding: .utf8) else {
 			XCTFail("Failed to get source")
-			return
+			return nil
 		}
 		
-		let lexer = Lexer(input: source)
-		let tokens = lexer.tokenize()
-		
-		let parser = Parser(tokens: tokens)
-		let ast = try! parser.parse()
-		
-		self.measure {
-			
-			let compiler = BytecodeCompiler()
-			
-			let bytecode = try! compiler.compile(ast)
-			
-			let interpreter = try! BytecodeInterpreter(bytecode: bytecode)
-			try! interpreter.interpret()
-			
+		guard let compiledSource = runner.compileLionessSourceCode(source) else {
+			XCTFail("Failed to compile stdlib")
+			return nil
 		}
+		
+		let bytecode = compiledStdLib + compiledSource
+		
+		return bytecode
+
+	}
+	
+	func execute(_ bytecode: [BytecodeLine]) {
+		
+		let interpreter = try! BytecodeInterpreter(bytecode: bytecode)
+		try! interpreter.interpret()
+		
 	}
 	
 }
