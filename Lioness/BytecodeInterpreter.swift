@@ -43,7 +43,7 @@ public class BytecodeInterpreter {
 	/// Manual stack size counting for performance
 	fileprivate var stackSize = 0
 	
-
+	// TODO: use int as key?
 	/// Function map with id as key and program counter as value
 	fileprivate var functionMap = [String : Int]()
 
