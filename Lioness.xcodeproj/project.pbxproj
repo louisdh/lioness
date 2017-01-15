@@ -124,6 +124,8 @@
 		BE8804361E28267E00EBEC54 /* BytecodeStructHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE8804351E28267E00EBEC54 /* BytecodeStructHeader.swift */; };
 		BE8804371E28267E00EBEC54 /* BytecodeStructHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE8804351E28267E00EBEC54 /* BytecodeStructHeader.swift */; };
 		BEAD9A7F1DB3A1A000A6DDC1 /* Runner.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEAD9A7E1DB3A1A000A6DDC1 /* Runner.swift */; };
+		BEBB9C431E2C1B7000DCBA4D /* Graphics.lion in Resources */ = {isa = PBXBuildFile; fileRef = BEBB9C421E2C1B7000DCBA4D /* Graphics.lion */; };
+		BEBB9C441E2C1B7000DCBA4D /* Graphics.lion in Resources */ = {isa = PBXBuildFile; fileRef = BEBB9C421E2C1B7000DCBA4D /* Graphics.lion */; };
 		BED616D41DFA03CF00A70820 /* BreakLoopNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = BED616D31DFA03CF00A70820 /* BreakLoopNode.swift */; };
 		BED616D61DFB622300A70820 /* LoopNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = BED616D51DFB622300A70820 /* LoopNode.swift */; };
 		BEE50BAB1E05D869006D8EE3 /* ReturnNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEE50BAA1E05D869006D8EE3 /* ReturnNode.swift */; };
@@ -204,6 +206,7 @@
 		BE8804351E28267E00EBEC54 /* BytecodeStructHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BytecodeStructHeader.swift; path = Compiler/BytecodeStructHeader.swift; sourceTree = "<group>"; };
 		BE9369FB1DA83AB000C0B3DF /* BytecodeCompiler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = BytecodeCompiler.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		BEAD9A7E1DB3A1A000A6DDC1 /* Runner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = Runner.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		BEBB9C421E2C1B7000DCBA4D /* Graphics.lion */ = {isa = PBXFileReference; explicitFileType = sourcecode.glsl; fileEncoding = 4; name = Graphics.lion; path = "Standard Library/Graphics.lion"; sourceTree = "<group>"; };
 		BED616D31DFA03CF00A70820 /* BreakLoopNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = BreakLoopNode.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		BED616D51DFB622300A70820 /* LoopNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = LoopNode.swift; path = AST/LoopNode.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		BEE50BAA1E05D869006D8EE3 /* ReturnNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = ReturnNode.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
@@ -391,8 +394,9 @@
 		BE4AF0611DFE009A00ECE275 /* Standard Library */ = {
 			isa = PBXGroup;
 			children = (
-				BE4AF0621DFE019F00ECE275 /* Geometry.lion */,
 				BE7940321E06BE24008FCCBB /* Arithmetic.lion */,
+				BE4AF0621DFE019F00ECE275 /* Geometry.lion */,
+				BEBB9C421E2C1B7000DCBA4D /* Graphics.lion */,
 				BE4AF0641DFE05E000ECE275 /* StdLib.swift */,
 			);
 			name = "Standard Library";
@@ -653,6 +657,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BEBB9C431E2C1B7000DCBA4D /* Graphics.lion in Resources */,
 				BE4AF0631DFE019F00ECE275 /* Geometry.lion in Resources */,
 				BE7940331E06BE24008FCCBB /* Arithmetic.lion in Resources */,
 			);
@@ -681,6 +686,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BEBB9C441E2C1B7000DCBA4D /* Graphics.lion in Resources */,
 				BE58C15A1E16D7E900BC73CA /* Arithmetic.lion in Resources */,
 				BE58C1591E16D7E900BC73CA /* Geometry.lion in Resources */,
 			);
