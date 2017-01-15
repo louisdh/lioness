@@ -298,20 +298,7 @@ public class Runner {
 
 				log("Registers at end of execution:")
 
-				for (key, value) in interpreter.registers {
-					
-					if let compiledKey = interpreter.regName(for: key),
-						let varName = compiler.getDecompiledVarName(for: compiledKey) {
-						
-						log("\(varName) (\(key)) = \(value)")
-						
-					} else {
-						
-						log("\(key) = \(value)")
-						
-					}
-					
-				}
+				logRegisters(interpreter)
 
 			}
 			
@@ -339,6 +326,25 @@ public class Runner {
 	
 	// MARK: -
 	// MARK: Logging
+	
+	fileprivate func logRegisters(_ interpreter: BytecodeInterpreter) {
+		
+		for (key, value) in interpreter.registers {
+			
+			if let compiledKey = interpreter.regName(for: key),
+				let varName = compiler.getDecompiledVarName(for: compiledKey) {
+				
+				log("\(varName) (\(key)) = \(value.description(with: compiler))")
+				
+			} else {
+				
+				log("\(key) = \(value)")
+				
+			}
+			
+		}
+		
+	}
 	
 	fileprivate func logSourceCode(_ source: String) {
 		

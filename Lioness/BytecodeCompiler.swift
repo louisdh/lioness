@@ -291,6 +291,12 @@ public class BytecodeCompiler {
 		return structMemberMap[memberName]
 	}
 	
+	func getStructMemberName(for id: Int) -> String? {
+		return structMemberMap.first(where: { (k, v) -> Bool in
+			return v == id
+		})?.0
+	}
+	
 	// MARK: - Registers
 	
 	fileprivate var registerCount = 0

@@ -17,6 +17,43 @@ public enum ValueType: Equatable {
 	
 }
 
+public extension ValueType {
+	
+	func description(with ctx: BytecodeCompiler) -> String {
+		
+		var descr = ""
+		
+		switch self {
+		case let .number(val):
+			
+			descr += "\(val)"
+			
+		case let .struct(val):
+			
+			descr += "{ "
+
+			for (k, v) in val {
+				
+
+				if let memberName = ctx.getStructMemberName(for: k) {
+					descr += "\(memberName) = "
+				} else {
+					descr += "\(k) = "
+				}
+				
+				descr += "\(v.description(with: ctx)); "
+				
+			}
+		
+			descr += " }"
+
+		}
+		
+		return descr
+	}
+	
+}
+
 public func ==(lhs: ValueType, rhs: ValueType) -> Bool {
 	
 	if case let ValueType.number(l) = lhs, case let ValueType.number(r) = rhs {
