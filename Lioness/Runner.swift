@@ -276,7 +276,7 @@ public class Runner {
 		
 	}
 	
-	var interpreter: BytecodeInterpreter!
+	var interpreter: BytecodeInterpreter?
 	
 	fileprivate func interpret(_ bytecode: BytecodeBody) {
 		
@@ -286,8 +286,10 @@ public class Runner {
 		
 		do {
 			
-			interpreter = try BytecodeInterpreter(bytecode: bytecode)
+			let interpreter = try BytecodeInterpreter(bytecode: bytecode)
 
+			self.interpreter = interpreter
+			
 			try interpreter.interpret()
 			
 			if logDebug {
@@ -318,9 +320,11 @@ public class Runner {
 			if logDebug {
 				
 				log("pc trace:")
-
-				for pc in interpreter.pcTrace {
-					log(bytecode[pc].description)
+				
+				if let interpreter = interpreter {
+					for pc in interpreter.pcTrace {
+						log(bytecode[pc].description)
+					}
 				}
 				
 				log("\n")
@@ -366,7 +370,7 @@ public class Runner {
 			
 			var description = ""
 			
-			if b is BytecodeFunctionHeader || b is BytecodePrivateFunctionHeader {
+			if b is BytecodeFunctionHeader || b is BytecodePrivateFunctionHeader || b is BytecodeStructHeader {
 				description += "\n"
 			}
 			
@@ -382,7 +386,7 @@ public class Runner {
 			
 			log(description)
 			
-			if b is BytecodeFunctionHeader || b is BytecodePrivateFunctionHeader {
+			if b is BytecodeFunctionHeader || b is BytecodePrivateFunctionHeader || b is BytecodeStructHeader {
 				indentLevel += 1
 			}
 			

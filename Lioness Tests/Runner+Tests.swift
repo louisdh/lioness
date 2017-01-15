@@ -140,7 +140,11 @@ class Runner_Tests: BaseTestCase {
 			
 			try runner.runSource(at: path)
 			
-			return runner.interpreter
+			guard let interpreter = runner.interpreter else {
+				throw RunnerTestError.executionFailed
+			}
+			
+			return interpreter
 			
 		} catch {
 			throw RunnerTestError.executionFailed

@@ -8,6 +8,7 @@
 
 import Foundation
 
+/// Either calls a function or the init of a struct
 public class CallNode: ASTNode {
 	
 	public let callee: String

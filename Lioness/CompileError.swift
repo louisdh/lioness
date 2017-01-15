@@ -10,6 +10,7 @@ import Foundation
 
 public enum CompileError: Error {
 	case unexpectedCommand
+	case emptyStruct
 	case unexpectedBinaryOperator
 	case functionNotFound
 	case unbalancedScope

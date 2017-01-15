@@ -21,6 +21,7 @@ public enum TokenType {
 	case curlyOpen
 	case curlyClose
 	case comma
+	case dot
 	
 	// Comparators
 	case comparatorEqual

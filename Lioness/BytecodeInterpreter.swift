@@ -13,7 +13,7 @@ public typealias NumberType = Double
 public enum ValueType: Equatable {
 	
 	case number(NumberType)
-	case `enum`([ValueType])
+	case `struct`([Int : ValueType])
 	
 }
 
@@ -23,7 +23,7 @@ public func ==(lhs: ValueType, rhs: ValueType) -> Bool {
 		return l == r
 	}
 	
-	if case let ValueType.enum(l) = lhs, case let ValueType.enum(r) = rhs {
+	if case let ValueType.struct(l) = lhs, case let ValueType.struct(r) = rhs {
 		return l == r
 	}
 	
@@ -43,6 +43,8 @@ public class BytecodeInterpreter {
 	/// Manual stack size counting for performance
 	fileprivate var stackSize = 0
 	
+	// TODO: rename "function" to "virtual"? (also used for structs)
+
 	// TODO: use int as key?
 	/// Function map with id as key and program counter as value
 	fileprivate var functionMap = [String : Int]()
@@ -123,6 +125,14 @@ public class BytecodeInterpreter {
 				funcStack.append(funcLine.id)
 			}
 			
+			if let funcLine = line as? BytecodeStructHeader {
+				// + 1 for first line in struct
+				// header should never be jumped to
+				functionMap[funcLine.id] = pc + 1
+				
+				funcStack.append(funcLine.id)
+			}
+			
 			if line is BytecodeEnd || line is BytecodePrivateEnd {
 				
 				guard let currentFunc = funcStack.popLast() else {
@@ -193,6 +203,14 @@ public class BytecodeInterpreter {
 			
 			return funcEndPc + 1
 			
+		} else if let structHeader = line as? BytecodeStructHeader {
+			
+			guard let funcEndPc = functionEndMap[structHeader.id] else {
+				throw error(.unexpectedArgument)
+			}
+			
+			return funcEndPc + 1
+			
 		} else {
 			
 			throw error(.unexpectedArgument)
@@ -203,7 +221,7 @@ public class BytecodeInterpreter {
 	
 	fileprivate func executeInstruction(_ instruction: BytecodeInstruction, pc: Int) throws -> Int {
 		
-		var newPc: Int
+		let newPc: Int
 		
 		// TODO: Cleaner (more generic) mapping possible?
 
@@ -281,6 +299,18 @@ public class BytecodeInterpreter {
 			case .skipPast:
 				newPc = try executeSkipPast(instruction, pc: pc)
 			
+			case .structInit:
+				newPc = try executeStructInit(instruction, pc: pc)
+
+			case .structSet:
+				newPc = try executeStructSet(instruction, pc: pc)
+
+			case .structUpdate:
+				newPc = try executeStructUpdate(instruction, pc: pc)
+			
+			case .structGet:
+				newPc = try executeStructGet(instruction, pc: pc)
+
 		}
 		
 		return newPc
@@ -586,6 +616,134 @@ public class BytecodeInterpreter {
 		
 	}
 	
+	fileprivate func executeStructInit(_ instruction: BytecodeInstruction, pc: Int) throws -> Int {
+
+		let newStruct = ValueType.struct([:])
+		
+		try push(newStruct)
+		
+		return pc + 1
+	}
+
+	fileprivate func executeStructSet(_ instruction: BytecodeInstruction, pc: Int) throws -> Int {
+		
+		guard let keyStr = instruction.arguments.first, let key = Int(keyStr) else {
+			throw error(.unexpectedArgument)
+		}
+		
+		guard case let ValueType.struct(v) = try pop() else {
+			throw error(.unexpectedArgument)
+		}
+		
+		var newStruct = v
+		
+		newStruct[key] = try pop()
+
+		try push(.struct(newStruct))
+		
+		return pc + 1
+	}
+
+	fileprivate func executeStructUpdate(_ instruction: BytecodeInstruction, pc: Int) throws -> Int {
+
+		let memberIds = instruction.arguments.flatMap { Int($0) }
+		
+		guard case let ValueType.struct(v) = try pop() else {
+			throw error(.unexpectedArgument)
+		}
+		
+		let updateValue = try pop()
+		
+		let newStruct = try updateDict(v, keyPath: memberIds, newValue: updateValue)
+		
+		try push(.struct(newStruct))
+		
+		return pc + 1
+	}
+	
+	fileprivate func executeStructGet(_ instruction: BytecodeInstruction, pc: Int) throws -> Int {
+		
+		guard let keyStr = instruction.arguments.first, let key = Int(keyStr) else {
+			throw error(.unexpectedArgument)
+		}
+		
+		guard case let ValueType.struct(v) = try pop() else {
+			throw error(.unexpectedArgument)
+		}
+		
+		guard let memberValue = v[key] else {
+			throw error(.unexpectedArgument)
+		}
+		
+		try push(memberValue)
+		
+		return pc + 1
+	}
+	
+	// MARK: - Structs
+	
+	func updateDict(_ dict: [Int : ValueType], keyPath: [Int], newValue: ValueType, isReconstructing: Bool = false, trace: [[Int : ValueType]] = [], keyPathPassed: [Int] = []) throws -> [Int : ValueType] {
+		
+		var dict = dict
+		var trace = trace
+		var keyPathPassed = keyPathPassed
+		
+		if isReconstructing {
+			
+			if trace.isEmpty {
+				return dict
+			}
+			
+			guard let idPassed = keyPathPassed.popLast() else {
+				throw error(.unexpectedArgument)
+			}
+			
+			guard let lastTrace = trace.popLast() else {
+				throw error(.unexpectedArgument)
+			}
+			
+			var newDict = lastTrace
+			newDict[idPassed] = .struct(dict)
+			
+			return try updateDict(newDict, keyPath: keyPath, newValue: newValue, isReconstructing: true, trace: trace, keyPathPassed: keyPathPassed)
+		}
+		
+		guard !keyPath.isEmpty else {
+			throw error(.unexpectedArgument)
+		}
+		
+		guard let id = keyPath.last else {
+			throw error(.unexpectedArgument)
+		}
+		
+		
+		if keyPath.count == 1 {
+			
+			dict[id] = newValue
+			
+			return try updateDict(dict, keyPath: keyPath, newValue: newValue, isReconstructing: true, trace: trace, keyPathPassed: keyPathPassed)
+
+		} else {
+			
+			trace.append(dict)
+			keyPathPassed.append(id)
+
+			var keyPath = keyPath
+
+			guard let v = dict[id] else {
+				throw error(.unexpectedArgument)
+			}
+			
+			guard case let ValueType.struct(dictToUpdate) = v else {
+				throw error(.unexpectedArgument)
+			}
+			
+			keyPath.removeLast()
+			
+			return try updateDict(dictToUpdate, keyPath: keyPath, newValue: newValue, trace: trace, keyPathPassed: keyPathPassed)
+		}
+		
+	}
 	
 	// MARK: - Registers
 	

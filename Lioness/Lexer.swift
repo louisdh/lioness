@@ -35,6 +35,7 @@ public class Lexer {
 		"{": .curlyOpen,
 		"}": .curlyClose,
 		",": .comma,
+		".": .dot,
 		"!": .booleanNot,
 		">": .comparatorGreaterThan,
 		"<": .comparatorLessThan,

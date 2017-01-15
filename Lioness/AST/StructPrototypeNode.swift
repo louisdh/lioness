@@ -13,7 +13,12 @@ public class StructPrototypeNode: ASTNode {
 	public let name: String
 	public let members: [String]
 	
-	public init(name: String, members: [String]) {
+	public init(name: String, members: [String]) throws {
+		
+		guard members.count > 0 else {
+			throw CompileError.emptyStruct
+		}
+		
 		self.name = name
 		self.members = members
 	}

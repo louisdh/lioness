@@ -16,8 +16,12 @@ public enum ParseErrorType {
 	case expectedCharacterButFound(char: String, token: Token)
 	case expectedExpression
 	case expectedArgumentList
+	case expectedMemberList
 	case expectedFunctionName
+	case expectedStructName
 	case expectedVariable
+	
+	case emptyStructNotAllowed
 	
 	case illegalBinaryOperation
 
@@ -48,9 +52,15 @@ public enum ParseErrorType {
 			case .expectedArgumentList:
 				return "Expected argument list on line \(line)"
 				
+			case .expectedMemberList:
+				return "Expected member list on line \(line)"
+				
 			case .expectedFunctionName:
 				return "Expected function name on line \(line)"
 				
+			case .expectedStructName:
+				return "Expected struct name on line \(line)"
+
 			case .internalInconsistencyOccurred:
 				return "Internal inconsistency occured on line \(line)"
 				
@@ -63,6 +73,9 @@ public enum ParseErrorType {
 			case .expectedVariable:
 				return "Expected variable on line \(line)"
 				
+			case .emptyStructNotAllowed:
+				return "Struct with no members found on line \(line), structs may not be empty"
+
 			}
 		
 		}
@@ -86,9 +99,15 @@ public enum ParseErrorType {
 		case .expectedArgumentList:
 			return "Expected argument list"
 			
+		case .expectedMemberList:
+			return "Expected member list"
+			
 		case .expectedFunctionName:
 			return "Expected function name"
 			
+		case .expectedStructName:
+			return "Expected struct name"
+
 		case .internalInconsistencyOccurred:
 			return "Internal inconsistency occured"
 		
@@ -101,6 +120,9 @@ public enum ParseErrorType {
 		case .expectedVariable:
 			return "Expected variable)"
 			
+		case .emptyStructNotAllowed:
+			return "Struct with no members found, structs may not be empty"
+
 		}
 	}
 }

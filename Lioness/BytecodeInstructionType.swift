@@ -58,6 +58,11 @@ public enum BytecodeInstructionType: UInt8, CustomStringConvertible {
 
 	case skipPast = 23
 	
+	case structInit = 24
+	case structSet = 25
+	case structUpdate = 26
+	case structGet = 27
+	
 	public var opCode: UInt8 {
 		return self.rawValue
 	}
@@ -126,9 +131,11 @@ public enum BytecodeInstructionType: UInt8, CustomStringConvertible {
 		case .registerLoad:
 			return "reg_load"
 			
+		// TODO: rename to "virtual"?
 		case .invokeFunc:
 			return "invoke_func"
 			
+		// TODO: rename to "virtual"?
 		case .exitFunc:
 			return "exit_func"
 			
@@ -137,6 +144,18 @@ public enum BytecodeInstructionType: UInt8, CustomStringConvertible {
 			
 		case .skipPast:
 			return "skip_past"
+			
+		case .structInit:
+			return "struct_init"
+
+		case .structSet:
+			return "struct_set"
+			
+		case .structUpdate:
+			return "struct_update"
+			
+		case .structGet:
+			return "struct_get"
 			
 		}
 		

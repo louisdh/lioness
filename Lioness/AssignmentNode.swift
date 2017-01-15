@@ -10,11 +10,13 @@ import Foundation
 
 public class AssignmentNode: ASTNode {
 	
-	// TODO: make ASTNode (can be StructMemberNode)
-	public let variable: VariableNode
+	public let variable: ASTNode
 	public let value: ASTNode
 	
-	public init(variable: VariableNode, value: ASTNode) {
+	public init(variable: ASTNode, value: ASTNode) {
+		
+		// TODO: add validation, variable may only be VariableNode or StructMemberNode
+		
 		self.variable = variable
 		self.value = value
 	}
@@ -28,15 +30,69 @@ public class AssignmentNode: ASTNode {
 		bytecode.append(contentsOf: v)
 		
 		let label = ctx.nextIndexLabel()
-		let (varReg, isNew) = ctx.getRegister(for: variable.name)
 		
-		let type: BytecodeInstructionType = isNew ? .registerStore : .registerUpdate
+		if let variable = variable as? VariableNode {
 		
-		let instruction = BytecodeInstruction(label: label, type: type, arguments: [varReg], comment: "\(variable.name)")
-		
-		bytecode.append(instruction)
+			let (varReg, isNew) = ctx.getRegister(for: variable.name)
 
+			let type: BytecodeInstructionType = isNew ? .registerStore : .registerUpdate
+			
+			let instruction = BytecodeInstruction(label: label, type: type, arguments: [varReg], comment: "\(variable.name)")
+			
+			bytecode.append(instruction)
+			
+		} else if let member = variable as? StructMemberNode {
+			
+			let (members, varNode) = try getStructUpdate(member, members: [], with: ctx)
+			
+			let (varReg, isNew) = ctx.getRegister(for: varNode.name)
+			
+			guard !isNew else {
+				throw CompileError.unexpectedCommand
+			}
+			
+			let varInstructions = try varNode.compile(with: ctx, in: self)
+			bytecode.append(contentsOf: varInstructions)
+
+			let membersMapped = members.map { String($0) }
+			
+			let instruction = BytecodeInstruction(label: label, type: .structUpdate, arguments: membersMapped, comment: "\(membersMapped)")
+			
+			bytecode.append(instruction)
+
+			
+			let storeInstruction = BytecodeInstruction(label: label, type: .registerUpdate, arguments: [varReg], comment: "\(varNode.name)")
+
+			bytecode.append(storeInstruction)
+
+		}
+		
 		return bytecode
+		
+	}
+	
+	fileprivate func getStructUpdate(_ memberNode: StructMemberNode, members: [Int], with ctx: BytecodeCompiler) throws -> ([Int], VariableNode) {
+		
+		var members = members
+		
+		guard let memberId = ctx.getStructMemberId(for: memberNode.name) else {
+			throw CompileError.unexpectedCommand
+		}
+		
+		members.append(memberId)
+		
+		if let varNode = memberNode.variable as? VariableNode {
+			return (members, varNode)
+
+		} else {
+			
+			guard let childMemberNode = memberNode.variable as? StructMemberNode else {
+				throw CompileError.unexpectedCommand
+			}
+			
+			return try getStructUpdate(childMemberNode, members: members, with: ctx)
+
+		}
 		
 	}
 	

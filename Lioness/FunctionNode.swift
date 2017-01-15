@@ -10,10 +10,10 @@ import Foundation
 
 public class FunctionNode: ASTNode {
 	
-	public let prototype: PrototypeNode
+	public let prototype: FunctionPrototypeNode
 	public let body: BodyNode
 	
-	public init(prototype: PrototypeNode, body: BodyNode) {
+	public init(prototype: FunctionPrototypeNode, body: BodyNode) {
 		self.prototype = prototype
 		self.body = body
 	}

@@ -20,6 +20,10 @@ public class BytecodeCompiler {
 
 	fileprivate var functionExitStack: [String]
 	
+	fileprivate var structMemberIndex: Int
+
+	fileprivate var structMemberMap: [String : Int]
+
 	fileprivate let scopeTreeRoot: ScopeNode
 
 	fileprivate var currentScopeNode: ScopeNode
@@ -37,6 +41,9 @@ public class BytecodeCompiler {
 		scopeTreeRoot = ScopeNode(childNodes: [])
 		currentScopeNode = scopeTreeRoot
 		
+		structMemberIndex = 0
+		structMemberMap = [String : Int]()
+		
 	}
 	
 	// MARK: - Public
@@ -44,6 +51,7 @@ public class BytecodeCompiler {
 	public func compile(_ ast: [ASTNode]) throws -> BytecodeBody {
 		
 		try compileFunctionPrototypes(for: ast)
+		try mapStructMembers(for: ast)
 		
 		var bytecode = BytecodeBody()
 
@@ -61,6 +69,27 @@ public class BytecodeCompiler {
 	}
 	
 	// MARK: -
+	
+	fileprivate func mapStructMembers(for ast: [ASTNode]) throws {
+
+		for node in ast {
+			
+			if let structNode = node as? StructNode {
+				
+				for memberName in structNode.prototype.members {
+				
+					if !structMemberMap.keys.contains(memberName) {
+						structMemberIndex += 1
+						structMemberMap[memberName] = structMemberIndex
+					}
+					
+				}
+				
+			}
+			
+		}
+		
+	}
 	
 	fileprivate func compileFunctionPrototypes(for ast: [ASTNode]) throws {
 		
@@ -256,6 +285,12 @@ public class BytecodeCompiler {
 		
 	}
 	
+	// MARK: - Structs
+	
+	func getStructMemberId(for memberName: String) -> Int? {
+		return structMemberMap[memberName]
+	}
+	
 	// MARK: - Registers
 	
 	fileprivate var registerCount = 0
@@ -293,7 +328,25 @@ public class BytecodeCompiler {
 	
 	// MARK: - Function ids
 	
+	// TODO: rename to virtual?
+	
 	fileprivate var functionCount = 0
+	
+	func getStructId(for structNode: StructNode) -> String {
+		
+		let name = structNode.prototype.name
+		
+		if let functionMapped = currentScopeNode.deepFunctionMap()[name] {
+			return functionMapped.id
+		}
+		
+		let newReg = getNewFunctionId()
+		let exitReg = getNewFunctionId()
+		
+		currentScopeNode.functionMap[name] = FunctionMapped(id: newReg, exitId: exitReg, returns: true)
+		
+		return newReg
+	}
 	
 	/// Will make new id if needed
 	func getFunctionId(for functionNode: FunctionNode) -> String {

@@ -8,8 +8,7 @@
 
 import Foundation
 
-// TODO: rename to FunctionPrototypeNode
-public class PrototypeNode: ASTNode {
+public class FunctionPrototypeNode: ASTNode {
 	
 	public let name: String
 	public let argumentNames: [String]
@@ -31,11 +30,11 @@ public class PrototypeNode: ASTNode {
 	}
 	
 	public var description: String {
-		return "PrototypeNode(name: \(name), argumentNames: \(argumentNames), returns: \(returns))"
+		return "FunctionPrototypeNode(name: \(name), argumentNames: \(argumentNames), returns: \(returns))"
 	}
 	
 	public var nodeDescription: String? {
-		return "Prototype"
+		return "Function Prototype"
 	}
 	
 	public var descriptionChildNodes: [ASTChildNode] {

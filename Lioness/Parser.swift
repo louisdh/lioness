@@ -174,7 +174,7 @@ public class Parser {
 	}
 	
 	/// Get operator for token (e.g. '+=' returns '+')
-	fileprivate func getOperator(for tokenType: TokenType) -> String? {
+	fileprivate func getOperator(forShortHandToken tokenType: TokenType) -> String? {
 
 		if case .shortHandAdd = tokenType {
 			return "+"
@@ -256,15 +256,36 @@ public class Parser {
 			return false
 		}
 		
-		guard let nextToken = peekNextToken() else {
-			return false
+		var i = 1
+		var expectDot = true
+		
+		while let nextToken = peekToken(offset: i) {
+			
+			if case .equals = nextToken.type {
+				return true
+			}
+			
+			if expectDot {
+				
+				guard case .dot = nextToken.type else {
+					return false
+				}
+		
+			} else {
+				
+				guard case .identifier = nextToken.type else {
+					return false
+				}
+
+			}
+		
+			expectDot = !expectDot
+			
+			i += 1
+
 		}
 		
-		guard case .equals = nextToken.type else {
-			return false
-		}
-		
-		return true
+		return false
 		
 	}
 	
@@ -272,15 +293,17 @@ public class Parser {
 
 	fileprivate func parseAssignment() throws -> AssignmentNode {
 		
-		guard case let .identifier(variable) = popCurrentToken().type else {
+		guard case let .identifier(varName) = popCurrentToken().type else {
 			throw error(.unexpectedToken)
 		}
 		
+		let varNode = try parseVariable(with: varName)
+
 		try popCurrentToken(andExpect: .equals, "=")
 		
 		let expr = try parseExpression()
 		
-		let assign = AssignmentNode(variable: VariableNode(name: variable), value: expr)
+		let assign = AssignmentNode(variable: varNode, value: expr)
 
 		return assign
 	}
@@ -294,15 +317,15 @@ public class Parser {
 		return NumberNode(value: value)
 	}
 	
-	/// Expression can be a binary/bool op
+	/// Expression can be a binary/bool op, member
 	fileprivate func parseExpression() throws -> ASTNode {
 		
 		let node = try parsePrimary()
 		
 		// Handles short hand operators (e.g. "+=")
-		if let currentToken = peekCurrentToken(), let op = getOperator(for: currentToken.type) {
+		if let currentToken = peekCurrentToken(), let op = getOperator(forShortHandToken: currentToken.type) {
 			
-			guard let variable = node as? VariableNode else {
+			guard node is VariableNode || node is StructMemberNode else {
 				throw error(.expectedVariable)
 			}
 			
@@ -314,12 +337,12 @@ public class Parser {
 			let operation: BinaryOpNode
 			
 			do {
-				operation = try BinaryOpNode(op: op, lhs: variable, rhs: expr)
+				operation = try BinaryOpNode(op: op, lhs: node, rhs: expr)
 			} catch {
 				throw self.error(.illegalBinaryOperation, token: currentToken)
 			}
 			
-			let assignment = AssignmentNode(variable: variable, value: operation)
+			let assignment = AssignmentNode(variable: node, value: operation)
 			
 			return assignment
 		
@@ -382,6 +405,57 @@ public class Parser {
 
 	}
 	
+	fileprivate func parseVariable(with name: String) throws -> ASTNode {
+
+		let varNode = VariableNode(name: name)
+		
+		if let currentToken = peekCurrentToken(), case .dot = currentToken.type {
+			
+			var members = [String]()
+			
+			while let currentToken = peekCurrentToken(), case .dot = currentToken.type {
+				
+				try popCurrentToken(andExpect: .dot, ".")
+				
+				guard case let .identifier(variable) = popCurrentToken().type else {
+					throw error(.unexpectedToken)
+				}
+				
+				members.append(variable)
+				
+			}
+			
+			var memberNode: StructMemberNode?
+			
+			
+			while !members.isEmpty {
+				
+				let member = members.removeFirst()
+				
+				if let prevMemberNode = memberNode {
+					
+					memberNode = StructMemberNode(variable: prevMemberNode, name: member)
+					
+				} else {
+					
+					memberNode = StructMemberNode(variable: varNode, name: member)
+					
+				}
+				
+			}
+			
+			guard let returnNode = memberNode else {
+				throw error(.unexpectedToken)
+			}
+			
+			return returnNode
+			
+		}
+		
+		return varNode
+		
+	}
+	
 	fileprivate func parseIdentifier() throws -> ASTNode {
 		
 		guard case let .identifier(name) = popCurrentToken().type else {
@@ -389,7 +463,7 @@ public class Parser {
 		}
 
 		guard let currentToken = peekCurrentToken(), case .parensOpen = currentToken.type else {
-			return VariableNode(name: name)
+			return try parseVariable(with: name)
 		}
 		
 		popCurrentToken()
@@ -472,6 +546,9 @@ public class Parser {
 			case .function:
 				return try parseFunction()
 			
+			case .struct:
+				return try parseStruct()
+
 			default:
 				throw error(.expectedExpression, token: currentToken)
 		}
@@ -753,7 +830,7 @@ public class Parser {
 	// TODO: use stack once we allow functions in functions
 	fileprivate var currentFunctionReturns = false
 	
-	fileprivate func parsePrototype() throws -> PrototypeNode {
+	fileprivate func parseFunctionPrototype() throws -> FunctionPrototypeNode {
 		
 		guard case let .identifier(name) = popCurrentToken().type else {
 			throw error(.expectedFunctionName)
@@ -787,20 +864,52 @@ public class Parser {
 		
 		try popCurrentToken(andExpect: .curlyOpen, "{")
 		
-		return PrototypeNode(name: name, argumentNames: argumentNames, returns: returns)
+		return FunctionPrototypeNode(name: name, argumentNames: argumentNames, returns: returns)
 	}
 	
 	fileprivate func parseFunction() throws -> FunctionNode {
 		
-		popCurrentToken()
+		try popCurrentToken(andExpect: .function)
 		
-		let prototype = try parsePrototype()
+		let prototype = try parseFunctionPrototype()
 		
 		let body = try parseBody()
 		
 		try popCurrentToken(andExpect: .curlyClose, "}")
 
 		return FunctionNode(prototype: prototype, body: body)
+	}
+	
+	fileprivate func parseStruct() throws -> StructNode {
+		
+		try popCurrentToken(andExpect: .struct)
+		
+		guard case let .identifier(name) = popCurrentToken().type else {
+			throw error(.expectedFunctionName)
+		}
+
+		try popCurrentToken(andExpect: .curlyOpen, "{")
+		
+		var members = [String]()
+		
+		while let currentToken = peekCurrentToken(), case let .identifier(name) = currentToken.type {
+			popCurrentToken()
+			members.append(name)
+			
+			if let currentToken = peekCurrentToken(), case .curlyClose = currentToken.type {
+				break
+			}
+			
+			guard case .comma = popCurrentToken().type else {
+				throw error(.expectedMemberList)
+			}
+		}
+		
+		let prototype = try StructPrototypeNode(name: name, members: members)
+		
+		try popCurrentToken(andExpect: .curlyClose, "}")
+		
+		return StructNode(prototype: prototype)
 	}
 	
 	// MARK: -
