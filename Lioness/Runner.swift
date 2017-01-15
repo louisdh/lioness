@@ -28,6 +28,7 @@ public enum RunnerError: Error {
 public class Runner {
 	
 	fileprivate let logDebug: Bool
+	fileprivate let logTime: Bool
 	
 	fileprivate var source: String?
 	
@@ -37,8 +38,9 @@ public class Runner {
 
 	// MARK: -
 
-	public init(logDebug: Bool = false) {
+	public init(logDebug: Bool = false, logTime: Bool = false) {
 		self.logDebug = logDebug
+		self.logTime = logTime
 		compiler = BytecodeCompiler()
 	}
 	
@@ -111,12 +113,14 @@ public class Runner {
 
 		interpret(fullBytecode)
 		
-		if logDebug {
+		if logTime {
 			
 			let timeElapsed = CFAbsoluteTimeGetCurrent() - startTime
-			log("\nTotal execution time: \(timeElapsed)s")
 			
 			let interpretTimeElapsed = CFAbsoluteTimeGetCurrent() - interpretStartTime
+			
+			log("\nTotal execution time: \(timeElapsed)s")
+
 			log("\nInterpret execution time: \(interpretTimeElapsed)s")
 
 		}
@@ -293,13 +297,7 @@ public class Runner {
 			try interpreter.interpret()
 			
 			if logDebug {
-
-				log("Stack at end of execution:\n\(interpreter.stack)\n")
-
-				log("Registers at end of execution:")
-
-				logRegisters(interpreter)
-
+				logInterpreter(interpreter)
 			}
 			
 		} catch {
@@ -326,6 +324,16 @@ public class Runner {
 	
 	// MARK: -
 	// MARK: Logging
+	
+	fileprivate func logInterpreter(_ interpreter: BytecodeInterpreter) {
+		
+		log("Stack at end of execution:\n\(interpreter.stack)\n")
+		
+		log("Registers at end of execution:")
+		
+		logRegisters(interpreter)
+	
+	}
 	
 	fileprivate func logRegisters(_ interpreter: BytecodeInterpreter) {
 		
