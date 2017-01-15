@@ -14,6 +14,24 @@ CHANGELOG
 Lioness 1.0
 -----------
 
+### 2017-01-15
+* Lioness now supports structs. Example:
+
+	```lioness
+	// The Point struct is included in the stdlib
+	struct Point {
+		x, y
+	}
+	
+	p = Point(2, 3)
+	foo = p
+	p.x += 5.0
+	
+	// p = {x: 7, y: 3}
+	// foo = {x: 2, y: 3}
+	
+	```
+	
 ### 2017-01-09
 * Lioness now supports non-global functions. Example:
 
