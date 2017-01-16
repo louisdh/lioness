@@ -78,10 +78,10 @@ func ==(lhs: TokenType, rhs: TokenType) -> Bool {
 public struct Token: CustomStringConvertible {
 	
 	/// The token's type
-	let type: TokenType
+	public let type: TokenType
 	
 	/// The range of the token in the original source code
-	let range: Range<String.Index>
+	public let range: Range<String.Index>
 	
 	public var description: String {
 		return "\(type)"
