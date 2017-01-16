@@ -14,7 +14,7 @@ class ViewController: NSViewController, RunnerDelegate {
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
-		let runner = Runner(logDebug: true)
+		let runner = Runner(logDebug: true, logTime: true)
 		runner.delegate = self
 		
 		guard let path = stringPath(for: "A") else {
