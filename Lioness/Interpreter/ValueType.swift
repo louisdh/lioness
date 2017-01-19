@@ -34,7 +34,6 @@ public extension ValueType {
 			
 			for (k, v) in val {
 				
-				
 				if let memberName = ctx.getStructMemberName(for: k) {
 					descr += "\(memberName) = "
 				} else {
