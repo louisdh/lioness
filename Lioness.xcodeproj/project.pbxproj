@@ -109,6 +109,8 @@
 		BE62A8721DE6108F00A75453 /* Complex.lion in Resources */ = {isa = PBXBuildFile; fileRef = BE62A8711DE6108F00A75453 /* Complex.lion */; };
 		BE736A8D1DBBEA5F00ADC83A /* BaseTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE736A8C1DBBEA5F00ADC83A /* BaseTestCase.swift */; };
 		BE736A911DBD3C0D00ADC83A /* Execution+Performance.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE736A901DBD3C0D00ADC83A /* Execution+Performance.swift */; };
+		BE76416C1E317C44004562FE /* ValueType.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE76416B1E317C44004562FE /* ValueType.swift */; };
+		BE76416D1E317C44004562FE /* ValueType.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE76416B1E317C44004562FE /* ValueType.swift */; };
 		BE7940331E06BE24008FCCBB /* Arithmetic.lion in Resources */ = {isa = PBXBuildFile; fileRef = BE7940321E06BE24008FCCBB /* Arithmetic.lion */; };
 		BE809A151E2274610005370D /* FunctionReturnGlobalVar.lion in Resources */ = {isa = PBXBuildFile; fileRef = BE809A141E2274610005370D /* FunctionReturnGlobalVar.lion */; };
 		BE809A171E22C5C80005370D /* UnusedFunctionResult.lion in Resources */ = {isa = PBXBuildFile; fileRef = BE809A161E22C5C80005370D /* UnusedFunctionResult.lion */; };
@@ -194,6 +196,7 @@
 		BE62A8711DE6108F00A75453 /* Complex.lion */ = {isa = PBXFileReference; explicitFileType = sourcecode.glsl; fileEncoding = 4; path = Complex.lion; sourceTree = "<group>"; };
 		BE736A8C1DBBEA5F00ADC83A /* BaseTestCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = BaseTestCase.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		BE736A901DBD3C0D00ADC83A /* Execution+Performance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Execution+Performance.swift"; path = "Execution/Execution+Performance.swift"; sourceTree = "<group>"; };
+		BE76416B1E317C44004562FE /* ValueType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ValueType.swift; path = Interpreter/ValueType.swift; sourceTree = "<group>"; };
 		BE7940321E06BE24008FCCBB /* Arithmetic.lion */ = {isa = PBXFileReference; explicitFileType = sourcecode.glsl; fileEncoding = 4; name = Arithmetic.lion; path = "Standard Library/Arithmetic.lion"; sourceTree = "<group>"; };
 		BE809A141E2274610005370D /* FunctionReturnGlobalVar.lion */ = {isa = PBXFileReference; explicitFileType = sourcecode.glsl; fileEncoding = 4; path = FunctionReturnGlobalVar.lion; sourceTree = "<group>"; };
 		BE809A161E22C5C80005370D /* UnusedFunctionResult.lion */ = {isa = PBXFileReference; explicitFileType = sourcecode.glsl; fileEncoding = 4; path = UnusedFunctionResult.lion; sourceTree = "<group>"; };
@@ -470,6 +473,7 @@
 		BE9369FA1DA807B400C0B3DF /* Interpreter */ = {
 			isa = PBXGroup;
 			children = (
+				BE76416B1E317C44004562FE /* ValueType.swift */,
 				BE3CCDC81E0330EE00977DCE /* InterpreterError.swift */,
 				BEFFCB8F1DAA77AE001EF8E4 /* BytecodeInterpreter.swift */,
 			);
@@ -706,6 +710,7 @@
 				BE2ECC461E1C54CD00CCD588 /* BytecodePrivateEnd.swift in Sources */,
 				BE8800611E25760B00EBEC54 /* StructPrototypeNode.swift in Sources */,
 				BE25BA241DDD1F0000041A20 /* ASTNode+Validation.swift in Sources */,
+				BE76416C1E317C44004562FE /* ValueType.swift in Sources */,
 				BE25BA1D1DD8F5F500041A20 /* ForStatementNode.swift in Sources */,
 				BE2296311DB16F1B00EA477A /* Lexer.swift in Sources */,
 				BED616D61DFB622300A70820 /* LoopNode.swift in Sources */,
@@ -776,6 +781,7 @@
 				BE2ECC471E1C54CD00CCD588 /* BytecodePrivateEnd.swift in Sources */,
 				BE8800621E25760B00EBEC54 /* StructPrototypeNode.swift in Sources */,
 				BE58C1771E16D80500BC73CA /* ReturnNode.swift in Sources */,
+				BE76416D1E317C44004562FE /* ValueType.swift in Sources */,
 				BE58C15F1E16D7F100BC73CA /* BytecodeInterpreter.swift in Sources */,
 				BE58C16D1E16D80500BC73CA /* ASTNode+Validation.swift in Sources */,
 				BE58C17A1E16D80500BC73CA /* WhileStatementNode.swift in Sources */,
