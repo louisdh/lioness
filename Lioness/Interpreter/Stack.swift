@@ -8,7 +8,7 @@
 
 import Foundation
 
-public struct Stack<Element> {
+public struct Stack<Element>: CustomStringConvertible {
 	
 	fileprivate var items: [Element]
 	fileprivate let limit: Int
@@ -48,6 +48,10 @@ public struct Stack<Element> {
 		size -= 1
 		
 		return last
+	}
+	
+	public var description: String {
+		return items.description
 	}
 	
 }
