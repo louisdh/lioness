@@ -8,6 +8,7 @@
 
 import Foundation
 
+/// LIFO stack
 public struct Stack<Element>: CustomStringConvertible {
 	
 	fileprivate var items: [Element]
