@@ -16,10 +16,7 @@ public class BytecodeInterpreter {
 	fileprivate let bytecode: BytecodeBody
 	
 	/// Stack
-	fileprivate(set) public var stack = [ValueType]()
-	
-	/// Manual stack size counting for performance
-	fileprivate var stackSize = 0
+	fileprivate(set) public var stack: Stack<ValueType>
 	
 	// TODO: rename "function" to "virtual"? (also used for structs)
 
@@ -29,13 +26,10 @@ public class BytecodeInterpreter {
 
 	fileprivate var functionEndMap = [String : Int]()
 
-	fileprivate var functionInvokeStack = [Int]()
+	fileprivate var functionInvokeStack: Stack<Int>
 	
 	fileprivate var functionDepth = 0
 
-	/// Manual stack size counting for performance
-	fileprivate var functionInvokeStackSize = 0
-	
 	/// Registers
 	fileprivate(set) public var registers = [String : ValueType]()
 	
@@ -48,7 +42,11 @@ public class BytecodeInterpreter {
 	/// - Parameter bytecode: Array of BytecodeInstruction
 	public init(bytecode: BytecodeBody) throws {
 		self.bytecode = bytecode
-
+		
+		stack = Stack<ValueType>(withLimit: stackLimit)
+		registers = [String : ValueType]()
+		functionInvokeStack = Stack<Int>(withLimit: stackLimit)
+		
 		try createFunctionMap()
 	}
 	
@@ -59,6 +57,10 @@ public class BytecodeInterpreter {
 	/// - Parameter bytecodeStrings: bytecode instructions as strings
 	public init?(bytecodeStrings: [String]) {
 		
+		stack = Stack<ValueType>(withLimit: stackLimit)
+		registers = [String : ValueType]()
+		functionInvokeStack = Stack<Int>(withLimit: stackLimit)
+
 		var bytecode = BytecodeBody()
 		
 		for s in bytecodeStrings {
@@ -135,9 +137,6 @@ public class BytecodeInterpreter {
 	/// - Throws: InterpreterError
 	public func interpret() throws {
 		
-		stack = [ValueType]()
-		registers = [String : ValueType]()
-		
 		// Program counter
 		var pc = pcStart
 		
@@ -159,7 +158,7 @@ public class BytecodeInterpreter {
 		} else if line is BytecodeEnd {
 			
 			// In theory should never be called?
-			return try popFunctionInvoke()
+			return try functionInvokeStack.pop()
 			
 		} else if let functionHeader = line as? BytecodeFunctionHeader {
 			
@@ -171,7 +170,7 @@ public class BytecodeInterpreter {
 			
 		} else if line is BytecodePrivateEnd {
 			
-			return try popFunctionInvoke()
+			return try functionInvokeStack.pop()
 			
 		} else if let functionHeader = line as? BytecodePrivateFunctionHeader {
 			
@@ -302,7 +301,7 @@ public class BytecodeInterpreter {
 			throw error(.unexpectedArgument)
 		}
 		
-		try push(.number(f))
+		try stack.push(.number(f))
 		
 		return pc + 1
 	}
@@ -312,7 +311,7 @@ public class BytecodeInterpreter {
 		let lhs = try popNumber()
 		let rhs = try popNumber()
 		
-		try push(.number(lhs + rhs))
+		try stack.push(.number(lhs + rhs))
 		
 		return pc + 1
 	}
@@ -322,7 +321,7 @@ public class BytecodeInterpreter {
 		let rhs = try popNumber()
 		let lhs = try popNumber()
 		
-		try push(.number(lhs - rhs))
+		try stack.push(.number(lhs - rhs))
 		
 		return pc + 1
 	}
@@ -332,7 +331,7 @@ public class BytecodeInterpreter {
 		let lhs = try popNumber()
 		let rhs = try popNumber()
 		
-		try push(.number(lhs * rhs))
+		try stack.push(.number(lhs * rhs))
 		
 		return pc + 1
 	}
@@ -342,7 +341,7 @@ public class BytecodeInterpreter {
 		let rhs = try popNumber()
 		let lhs = try popNumber()
 
-		try push(.number(lhs / rhs))
+		try stack.push(.number(lhs / rhs))
 		
 		return pc + 1
 	}
@@ -352,7 +351,7 @@ public class BytecodeInterpreter {
 		let rhs = try popNumber()
 		let lhs = try popNumber()
 		
-		try push(.number(pow(lhs, rhs)))
+		try stack.push(.number(pow(lhs, rhs)))
 		
 		return pc + 1
 	}
@@ -364,7 +363,7 @@ public class BytecodeInterpreter {
 		
 		let and: NumberType = (rhs && lhs) == true ? 1.0 : 0.0
 		
-		try push(.number(and))
+		try stack.push(.number(and))
 		
 		return pc + 1
 	}
@@ -376,7 +375,7 @@ public class BytecodeInterpreter {
 		
 		let and: NumberType = (rhs || lhs) == true ? 1.0 : 0.0
 		
-		try push(.number(and))
+		try stack.push(.number(and))
 		
 		return pc + 1
 	}
@@ -387,7 +386,7 @@ public class BytecodeInterpreter {
 		
 		let not: NumberType = (!b) == true ? 1.0 : 0.0
 		
-		try push(.number(not))
+		try stack.push(.number(not))
 		
 		return pc + 1
 	}
@@ -399,7 +398,7 @@ public class BytecodeInterpreter {
 		
 		let eq: NumberType = (lhs == rhs) ? 1.0 : 0.0
 		
-		try push(.number(eq))
+		try stack.push(.number(eq))
 		
 		return pc + 1
 	}
@@ -411,7 +410,7 @@ public class BytecodeInterpreter {
 		
 		let neq: NumberType = (lhs != rhs) ? 1.0 : 0.0
 		
-		try push(.number(neq))
+		try stack.push(.number(neq))
 		
 		return pc + 1
 	}
@@ -423,7 +422,7 @@ public class BytecodeInterpreter {
 		
 		let cmp: NumberType = (lhs <= rhs) ? 1.0 : 0.0
 		
-		try push(.number(cmp))
+		try stack.push(.number(cmp))
 		
 		return pc + 1
 	}
@@ -435,7 +434,7 @@ public class BytecodeInterpreter {
 		
 		let cmp: NumberType = (lhs < rhs) ? 1.0 : 0.0
 		
-		try push(.number(cmp))
+		try stack.push(.number(cmp))
 		
 		return pc + 1
 	}
@@ -500,7 +499,7 @@ public class BytecodeInterpreter {
 			throw error(.unexpectedArgument)
 		}
 		
-		setRegValue(try pop(), for: reg)
+		setRegValue(try stack.pop(), for: reg)
 		
 		return pc + 1
 	}
@@ -511,7 +510,7 @@ public class BytecodeInterpreter {
 			throw error(.unexpectedArgument)
 		}
 		
-		try updateRegValue(try pop(), for: reg)
+		try updateRegValue(try stack.pop(), for: reg)
 		
 		return pc + 1
 	}
@@ -535,7 +534,7 @@ public class BytecodeInterpreter {
 		
 		let regValue = try getRegValue(for: reg)
 		
-		try push(regValue)
+		try stack.push(regValue)
 		
 		return pc + 1
 	}
@@ -551,7 +550,7 @@ public class BytecodeInterpreter {
 		}
 		
 		// return to next pc after function returns
-		try pushFunctionInvoke(pc + 1)
+		try functionInvokeStack.push(pc + 1)
 		
 		// TODO: if not private function {
 		if bytecode[idPc - 1] is BytecodeFunctionHeader {
@@ -563,7 +562,7 @@ public class BytecodeInterpreter {
 	
 	fileprivate func executeExitFunction(_ instruction: BytecodeInstruction, pc: Int) throws -> Int {
 		
-		guard let exitFunctionLabel = functionInvokeStack.popLast() else {
+		guard let exitFunctionLabel = try? functionInvokeStack.pop() else {
 			throw error(.unexpectedArgument)
 		}
 		
@@ -574,7 +573,7 @@ public class BytecodeInterpreter {
 	
 	fileprivate func executePop(_ instruction: BytecodeInstruction, pc: Int) throws -> Int {
 		
-		_ = try pop()
+		_ = try stack.pop()
 		
 		return pc + 1
 	}
@@ -598,7 +597,7 @@ public class BytecodeInterpreter {
 
 		let newStruct = ValueType.struct([:])
 		
-		try push(newStruct)
+		try stack.push(newStruct)
 		
 		return pc + 1
 	}
@@ -609,15 +608,15 @@ public class BytecodeInterpreter {
 			throw error(.unexpectedArgument)
 		}
 		
-		guard case let ValueType.struct(v) = try pop() else {
+		guard case let ValueType.struct(v) = try stack.pop() else {
 			throw error(.unexpectedArgument)
 		}
 		
 		var newStruct = v
 		
-		newStruct[key] = try pop()
+		newStruct[key] = try stack.pop()
 
-		try push(.struct(newStruct))
+		try stack.push(.struct(newStruct))
 		
 		return pc + 1
 	}
@@ -626,15 +625,15 @@ public class BytecodeInterpreter {
 
 		let memberIds = instruction.arguments.flatMap { Int($0) }
 		
-		guard case let ValueType.struct(v) = try pop() else {
+		guard case let ValueType.struct(v) = try stack.pop() else {
 			throw error(.unexpectedArgument)
 		}
 		
-		let updateValue = try pop()
+		let updateValue = try stack.pop()
 		
 		let newStruct = try updateDict(v, keyPath: memberIds, newValue: updateValue)
 		
-		try push(.struct(newStruct))
+		try stack.push(.struct(newStruct))
 		
 		return pc + 1
 	}
@@ -645,7 +644,7 @@ public class BytecodeInterpreter {
 			throw error(.unexpectedArgument)
 		}
 		
-		guard case let ValueType.struct(v) = try pop() else {
+		guard case let ValueType.struct(v) = try stack.pop() else {
 			throw error(.unexpectedArgument)
 		}
 		
@@ -653,7 +652,7 @@ public class BytecodeInterpreter {
 			throw error(.unexpectedArgument)
 		}
 		
-		try push(memberValue)
+		try stack.push(memberValue)
 		
 		return pc + 1
 	}
@@ -830,7 +829,7 @@ public class BytecodeInterpreter {
 		
 		if foundLabel == nil {
 			
-			if let exitFunctionLabel = functionInvokeStack.popLast() {
+			if let exitFunctionLabel = try? functionInvokeStack.pop() {
 				
 				functionDepth -= 1
 				
@@ -848,70 +847,14 @@ public class BytecodeInterpreter {
 	
 	fileprivate func popNumber() throws -> NumberType {
 		
-		guard let last = stack.popLast() else {
-			throw error(.illegalStackOperation)
-		}
+		let last = try stack.pop()
 		
 		guard case let ValueType.number(number) = last else {
 			throw error(.unexpectedArgument)
 		}
 		
-		stackSize -= 1
-		
 		return number
 	}
-
-	/// Pop from stack
-	fileprivate func pop() throws -> ValueType {
-		
-		guard let last = stack.popLast() else {
-			throw error(.illegalStackOperation)
-		}
-		
-		stackSize -= 1
-
-		return last
-	}
-	
-	/// Push to stack
-	fileprivate func push(_ item: ValueType) throws {
-		
-		if stackSize >= stackLimit {
-			throw error(.stackOverflow)
-		}
-		
-		stack.append(item)
-		stackSize += 1
-	}
-
-	// MARK: - Function invoke stack
-
-	/// Pop from function invoke stack
-	fileprivate func popFunctionInvoke() throws -> Int {
-		
-		// TODO: is this faster than popLast()?
-//		let last = functionInvokeStack.remove(at: functionInvokeStackSize - 1)
-		
-		guard let last = functionInvokeStack.popLast() else {
-			throw error(.illegalStackOperation)
-		}
-		
-		functionInvokeStackSize -= 1
-		
-		return last
-	}
-	
-	/// Push to function invoke stack
-	fileprivate func pushFunctionInvoke(_ item: Int) throws {
-		
-		if functionInvokeStackSize >= stackLimit {
-			throw error(.stackOverflow)
-		}
-		
-		functionInvokeStack.append(item)
-		functionInvokeStackSize += 1
-	}
-
 	
 	// MARK: -
 	

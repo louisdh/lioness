@@ -1,0 +1,53 @@
+//
+//  Stack.swift
+//  Lioness
+//
+//  Created by Louis D'hauwe on 20/01/2017.
+//  Copyright © 2017 Silver Fox. All rights reserved.
+//
+
+import Foundation
+
+public struct Stack<Element> {
+	
+	fileprivate var items: [Element]
+	fileprivate let limit: Int
+	
+	/// Manual stack size counting for performance
+	fileprivate(set) var size: Int
+	
+	init(withLimit limit: Int) {
+		self.limit = limit
+		items = [Element]()
+		size = 0
+	}
+	
+	var isEmpty: Bool {
+		return size == 0
+	}
+	
+	mutating func push(_ item: Element) throws {
+		
+		if size >= limit {
+			throw InterpreterError.stackOverflow
+		}
+		
+		items.append(item)
+		size += 1
+	}
+	
+	mutating func pop() throws -> Element {
+		
+		// TODO: is this faster than popLast()?
+//		let last = items.remove(at: size - 1)
+		
+		guard let last = items.popLast() else {
+			throw InterpreterError.illegalStackOperation
+		}
+		
+		size -= 1
+		
+		return last
+	}
+	
+}

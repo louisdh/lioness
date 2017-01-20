@@ -111,6 +111,8 @@
 		BE736A911DBD3C0D00ADC83A /* Execution+Performance.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE736A901DBD3C0D00ADC83A /* Execution+Performance.swift */; };
 		BE76416C1E317C44004562FE /* ValueType.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE76416B1E317C44004562FE /* ValueType.swift */; };
 		BE76416D1E317C44004562FE /* ValueType.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE76416B1E317C44004562FE /* ValueType.swift */; };
+		BE76416F1E32861A004562FE /* Stack.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE76416E1E32861A004562FE /* Stack.swift */; };
+		BE7641701E32861A004562FE /* Stack.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE76416E1E32861A004562FE /* Stack.swift */; };
 		BE7940331E06BE24008FCCBB /* Arithmetic.lion in Resources */ = {isa = PBXBuildFile; fileRef = BE7940321E06BE24008FCCBB /* Arithmetic.lion */; };
 		BE809A151E2274610005370D /* FunctionReturnGlobalVar.lion in Resources */ = {isa = PBXBuildFile; fileRef = BE809A141E2274610005370D /* FunctionReturnGlobalVar.lion */; };
 		BE809A171E22C5C80005370D /* UnusedFunctionResult.lion in Resources */ = {isa = PBXBuildFile; fileRef = BE809A161E22C5C80005370D /* UnusedFunctionResult.lion */; };
@@ -197,6 +199,7 @@
 		BE736A8C1DBBEA5F00ADC83A /* BaseTestCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = BaseTestCase.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		BE736A901DBD3C0D00ADC83A /* Execution+Performance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Execution+Performance.swift"; path = "Execution/Execution+Performance.swift"; sourceTree = "<group>"; };
 		BE76416B1E317C44004562FE /* ValueType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ValueType.swift; path = Interpreter/ValueType.swift; sourceTree = "<group>"; };
+		BE76416E1E32861A004562FE /* Stack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Stack.swift; path = Interpreter/Stack.swift; sourceTree = "<group>"; };
 		BE7940321E06BE24008FCCBB /* Arithmetic.lion */ = {isa = PBXFileReference; explicitFileType = sourcecode.glsl; fileEncoding = 4; name = Arithmetic.lion; path = "Standard Library/Arithmetic.lion"; sourceTree = "<group>"; };
 		BE809A141E2274610005370D /* FunctionReturnGlobalVar.lion */ = {isa = PBXFileReference; explicitFileType = sourcecode.glsl; fileEncoding = 4; path = FunctionReturnGlobalVar.lion; sourceTree = "<group>"; };
 		BE809A161E22C5C80005370D /* UnusedFunctionResult.lion */ = {isa = PBXFileReference; explicitFileType = sourcecode.glsl; fileEncoding = 4; path = UnusedFunctionResult.lion; sourceTree = "<group>"; };
@@ -476,6 +479,7 @@
 				BE76416B1E317C44004562FE /* ValueType.swift */,
 				BE3CCDC81E0330EE00977DCE /* InterpreterError.swift */,
 				BEFFCB8F1DAA77AE001EF8E4 /* BytecodeInterpreter.swift */,
+				BE76416E1E32861A004562FE /* Stack.swift */,
 			);
 			name = Interpreter;
 			sourceTree = "<group>";
@@ -740,6 +744,7 @@
 				BEEB63711DC14E570019BC50 /* BodyNode.swift in Sources */,
 				BE2296301DB16F1B00EA477A /* Token.swift in Sources */,
 				BE3CCDC91E0330EE00977DCE /* InterpreterError.swift in Sources */,
+				BE76416F1E32861A004562FE /* Stack.swift in Sources */,
 				BE4AF05D1DFD855F00ECE275 /* BytecodeFunctionHeader.swift in Sources */,
 				BE2296351DB16F2100EA477A /* NumberNode.swift in Sources */,
 				BE193A8A1DF47910002DCC77 /* RepeatWhileStatementNode.swift in Sources */,
@@ -811,6 +816,7 @@
 				BE58C1651E16D7F900BC73CA /* BytecodeInstruction.swift in Sources */,
 				BE58C1621E16D7F900BC73CA /* BytecodeFunctionHeader.swift in Sources */,
 				BE58C1731E16D80500BC73CA /* BinaryOpNode.swift in Sources */,
+				BE7641701E32861A004562FE /* Stack.swift in Sources */,
 				BE58C17B1E16D80500BC73CA /* RepeatWhileStatementNode.swift in Sources */,
 				BE58C15C1E16D7EC00BC73CA /* Runner.swift in Sources */,
 				BE58C17D1E16D80500BC73CA /* DoStatementNode.swift in Sources */,
