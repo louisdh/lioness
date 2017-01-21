@@ -1,10 +1,9 @@
-## Architecture
-Lioness source code is compiled to bytecode, called Scorpion. Scorpion is a simple instruction language, with a very small instruction set (currently 20). <!-- TODO: add list -->
+# Architecture
+This project consists of four main steps that, when put together, can run Lioness source code from a raw string to an executed result.
 
+## Lioness pipeline
 
-### Lioness pipeline
-
-#### Full pipeline:
+### Full pipeline:
 | 🛬 ```source code``` | ➡️ | Lexer 	| ➡️ | Parser | ➡️ | Compiler |  ➡️ | Interpreter | ➡️ | ```result``` 🛫 |
 |---------------------- |---- |------- |---|-------- |--- |---------- |--- |------------- |--- |-------- |
 
@@ -14,10 +13,10 @@ The following table describes the ```I/O``` of each step in the pipeline:
 |:-----------:	|:-----------------:	|:-----------------:|
 |    Lexer    	|    Source code    	|       Tokens      |
 |    Parser   	|       Tokens      	|        AST        |
-|   Compiler  	|        AST        	| Scorpion Bytecode |
-| Interpreter 	| Scorpion Bytecode 	|  Execution result |
+|   Compiler  	|        AST        	| [Scorpion Bytecode](Scorpion.md) |
+| Interpreter 	| [Scorpion Bytecode](Scorpion.md) 	|  Execution result |
 
-*Note: Each step in the pipeline is independent from all others.*
+*Note: Each step in the pipeline is independent from all others. This makes unit testing very straight forward.*
 
 #### Practical workflow:
 In practice it is common to want to compile source code once and execute it multiple times. The following pipelines provide this in an efficient way:

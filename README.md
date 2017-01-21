@@ -70,7 +70,7 @@ Lioness source files can easily be created with Xcode, see [XcodeTemplate.md](Xc
 
 
 ## Architecture
-A detailed explanation of the project's architecture can be found [here](ARCHITECTURE.md).
+A detailed explanation of the project's architecture can be found [here](docs/Architecture.md).
 
 ## License
 
