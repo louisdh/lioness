@@ -199,7 +199,7 @@
 		BE736A8C1DBBEA5F00ADC83A /* BaseTestCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = BaseTestCase.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		BE736A901DBD3C0D00ADC83A /* Execution+Performance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Execution+Performance.swift"; path = "Execution/Execution+Performance.swift"; sourceTree = "<group>"; };
 		BE76416B1E317C44004562FE /* ValueType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ValueType.swift; path = Interpreter/ValueType.swift; sourceTree = "<group>"; };
-		BE76416E1E32861A004562FE /* Stack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Stack.swift; path = Interpreter/Stack.swift; sourceTree = "<group>"; };
+		BE76416E1E32861A004562FE /* Stack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = Stack.swift; path = Interpreter/Stack.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		BE7940321E06BE24008FCCBB /* Arithmetic.lion */ = {isa = PBXFileReference; explicitFileType = sourcecode.glsl; fileEncoding = 4; name = Arithmetic.lion; path = "Standard Library/Arithmetic.lion"; sourceTree = "<group>"; };
 		BE809A141E2274610005370D /* FunctionReturnGlobalVar.lion */ = {isa = PBXFileReference; explicitFileType = sourcecode.glsl; fileEncoding = 4; path = FunctionReturnGlobalVar.lion; sourceTree = "<group>"; };
 		BE809A161E22C5C80005370D /* UnusedFunctionResult.lion */ = {isa = PBXFileReference; explicitFileType = sourcecode.glsl; fileEncoding = 4; path = UnusedFunctionResult.lion; sourceTree = "<group>"; };
@@ -221,7 +221,7 @@
 		BEEB63701DC14E570019BC50 /* BodyNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = BodyNode.swift; path = AST/BodyNode.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		BEF5BA401DAC15B100D9ADB7 /* AssignmentNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = AssignmentNode.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		BEFD84121E21BB8500A6DB92 /* BinaryOp.lion */ = {isa = PBXFileReference; explicitFileType = sourcecode.glsl; fileEncoding = 4; path = BinaryOp.lion; sourceTree = "<group>"; };
-		BEFFCB8F1DAA77AE001EF8E4 /* BytecodeInterpreter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BytecodeInterpreter.swift; sourceTree = "<group>"; };
+		BEFFCB8F1DAA77AE001EF8E4 /* BytecodeInterpreter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = BytecodeInterpreter.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */

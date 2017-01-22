@@ -43,7 +43,7 @@ public class CallNode: ASTNode {
 		return bytecode
 	}
 	
-	fileprivate func isResultUnused(with ctx: BytecodeCompiler, in parent: ASTNode?) throws -> Bool {
+	private func isResultUnused(with ctx: BytecodeCompiler, in parent: ASTNode?) throws -> Bool {
 		
 		guard try ctx.doesFunctionReturn(for: callee) else {
 			// No result

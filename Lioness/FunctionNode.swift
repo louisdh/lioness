@@ -96,7 +96,7 @@ public class FunctionNode: ASTNode {
 
 	}
 	
-	fileprivate func compileFunction(with ctx: BytecodeCompiler) throws -> BytecodeBody {
+	private func compileFunction(with ctx: BytecodeCompiler) throws -> BytecodeBody {
 		
 		var bytecode = BytecodeBody()
 		

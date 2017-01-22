@@ -110,7 +110,7 @@ public class BytecodeInstruction: BytecodeLine {
 	
 	// MARK: -
 	
-	fileprivate static func error(_ type: BytecodeInstructionError) -> Error {
+	private static func error(_ type: BytecodeInstructionError) -> Error {
 		return type
 	}
 	

@@ -71,7 +71,7 @@ public class AssignmentNode: ASTNode {
 		
 	}
 	
-	fileprivate func getStructUpdate(_ memberNode: StructMemberNode, members: [Int], with ctx: BytecodeCompiler) throws -> ([Int], VariableNode) {
+	private func getStructUpdate(_ memberNode: StructMemberNode, members: [Int], with ctx: BytecodeCompiler) throws -> ([Int], VariableNode) {
 		
 		var members = members
 		

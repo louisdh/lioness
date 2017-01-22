@@ -27,10 +27,10 @@ public enum RunnerError: Error {
 /// Runs through full pipeline, from lexer to interpreter
 public class Runner {
 	
-	fileprivate let logDebug: Bool
-	fileprivate let logTime: Bool
+	private let logDebug: Bool
+	private let logTime: Bool
 	
-	fileprivate var source: String?
+	private var source: String?
 	
 	public var delegate: RunnerDelegate?
 	
@@ -177,7 +177,7 @@ public class Runner {
 		
 	}
 	
-	fileprivate func runLionessSourceCode(_ source: String) {
+	private func runLionessSourceCode(_ source: String) {
 		
 		guard let bytecode = compileLionessSourceCode(source) else {
 			return
@@ -187,7 +187,7 @@ public class Runner {
 		
 	}
 	
-	fileprivate func runLexer(withSource source: String) -> [Token] {
+	private func runLexer(withSource source: String) -> [Token] {
 		
 		if logDebug {
 			logTitle("Start lexer")
@@ -210,7 +210,7 @@ public class Runner {
 		
 	}
 	
-	fileprivate func parseTokens(_ tokens: [Token]) -> [ASTNode]? {
+	private func parseTokens(_ tokens: [Token]) -> [ASTNode]? {
 		
 		if logDebug {
 			logTitle("Start parser")
@@ -250,7 +250,7 @@ public class Runner {
 		
 	}
 	
-	fileprivate func compileToBytecode(ast: [ASTNode]) -> BytecodeBody? {
+	private func compileToBytecode(ast: [ASTNode]) -> BytecodeBody? {
 		
 		if logDebug {
 			logTitle("Start bytecode compiler")
@@ -282,7 +282,7 @@ public class Runner {
 	
 	var interpreter: BytecodeInterpreter?
 	
-	fileprivate func interpret(_ bytecode: BytecodeBody) {
+	private func interpret(_ bytecode: BytecodeBody) {
 		
 		if logDebug {
 			logTitle("Start bytecode interpreter")
@@ -325,7 +325,7 @@ public class Runner {
 	// MARK: -
 	// MARK: Logging
 	
-	fileprivate func logInterpreter(_ interpreter: BytecodeInterpreter) {
+	private func logInterpreter(_ interpreter: BytecodeInterpreter) {
 		
 		log("Stack at end of execution:\n\(interpreter.stack)\n")
 		
@@ -335,7 +335,7 @@ public class Runner {
 	
 	}
 	
-	fileprivate func logRegisters(_ interpreter: BytecodeInterpreter) {
+	private func logRegisters(_ interpreter: BytecodeInterpreter) {
 		
 		for (key, value) in interpreter.registers {
 			
@@ -354,7 +354,7 @@ public class Runner {
 		
 	}
 	
-	fileprivate func logSourceCode(_ source: String) {
+	private func logSourceCode(_ source: String) {
 		
 		logTitle("Source code")
 		
@@ -364,7 +364,7 @@ public class Runner {
 		
 	}
 	
-	fileprivate func logTitle(_ title: String) {
+	private func logTitle(_ title: String) {
 		
 		log("================================")
 		log(title)
@@ -372,7 +372,7 @@ public class Runner {
 		
 	}
 	
-	fileprivate func logBytecode(_ bytecode: BytecodeBody) {
+	private func logBytecode(_ bytecode: BytecodeBody) {
 		
 		var indentLevel = 0
 		
@@ -408,11 +408,11 @@ public class Runner {
 		
 	}
 	
-	fileprivate func log(_ message: String) {
+	private func log(_ message: String) {
 		delegate?.log(message)
 	}
 	
-	fileprivate func log(_ error: Error) {
+	private func log(_ error: Error) {
 		
 		guard let source = source else {
 			delegate?.log(error)
@@ -432,7 +432,7 @@ public class Runner {
 		
 	}
 	
-	fileprivate func log(_ token: Token) {
+	private func log(_ token: Token) {
 		delegate?.log(token)
 	}
 	

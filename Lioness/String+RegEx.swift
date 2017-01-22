@@ -40,7 +40,7 @@ extension String {
 		return rangeOfFirstMatch.location != NSNotFound
 	}
 	
-	fileprivate func firstMatch(withRegEx regEx: NSRegularExpression) -> String? {
+	private func firstMatch(withRegEx regEx: NSRegularExpression) -> String? {
 		
 		let stringRange = NSRange(location: 0, length: self.characters.count)
 		let rangeOfFirstMatch = regEx.rangeOfFirstMatch(in: self, options: [], range: stringRange)

@@ -13,20 +13,20 @@ public class BytecodeCompiler {
 	
 	// MARK: - Private
 	
-	fileprivate var index: UInt
+	private var index: UInt
 	
-	fileprivate var loopHeaderStack: [String]
-	fileprivate var loopContinueStack: [String]
+	private var loopHeaderStack: [String]
+	private var loopContinueStack: [String]
 
-	fileprivate var functionExitStack: [String]
+	private var functionExitStack: [String]
 	
-	fileprivate var structMemberIndex: Int
+	private var structMemberIndex: Int
 
-	fileprivate var structMemberMap: [String : Int]
+	private var structMemberMap: [String : Int]
 
-	fileprivate let scopeTreeRoot: ScopeNode
+	private let scopeTreeRoot: ScopeNode
 
-	fileprivate var currentScopeNode: ScopeNode
+	private var currentScopeNode: ScopeNode
 
 	// MARK: -
 
@@ -70,7 +70,7 @@ public class BytecodeCompiler {
 	
 	// MARK: -
 	
-	fileprivate func mapStructMembers(for ast: [ASTNode]) throws {
+	private func mapStructMembers(for ast: [ASTNode]) throws {
 
 		for node in ast {
 			
@@ -91,7 +91,7 @@ public class BytecodeCompiler {
 		
 	}
 	
-	fileprivate func compileFunctionPrototypes(for ast: [ASTNode]) throws {
+	private func compileFunctionPrototypes(for ast: [ASTNode]) throws {
 		
 		for node in ast {
 			
@@ -238,7 +238,7 @@ public class BytecodeCompiler {
 		return cleanupRegisterInstructions(for: currentScopeNode)
 	}
 	
-	fileprivate func registersToClean(for scopeNode: ScopeNode) -> [(String, String?)] {
+	private func registersToClean(for scopeNode: ScopeNode) -> [(String, String?)] {
 
 		var registersToCleanup = scopeNode.registerMap.map { (kv) -> (String, String?) in
 			return (kv.1, kv.0)
@@ -251,7 +251,7 @@ public class BytecodeCompiler {
 		return registersToCleanup
 	}
 		
-	fileprivate func cleanupRegisterInstructions(for scopeNode: ScopeNode) -> [BytecodeInstruction] {
+	private func cleanupRegisterInstructions(for scopeNode: ScopeNode) -> [BytecodeInstruction] {
 		
 		var instructions = [BytecodeInstruction]()
 	
@@ -299,7 +299,7 @@ public class BytecodeCompiler {
 	
 	// MARK: - Registers
 	
-	fileprivate var registerCount = 0
+	private var registerCount = 0
 
 	/// Get register for var name
 	///
@@ -326,7 +326,7 @@ public class BytecodeCompiler {
 		
 	}
 	
-	fileprivate func getNewRegister() -> String {
+	private func getNewRegister() -> String {
 		registerCount += 1
 		let newReg = "r\(registerCount)"
 		return newReg
@@ -336,7 +336,7 @@ public class BytecodeCompiler {
 	
 	// TODO: rename to virtual?
 	
-	fileprivate var functionCount = 0
+	private var functionCount = 0
 	
 	func getStructId(for structNode: StructNode) -> String {
 		
@@ -403,7 +403,7 @@ public class BytecodeCompiler {
 
 	}
 	
-	fileprivate func getNewFunctionId() -> String {
+	private func getNewFunctionId() -> String {
 		functionCount += 1
 		let id = "\(functionCount)"
 		return id
@@ -411,7 +411,7 @@ public class BytecodeCompiler {
 
 	// MARK: -
 	
-	fileprivate func error(_ type: CompileError) -> Error {
+	private func error(_ type: CompileError) -> Error {
 		return type
 	}
 	

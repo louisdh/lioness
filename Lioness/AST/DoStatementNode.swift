@@ -49,7 +49,7 @@ public class DoStatementNode: LoopNode {
 	
 	// MARK: -
 	
-	fileprivate func doStatementCompiled(with ctx: BytecodeCompiler) throws -> BytecodeBody {
+	private func doStatementCompiled(with ctx: BytecodeCompiler) throws -> BytecodeBody {
 		
 		var bytecode = BytecodeBody()
 
@@ -107,7 +107,7 @@ public class DoStatementNode: LoopNode {
 		return bytecode
 	}
 	
-	fileprivate func assignmentInstructions(with ctx: BytecodeCompiler, and regName: String) throws -> BytecodeBody {
+	private func assignmentInstructions(with ctx: BytecodeCompiler, and regName: String) throws -> BytecodeBody {
 		
 		let v = try amount.compile(with: ctx, in: self)
 		
@@ -124,7 +124,7 @@ public class DoStatementNode: LoopNode {
 		
 	}
 	
-	fileprivate func conditionInstructions(with ctx: BytecodeCompiler, and regName: String) throws -> BytecodeBody {
+	private func conditionInstructions(with ctx: BytecodeCompiler, and regName: String) throws -> BytecodeBody {
 		
 		let varNode = InternalVariableNode(register: regName, debugName: "do repeat iterator")
 		let conditionNode = try BinaryOpNode(op: ">", lhs: varNode, rhs: NumberNode(value: 0.0))
@@ -135,7 +135,7 @@ public class DoStatementNode: LoopNode {
 		
 	}
 	
-	fileprivate func decrementInstructions(with ctx: BytecodeCompiler, and regName: String) throws -> BytecodeBody {
+	private func decrementInstructions(with ctx: BytecodeCompiler, and regName: String) throws -> BytecodeBody {
 		
 		let varNode = InternalVariableNode(register: regName, debugName: "do repeat iterator")
 		let decrementNode = try BinaryOpNode(op: "-", lhs: varNode, rhs: NumberNode(value: 1.0))

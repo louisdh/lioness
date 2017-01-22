@@ -11,11 +11,11 @@ import Foundation
 /// LIFO stack
 public struct Stack<Element>: CustomStringConvertible {
 	
-	fileprivate var items: [Element]
-	fileprivate let limit: Int
+	private var items: [Element]
+	private let limit: Int
 	
 	/// Manual stack size counting for performance
-	fileprivate(set) var size: Int
+	private(set) var size: Int
 	
 	init(withLimit limit: Int) {
 		self.limit = limit

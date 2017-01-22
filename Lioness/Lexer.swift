@@ -10,7 +10,7 @@ import Foundation
 
 public class Lexer {
 	
-	fileprivate static let keywordTokens: [String : TokenType] = [
+	private static let keywordTokens: [String : TokenType] = [
 		"func": .function,
 		"while": .while,
 		"for": .for,
@@ -29,7 +29,7 @@ public class Lexer {
 	]
 	
 	/// Currently only works for 1 char tokens
-	fileprivate static let otherMapping: [String : TokenType] = [
+	private static let otherMapping: [String : TokenType] = [
 		"(": .parensOpen,
 		")": .parensClose,
 		"{": .curlyOpen,
@@ -42,12 +42,12 @@ public class Lexer {
 		"=": .equals
 	]
 	
-	fileprivate typealias TokenGenerator = (String) -> TokenType?
+	private typealias TokenGenerator = (String) -> TokenType?
 
 	/// The order of this list is important,
 	/// e.g. match identifiers before numbers
 	/// The number of regexs should be kept low for performance reasons
-	fileprivate let tokenList: [(String, TokenGenerator)] = [
+	private let tokenList: [(String, TokenGenerator)] = [
 		
 		// one line comment
 		("\\/\\/.*", { _ in .ignoreableToken }),
@@ -96,7 +96,7 @@ public class Lexer {
 		
 	]
 	
-	fileprivate let input: String
+	private let input: String
 	
 	public init(input: String) {
         self.input = input

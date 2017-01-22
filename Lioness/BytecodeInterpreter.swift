@@ -11,29 +11,29 @@ import Foundation
 /// Bytecode Interpreter
 public class BytecodeInterpreter {
 	
-	fileprivate let stackLimit = 65_536
+	private let stackLimit = 65_536
 	
-	fileprivate let bytecode: BytecodeBody
+	private let bytecode: BytecodeBody
 	
 	/// Stack
-	fileprivate(set) public var stack: Stack<ValueType>
+	private(set) public var stack: Stack<ValueType>
 	
 	// TODO: rename "function" to "virtual"? (also used for structs)
 
 	// TODO: use int as key?
 	/// Function map with id as key and program counter as value
-	fileprivate var functionMap = [String : Int]()
+	private var functionMap = [String : Int]()
 
-	fileprivate var functionEndMap = [String : Int]()
+	private var functionEndMap = [String : Int]()
 
-	fileprivate var functionInvokeStack: Stack<Int>
+	private var functionInvokeStack: Stack<Int>
 	
-	fileprivate var functionDepth = 0
+	private var functionDepth = 0
 
 	/// Registers
-	fileprivate(set) public var registers = [String : ValueType]()
+	private(set) public var registers = [String : ValueType]()
 	
-	fileprivate(set) var pcTrace = [Int]()
+	private(set) var pcTrace = [Int]()
 
 	// MARK: - Init
 	
@@ -81,7 +81,7 @@ public class BytecodeInterpreter {
 		
 	}
 	
-	fileprivate func createFunctionMap() throws {
+	private func createFunctionMap() throws {
 		
 		var pc = 0
 		
@@ -128,7 +128,7 @@ public class BytecodeInterpreter {
 		
 	}
 	
-	fileprivate var pcStart: Int {
+	private var pcStart: Int {
 		return 0
 	}
 	
@@ -149,7 +149,7 @@ public class BytecodeInterpreter {
 		
 	}
 	
-	fileprivate func executeLine(_ line: BytecodeLine, pc: Int) throws -> Int {
+	private func executeLine(_ line: BytecodeLine, pc: Int) throws -> Int {
 		
 		if let instruction = line as? BytecodeInstruction {
 			
@@ -196,7 +196,7 @@ public class BytecodeInterpreter {
 		
 	}
 	
-	fileprivate func executeInstruction(_ instruction: BytecodeInstruction, pc: Int) throws -> Int {
+	private func executeInstruction(_ instruction: BytecodeInstruction, pc: Int) throws -> Int {
 		
 		let newPc: Int
 		
@@ -295,7 +295,7 @@ public class BytecodeInterpreter {
 
 	// MARK: - Execution
 
-	fileprivate func executePushConst(_ instruction: BytecodeInstruction, pc: Int) throws -> Int {
+	private func executePushConst(_ instruction: BytecodeInstruction, pc: Int) throws -> Int {
 		// TODO: add enum support
 		guard let arg = instruction.arguments.first, let f = NumberType(arg) else {
 			throw error(.unexpectedArgument)
@@ -306,7 +306,7 @@ public class BytecodeInterpreter {
 		return pc + 1
 	}
 	
-	fileprivate func executeAdd(pc: Int) throws -> Int {
+	private func executeAdd(pc: Int) throws -> Int {
 		
 		let lhs = try popNumber()
 		let rhs = try popNumber()
@@ -316,7 +316,7 @@ public class BytecodeInterpreter {
 		return pc + 1
 	}
 	
-	fileprivate func executeSub(pc: Int) throws -> Int {
+	private func executeSub(pc: Int) throws -> Int {
 
 		let rhs = try popNumber()
 		let lhs = try popNumber()
@@ -326,7 +326,7 @@ public class BytecodeInterpreter {
 		return pc + 1
 	}
 	
-	fileprivate func executeMul(pc: Int) throws -> Int {
+	private func executeMul(pc: Int) throws -> Int {
 		
 		let lhs = try popNumber()
 		let rhs = try popNumber()
@@ -336,7 +336,7 @@ public class BytecodeInterpreter {
 		return pc + 1
 	}
 	
-	fileprivate func executeDiv(pc: Int) throws -> Int {
+	private func executeDiv(pc: Int) throws -> Int {
 		
 		let rhs = try popNumber()
 		let lhs = try popNumber()
@@ -346,7 +346,7 @@ public class BytecodeInterpreter {
 		return pc + 1
 	}
 	
-	fileprivate func executePow(pc: Int) throws -> Int {
+	private func executePow(pc: Int) throws -> Int {
 		
 		let rhs = try popNumber()
 		let lhs = try popNumber()
@@ -356,7 +356,7 @@ public class BytecodeInterpreter {
 		return pc + 1
 	}
 	
-	fileprivate func executeAnd(pc: Int) throws -> Int {
+	private func executeAnd(pc: Int) throws -> Int {
 		
 		let rhs = try popNumber() == 1.0
 		let lhs = try popNumber() == 1.0
@@ -368,7 +368,7 @@ public class BytecodeInterpreter {
 		return pc + 1
 	}
 	
-	fileprivate func executeOr(pc: Int) throws -> Int {
+	private func executeOr(pc: Int) throws -> Int {
 		
 		let rhs = try popNumber() == 1.0
 		let lhs = try popNumber() == 1.0
@@ -380,7 +380,7 @@ public class BytecodeInterpreter {
 		return pc + 1
 	}
 	
-	fileprivate func executeNot(pc: Int) throws -> Int {
+	private func executeNot(pc: Int) throws -> Int {
 		
 		let b = try popNumber() == 1.0
 		
@@ -391,7 +391,7 @@ public class BytecodeInterpreter {
 		return pc + 1
 	}
 	
-	fileprivate func executeEqual(pc: Int) throws -> Int {
+	private func executeEqual(pc: Int) throws -> Int {
 		
 		let rhs = try popNumber()
 		let lhs = try popNumber()
@@ -403,7 +403,7 @@ public class BytecodeInterpreter {
 		return pc + 1
 	}
 	
-	fileprivate func executeNotEqual(pc: Int) throws -> Int {
+	private func executeNotEqual(pc: Int) throws -> Int {
 		
 		let rhs = try popNumber()
 		let lhs = try popNumber()
@@ -415,7 +415,7 @@ public class BytecodeInterpreter {
 		return pc + 1
 	}
 	
-	fileprivate func executeCmpLe(pc: Int) throws -> Int {
+	private func executeCmpLe(pc: Int) throws -> Int {
 
 		let rhs = try popNumber()
 		let lhs = try popNumber()
@@ -427,7 +427,7 @@ public class BytecodeInterpreter {
 		return pc + 1
 	}
 	
-	fileprivate func executeCmpLt(pc: Int) throws -> Int {
+	private func executeCmpLt(pc: Int) throws -> Int {
 
 		let rhs = try popNumber()
 		let lhs = try popNumber()
@@ -439,7 +439,7 @@ public class BytecodeInterpreter {
 		return pc + 1
 	}
 	
-	fileprivate func executeIfTrue(_ instruction: BytecodeInstruction, pc: Int) throws -> Int {
+	private func executeIfTrue(_ instruction: BytecodeInstruction, pc: Int) throws -> Int {
 		
 		guard let label = instruction.arguments.first else {
 			throw error(.unexpectedArgument)
@@ -459,7 +459,7 @@ public class BytecodeInterpreter {
 		
 	}
 	
-	fileprivate func executeIfFalse(_ instruction: BytecodeInstruction, pc: Int) throws -> Int {
+	private func executeIfFalse(_ instruction: BytecodeInstruction, pc: Int) throws -> Int {
 		
 		guard let label = instruction.arguments.first else {
 			throw error(.unexpectedArgument)
@@ -479,7 +479,7 @@ public class BytecodeInterpreter {
 		
 	}
 	
-	fileprivate func executeGoto(_ instruction: BytecodeInstruction) throws -> Int {
+	private func executeGoto(_ instruction: BytecodeInstruction) throws -> Int {
 		
 		guard let label = instruction.arguments.first else {
 			throw error(.unexpectedArgument)
@@ -493,7 +493,7 @@ public class BytecodeInterpreter {
 		
 	}
 	
-	fileprivate func executeStore(_ instruction: BytecodeInstruction, pc: Int) throws -> Int {
+	private func executeStore(_ instruction: BytecodeInstruction, pc: Int) throws -> Int {
 		
 		guard let reg = instruction.arguments.first else {
 			throw error(.unexpectedArgument)
@@ -504,7 +504,7 @@ public class BytecodeInterpreter {
 		return pc + 1
 	}
 	
-	fileprivate func executeRegisterUpdate(_ instruction: BytecodeInstruction, pc: Int) throws -> Int {
+	private func executeRegisterUpdate(_ instruction: BytecodeInstruction, pc: Int) throws -> Int {
 		
 		guard let reg = instruction.arguments.first else {
 			throw error(.unexpectedArgument)
@@ -515,7 +515,7 @@ public class BytecodeInterpreter {
 		return pc + 1
 	}
 	
-	fileprivate func executeRegisterClear(_ instruction: BytecodeInstruction, pc: Int) throws -> Int {
+	private func executeRegisterClear(_ instruction: BytecodeInstruction, pc: Int) throws -> Int {
 
 		guard let reg = instruction.arguments.first else {
 			throw error(.unexpectedArgument)
@@ -526,7 +526,7 @@ public class BytecodeInterpreter {
 		return pc + 1
 	}
 	
-	fileprivate func executeRegisterLoad(_ instruction: BytecodeInstruction, pc: Int) throws -> Int {
+	private func executeRegisterLoad(_ instruction: BytecodeInstruction, pc: Int) throws -> Int {
 		
 		guard let reg = instruction.arguments.first else {
 			throw error(.unexpectedArgument)
@@ -539,7 +539,7 @@ public class BytecodeInterpreter {
 		return pc + 1
 	}
 	
-	fileprivate func executeInvokeFunction(_ instruction: BytecodeInstruction, pc: Int) throws -> Int {
+	private func executeInvokeFunction(_ instruction: BytecodeInstruction, pc: Int) throws -> Int {
 		
 		guard let id = instruction.arguments.first else {
 			throw error(.unexpectedArgument)
@@ -560,7 +560,7 @@ public class BytecodeInterpreter {
 		return idPc
 	}
 	
-	fileprivate func executeExitFunction(_ instruction: BytecodeInstruction, pc: Int) throws -> Int {
+	private func executeExitFunction(_ instruction: BytecodeInstruction, pc: Int) throws -> Int {
 		
 		guard let exitFunctionLabel = try? functionInvokeStack.pop() else {
 			throw error(.unexpectedArgument)
@@ -571,14 +571,14 @@ public class BytecodeInterpreter {
 		return exitFunctionLabel
 	}
 	
-	fileprivate func executePop(_ instruction: BytecodeInstruction, pc: Int) throws -> Int {
+	private func executePop(_ instruction: BytecodeInstruction, pc: Int) throws -> Int {
 		
 		_ = try stack.pop()
 		
 		return pc + 1
 	}
 	
-	fileprivate func executeSkipPast(_ instruction: BytecodeInstruction, pc: Int) throws -> Int {
+	private func executeSkipPast(_ instruction: BytecodeInstruction, pc: Int) throws -> Int {
 		
 		guard let label = instruction.arguments.first else {
 			throw error(.unexpectedArgument)
@@ -593,7 +593,7 @@ public class BytecodeInterpreter {
 		
 	}
 	
-	fileprivate func executeStructInit(_ instruction: BytecodeInstruction, pc: Int) throws -> Int {
+	private func executeStructInit(_ instruction: BytecodeInstruction, pc: Int) throws -> Int {
 
 		let newStruct = ValueType.struct([:])
 		
@@ -602,7 +602,7 @@ public class BytecodeInterpreter {
 		return pc + 1
 	}
 
-	fileprivate func executeStructSet(_ instruction: BytecodeInstruction, pc: Int) throws -> Int {
+	private func executeStructSet(_ instruction: BytecodeInstruction, pc: Int) throws -> Int {
 		
 		guard let keyStr = instruction.arguments.first, let key = Int(keyStr) else {
 			throw error(.unexpectedArgument)
@@ -621,7 +621,7 @@ public class BytecodeInterpreter {
 		return pc + 1
 	}
 
-	fileprivate func executeStructUpdate(_ instruction: BytecodeInstruction, pc: Int) throws -> Int {
+	private func executeStructUpdate(_ instruction: BytecodeInstruction, pc: Int) throws -> Int {
 
 		let memberIds = instruction.arguments.flatMap { Int($0) }
 		
@@ -638,7 +638,7 @@ public class BytecodeInterpreter {
 		return pc + 1
 	}
 	
-	fileprivate func executeStructGet(_ instruction: BytecodeInstruction, pc: Int) throws -> Int {
+	private func executeStructGet(_ instruction: BytecodeInstruction, pc: Int) throws -> Int {
 		
 		guard let keyStr = instruction.arguments.first, let key = Int(keyStr) else {
 			throw error(.unexpectedArgument)
@@ -661,7 +661,7 @@ public class BytecodeInterpreter {
 	
 	/// Get updated dictionary for given dictionary, updating with newValue at keyPath.
 	/// Recursively traverses dictionary tree to update a value, then reconstructs the dictionary.
-	fileprivate func updatedDict(for dict: [Int : ValueType], keyPath: [Int], newValue: ValueType, isReconstructing: Bool = false, trace: [[Int : ValueType]] = [], keyPathPassed: [Int] = []) throws -> [Int : ValueType] {
+	private func updatedDict(for dict: [Int : ValueType], keyPath: [Int], newValue: ValueType, isReconstructing: Bool = false, trace: [[Int : ValueType]] = [], keyPathPassed: [Int] = []) throws -> [Int : ValueType] {
 		
 		var trace = trace
 		var keyPathPassed = keyPathPassed
@@ -727,7 +727,7 @@ public class BytecodeInterpreter {
 	
 	// MARK: - Registers
 	
-	fileprivate func removeRegValue(in reg: String) throws {
+	private func removeRegValue(in reg: String) throws {
 		
 		guard let key = privateReg(for: reg) else {
 			return
@@ -757,7 +757,7 @@ public class BytecodeInterpreter {
 		return regValue
 	}
 	
-	fileprivate func setRegValue(_ value: ValueType, for reg: String) {
+	private func setRegValue(_ value: ValueType, for reg: String) {
 		
 		let privateKey = "\(functionDepth)_\(reg)"
 		
@@ -772,7 +772,7 @@ public class BytecodeInterpreter {
 		
 	}
 	
-	fileprivate func updateRegValue(_ value: ValueType, for reg: String) throws {
+	private func updateRegValue(_ value: ValueType, for reg: String) throws {
 
 		guard let privateKey = privateReg(for: reg) else {
 			throw error(.invalidRegister)
@@ -782,9 +782,9 @@ public class BytecodeInterpreter {
 		
 	}
 	
-	fileprivate var regMap = [String : [Int]]()
+	private var regMap = [String : [Int]]()
 	
-	fileprivate func privateReg(for reg: String) -> String? {
+	private func privateReg(for reg: String) -> String? {
 		
 		guard let id = regMap[reg]?.last else {
 			return nil
@@ -815,9 +815,9 @@ public class BytecodeInterpreter {
 	// MARK: -
 	
 	// TODO: max cache size?
-	fileprivate var labelProgramCountersCache = [String : Int]()
+	private var labelProgramCountersCache = [String : Int]()
 	
-	fileprivate func progamCounter(for label: String) -> Int? {
+	private func progamCounter(for label: String) -> Int? {
 		
 		if let pc = labelProgramCountersCache[label] {
 			return pc
@@ -848,7 +848,7 @@ public class BytecodeInterpreter {
 	
 	// MARK: - Stack
 	
-	fileprivate func popNumber() throws -> NumberType {
+	private func popNumber() throws -> NumberType {
 		
 		let last = try stack.pop()
 		
@@ -861,7 +861,7 @@ public class BytecodeInterpreter {
 	
 	// MARK: -
 	
-	fileprivate func error(_ type: InterpreterError) -> Error {
+	private func error(_ type: InterpreterError) -> Error {
 		return type
 	}
 	
