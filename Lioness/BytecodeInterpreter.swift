@@ -631,7 +631,7 @@ public class BytecodeInterpreter {
 		
 		let updateValue = try stack.pop()
 		
-		let newStruct = try updateDict(v, keyPath: memberIds, newValue: updateValue)
+		let newStruct = try updatedDict(for: v, keyPath: memberIds, newValue: updateValue)
 		
 		try stack.push(.struct(newStruct))
 		
@@ -659,9 +659,10 @@ public class BytecodeInterpreter {
 	
 	// MARK: - Structs
 	
-	func updateDict(_ dict: [Int : ValueType], keyPath: [Int], newValue: ValueType, isReconstructing: Bool = false, trace: [[Int : ValueType]] = [], keyPathPassed: [Int] = []) throws -> [Int : ValueType] {
+	/// Get updated dictionary for given dictionary, updating with newValue at keyPath.
+	/// Recursively traverses dictionary tree to update a value, then reconstructs the dictionary.
+	fileprivate func updatedDict(for dict: [Int : ValueType], keyPath: [Int], newValue: ValueType, isReconstructing: Bool = false, trace: [[Int : ValueType]] = [], keyPathPassed: [Int] = []) throws -> [Int : ValueType] {
 		
-		var dict = dict
 		var trace = trace
 		var keyPathPassed = keyPathPassed
 		
@@ -682,9 +683,11 @@ public class BytecodeInterpreter {
 			var newDict = lastTrace
 			newDict[idPassed] = .struct(dict)
 			
-			return try updateDict(newDict, keyPath: keyPath, newValue: newValue, isReconstructing: true, trace: trace, keyPathPassed: keyPathPassed)
+			return try updatedDict(for: newDict, keyPath: keyPath, newValue: newValue, isReconstructing: true, trace: trace, keyPathPassed: keyPathPassed)
 		}
 		
+		var dict = dict
+
 		guard !keyPath.isEmpty else {
 			throw error(.unexpectedArgument)
 		}
@@ -698,7 +701,7 @@ public class BytecodeInterpreter {
 			
 			dict[id] = newValue
 			
-			return try updateDict(dict, keyPath: keyPath, newValue: newValue, isReconstructing: true, trace: trace, keyPathPassed: keyPathPassed)
+			return try updatedDict(for: dict, keyPath: keyPath, newValue: newValue, isReconstructing: true, trace: trace, keyPathPassed: keyPathPassed)
 
 		} else {
 			
@@ -717,7 +720,7 @@ public class BytecodeInterpreter {
 			
 			keyPath.removeLast()
 			
-			return try updateDict(dictToUpdate, keyPath: keyPath, newValue: newValue, trace: trace, keyPathPassed: keyPathPassed)
+			return try updatedDict(for: dictToUpdate, keyPath: keyPath, newValue: newValue, trace: trace, keyPathPassed: keyPathPassed)
 		}
 		
 	}
