@@ -287,11 +287,11 @@ public class BytecodeCompiler {
 	
 	// MARK: - Structs
 	
-	func getStructMemberId(for memberName: String) -> Int? {
+	public func getStructMemberId(for memberName: String) -> Int? {
 		return structMemberMap[memberName]
 	}
 	
-	func getStructMemberName(for id: Int) -> String? {
+	public func getStructMemberName(for id: Int) -> String? {
 		return structMemberMap.first(where: { (k, v) -> Bool in
 			return v == id
 		})?.0
