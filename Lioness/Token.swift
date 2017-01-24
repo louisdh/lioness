@@ -12,6 +12,7 @@ public enum TokenType {
 	
 	/// Token which has no effect on program, such as white space
 	case ignoreableToken
+	case comment
 	
 	case identifier(String)
 	case number(Double)

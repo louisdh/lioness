@@ -50,10 +50,10 @@ public class Lexer {
 	private let tokenList: [(String, TokenGenerator)] = [
 		
 		// one line comment
-		("\\/\\/.*", { _ in .ignoreableToken }),
+		("\\/\\/.*", { _ in .comment }),
 
 		// multiline comment
-		("/\\*[^*]*\\*+(?:[^/*][^*]*\\*+)*/", { _ in .ignoreableToken }),
+		("/\\*[^*]*\\*+(?:[^/*][^*]*\\*+)*/", { _ in .comment }),
 		
 		
 		("[ \t\n]", { _ in .ignoreableToken }),

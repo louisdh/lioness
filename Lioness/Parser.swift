@@ -16,7 +16,15 @@ public class Parser {
 	private var index = 0
 	
 	public init(tokens: [Token]) {
-		self.tokens = tokens
+
+		self.tokens = tokens.filter {
+			if case .comment = $0.type {
+				return false
+			}
+			
+			return true
+		}
+		
 	}
 	
 	// MARK: - Public
