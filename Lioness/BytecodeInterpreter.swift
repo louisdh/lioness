@@ -393,8 +393,8 @@ public class BytecodeInterpreter {
 	
 	private func executeEqual(pc: Int) throws -> Int {
 		
-		let rhs = try popNumber()
-		let lhs = try popNumber()
+		let rhs = try stack.pop()
+		let lhs = try stack.pop()
 		
 		let eq: NumberType = (lhs == rhs) ? 1.0 : 0.0
 		
@@ -405,8 +405,8 @@ public class BytecodeInterpreter {
 	
 	private func executeNotEqual(pc: Int) throws -> Int {
 		
-		let rhs = try popNumber()
-		let lhs = try popNumber()
+		let rhs = try stack.pop()
+		let lhs = try stack.pop()
 		
 		let neq: NumberType = (lhs != rhs) ? 1.0 : 0.0
 		
