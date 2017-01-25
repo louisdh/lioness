@@ -8,11 +8,15 @@
 
 import Foundation
 
-class StdLib {
+public class StdLib {
 	
 	private let sources = ["Arithmetic", "Geometry", "Graphics"]
 	
-	func stdLibCode() throws -> String {
+	public init() {
+		
+	}
+	
+	public func stdLibCode() throws -> String {
 		
 		var stdLib = ""
 		
