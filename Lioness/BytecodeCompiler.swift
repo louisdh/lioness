@@ -122,6 +122,16 @@ public class BytecodeCompiler {
 		return "\(index + 1)"
 	}
 	
+	public func currentLabelIndex() -> UInt {
+		return index
+	}
+	
+	/// Explicitly set the label index.
+	/// Meant for code injection.
+	public func setLabelIndex(to newIndex: UInt) {
+		index = newIndex
+	}
+	
 	// TODO: make stack operations throw?
 
 	// MARK: - Loop header
