@@ -11,7 +11,7 @@ import Foundation
 /// Scorpion Bytecode Instruction
 public class BytecodeInstruction: BytecodeLine {
 	
-	let label: String
+	let label: Int
 	
 	let type: BytecodeInstructionType
 	
@@ -29,7 +29,11 @@ public class BytecodeInstruction: BytecodeLine {
 			throw BytecodeInstruction.error(.invalidDecoding)
 		}
 		
-		self.label = label
+		guard let labelInt = Int(label) else {
+			throw BytecodeInstruction.error(.invalidDecoding)
+		}
+		
+		self.label = labelInt
 		
 		guard let opCodeString = substrings[safe: 1], let opCode = UInt8(opCodeString) else {
 			throw BytecodeInstruction.error(.invalidDecoding)
@@ -51,7 +55,7 @@ public class BytecodeInstruction: BytecodeLine {
 
 	}
 	
-	init(label: String, type: BytecodeInstructionType, arguments: [String] = [], comment: String? = nil) {
+	init(label: Int, type: BytecodeInstructionType, arguments: [String] = [], comment: String? = nil) {
 		self.label = label
 		self.type = type
 		self.arguments = arguments

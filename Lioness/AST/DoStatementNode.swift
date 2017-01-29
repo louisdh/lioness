@@ -36,7 +36,7 @@ public class DoStatementNode: LoopNode {
 		self.body = body
 	}
 	
-	override func compileLoop(with ctx: BytecodeCompiler, scopeStart: String) throws -> BytecodeBody {
+	override func compileLoop(with ctx: BytecodeCompiler, scopeStart: Int) throws -> BytecodeBody {
 		
 		var bytecode = BytecodeBody()
 		
@@ -72,7 +72,7 @@ public class DoStatementNode: LoopNode {
 
 		ctx.pushLoopContinue(startOfLoopLabel)
 		
-		let skipFirstInterval = BytecodeInstruction(label: skipFirstIntervalLabel, type: .goto, arguments: [skippedIntervalLabel], comment: "skip first interval")
+		let skipFirstInterval = BytecodeInstruction(label: skipFirstIntervalLabel, type: .goto, arguments: ["\(skippedIntervalLabel)"], comment: "skip first interval")
 		bytecode.append(skipFirstInterval)
 		
 		bytecode.append(contentsOf: intervalInstructions)
@@ -92,12 +92,12 @@ public class DoStatementNode: LoopNode {
 		let goToEndLabel = ctx.nextIndexLabel()
 		
 		let peekNextLabel = ctx.peekNextIndexLabel()
-		let ifeq = BytecodeInstruction(label: ifeqLabel, type: .ifFalse, arguments: [peekNextLabel], comment: "if false: exit loop")
+		let ifeq = BytecodeInstruction(label: ifeqLabel, type: .ifFalse, arguments: ["\(peekNextLabel)"], comment: "if false: exit loop")
 		
 		bytecode.append(ifeq)
 		bytecode.append(contentsOf: bodyBytecode)
 		
-		let goToStart = BytecodeInstruction(label: goToEndLabel, type: .goto, arguments: [startOfLoopLabel], comment: "loop")
+		let goToStart = BytecodeInstruction(label: goToEndLabel, type: .goto, arguments: ["\(startOfLoopLabel)"], comment: "loop")
 		bytecode.append(goToStart)
 		
 		guard let _ = ctx.popLoopContinue() else {

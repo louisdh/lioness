@@ -23,7 +23,7 @@ public class RepeatWhileStatementNode: LoopNode {
 		self.body = body
 	}
 	
-	override func compileLoop(with ctx: BytecodeCompiler, scopeStart: String) throws -> BytecodeBody {
+	override func compileLoop(with ctx: BytecodeCompiler, scopeStart: Int) throws -> BytecodeBody {
 		
 		var bytecode = BytecodeBody()
 		
@@ -41,11 +41,11 @@ public class RepeatWhileStatementNode: LoopNode {
 		let goToEndLabel = ctx.nextIndexLabel()
 		
 		let peekNextLabel = ctx.peekNextIndexLabel()
-		let ifeq = BytecodeInstruction(label: ifeqLabel, type: .ifFalse, arguments: [peekNextLabel])
+		let ifeq = BytecodeInstruction(label: ifeqLabel, type: .ifFalse, arguments: ["\(peekNextLabel)"])
 		
 		bytecode.append(ifeq)
 		
-		let goToStart = BytecodeInstruction(label: goToEndLabel, type: .goto, arguments: [scopeStart])
+		let goToStart = BytecodeInstruction(label: goToEndLabel, type: .goto, arguments: ["\(scopeStart)"])
 		bytecode.append(goToStart)
 		
 		guard let _ = ctx.popLoopContinue() else {

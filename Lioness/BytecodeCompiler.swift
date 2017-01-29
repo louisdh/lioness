@@ -15,10 +15,10 @@ public class BytecodeCompiler {
 	
 	private var index: UInt
 	
-	private var loopHeaderStack: [String]
-	private var loopContinueStack: [String]
+	private var loopHeaderStack: [Int]
+	private var loopContinueStack: [Int]
 
-	private var functionExitStack: [String]
+	private var functionExitStack: [Int]
 	
 	private var structMemberIndex: Int
 
@@ -34,9 +34,9 @@ public class BytecodeCompiler {
 		
 		index = 0
 		
-		loopHeaderStack = [String]()
-		loopContinueStack = [String]()
-		functionExitStack = [String]()
+		loopHeaderStack = [Int]()
+		loopContinueStack = [Int]()
+		functionExitStack = [Int]()
 
 		scopeTreeRoot = ScopeNode(childNodes: [])
 		currentScopeNode = scopeTreeRoot
@@ -113,13 +113,13 @@ public class BytecodeCompiler {
 	
 	// MARK: - Labels
 
-	func nextIndexLabel() -> String {
+	func nextIndexLabel() -> Int {
 		index += 1
-		return "\(index)"
+		return Int(index)
 	}
 	
-	func peekNextIndexLabel() -> String {
-		return "\(index + 1)"
+	func peekNextIndexLabel() -> Int {
+		return Int(index + 1)
 	}
 	
 	public func currentLabelIndex() -> UInt {
@@ -136,45 +136,45 @@ public class BytecodeCompiler {
 
 	// MARK: - Loop header
 	
-	func pushLoopHeader(_ label: String) {
+	func pushLoopHeader(_ label: Int) {
 		loopHeaderStack.append(label)
 	}
 	
 	@discardableResult
-	func popLoopHeader() -> String? {
+	func popLoopHeader() -> Int? {
 		return loopHeaderStack.popLast()
 	}
 	
-	func peekLoopHeader() -> String? {
+	func peekLoopHeader() -> Int? {
 		return loopHeaderStack.last
 	}
 	
 	// MARK: - Loop continue
 	
-	func pushLoopContinue(_ label: String) {
+	func pushLoopContinue(_ label: Int) {
 		loopContinueStack.append(label)
 	}
 	
-	func popLoopContinue() -> String? {
+	func popLoopContinue() -> Int? {
 		return loopContinueStack.popLast()
 	}
 	
-	func peekLoopContinue() -> String? {
+	func peekLoopContinue() -> Int? {
 		return loopContinueStack.last
 	}
 	
 	// MARK: - Return stack
 	
-	func pushFunctionExit(_ label: String) {
+	func pushFunctionExit(_ label: Int) {
 		functionExitStack.append(label)
 	}
 	
 	@discardableResult
-	func popFunctionExit() -> String? {
+	func popFunctionExit() -> Int? {
 		return functionExitStack.popLast()
 	}
 	
-	func peekFunctionExit() -> String? {
+	func peekFunctionExit() -> Int? {
 		return functionExitStack.last
 	}
 	

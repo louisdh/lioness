@@ -815,9 +815,13 @@ public class BytecodeInterpreter {
 	// MARK: -
 	
 	// TODO: max cache size?
-	private var labelProgramCountersCache = [String : Int]()
+	private var labelProgramCountersCache = [Int : Int]()
 	
 	private func progamCounter(for label: String) -> Int? {
+		
+		guard let label = Int(label) else {
+			return nil
+		}
 		
 		if let pc = labelProgramCountersCache[label] {
 			return pc

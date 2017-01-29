@@ -18,7 +18,7 @@ public class BreakLoopNode: ASTNode {
 			throw CompileError.unexpectedCommand
 		}
 		
-		return [BytecodeInstruction(label: label, type: .goto, arguments: [breakLabel], comment: "break")]
+		return [BytecodeInstruction(label: label, type: .goto, arguments: ["\(breakLabel)"], comment: "break")]
 		
 	}
 	

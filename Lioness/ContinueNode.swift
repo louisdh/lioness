@@ -18,7 +18,7 @@ public class ContinueNode: ASTNode {
 			throw CompileError.unexpectedCommand
 		}
 		
-		return [BytecodeInstruction(label: label, type: .goto, arguments: [continueLabel], comment: "continue")]
+		return [BytecodeInstruction(label: label, type: .goto, arguments: ["\(continueLabel)"], comment: "continue")]
 		
 	}
 	
