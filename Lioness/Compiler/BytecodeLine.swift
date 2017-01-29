@@ -8,7 +8,7 @@
 
 import Foundation
 
-public protocol BytecodeLine: CustomStringConvertible {
+public protocol BytecodeLine: class, CustomStringConvertible {
 	
 	var encoded: String { get }
 	
