@@ -24,8 +24,6 @@ class FullRun_Performance: BaseTestCase {
 
     func testLargeMathPerformance() {
 		
-		let runner = Runner(logDebug: false)
-		
 		let fileURL = getFilePath(for: "LargeMathOperation")
 		
 		guard let path = fileURL?.path else {
@@ -40,6 +38,8 @@ class FullRun_Performance: BaseTestCase {
 				
         self.measure {
 
+			let runner = Runner(logDebug: false)
+
 			do {
 				try runner.run(source)
 			} catch {
@@ -50,8 +50,6 @@ class FullRun_Performance: BaseTestCase {
     }
 
 	func testComplexPerformance() {
-		
-		let runner = Runner(logDebug: false)
 		
 		let fileURL = getFilePath(for: "Complex")
 		
@@ -67,6 +65,8 @@ class FullRun_Performance: BaseTestCase {
 		
 		self.measure {
 			
+			let runner = Runner(logDebug: false)
+
 			do {
 				try runner.run(source)
 			} catch {
