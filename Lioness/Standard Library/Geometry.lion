@@ -55,7 +55,23 @@ func factorial(x) returns {
 	return 1
 }
 
+// Get wrapped rad angle in range [-pi, pi]
+func wrappedRadAngle(x) returns {
+	
+	while x > pi {
+		x -= 2 * pi
+	}
+	
+	while x <= pi {
+		x += 2 * pi
+	}
+	
+	return x
+}
+
 func sin(x) returns {
+	
+	x = wrappedRadAngle(x)
 	
 	// first element of the taylor series
 	sum = x
@@ -76,6 +92,8 @@ func sin(x) returns {
 
 func cos(x) returns {
 	
+	x = wrappedRadAngle(x)
+
 	// first element of the taylor series
 	sum = 1
 	

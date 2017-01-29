@@ -1,4 +1,4 @@
 
-a = sin(degToRad(45))
+a = sin(10.0)
 b = cos(degToRad(45))
 c = tan(degToRad(45))
