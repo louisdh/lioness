@@ -40,8 +40,12 @@ class FullRun_Performance: BaseTestCase {
 				
         self.measure {
 
-			try! runner.run(source)
-
+			do {
+				try runner.run(source)
+			} catch {
+				XCTFail(error.localizedDescription)
+			}
+			
 		}
     }
 
@@ -63,7 +67,11 @@ class FullRun_Performance: BaseTestCase {
 		
 		self.measure {
 			
-			try! runner.run(source)
+			do {
+				try runner.run(source)
+			} catch {
+				XCTFail(error.localizedDescription)
+			}
 			
 		}
 	}
