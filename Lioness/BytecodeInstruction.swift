@@ -8,6 +8,15 @@
 
 import Foundation
 
+// TODO: use in BytecodeInstruction
+public enum InstructionArgumentType {
+	
+	case value(Double)
+	case index(Int)
+	
+}
+
+
 /// Scorpion Bytecode Instruction
 public class BytecodeInstruction: BytecodeLine {
 	
