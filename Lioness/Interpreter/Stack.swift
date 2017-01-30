@@ -20,6 +20,7 @@ public struct Stack<Element>: CustomStringConvertible {
 	init(withLimit limit: Int) {
 		self.limit = limit
 		items = [Element]()
+		items.reserveCapacity(limit)
 		size = 0
 	}
 	
