@@ -31,7 +31,7 @@ public class BytecodeInterpreter {
 	private var functionDepth = 0
 
 	/// Registers
-	private(set) public var registers = [String : ValueType]()
+	private(set) public var registers = [Int : ValueType]()
 	
 	private(set) var pcTrace = [Int]()
 
@@ -44,7 +44,7 @@ public class BytecodeInterpreter {
 		self.bytecode = bytecode
 		
 		stack = Stack<ValueType>(withLimit: stackLimit)
-		registers = [String : ValueType]()
+		registers = [Int : ValueType]()
 		functionInvokeStack = Stack<Int>(withLimit: stackLimit)
 		
 		try createFunctionMap()
@@ -58,7 +58,7 @@ public class BytecodeInterpreter {
 	public init?(bytecodeStrings: [String]) {
 		
 		stack = Stack<ValueType>(withLimit: stackLimit)
-		registers = [String : ValueType]()
+		registers = [Int : ValueType]()
 		functionInvokeStack = Stack<Int>(withLimit: stackLimit)
 
 		var bytecode = BytecodeBody()
@@ -800,7 +800,7 @@ public class BytecodeInterpreter {
 	
 	private func setRegValue(_ value: ValueType, for reg: Int) {
 		
-		let privateKey = "\(functionDepth)_\(reg)"
+		let privateKey = functionDepth * regPrivateKeyPrefixSize + reg
 		
 		// FIXME: make faster?
 		if regMap[reg] != nil {
@@ -825,22 +825,33 @@ public class BytecodeInterpreter {
 	
 	private var regMap = [Int : [Int]]()
 	
-	private func privateReg(for reg: Int) -> String? {
+	// Also the max number of private keys for each reg
+	private var regPrivateKeyPrefixSize = 10_000
+	
+	private func privateReg(for reg: Int) -> Int? {
 		
 		guard let id = regMap[reg]?.last else {
 			return nil
 		}
 		
-		return "\(id)_\(reg)"
+		guard reg < regPrivateKeyPrefixSize else {
+			return nil
+		}
+		
+		return id * regPrivateKeyPrefixSize + reg
 	}
 	
-	public func regName(for privateReg: String) -> Int? {
+	public func regName(for privateReg: Int) -> Int? {
 		
 		for (k, v) in regMap {
 			
+			guard k < regPrivateKeyPrefixSize else {
+				continue
+			}
+			
 			for reg in v {
 				
-				let privateKey = "\(reg)_\(k)"
+				let privateKey = reg * regPrivateKeyPrefixSize + k
 
 				if privateKey == privateReg {
 					return k
