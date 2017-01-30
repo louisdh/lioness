@@ -22,9 +22,9 @@ public class BytecodeInterpreter {
 
 	// TODO: use int as key?
 	/// Function map with id as key and program counter as value
-	private var functionMap = [String : Int]()
+	private var functionMap = [Int : Int]()
 
-	private var functionEndMap = [String : Int]()
+	private var functionEndMap = [Int : Int]()
 
 	private var functionInvokeStack: Stack<Int>
 	
@@ -85,7 +85,7 @@ public class BytecodeInterpreter {
 		
 		var pc = 0
 		
-		var funcStack = [String]()
+		var funcStack = [Int]()
 		
 		for line in bytecode {
 			
@@ -297,7 +297,7 @@ public class BytecodeInterpreter {
 
 	private func executePushConst(_ instruction: BytecodeInstruction, pc: Int) throws -> Int {
 		// TODO: add enum support
-		guard let arg = instruction.arguments.first, let f = NumberType(arg) else {
+		guard let arg = instruction.arguments.first, case let .value(f) = arg else {
 			throw error(.unexpectedArgument)
 		}
 		
@@ -445,9 +445,13 @@ public class BytecodeInterpreter {
 			throw error(.unexpectedArgument)
 		}
 		
+		guard case let .index(i) = label else {
+			throw error(.unexpectedArgument)
+		}
+		
 		if try popNumber() == 1.0 {
 			
-			if let newPc = progamCounter(for: label) {
+			if let newPc = progamCounter(for: i) {
 				return newPc
 			} else {
 				return bytecode.count
@@ -465,9 +469,13 @@ public class BytecodeInterpreter {
 			throw error(.unexpectedArgument)
 		}
 		
+		guard case let .index(i) = label else {
+			throw error(.unexpectedArgument)
+		}
+		
 		if try popNumber() == 0.0 {
 			
-			if let newPc = progamCounter(for: label) {
+			if let newPc = progamCounter(for: i) {
 				return newPc
 			} else {
 				return bytecode.count
@@ -485,7 +493,11 @@ public class BytecodeInterpreter {
 			throw error(.unexpectedArgument)
 		}
 
-		if let newPc = progamCounter(for: label) {
+		guard case let .index(i) = label else {
+			throw error(.unexpectedArgument)
+		}
+		
+		if let newPc = progamCounter(for: i) {
 			return newPc
 		} else {
 			return bytecode.count
@@ -499,7 +511,11 @@ public class BytecodeInterpreter {
 			throw error(.unexpectedArgument)
 		}
 		
-		setRegValue(try stack.pop(), for: reg)
+		guard case let .index(i) = reg else {
+			throw error(.unexpectedArgument)
+		}
+		
+		setRegValue(try stack.pop(), for: i)
 		
 		return pc + 1
 	}
@@ -510,7 +526,11 @@ public class BytecodeInterpreter {
 			throw error(.unexpectedArgument)
 		}
 		
-		try updateRegValue(try stack.pop(), for: reg)
+		guard case let .index(i) = reg else {
+			throw error(.unexpectedArgument)
+		}
+		
+		try updateRegValue(try stack.pop(), for: i)
 		
 		return pc + 1
 	}
@@ -521,7 +541,11 @@ public class BytecodeInterpreter {
 			throw error(.unexpectedArgument)
 		}
 		
-		try removeRegValue(in: reg)
+		guard case let .index(i) = reg else {
+			throw error(.unexpectedArgument)
+		}
+		
+		try removeRegValue(in: i)
 		
 		return pc + 1
 	}
@@ -532,7 +556,11 @@ public class BytecodeInterpreter {
 			throw error(.unexpectedArgument)
 		}
 		
-		let regValue = try getRegValue(for: reg)
+		guard case let .index(i) = reg else {
+			throw error(.unexpectedArgument)
+		}
+		
+		let regValue = try getRegValue(for: i)
 		
 		try stack.push(regValue)
 		
@@ -545,7 +573,11 @@ public class BytecodeInterpreter {
 			throw error(.unexpectedArgument)
 		}
 		
-		guard let idPc = functionMap[id] else {
+		guard case let .index(i) = id else {
+			throw error(.unexpectedArgument)
+		}
+		
+		guard let idPc = functionMap[i] else {
 			throw error(.unexpectedArgument)
 		}
 		
@@ -584,7 +616,11 @@ public class BytecodeInterpreter {
 			throw error(.unexpectedArgument)
 		}
 		
-		if let newPc = progamCounter(for: label) {
+		guard case let .index(i) = label else {
+			throw error(.unexpectedArgument)
+		}
+		
+		if let newPc = progamCounter(for: i) {
 			// FIXME: need to check if newPc >= bytecode.count?
 			return newPc + 1
 		} else {
@@ -604,7 +640,7 @@ public class BytecodeInterpreter {
 
 	private func executeStructSet(_ instruction: BytecodeInstruction, pc: Int) throws -> Int {
 		
-		guard let keyStr = instruction.arguments.first, let key = Int(keyStr) else {
+		guard let arg = instruction.arguments.first, case let .index(key) = arg else {
 			throw error(.unexpectedArgument)
 		}
 		
@@ -623,7 +659,12 @@ public class BytecodeInterpreter {
 
 	private func executeStructUpdate(_ instruction: BytecodeInstruction, pc: Int) throws -> Int {
 
-		let memberIds = instruction.arguments.flatMap { Int($0) }
+		let memberIds: [Int] = instruction.arguments.flatMap {
+			if case let .index(i) = $0 {
+				return i
+			}
+			return nil
+		}
 		
 		guard case let ValueType.struct(v) = try stack.pop() else {
 			throw error(.unexpectedArgument)
@@ -640,7 +681,7 @@ public class BytecodeInterpreter {
 	
 	private func executeStructGet(_ instruction: BytecodeInstruction, pc: Int) throws -> Int {
 		
-		guard let keyStr = instruction.arguments.first, let key = Int(keyStr) else {
+		guard let arg = instruction.arguments.first, case let .index(key) = arg else {
 			throw error(.unexpectedArgument)
 		}
 		
@@ -727,7 +768,7 @@ public class BytecodeInterpreter {
 	
 	// MARK: - Registers
 	
-	private func removeRegValue(in reg: String) throws {
+	private func removeRegValue(in reg: Int) throws {
 		
 		guard let key = privateReg(for: reg) else {
 			return
@@ -744,7 +785,7 @@ public class BytecodeInterpreter {
 //		}
 	}
 	
-	public func getRegValue(for reg: String) throws -> ValueType {
+	public func getRegValue(for reg: Int) throws -> ValueType {
 		
 		guard let key = privateReg(for: reg) else {
 			throw error(.invalidRegister)
@@ -757,7 +798,7 @@ public class BytecodeInterpreter {
 		return regValue
 	}
 	
-	private func setRegValue(_ value: ValueType, for reg: String) {
+	private func setRegValue(_ value: ValueType, for reg: Int) {
 		
 		let privateKey = "\(functionDepth)_\(reg)"
 		
@@ -772,7 +813,7 @@ public class BytecodeInterpreter {
 		
 	}
 	
-	private func updateRegValue(_ value: ValueType, for reg: String) throws {
+	private func updateRegValue(_ value: ValueType, for reg: Int) throws {
 
 		guard let privateKey = privateReg(for: reg) else {
 			throw error(.invalidRegister)
@@ -782,9 +823,9 @@ public class BytecodeInterpreter {
 		
 	}
 	
-	private var regMap = [String : [Int]]()
+	private var regMap = [Int : [Int]]()
 	
-	private func privateReg(for reg: String) -> String? {
+	private func privateReg(for reg: Int) -> String? {
 		
 		guard let id = regMap[reg]?.last else {
 			return nil
@@ -793,7 +834,7 @@ public class BytecodeInterpreter {
 		return "\(id)_\(reg)"
 	}
 	
-	public func regName(for privateReg: String) -> String? {
+	public func regName(for privateReg: String) -> Int? {
 		
 		for (k, v) in regMap {
 			
@@ -817,11 +858,7 @@ public class BytecodeInterpreter {
 	// TODO: max cache size?
 	private var labelProgramCountersCache = [Int : Int]()
 	
-	private func progamCounter(for label: String) -> Int? {
-		
-		guard let label = Int(label) else {
-			return nil
-		}
+	private func progamCounter(for label: Int) -> Int? {
 		
 		if let pc = labelProgramCountersCache[label] {
 			return pc

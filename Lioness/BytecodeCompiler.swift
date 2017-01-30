@@ -222,22 +222,22 @@ public class BytecodeCompiler {
 
 	}
 	
-	public func getCompiledRegister(for varName: String) -> String? {
+	public func getCompiledRegister(for varName: String) -> Int? {
 		
 		let deepRegMap = currentScopeNode.deepRegisterMap()
 		
-		let decompiledVarName = deepRegMap.first(where: { (keyValue: (key: String, value: String)) -> Bool in
+		let decompiledVarName = deepRegMap.first(where: { (keyValue: (key: String, value: Int)) -> Bool in
 			return keyValue.key == varName
 		})?.value
 		
 		return decompiledVarName
 	}
 	
-	func getDecompiledVarName(for register: String) -> String? {
+	func getDecompiledVarName(for register: Int) -> String? {
 		
 		let deepRegMap = currentScopeNode.deepRegisterMap()
 		
-		let decompiledVarName = deepRegMap.first(where: { (keyValue: (key: String, value: String)) -> Bool in
+		let decompiledVarName = deepRegMap.first(where: { (keyValue: (key: String, value: Int)) -> Bool in
 			return keyValue.value == register
 		})?.key
 		
@@ -248,9 +248,9 @@ public class BytecodeCompiler {
 		return cleanupRegisterInstructions(for: currentScopeNode)
 	}
 	
-	private func registersToClean(for scopeNode: ScopeNode) -> [(String, String?)] {
+	private func registersToClean(for scopeNode: ScopeNode) -> [(Int, String?)] {
 
-		var registersToCleanup = scopeNode.registerMap.map { (kv) -> (String, String?) in
+		var registersToCleanup = scopeNode.registerMap.map { (kv) -> (Int, String?) in
 			return (kv.1, kv.0)
 		}
 		
@@ -277,7 +277,7 @@ public class BytecodeCompiler {
 				comment += " \(decompiledVarName)"
 			}
 			
-			let instr = BytecodeInstruction(label: label, type: .registerClear, arguments: [reg], comment: comment)
+			let instr = BytecodeInstruction(label: label, type: .registerClear, arguments: [.index(reg)], comment: comment)
 			instructions.append(instr)
 			
 		}
@@ -315,7 +315,7 @@ public class BytecodeCompiler {
 	///
 	/// - Parameter varName: var name
 	/// - Returns: Register and boolean (true = register is new, false = reused)
-	func getRegister(for varName: String) -> (String, Bool) {
+	func getRegister(for varName: String) -> (Int, Bool) {
 		
 		if let existingReg = currentScopeNode.deepRegisterMap()[varName] {
 			return (existingReg, false)
@@ -327,7 +327,7 @@ public class BytecodeCompiler {
 		return (newReg, true)
 	}
 	
-	func getNewInternalRegisterAndStoreInScope() -> String {
+	func getNewInternalRegisterAndStoreInScope() -> Int {
 
 		let newReg = getNewRegister()
 		currentScopeNode.internalRegisters.append(newReg)
@@ -336,10 +336,9 @@ public class BytecodeCompiler {
 		
 	}
 	
-	private func getNewRegister() -> String {
+	private func getNewRegister() -> Int {
 		registerCount += 1
-		let newReg = "r\(registerCount)"
-		return newReg
+		return registerCount
 	}
 	
 	// MARK: - Function ids
@@ -348,7 +347,7 @@ public class BytecodeCompiler {
 	
 	private var functionCount = 0
 	
-	func getStructId(for structNode: StructNode) -> String {
+	func getStructId(for structNode: StructNode) -> Int {
 		
 		let name = structNode.prototype.name
 		
@@ -365,7 +364,7 @@ public class BytecodeCompiler {
 	}
 	
 	/// Will make new id if needed
-	func getFunctionId(for functionNode: FunctionNode) -> String {
+	func getFunctionId(for functionNode: FunctionNode) -> Int {
 		
 		let name = functionNode.prototype.name
 		
@@ -381,7 +380,7 @@ public class BytecodeCompiler {
 		return newReg
 	}
 	
-	func getExitScopeFunctionId(for functionNode: FunctionNode) throws -> String {
+	func getExitScopeFunctionId(for functionNode: FunctionNode) throws -> Int {
 		
 		let name = functionNode.prototype.name
 		
@@ -394,7 +393,7 @@ public class BytecodeCompiler {
 	}
 	
 	/// Expects function id to exist
-	func getCallFunctionId(for functionName: String) throws -> String {
+	func getCallFunctionId(for functionName: String) throws -> Int {
 
 		if let functionMapped = currentScopeNode.deepFunctionMap()[functionName] {
 			return functionMapped.id
@@ -413,10 +412,9 @@ public class BytecodeCompiler {
 
 	}
 	
-	private func getNewFunctionId() -> String {
+	private func getNewFunctionId() -> Int {
 		functionCount += 1
-		let id = "\(functionCount)"
-		return id
+		return functionCount
 	}
 
 	// MARK: -

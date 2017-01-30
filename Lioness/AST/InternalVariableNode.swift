@@ -10,10 +10,10 @@ import Foundation
 
 public class InternalVariableNode: ASTNode {
 	
-	public let register: String
+	public let register: Int
 	public let debugName: String?
 	
-	public init(register: String, debugName: String? = nil) {
+	public init(register: Int, debugName: String? = nil) {
 		self.register = register
 		self.debugName = debugName
 	}
@@ -22,7 +22,7 @@ public class InternalVariableNode: ASTNode {
 		
 		var bytecode = BytecodeBody()
 		
-		let load = BytecodeInstruction(label: ctx.nextIndexLabel(), type: .registerLoad, arguments: [register], comment: debugName)
+		let load = BytecodeInstruction(label: ctx.nextIndexLabel(), type: .registerLoad, arguments: [.index(register)], comment: debugName)
 		
 		bytecode.append(load)
 		

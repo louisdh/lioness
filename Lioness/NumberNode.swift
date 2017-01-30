@@ -20,7 +20,7 @@ public class NumberNode: ASTNode {
 		
 		let i = self.value
 		let label = ctx.nextIndexLabel()
-		return [BytecodeInstruction(label: label, type: .pushConst, arguments: ["\(i)"])]
+		return [BytecodeInstruction(label: label, type: .pushConst, arguments: [.value(i)])]
 		
 	}
 

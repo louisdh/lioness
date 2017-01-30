@@ -11,12 +11,12 @@ import Foundation
 // TODO: Merge with function header, rename to "virtual"
 public class BytecodeStructHeader: BytecodeLine {
 	
-	let id: String
+	let id: Int
 	let name: String?
 	
 	let members: [String]
 	
-	init(id: String, name: String? = nil, members: [String]) {
+	init(id: Int, name: String? = nil, members: [String]) {
 		self.id = id
 		self.name = name
 		self.members = members

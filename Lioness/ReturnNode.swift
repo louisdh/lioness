@@ -35,7 +35,7 @@ public class ReturnNode: ASTNode {
 			throw CompileError.unexpectedCommand
 		}
 		
-		let exitInstruction = BytecodeInstruction(label: label, type: .goto, arguments: ["\(cleanupLabel)"], comment: "return")
+		let exitInstruction = BytecodeInstruction(label: label, type: .goto, arguments: [.index(cleanupLabel)], comment: "return")
 	
 		bytecode.append(exitInstruction)
 		

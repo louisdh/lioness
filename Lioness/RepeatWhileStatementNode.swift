@@ -41,11 +41,11 @@ public class RepeatWhileStatementNode: LoopNode {
 		let goToEndLabel = ctx.nextIndexLabel()
 		
 		let peekNextLabel = ctx.peekNextIndexLabel()
-		let ifeq = BytecodeInstruction(label: ifeqLabel, type: .ifFalse, arguments: ["\(peekNextLabel)"])
+		let ifeq = BytecodeInstruction(label: ifeqLabel, type: .ifFalse, arguments: [.index(peekNextLabel)])
 		
 		bytecode.append(ifeq)
 		
-		let goToStart = BytecodeInstruction(label: goToEndLabel, type: .goto, arguments: ["\(scopeStart)"])
+		let goToStart = BytecodeInstruction(label: goToEndLabel, type: .goto, arguments: [.index(scopeStart)])
 		bytecode.append(goToStart)
 		
 		guard let _ = ctx.popLoopContinue() else {

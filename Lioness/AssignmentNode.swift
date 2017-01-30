@@ -37,7 +37,7 @@ public class AssignmentNode: ASTNode {
 
 			let type: BytecodeInstructionType = isNew ? .registerStore : .registerUpdate
 			
-			let instruction = BytecodeInstruction(label: label, type: type, arguments: [varReg], comment: "\(variable.name)")
+			let instruction = BytecodeInstruction(label: label, type: type, arguments: [.index(varReg)], comment: "\(variable.name)")
 			
 			bytecode.append(instruction)
 			
@@ -54,14 +54,14 @@ public class AssignmentNode: ASTNode {
 			let varInstructions = try varNode.compile(with: ctx, in: self)
 			bytecode.append(contentsOf: varInstructions)
 
-			let membersMapped = members.map { String($0) }
+			let membersMapped = members.map { InstructionArgumentType.index($0) }
 			
 			let instruction = BytecodeInstruction(label: label, type: .structUpdate, arguments: membersMapped, comment: "\(membersMapped)")
 			
 			bytecode.append(instruction)
 
 			
-			let storeInstruction = BytecodeInstruction(label: label, type: .registerUpdate, arguments: [varReg], comment: "\(varNode.name)")
+			let storeInstruction = BytecodeInstruction(label: label, type: .registerUpdate, arguments: [.index(varReg)], comment: "\(varNode.name)")
 
 			bytecode.append(storeInstruction)
 

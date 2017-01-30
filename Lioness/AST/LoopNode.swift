@@ -31,11 +31,11 @@ public class LoopNode: ASTNode {
 		
 		let loopEndLabel = ctx.peekNextIndexLabel()
 		
-		let skipExitInstruction = BytecodeInstruction(label: skipExitInstrLabel, type: .goto, arguments: ["\(loopScopeStart)"], comment: "skip exit instruction")
+		let skipExitInstruction = BytecodeInstruction(label: skipExitInstrLabel, type: .goto, arguments: [.index(loopScopeStart)], comment: "skip exit instruction")
 		bytecode.append(skipExitInstruction)
 		
 		
-		let exitLoopInstruction = BytecodeInstruction(label: exitLoopInstrLabel, type: .goto, arguments: ["\(loopEndLabel)"], comment: "exit loop")
+		let exitLoopInstruction = BytecodeInstruction(label: exitLoopInstrLabel, type: .goto, arguments: [.index(loopEndLabel)], comment: "exit loop")
 		bytecode.append(exitLoopInstruction)
 		
 		

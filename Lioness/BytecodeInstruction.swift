@@ -14,8 +14,18 @@ public enum InstructionArgumentType {
 	case value(Double)
 	case index(Int)
 	
+	var encoded: String {
+		
+		switch self {
+		case let .value(v):
+			return "v\(v)"
+		case let .index(i):
+			return "i\(i)"
+		}
+		
+	}
+	
 }
-
 
 /// Scorpion Bytecode Instruction
 public class BytecodeInstruction: BytecodeLine {
@@ -24,7 +34,7 @@ public class BytecodeInstruction: BytecodeLine {
 	
 	let type: BytecodeInstructionType
 	
-	let arguments: [String]
+	let arguments: [InstructionArgumentType]
 	
 	let comment: String?
 	
@@ -55,7 +65,39 @@ public class BytecodeInstruction: BytecodeLine {
 		self.type = type
 		
 		if let args = substrings[safe: 2]?.components(separatedBy: ",") {
-			self.arguments = args
+			
+			var argsParsed = [InstructionArgumentType]()
+			
+			for arg in args {
+			
+				var arg = arg
+				
+				if arg.hasPrefix("i") {
+					
+					arg = arg.replacingOccurrences(of: "i", with: "")
+					
+					guard let i = Int(arg) else {
+						throw BytecodeInstruction.error(.invalidDecoding)
+					}
+					
+					argsParsed.append(InstructionArgumentType.index(i))
+					
+				} else if arg.hasPrefix("v") {
+					
+					arg = arg.replacingOccurrences(of: "v", with: "")
+
+					guard let v = Double(arg) else {
+						throw BytecodeInstruction.error(.invalidDecoding)
+					}
+					
+					argsParsed.append(InstructionArgumentType.value(v))
+
+				}
+				
+			}
+			
+			self.arguments = argsParsed
+			
 		} else {
 			self.arguments = []
 		}
@@ -64,7 +106,7 @@ public class BytecodeInstruction: BytecodeLine {
 
 	}
 	
-	init(label: Int, type: BytecodeInstructionType, arguments: [String] = [], comment: String? = nil) {
+	init(label: Int, type: BytecodeInstructionType, arguments: [InstructionArgumentType] = [], comment: String? = nil) {
 		self.label = label
 		self.type = type
 		self.arguments = arguments
@@ -77,7 +119,7 @@ public class BytecodeInstruction: BytecodeLine {
 		
 		var i = 0
 		for a in arguments {
-			args += a
+			args += a.encoded
 			i += 1
 			
 			if i != arguments.count {
@@ -100,7 +142,7 @@ public class BytecodeInstruction: BytecodeLine {
 		
 		var i = 0
 		for a in arguments {
-			args += a
+			args += a.encoded
 			i += 1
 			
 			if i != arguments.count {
@@ -136,4 +178,3 @@ extension String {
 	}
 	
 }
-

@@ -41,7 +41,7 @@ public class ConditionalStatementNode: ASTNode {
 
 		
 		let peekNextLabel = ctx.peekNextIndexLabel()
-		let ifeq = BytecodeInstruction(label: ifeqLabel, type: .ifFalse, arguments: ["\(peekNextLabel)"])
+		let ifeq = BytecodeInstruction(label: ifeqLabel, type: .ifFalse, arguments: [.index(peekNextLabel)])
 		bytecode.append(ifeq)
 		
 		if let elseBody = elseBody {
@@ -54,7 +54,7 @@ public class ConditionalStatementNode: ASTNode {
 		bytecode.append(contentsOf: bodyBytecode)
 
 		if let elseBody = elseBody, elseBody.nodes.count > 0 {
-			let goToEnd = BytecodeInstruction(label: goToEndLabel, type: .goto, arguments: ["\(ctx.peekNextIndexLabel())"])
+			let goToEnd = BytecodeInstruction(label: goToEndLabel, type: .goto, arguments: [.index(ctx.peekNextIndexLabel())])
 			bytecode.append(goToEnd)
 		}
 		

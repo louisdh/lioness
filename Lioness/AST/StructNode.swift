@@ -34,7 +34,7 @@ public class StructNode: ASTNode {
 				throw CompileError.unexpectedCommand
 			}
 			
-			let instr = BytecodeInstruction(label: ctx.nextIndexLabel(), type: .structSet, arguments: ["\(id)"], comment: "set \(member)")
+			let instr = BytecodeInstruction(label: ctx.nextIndexLabel(), type: .structSet, arguments: [.index(id)], comment: "set \(member)")
 			bytecode.append(instr)
 
 		}

@@ -27,7 +27,7 @@ public class StructMemberNode: ASTNode {
 			throw CompileError.unexpectedCommand
 		}
 		
-		let getInstr = BytecodeInstruction(label: ctx.nextIndexLabel(), type: .structGet, arguments: ["\(id)"], comment: "get \(name)")
+		let getInstr = BytecodeInstruction(label: ctx.nextIndexLabel(), type: .structGet, arguments: [.index(id)], comment: "get \(name)")
 		bytecode.append(getInstr)
 		
 		return bytecode

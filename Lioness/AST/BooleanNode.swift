@@ -42,9 +42,9 @@ public class BooleanNode: ASTNode {
 	
 	public func compile(with ctx: BytecodeCompiler, in parent: ASTNode?) throws -> BytecodeBody {
 		
-		let i = self.value
+		let i = boolValue ? 1.0 : 0.0
 		let label = ctx.nextIndexLabel()
-		return [BytecodeInstruction(label: label, type: .pushConst, arguments: ["\(i)"])]
+		return [BytecodeInstruction(label: label, type: .pushConst, arguments: [.value(i)])]
 		
 	}
 	

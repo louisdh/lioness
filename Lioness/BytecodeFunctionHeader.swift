@@ -10,12 +10,12 @@ import Foundation
 
 public class BytecodeFunctionHeader: BytecodeLine {
 
-	let id: String
+	let id: Int
 	let name: String?
 	
 	let arguments: [String]
 
-	init(id: String, name: String? = nil, arguments: [String] = []) {
+	init(id: Int, name: String? = nil, arguments: [String] = []) {
 		self.id = id
 		self.name = name
 		self.arguments = arguments

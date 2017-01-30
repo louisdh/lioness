@@ -13,20 +13,22 @@ internal class ScopeNode {
 	weak var parentNode: ScopeNode?
 	var childNodes: [ScopeNode]
 	
-	var registerMap: [String : String]
+	var registerMap: [String : Int]
 	var functionMap: [String : FunctionMapped]
-	var internalRegisters: [String]
+	var internalRegisters: [Int]
 
 	// TODO: make Set?
-	var registersToClean: [(String, String?)]
+	// 0 = reg id
+	// 1 = decompiled var name
+	var registersToClean: [(Int, String?)]
 
 	init(parentNode: ScopeNode? = nil, childNodes: [ScopeNode]) {
 		self.parentNode = parentNode
 		self.childNodes = childNodes
-		registerMap = [String : String]()
+		registerMap = [String : Int]()
 		functionMap = [String : FunctionMapped]()
-		internalRegisters = [String]()
-		registersToClean = [(String, String?)]()
+		internalRegisters = [Int]()
+		registersToClean = [(Int, String?)]()
 	}
 	
 	func addRegistersToCleanToParent() {
@@ -36,7 +38,7 @@ internal class ScopeNode {
 	}
 	
 	/// Get deep register map (including parents' register map)
-	func deepRegisterMap() -> [String : String] {
+	func deepRegisterMap() -> [String : Int] {
 	
 		if let parentNode = parentNode {
 			
@@ -77,8 +79,8 @@ internal class ScopeNode {
 
 struct FunctionMapped {
 	
-	let id: String
-	let exitId: String
+	let id: Int
+	let exitId: Int
 	let returns: Bool
 	
 }

@@ -10,10 +10,10 @@ import Foundation
 
 public class BytecodePrivateFunctionHeader: BytecodeLine {
 	
-	let id: String
+	let id: Int
 	let name: String?
 	
-	init(id: String, name: String? = nil) {
+	init(id: Int, name: String? = nil) {
 		self.id = id
 		self.name = name
 	}

@@ -32,7 +32,7 @@ public class CallNode: ASTNode {
 			
 		}
 		
-		let invokeInstruction = BytecodeInstruction(label: ctx.nextIndexLabel(), type: .invokeFunc, arguments: [id], comment: "\(callee)")
+		let invokeInstruction = BytecodeInstruction(label: ctx.nextIndexLabel(), type: .invokeFunc, arguments: [.index(id)], comment: "\(callee)")
 		bytecode.append(invokeInstruction)
 
 		if try isResultUnused(with: ctx, in: parent) {

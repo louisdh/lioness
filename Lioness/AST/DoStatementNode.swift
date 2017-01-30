@@ -72,7 +72,7 @@ public class DoStatementNode: LoopNode {
 
 		ctx.pushLoopContinue(startOfLoopLabel)
 		
-		let skipFirstInterval = BytecodeInstruction(label: skipFirstIntervalLabel, type: .goto, arguments: ["\(skippedIntervalLabel)"], comment: "skip first interval")
+		let skipFirstInterval = BytecodeInstruction(label: skipFirstIntervalLabel, type: .goto, arguments: [.index(skippedIntervalLabel)], comment: "skip first interval")
 		bytecode.append(skipFirstInterval)
 		
 		bytecode.append(contentsOf: intervalInstructions)
@@ -92,12 +92,12 @@ public class DoStatementNode: LoopNode {
 		let goToEndLabel = ctx.nextIndexLabel()
 		
 		let peekNextLabel = ctx.peekNextIndexLabel()
-		let ifeq = BytecodeInstruction(label: ifeqLabel, type: .ifFalse, arguments: ["\(peekNextLabel)"], comment: "if false: exit loop")
+		let ifeq = BytecodeInstruction(label: ifeqLabel, type: .ifFalse, arguments: [.index(peekNextLabel)], comment: "if false: exit loop")
 		
 		bytecode.append(ifeq)
 		bytecode.append(contentsOf: bodyBytecode)
 		
-		let goToStart = BytecodeInstruction(label: goToEndLabel, type: .goto, arguments: ["\(startOfLoopLabel)"], comment: "loop")
+		let goToStart = BytecodeInstruction(label: goToEndLabel, type: .goto, arguments: [.index(startOfLoopLabel)], comment: "loop")
 		bytecode.append(goToStart)
 		
 		guard let _ = ctx.popLoopContinue() else {
@@ -107,7 +107,7 @@ public class DoStatementNode: LoopNode {
 		return bytecode
 	}
 	
-	private func assignmentInstructions(with ctx: BytecodeCompiler, and regName: String) throws -> BytecodeBody {
+	private func assignmentInstructions(with ctx: BytecodeCompiler, and regName: Int) throws -> BytecodeBody {
 		
 		let v = try amount.compile(with: ctx, in: self)
 		
@@ -116,7 +116,7 @@ public class DoStatementNode: LoopNode {
 		bytecode.append(contentsOf: v)
 		
 		let label = ctx.nextIndexLabel()
-		let instruction = BytecodeInstruction(label: label, type: .registerStore, arguments: [regName], comment: "do repeat iterator")
+		let instruction = BytecodeInstruction(label: label, type: .registerStore, arguments: [.index(regName)], comment: "do repeat iterator")
 		
 		bytecode.append(instruction)
 		
@@ -124,7 +124,7 @@ public class DoStatementNode: LoopNode {
 		
 	}
 	
-	private func conditionInstructions(with ctx: BytecodeCompiler, and regName: String) throws -> BytecodeBody {
+	private func conditionInstructions(with ctx: BytecodeCompiler, and regName: Int) throws -> BytecodeBody {
 		
 		let varNode = InternalVariableNode(register: regName, debugName: "do repeat iterator")
 		let conditionNode = try BinaryOpNode(op: ">", lhs: varNode, rhs: NumberNode(value: 0.0))
@@ -135,7 +135,7 @@ public class DoStatementNode: LoopNode {
 		
 	}
 	
-	private func decrementInstructions(with ctx: BytecodeCompiler, and regName: String) throws -> BytecodeBody {
+	private func decrementInstructions(with ctx: BytecodeCompiler, and regName: Int) throws -> BytecodeBody {
 		
 		let varNode = InternalVariableNode(register: regName, debugName: "do repeat iterator")
 		let decrementNode = try BinaryOpNode(op: "-", lhs: varNode, rhs: NumberNode(value: 1.0))
@@ -147,7 +147,7 @@ public class DoStatementNode: LoopNode {
 		bytecode.append(contentsOf: v)
 		
 		let label = ctx.nextIndexLabel()
-		let instruction = BytecodeInstruction(label: label, type: .registerStore, arguments: [regName], comment: "do repeat iterator")
+		let instruction = BytecodeInstruction(label: label, type: .registerStore, arguments: [.index(regName)], comment: "do repeat iterator")
 		
 		bytecode.append(instruction)
 		

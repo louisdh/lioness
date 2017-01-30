@@ -63,10 +63,10 @@ public class FunctionNode: ASTNode {
 		
 	
 
-		let skipExitInstruction = BytecodeInstruction(label: skipExitInstrLabel, type: .skipPast, arguments: ["\(exitFunctionInstrLabel)"], comment: "skip exit instruction")
+		let skipExitInstruction = BytecodeInstruction(label: skipExitInstrLabel, type: .skipPast, arguments: [.index(exitFunctionInstrLabel)], comment: "skip exit instruction")
 		bytecode.append(skipExitInstruction)
 		
-		let invokeInstruction = BytecodeInstruction(label: cleanupFunctionCallInstrLabel, type: .invokeFunc, arguments: [exitId], comment: "cleanup_\(prototype.name)()")
+		let invokeInstruction = BytecodeInstruction(label: cleanupFunctionCallInstrLabel, type: .invokeFunc, arguments: [.index(exitId)], comment: "cleanup_\(prototype.name)()")
 		bytecode.append(invokeInstruction)
 		
 		let exitFunctionInstruction = BytecodeInstruction(label: exitFunctionInstrLabel, type: .exitFunc, comment: "exit function")
@@ -104,7 +104,7 @@ public class FunctionNode: ASTNode {
 			
 			let label = ctx.nextIndexLabel()
 			let (varReg, _) = ctx.getRegister(for: arg)
-			let instruction = BytecodeInstruction(label: label, type: .registerStore, arguments: [varReg], comment: "\(arg)")
+			let instruction = BytecodeInstruction(label: label, type: .registerStore, arguments: [.index(varReg)], comment: "\(arg)")
 			
 			bytecode.append(instruction)
 			
