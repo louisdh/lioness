@@ -823,6 +823,9 @@ public class BytecodeInterpreter {
 		
 	}
 	
+	/// Maps compiled regs to runtime reg names.
+	/// This allows for correct recursion, since multiple variables
+	/// with the same name might point to different registers.
 	private var regMap = [Int : [Int]]()
 	
 	// Also the max number of private keys for each reg
