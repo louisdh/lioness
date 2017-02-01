@@ -1,7 +1,36 @@
 # Scorpion (bytecode)
-Scorpion is a simple instruction language, with a very small instruction set.
+Scorpion is a simple instruction language, with a very small [instruction set](#instruction-set).
 
 Lioness is compiled to Scorpion, which can be executed using an interpreter. The interpreter included in this project does not perform any JIT compilation, making it safe to use in sandboxed environments, such as in iOS apps.
 
-## Op codes
-TBD
+## Instruction set
+| Mnemonic      | Opcode <br/>(UInt8) | Arguments | Stack <br/>[before] ➡️ [after] | Description                                                                           |
+|---------------|---------------------|-----------|-------------------------------|---------------------------------------------------------------------------------------|
+| push_const    | 0                   | value     | ➡️ value                       | push ```value``` onto the stack                                                       |
+| add           | 1                   |           | value1, value2 ➡️ result       | add two numbers                                                                       |
+| sub           | 2                   |           | value1, value2 ➡️ result       | subtract two numbers                                                                  |
+| mul           | 3                   |           | value1, value2 ➡️ result       | multiply two numbers                                                                  |
+| div           | 4                   |           | value1, value2 ➡️ result       | divide two numbers                                                                    |
+| pow           | 5                   |           | value1, value2 ➡️ result       | raise ```value1``` to power of ```value2```                                           |
+| and           | 6                   |           | value1, value2 ➡️ result       | AND two booleans                                                                      |
+| or            | 7                   |           | value1, value2 ➡️ result       | OR two booleans                                                                       |
+| not           | 8                   |           | value ➡️ result                | inverse boolean                                                                       |
+| eq            | 9                   |           | value1, value2 ➡️ result       | compare two values (equal), push result (boolean)                                     |
+| neq           | 10                  |           | value1, value2 ➡️ result       | compare two values (not equal), push result (boolean)                                 |
+| if_true       | 11                  | label     | value ➡️                       | pop boolean and if true: jump to ```label```                                          |
+| if_false      | 12                  | label     | value ➡️                       | pop boolean and if false: jump to ```label```                                         |
+| cmple         | 13                  |           | value1, value2 ➡️ result       | compare two values (less than or equal), push result (boolean)                        |
+| cmplt         | 14                  |           | value1, value2 ➡️ result       | compare two values (less than), push result (boolean)                                 |
+| goto          | 15                  | label     |                               | jump to label                                                                         |
+| reg_store     | 16                  | reg       | value ➡️                       | pop value and store in ```reg``` register                                             |
+| reg_update    | 17                  | reg       | value ➡️                       | pop value and update in ```reg``` register                                            |
+| reg_clear     | 18                  | reg       |                               | clear register ```reg```                                                              |
+| reg_load      | 19                  | reg       | ➡️ value                       | get value in ```reg``` register and push onto stack                                   |
+| invoke_func   | 20                  | id        |                               | invoke function #```id```                                                             |
+| exit_func     | 21                  |           |                               | exit current function                                                                 |
+| pop           | 22                  |           | value ➡️                       | pop value and discard                                                                 |
+| skip_past     | 23                  | label     |                               | skip program counter one past ```label```                                             |
+| struct_init   | 24                  |           | ➡️ struct                      | initialize empty struct and push onto stack                                           |
+| struct_set    | 25                  | member    | struct, value ➡️ struct        | pop struct, pop value, set value to ```member```, push updated struct                 |
+| struct_update | 26                  | key-path  | struct, value ➡️ struct        | pop struct, pop value, set value to the member at ```key-path```, push updated struct |
+| struct_get    | 27                  | member    | struct ➡️ value                | pop struct, get ```member``` value and push it onto the stack                         |
