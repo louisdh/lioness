@@ -8,10 +8,10 @@ Lioness is compiled to Scorpion, which can be executed using an interpreter. The
 |---------------|---------------------|-----------|-------------------------------|---------------------------------------------------------------------------------------|
 | push_const    | 0                   | value     | ➡️ value                       | push ```value``` onto the stack                                                       |
 | add           | 1                   |           | value1, value2 ➡️ result       | add two numbers                                                                       |
-| sub           | 2                   |           | value1, value2 ➡️ result       | subtract two numbers                                                                  |
+| sub           | 2                   |           | value1, value2 ➡️ result       | subtract two numbers (```value1``` - ```value2```)                                    |
 | mul           | 3                   |           | value1, value2 ➡️ result       | multiply two numbers                                                                  |
-| div           | 4                   |           | value1, value2 ➡️ result       | divide two numbers                                                                    |
-| pow           | 5                   |           | value1, value2 ➡️ result       | raise ```value1``` to power of ```value2```                                           |
+| div           | 4                   |           | value1, value2 ➡️ result       | divide two numbers (```value1``` / ```value2```)                                      |
+| pow           | 5                   |           | value1, value2 ➡️ result       | raise ```value2``` to power of ```value1```                                           |
 | and           | 6                   |           | value1, value2 ➡️ result       | AND two booleans                                                                      |
 | or            | 7                   |           | value1, value2 ➡️ result       | OR two booleans                                                                       |
 | not           | 8                   |           | value ➡️ result                | inverse boolean                                                                       |
