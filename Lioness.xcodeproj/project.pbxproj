@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		BE14125A1DB1774900DAA385 /* Lioness.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE2296281DB16EE800EA477A /* Lioness.framework */; };
 		BE1FD5F91DB1703C00B2A55B /* Lioness.h in Headers */ = {isa = PBXBuildFile; fileRef = BE1FD5F81DB1703C00B2A55B /* Lioness.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		BE22963F1DB16F2100EA477A /* BytecodeInterpreter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEFFCB8F1DAA77AE001EF8E4 /* BytecodeInterpreter.swift */; };
 		BE24AC1D1E43C1C4008892A2 /* InstructionArgumentType.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE24AC1C1E43C1C4008892A2 /* InstructionArgumentType.swift */; };
 		BE24AC1E1E43C1C4008892A2 /* InstructionArgumentType.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE24AC1C1E43C1C4008892A2 /* InstructionArgumentType.swift */; };
 		BE24AC201E43C2DD008892A2 /* BytecodeInstructionError.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE24AC1F1E43C2DD008892A2 /* BytecodeInstructionError.swift */; };
@@ -96,6 +95,8 @@
 		BE24AC991E43C62B008892A2 /* CompileError.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE24AC951E43C62B008892A2 /* CompileError.swift */; };
 		BE24AC9B1E43C65D008892A2 /* Parser.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE24AC9A1E43C65D008892A2 /* Parser.swift */; };
 		BE24AC9C1E43C65D008892A2 /* Parser.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE24AC9A1E43C65D008892A2 /* Parser.swift */; };
+		BE24AC9E1E43C687008892A2 /* BytecodeInterpreter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE24AC9D1E43C687008892A2 /* BytecodeInterpreter.swift */; };
+		BE24AC9F1E43C687008892A2 /* BytecodeInterpreter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE24AC9D1E43C687008892A2 /* BytecodeInterpreter.swift */; };
 		BE25BA241DDD1F0000041A20 /* ASTNode+Validation.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE25BA231DDD1F0000041A20 /* ASTNode+Validation.swift */; };
 		BE295CEB1DB14DCE0019EC57 /* Lexer+Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE295CEA1DB14DCE0019EC57 /* Lexer+Tests.swift */; };
 		BE2B29151E21A627007978BE /* FunctionGlobalVar.lion in Resources */ = {isa = PBXBuildFile; fileRef = BE2B29141E21A627007978BE /* FunctionGlobalVar.lion */; };
@@ -119,7 +120,6 @@
 		BE58C15C1E16D7EC00BC73CA /* Runner.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEAD9A7E1DB3A1A000A6DDC1 /* Runner.swift */; };
 		BE58C15D1E16D7EC00BC73CA /* Array+Safe.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE446C431DCD3BF20085EEE0 /* Array+Safe.swift */; };
 		BE58C15E1E16D7F100BC73CA /* InterpreterError.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3CCDC81E0330EE00977DCE /* InterpreterError.swift */; };
-		BE58C15F1E16D7F100BC73CA /* BytecodeInterpreter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEFFCB8F1DAA77AE001EF8E4 /* BytecodeInterpreter.swift */; };
 		BE58C16D1E16D80500BC73CA /* ASTNode+Validation.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE25BA231DDD1F0000041A20 /* ASTNode+Validation.swift */; };
 		BE58C1811E16D80A00BC73CA /* ParseError.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE37DFA41DBB8FBD003F6A3E /* ParseError.swift */; };
 		BE62A8721DE6108F00A75453 /* Complex.lion in Resources */ = {isa = PBXBuildFile; fileRef = BE62A8711DE6108F00A75453 /* Complex.lion */; };
@@ -189,6 +189,7 @@
 		BE24AC941E43C62B008892A2 /* BytecodeCompiler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BytecodeCompiler.swift; path = Compiler/BytecodeCompiler.swift; sourceTree = "<group>"; };
 		BE24AC951E43C62B008892A2 /* CompileError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CompileError.swift; path = Compiler/CompileError.swift; sourceTree = "<group>"; };
 		BE24AC9A1E43C65D008892A2 /* Parser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Parser.swift; path = Parser/Parser.swift; sourceTree = "<group>"; };
+		BE24AC9D1E43C687008892A2 /* BytecodeInterpreter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BytecodeInterpreter.swift; path = Interpreter/BytecodeInterpreter.swift; sourceTree = "<group>"; };
 		BE25BA231DDD1F0000041A20 /* ASTNode+Validation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = "ASTNode+Validation.swift"; path = "AST/ASTNode+Validation.swift"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		BE295CE81DB14DCE0019EC57 /* Lioness macOS Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Lioness macOS Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BE295CEA1DB14DCE0019EC57 /* Lexer+Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Lexer+Tests.swift"; sourceTree = "<group>"; };
@@ -224,7 +225,6 @@
 		BEAD9A7E1DB3A1A000A6DDC1 /* Runner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = Runner.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		BEBB9C421E2C1B7000DCBA4D /* Graphics.lion */ = {isa = PBXFileReference; explicitFileType = sourcecode.glsl; fileEncoding = 4; name = Graphics.lion; path = "Standard Library/Graphics.lion"; sourceTree = "<group>"; };
 		BEFD84121E21BB8500A6DB92 /* BinaryOp.lion */ = {isa = PBXFileReference; explicitFileType = sourcecode.glsl; fileEncoding = 4; path = BinaryOp.lion; sourceTree = "<group>"; };
-		BEFFCB8F1DAA77AE001EF8E4 /* BytecodeInterpreter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = BytecodeInterpreter.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -479,9 +479,9 @@
 		BE9369FA1DA807B400C0B3DF /* Interpreter */ = {
 			isa = PBXGroup;
 			children = (
+				BE24AC9D1E43C687008892A2 /* BytecodeInterpreter.swift */,
 				BE76416B1E317C44004562FE /* ValueType.swift */,
 				BE3CCDC81E0330EE00977DCE /* InterpreterError.swift */,
-				BEFFCB8F1DAA77AE001EF8E4 /* BytecodeInterpreter.swift */,
 				BE76416E1E32861A004562FE /* Stack.swift */,
 			);
 			name = Interpreter;
@@ -746,7 +746,6 @@
 				BE24AC531E43C4FD008892A2 /* ForStatementNode.swift in Sources */,
 				BE37DFA51DBB8FBD003F6A3E /* ParseError.swift in Sources */,
 				BE24AC721E43C50D008892A2 /* CallNode.swift in Sources */,
-				BE22963F1DB16F2100EA477A /* BytecodeInterpreter.swift in Sources */,
 				BE24AC401E43C498008892A2 /* ASTChildNode.swift in Sources */,
 				BEAD9A7F1DB3A1A000A6DDC1 /* Runner.swift in Sources */,
 				BE3CCDC91E0330EE00977DCE /* InterpreterError.swift in Sources */,
@@ -763,6 +762,7 @@
 				BE24AC2A1E43C2F0008892A2 /* BytecodeMainHeader.swift in Sources */,
 				BE24AC821E43C50D008892A2 /* StructNode.swift in Sources */,
 				BE24AC4D1E43C4FD008892A2 /* BreakLoopNode.swift in Sources */,
+				BE24AC9E1E43C687008892A2 /* BytecodeInterpreter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -798,7 +798,6 @@
 				BE24AC901E43C5B2008892A2 /* Token.swift in Sources */,
 				BE76416D1E317C44004562FE /* ValueType.swift in Sources */,
 				BE24AC581E43C4FD008892A2 /* RepeatWhileStatementNode.swift in Sources */,
-				BE58C15F1E16D7F100BC73CA /* BytecodeInterpreter.swift in Sources */,
 				BE24AC931E43C627008892A2 /* ScopeNode.swift in Sources */,
 				BE58C16D1E16D80500BC73CA /* ASTNode+Validation.swift in Sources */,
 				BE24AC5A1E43C4FD008892A2 /* WhileStatementNode.swift in Sources */,
@@ -836,6 +835,7 @@
 				BE24AC2B1E43C2F0008892A2 /* BytecodeMainHeader.swift in Sources */,
 				BE24AC831E43C50D008892A2 /* StructNode.swift in Sources */,
 				BE24AC4E1E43C4FD008892A2 /* BreakLoopNode.swift in Sources */,
+				BE24AC9F1E43C687008892A2 /* BytecodeInterpreter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
