@@ -27,6 +27,8 @@
 		BE22963D1DB16F2100EA477A /* BytecodeInstruction.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE04D6391DA99FC800DAEB84 /* BytecodeInstruction.swift */; };
 		BE22963E1DB16F2100EA477A /* BytecodeInstructionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE5653631DAAB86F006171B9 /* BytecodeInstructionType.swift */; };
 		BE22963F1DB16F2100EA477A /* BytecodeInterpreter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEFFCB8F1DAA77AE001EF8E4 /* BytecodeInterpreter.swift */; };
+		BE24AC1D1E43C1C4008892A2 /* InstructionArgumentType.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE24AC1C1E43C1C4008892A2 /* InstructionArgumentType.swift */; };
+		BE24AC1E1E43C1C4008892A2 /* InstructionArgumentType.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE24AC1C1E43C1C4008892A2 /* InstructionArgumentType.swift */; };
 		BE25BA1D1DD8F5F500041A20 /* ForStatementNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE25BA1C1DD8F5F500041A20 /* ForStatementNode.swift */; };
 		BE25BA1F1DD9228D00041A20 /* DoStatementNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE25BA1E1DD9228D00041A20 /* DoStatementNode.swift */; };
 		BE25BA221DDBC83700041A20 /* ScopeNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE25BA211DDBC83700041A20 /* ScopeNode.swift */; };
@@ -147,6 +149,7 @@
 		BE1FD5F81DB1703C00B2A55B /* Lioness.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Lioness.h; path = Lioness/Lioness.h; sourceTree = "<group>"; };
 		BE2296281DB16EE800EA477A /* Lioness.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Lioness.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BE22962B1DB16EE800EA477A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = Lioness/Info.plist; sourceTree = "<group>"; };
+		BE24AC1C1E43C1C4008892A2 /* InstructionArgumentType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = InstructionArgumentType.swift; path = Bytecode/Instruction/InstructionArgumentType.swift; sourceTree = "<group>"; };
 		BE25BA1C1DD8F5F500041A20 /* ForStatementNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ForStatementNode.swift; path = AST/ForStatementNode.swift; sourceTree = "<group>"; };
 		BE25BA1E1DD9228D00041A20 /* DoStatementNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = DoStatementNode.swift; path = AST/DoStatementNode.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		BE25BA211DDBC83700041A20 /* ScopeNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = ScopeNode.swift; path = Compiler/ScopeNode.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
@@ -517,6 +520,7 @@
 			isa = PBXGroup;
 			children = (
 				BE04D6391DA99FC800DAEB84 /* BytecodeInstruction.swift */,
+				BE24AC1C1E43C1C4008892A2 /* InstructionArgumentType.swift */,
 				BE5653631DAAB86F006171B9 /* BytecodeInstructionType.swift */,
 				BE446C411DCD3BD40085EEE0 /* BytecodeInstructionError.swift */,
 			);
@@ -718,6 +722,7 @@
 				BE25BA1D1DD8F5F500041A20 /* ForStatementNode.swift in Sources */,
 				BE2296311DB16F1B00EA477A /* Lexer.swift in Sources */,
 				BED616D61DFB622300A70820 /* LoopNode.swift in Sources */,
+				BE24AC1D1E43C1C4008892A2 /* InstructionArgumentType.swift in Sources */,
 				BE446C441DCD3BF20085EEE0 /* Array+Safe.swift in Sources */,
 				BE446C4B1DCD3C8F0085EEE0 /* ASTChildNode.swift in Sources */,
 				BE4AF0651DFE05E000ECE275 /* StdLib.swift in Sources */,
@@ -790,6 +795,7 @@
 				BE58C15F1E16D7F100BC73CA /* BytecodeInterpreter.swift in Sources */,
 				BE58C16D1E16D80500BC73CA /* ASTNode+Validation.swift in Sources */,
 				BE58C17A1E16D80500BC73CA /* WhileStatementNode.swift in Sources */,
+				BE24AC1E1E43C1C4008892A2 /* InstructionArgumentType.swift in Sources */,
 				BE58C1811E16D80A00BC73CA /* ParseError.swift in Sources */,
 				BE58C1601E16D7F900BC73CA /* CompileError.swift in Sources */,
 				BE58C16E1E16D80500BC73CA /* BodyNode.swift in Sources */,

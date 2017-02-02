@@ -8,25 +8,6 @@
 
 import Foundation
 
-// TODO: use in BytecodeInstruction
-public enum InstructionArgumentType {
-	
-	case value(Double)
-	case index(Int)
-	
-	var encoded: String {
-		
-		switch self {
-		case let .value(v):
-			return "v\(v)"
-		case let .index(i):
-			return "i\(i)"
-		}
-		
-	}
-	
-}
-
 /// Scorpion Bytecode Instruction
 public class BytecodeInstruction: BytecodeLine {
 	
