@@ -24,11 +24,29 @@
 		BE22963A1DB16F2100EA477A /* FunctionNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE56536F1DAAE822006171B9 /* FunctionNode.swift */; };
 		BE22963B1DB16F2100EA477A /* FunctionPrototypeNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE56536D1DAAE7D8006171B9 /* FunctionPrototypeNode.swift */; };
 		BE22963C1DB16F2100EA477A /* BytecodeCompiler.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE9369FB1DA83AB000C0B3DF /* BytecodeCompiler.swift */; };
-		BE22963D1DB16F2100EA477A /* BytecodeInstruction.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE04D6391DA99FC800DAEB84 /* BytecodeInstruction.swift */; };
-		BE22963E1DB16F2100EA477A /* BytecodeInstructionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE5653631DAAB86F006171B9 /* BytecodeInstructionType.swift */; };
 		BE22963F1DB16F2100EA477A /* BytecodeInterpreter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEFFCB8F1DAA77AE001EF8E4 /* BytecodeInterpreter.swift */; };
 		BE24AC1D1E43C1C4008892A2 /* InstructionArgumentType.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE24AC1C1E43C1C4008892A2 /* InstructionArgumentType.swift */; };
 		BE24AC1E1E43C1C4008892A2 /* InstructionArgumentType.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE24AC1C1E43C1C4008892A2 /* InstructionArgumentType.swift */; };
+		BE24AC201E43C2DD008892A2 /* BytecodeInstructionError.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE24AC1F1E43C2DD008892A2 /* BytecodeInstructionError.swift */; };
+		BE24AC211E43C2DD008892A2 /* BytecodeInstructionError.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE24AC1F1E43C2DD008892A2 /* BytecodeInstructionError.swift */; };
+		BE24AC261E43C2F0008892A2 /* BytecodeEnd.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE24AC221E43C2F0008892A2 /* BytecodeEnd.swift */; };
+		BE24AC271E43C2F0008892A2 /* BytecodeEnd.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE24AC221E43C2F0008892A2 /* BytecodeEnd.swift */; };
+		BE24AC281E43C2F0008892A2 /* BytecodeLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE24AC231E43C2F0008892A2 /* BytecodeLine.swift */; };
+		BE24AC291E43C2F0008892A2 /* BytecodeLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE24AC231E43C2F0008892A2 /* BytecodeLine.swift */; };
+		BE24AC2A1E43C2F0008892A2 /* BytecodeMainHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE24AC241E43C2F0008892A2 /* BytecodeMainHeader.swift */; };
+		BE24AC2B1E43C2F0008892A2 /* BytecodeMainHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE24AC241E43C2F0008892A2 /* BytecodeMainHeader.swift */; };
+		BE24AC2C1E43C2F0008892A2 /* BytecodeStructHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE24AC251E43C2F0008892A2 /* BytecodeStructHeader.swift */; };
+		BE24AC2D1E43C2F0008892A2 /* BytecodeStructHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE24AC251E43C2F0008892A2 /* BytecodeStructHeader.swift */; };
+		BE24AC311E43C374008892A2 /* BytecodeFunctionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE24AC2E1E43C374008892A2 /* BytecodeFunctionHeader.swift */; };
+		BE24AC321E43C374008892A2 /* BytecodeFunctionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE24AC2E1E43C374008892A2 /* BytecodeFunctionHeader.swift */; };
+		BE24AC331E43C374008892A2 /* BytecodePrivateEnd.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE24AC2F1E43C374008892A2 /* BytecodePrivateEnd.swift */; };
+		BE24AC341E43C374008892A2 /* BytecodePrivateEnd.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE24AC2F1E43C374008892A2 /* BytecodePrivateEnd.swift */; };
+		BE24AC351E43C374008892A2 /* BytecodePrivateFunctionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE24AC301E43C374008892A2 /* BytecodePrivateFunctionHeader.swift */; };
+		BE24AC361E43C374008892A2 /* BytecodePrivateFunctionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE24AC301E43C374008892A2 /* BytecodePrivateFunctionHeader.swift */; };
+		BE24AC391E43C3C1008892A2 /* BytecodeInstruction.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE24AC371E43C3C1008892A2 /* BytecodeInstruction.swift */; };
+		BE24AC3A1E43C3C1008892A2 /* BytecodeInstruction.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE24AC371E43C3C1008892A2 /* BytecodeInstruction.swift */; };
+		BE24AC3B1E43C3C1008892A2 /* BytecodeInstructionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE24AC381E43C3C1008892A2 /* BytecodeInstructionType.swift */; };
+		BE24AC3C1E43C3C1008892A2 /* BytecodeInstructionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE24AC381E43C3C1008892A2 /* BytecodeInstructionType.swift */; };
 		BE25BA1D1DD8F5F500041A20 /* ForStatementNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE25BA1C1DD8F5F500041A20 /* ForStatementNode.swift */; };
 		BE25BA1F1DD9228D00041A20 /* DoStatementNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE25BA1E1DD9228D00041A20 /* DoStatementNode.swift */; };
 		BE25BA221DDBC83700041A20 /* ScopeNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE25BA211DDBC83700041A20 /* ScopeNode.swift */; };
@@ -41,10 +59,6 @@
 		BE2CC6631DB94D3500F74DBE /* Runner+Performance.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE2CC6621DB94D3500F74DBE /* Runner+Performance.swift */; };
 		BE2CC6651DB94F7100F74DBE /* Lexer+Performance.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE2CC6641DB94F7100F74DBE /* Lexer+Performance.swift */; };
 		BE2CC6671DBA79AD00F74DBE /* WhileStatementNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE2CC6661DBA79AD00F74DBE /* WhileStatementNode.swift */; };
-		BE2ECC461E1C54CD00CCD588 /* BytecodePrivateEnd.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE2ECC451E1C54CD00CCD588 /* BytecodePrivateEnd.swift */; };
-		BE2ECC471E1C54CD00CCD588 /* BytecodePrivateEnd.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE2ECC451E1C54CD00CCD588 /* BytecodePrivateEnd.swift */; };
-		BE2ECC491E1C552300CCD588 /* BytecodePrivateFunctionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE2ECC481E1C552300CCD588 /* BytecodePrivateFunctionHeader.swift */; };
-		BE2ECC4A1E1C552300CCD588 /* BytecodePrivateFunctionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE2ECC481E1C552300CCD588 /* BytecodePrivateFunctionHeader.swift */; };
 		BE2ED01B1E202E1D00CCD588 /* Stdlib+Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE2ED01A1E202E1D00CCD588 /* Stdlib+Tests.swift */; };
 		BE2ED01E1E211C1D00CCD588 /* Fibonacci.lion in Resources */ = {isa = PBXBuildFile; fileRef = BE2ED01C1E211C1D00CCD588 /* Fibonacci.lion */; };
 		BE2ED01F1E211C1D00CCD588 /* GreatestCommonDivisor.lion in Resources */ = {isa = PBXBuildFile; fileRef = BE2ED01D1E211C1D00CCD588 /* GreatestCommonDivisor.lion */; };
@@ -53,13 +67,10 @@
 		BE37DFAD1DBBBAEA003F6A3E /* ContinueNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE37DFAC1DBBBAEA003F6A3E /* ContinueNode.swift */; };
 		BE37DFAF1DBBE2D3003F6A3E /* InnerWhileLoops.lion in Resources */ = {isa = PBXBuildFile; fileRef = BE37DFAE1DBBE2D3003F6A3E /* InnerWhileLoops.lion */; };
 		BE3CCDC91E0330EE00977DCE /* InterpreterError.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3CCDC81E0330EE00977DCE /* InterpreterError.swift */; };
-		BE446C421DCD3BD40085EEE0 /* BytecodeInstructionError.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE446C411DCD3BD40085EEE0 /* BytecodeInstructionError.swift */; };
 		BE446C441DCD3BF20085EEE0 /* Array+Safe.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE446C431DCD3BF20085EEE0 /* Array+Safe.swift */; };
 		BE446C461DCD3C5B0085EEE0 /* CompileError.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE446C451DCD3C5B0085EEE0 /* CompileError.swift */; };
 		BE446C491DCD3C7B0085EEE0 /* ASTNodeDescriptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE446C481DCD3C7B0085EEE0 /* ASTNodeDescriptor.swift */; };
 		BE446C4B1DCD3C8F0085EEE0 /* ASTChildNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE446C4A1DCD3C8F0085EEE0 /* ASTChildNode.swift */; };
-		BE4AF05D1DFD855F00ECE275 /* BytecodeFunctionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE4AF05B1DFD855F00ECE275 /* BytecodeFunctionHeader.swift */; };
-		BE4AF0601DFD88B900ECE275 /* BytecodeLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE4AF05F1DFD88B900ECE275 /* BytecodeLine.swift */; };
 		BE4AF0631DFE019F00ECE275 /* Geometry.lion in Resources */ = {isa = PBXBuildFile; fileRef = BE4AF0621DFE019F00ECE275 /* Geometry.lion */; };
 		BE4AF0651DFE05E000ECE275 /* StdLib.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE4AF0641DFE05E000ECE275 /* StdLib.swift */; };
 		BE58C1581E16D7BE00BC73CA /* Lioness.h in Headers */ = {isa = PBXBuildFile; fileRef = BE58C1561E16D7BE00BC73CA /* Lioness.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -71,13 +82,6 @@
 		BE58C15E1E16D7F100BC73CA /* InterpreterError.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3CCDC81E0330EE00977DCE /* InterpreterError.swift */; };
 		BE58C15F1E16D7F100BC73CA /* BytecodeInterpreter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEFFCB8F1DAA77AE001EF8E4 /* BytecodeInterpreter.swift */; };
 		BE58C1601E16D7F900BC73CA /* CompileError.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE446C451DCD3C5B0085EEE0 /* CompileError.swift */; };
-		BE58C1611E16D7F900BC73CA /* BytecodeLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE4AF05F1DFD88B900ECE275 /* BytecodeLine.swift */; };
-		BE58C1621E16D7F900BC73CA /* BytecodeFunctionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE4AF05B1DFD855F00ECE275 /* BytecodeFunctionHeader.swift */; };
-		BE58C1631E16D7F900BC73CA /* BytecodeMainHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEE50BAC1E05EC43006D8EE3 /* BytecodeMainHeader.swift */; };
-		BE58C1641E16D7F900BC73CA /* BytecodeEnd.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEE50BAE1E05EC5B006D8EE3 /* BytecodeEnd.swift */; };
-		BE58C1651E16D7F900BC73CA /* BytecodeInstruction.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE04D6391DA99FC800DAEB84 /* BytecodeInstruction.swift */; };
-		BE58C1661E16D7F900BC73CA /* BytecodeInstructionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE5653631DAAB86F006171B9 /* BytecodeInstructionType.swift */; };
-		BE58C1671E16D7F900BC73CA /* BytecodeInstructionError.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE446C411DCD3BD40085EEE0 /* BytecodeInstructionError.swift */; };
 		BE58C1681E16D7F900BC73CA /* ScopeNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE25BA211DDBC83700041A20 /* ScopeNode.swift */; };
 		BE58C1691E16D7F900BC73CA /* BytecodeCompiler.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE9369FB1DA83AB000C0B3DF /* BytecodeCompiler.swift */; };
 		BE58C16A1E16D80500BC73CA /* ASTNodeDescriptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE446C481DCD3C7B0085EEE0 /* ASTNodeDescriptor.swift */; };
@@ -127,22 +131,17 @@
 		BE8800611E25760B00EBEC54 /* StructPrototypeNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE8800601E25760B00EBEC54 /* StructPrototypeNode.swift */; };
 		BE8800621E25760B00EBEC54 /* StructPrototypeNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE8800601E25760B00EBEC54 /* StructPrototypeNode.swift */; };
 		BE8800661E25A97B00EBEC54 /* Modulus.lion in Resources */ = {isa = PBXBuildFile; fileRef = BE8800631E25A6F600EBEC54 /* Modulus.lion */; };
-		BE8804361E28267E00EBEC54 /* BytecodeStructHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE8804351E28267E00EBEC54 /* BytecodeStructHeader.swift */; };
-		BE8804371E28267E00EBEC54 /* BytecodeStructHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE8804351E28267E00EBEC54 /* BytecodeStructHeader.swift */; };
 		BEAD9A7F1DB3A1A000A6DDC1 /* Runner.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEAD9A7E1DB3A1A000A6DDC1 /* Runner.swift */; };
 		BEBB9C431E2C1B7000DCBA4D /* Graphics.lion in Resources */ = {isa = PBXBuildFile; fileRef = BEBB9C421E2C1B7000DCBA4D /* Graphics.lion */; };
 		BEBB9C441E2C1B7000DCBA4D /* Graphics.lion in Resources */ = {isa = PBXBuildFile; fileRef = BEBB9C421E2C1B7000DCBA4D /* Graphics.lion */; };
 		BED616D41DFA03CF00A70820 /* BreakLoopNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = BED616D31DFA03CF00A70820 /* BreakLoopNode.swift */; };
 		BED616D61DFB622300A70820 /* LoopNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = BED616D51DFB622300A70820 /* LoopNode.swift */; };
 		BEE50BAB1E05D869006D8EE3 /* ReturnNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEE50BAA1E05D869006D8EE3 /* ReturnNode.swift */; };
-		BEE50BAD1E05EC43006D8EE3 /* BytecodeMainHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEE50BAC1E05EC43006D8EE3 /* BytecodeMainHeader.swift */; };
-		BEE50BAF1E05EC5B006D8EE3 /* BytecodeEnd.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEE50BAE1E05EC5B006D8EE3 /* BytecodeEnd.swift */; };
 		BEEB63711DC14E570019BC50 /* BodyNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEEB63701DC14E570019BC50 /* BodyNode.swift */; };
 		BEFD84131E21BB8500A6DB92 /* BinaryOp.lion in Resources */ = {isa = PBXBuildFile; fileRef = BEFD84121E21BB8500A6DB92 /* BinaryOp.lion */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		BE04D6391DA99FC800DAEB84 /* BytecodeInstruction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = BytecodeInstruction.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		BE1412571DB1755E00DAA385 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		BE1412AC1DB27F6F00DAA385 /* BooleanNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = BooleanNode.swift; path = AST/BooleanNode.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		BE193A891DF47910002DCC77 /* RepeatWhileStatementNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = RepeatWhileStatementNode.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
@@ -150,6 +149,16 @@
 		BE2296281DB16EE800EA477A /* Lioness.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Lioness.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BE22962B1DB16EE800EA477A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = Lioness/Info.plist; sourceTree = "<group>"; };
 		BE24AC1C1E43C1C4008892A2 /* InstructionArgumentType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = InstructionArgumentType.swift; path = Bytecode/Instruction/InstructionArgumentType.swift; sourceTree = "<group>"; };
+		BE24AC1F1E43C2DD008892A2 /* BytecodeInstructionError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BytecodeInstructionError.swift; path = Bytecode/Instruction/BytecodeInstructionError.swift; sourceTree = "<group>"; };
+		BE24AC221E43C2F0008892A2 /* BytecodeEnd.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BytecodeEnd.swift; path = Bytecode/BytecodeEnd.swift; sourceTree = "<group>"; };
+		BE24AC231E43C2F0008892A2 /* BytecodeLine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BytecodeLine.swift; path = Bytecode/BytecodeLine.swift; sourceTree = "<group>"; };
+		BE24AC241E43C2F0008892A2 /* BytecodeMainHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BytecodeMainHeader.swift; path = Bytecode/BytecodeMainHeader.swift; sourceTree = "<group>"; };
+		BE24AC251E43C2F0008892A2 /* BytecodeStructHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BytecodeStructHeader.swift; path = Bytecode/BytecodeStructHeader.swift; sourceTree = "<group>"; };
+		BE24AC2E1E43C374008892A2 /* BytecodeFunctionHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BytecodeFunctionHeader.swift; path = Bytecode/BytecodeFunctionHeader.swift; sourceTree = "<group>"; };
+		BE24AC2F1E43C374008892A2 /* BytecodePrivateEnd.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BytecodePrivateEnd.swift; path = Bytecode/BytecodePrivateEnd.swift; sourceTree = "<group>"; };
+		BE24AC301E43C374008892A2 /* BytecodePrivateFunctionHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BytecodePrivateFunctionHeader.swift; path = Bytecode/BytecodePrivateFunctionHeader.swift; sourceTree = "<group>"; };
+		BE24AC371E43C3C1008892A2 /* BytecodeInstruction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BytecodeInstruction.swift; path = Bytecode/Instruction/BytecodeInstruction.swift; sourceTree = "<group>"; };
+		BE24AC381E43C3C1008892A2 /* BytecodeInstructionType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BytecodeInstructionType.swift; path = Bytecode/Instruction/BytecodeInstructionType.swift; sourceTree = "<group>"; };
 		BE25BA1C1DD8F5F500041A20 /* ForStatementNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ForStatementNode.swift; path = AST/ForStatementNode.swift; sourceTree = "<group>"; };
 		BE25BA1E1DD9228D00041A20 /* DoStatementNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = DoStatementNode.swift; path = AST/DoStatementNode.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		BE25BA211DDBC83700041A20 /* ScopeNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = ScopeNode.swift; path = Compiler/ScopeNode.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
@@ -165,8 +174,6 @@
 		BE2CC6621DB94D3500F74DBE /* Runner+Performance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = "Runner+Performance.swift"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		BE2CC6641DB94F7100F74DBE /* Lexer+Performance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = "Lexer+Performance.swift"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		BE2CC6661DBA79AD00F74DBE /* WhileStatementNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = WhileStatementNode.swift; path = AST/WhileStatementNode.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
-		BE2ECC451E1C54CD00CCD588 /* BytecodePrivateEnd.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BytecodePrivateEnd.swift; path = Interpreter/BytecodePrivateEnd.swift; sourceTree = "<group>"; };
-		BE2ECC481E1C552300CCD588 /* BytecodePrivateFunctionHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BytecodePrivateFunctionHeader.swift; path = Interpreter/BytecodePrivateFunctionHeader.swift; sourceTree = "<group>"; };
 		BE2ED01A1E202E1D00CCD588 /* Stdlib+Tests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Stdlib+Tests.swift"; path = "Stdlib/Stdlib+Tests.swift"; sourceTree = "<group>"; };
 		BE2ED01C1E211C1D00CCD588 /* Fibonacci.lion */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Fibonacci.lion; sourceTree = "<group>"; };
 		BE2ED01D1E211C1D00CCD588 /* GreatestCommonDivisor.lion */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = GreatestCommonDivisor.lion; sourceTree = "<group>"; };
@@ -179,16 +186,12 @@
 		BE3FEBA51DA427800000648D /* ASTNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = ASTNode.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		BE3FEBA61DA427800000648D /* Parser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = Parser.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		BE3FEBA71DA427800000648D /* String+RegEx.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = "String+RegEx.swift"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
-		BE446C411DCD3BD40085EEE0 /* BytecodeInstructionError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = BytecodeInstructionError.swift; path = Compiler/BytecodeInstructionError.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		BE446C431DCD3BF20085EEE0 /* Array+Safe.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = "Array+Safe.swift"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		BE446C451DCD3C5B0085EEE0 /* CompileError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompileError.swift; sourceTree = "<group>"; };
 		BE446C481DCD3C7B0085EEE0 /* ASTNodeDescriptor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = ASTNodeDescriptor.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		BE446C4A1DCD3C8F0085EEE0 /* ASTChildNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = ASTChildNode.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
-		BE4AF05B1DFD855F00ECE275 /* BytecodeFunctionHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = BytecodeFunctionHeader.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
-		BE4AF05F1DFD88B900ECE275 /* BytecodeLine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BytecodeLine.swift; path = Compiler/BytecodeLine.swift; sourceTree = "<group>"; };
 		BE4AF0621DFE019F00ECE275 /* Geometry.lion */ = {isa = PBXFileReference; explicitFileType = sourcecode.glsl; fileEncoding = 4; name = Geometry.lion; path = "Standard Library/Geometry.lion"; sourceTree = "<group>"; };
 		BE4AF0641DFE05E000ECE275 /* StdLib.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = StdLib.swift; path = "Standard Library/StdLib.swift"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
-		BE5653631DAAB86F006171B9 /* BytecodeInstructionType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BytecodeInstructionType.swift; sourceTree = "<group>"; };
 		BE5653651DAAE7AD006171B9 /* NumberNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = NumberNode.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		BE5653671DAAE7BD006171B9 /* VariableNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = VariableNode.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		BE5653691DAAE7C6006171B9 /* BinaryOpNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = BinaryOpNode.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
@@ -212,15 +215,12 @@
 		BE88005D1E244BF400EBEC54 /* StructMemberNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StructMemberNode.swift; path = AST/StructMemberNode.swift; sourceTree = "<group>"; };
 		BE8800601E25760B00EBEC54 /* StructPrototypeNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StructPrototypeNode.swift; path = AST/StructPrototypeNode.swift; sourceTree = "<group>"; };
 		BE8800631E25A6F600EBEC54 /* Modulus.lion */ = {isa = PBXFileReference; explicitFileType = sourcecode.glsl; fileEncoding = 4; path = Modulus.lion; sourceTree = "<group>"; };
-		BE8804351E28267E00EBEC54 /* BytecodeStructHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BytecodeStructHeader.swift; path = Compiler/BytecodeStructHeader.swift; sourceTree = "<group>"; };
 		BE9369FB1DA83AB000C0B3DF /* BytecodeCompiler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = BytecodeCompiler.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		BEAD9A7E1DB3A1A000A6DDC1 /* Runner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = Runner.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		BEBB9C421E2C1B7000DCBA4D /* Graphics.lion */ = {isa = PBXFileReference; explicitFileType = sourcecode.glsl; fileEncoding = 4; name = Graphics.lion; path = "Standard Library/Graphics.lion"; sourceTree = "<group>"; };
 		BED616D31DFA03CF00A70820 /* BreakLoopNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = BreakLoopNode.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		BED616D51DFB622300A70820 /* LoopNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = LoopNode.swift; path = AST/LoopNode.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		BEE50BAA1E05D869006D8EE3 /* ReturnNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = ReturnNode.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
-		BEE50BAC1E05EC43006D8EE3 /* BytecodeMainHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BytecodeMainHeader.swift; path = Compiler/BytecodeMainHeader.swift; sourceTree = "<group>"; };
-		BEE50BAE1E05EC5B006D8EE3 /* BytecodeEnd.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = BytecodeEnd.swift; path = Compiler/BytecodeEnd.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		BEEB63701DC14E570019BC50 /* BodyNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = BodyNode.swift; path = AST/BodyNode.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		BEF5BA401DAC15B100D9ADB7 /* AssignmentNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = AssignmentNode.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		BEFD84121E21BB8500A6DB92 /* BinaryOp.lion */ = {isa = PBXFileReference; explicitFileType = sourcecode.glsl; fileEncoding = 4; path = BinaryOp.lion; sourceTree = "<group>"; };
@@ -490,13 +490,13 @@
 		BEBB9C411E2AA4E800DCBA4D /* Bytecode */ = {
 			isa = PBXGroup;
 			children = (
-				BE4AF05F1DFD88B900ECE275 /* BytecodeLine.swift */,
-				BE8804351E28267E00EBEC54 /* BytecodeStructHeader.swift */,
-				BE4AF05B1DFD855F00ECE275 /* BytecodeFunctionHeader.swift */,
-				BEE50BAC1E05EC43006D8EE3 /* BytecodeMainHeader.swift */,
-				BEE50BAE1E05EC5B006D8EE3 /* BytecodeEnd.swift */,
-				BE2ECC451E1C54CD00CCD588 /* BytecodePrivateEnd.swift */,
-				BE2ECC481E1C552300CCD588 /* BytecodePrivateFunctionHeader.swift */,
+				BE24AC221E43C2F0008892A2 /* BytecodeEnd.swift */,
+				BE24AC231E43C2F0008892A2 /* BytecodeLine.swift */,
+				BE24AC241E43C2F0008892A2 /* BytecodeMainHeader.swift */,
+				BE24AC251E43C2F0008892A2 /* BytecodeStructHeader.swift */,
+				BE24AC2E1E43C374008892A2 /* BytecodeFunctionHeader.swift */,
+				BE24AC2F1E43C374008892A2 /* BytecodePrivateEnd.swift */,
+				BE24AC301E43C374008892A2 /* BytecodePrivateFunctionHeader.swift */,
 				BED616D81DFD7EA000A70820 /* Instruction */,
 			);
 			name = Bytecode;
@@ -519,10 +519,10 @@
 		BED616D81DFD7EA000A70820 /* Instruction */ = {
 			isa = PBXGroup;
 			children = (
-				BE04D6391DA99FC800DAEB84 /* BytecodeInstruction.swift */,
+				BE24AC371E43C3C1008892A2 /* BytecodeInstruction.swift */,
+				BE24AC381E43C3C1008892A2 /* BytecodeInstructionType.swift */,
 				BE24AC1C1E43C1C4008892A2 /* InstructionArgumentType.swift */,
-				BE5653631DAAB86F006171B9 /* BytecodeInstructionType.swift */,
-				BE446C411DCD3BD40085EEE0 /* BytecodeInstructionError.swift */,
+				BE24AC1F1E43C2DD008892A2 /* BytecodeInstructionError.swift */,
 			);
 			name = Instruction;
 			sourceTree = "<group>";
@@ -711,11 +711,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BE24AC281E43C2F0008892A2 /* BytecodeLine.swift in Sources */,
 				BE2296331DB16F1B00EA477A /* Parser.swift in Sources */,
 				BE22963A1DB16F2100EA477A /* FunctionNode.swift in Sources */,
 				BE22963B1DB16F2100EA477A /* FunctionPrototypeNode.swift in Sources */,
-				BEE50BAD1E05EC43006D8EE3 /* BytecodeMainHeader.swift in Sources */,
-				BE2ECC461E1C54CD00CCD588 /* BytecodePrivateEnd.swift in Sources */,
+				BE24AC201E43C2DD008892A2 /* BytecodeInstructionError.swift in Sources */,
+				BE24AC331E43C374008892A2 /* BytecodePrivateEnd.swift in Sources */,
 				BE8800611E25760B00EBEC54 /* StructPrototypeNode.swift in Sources */,
 				BE25BA241DDD1F0000041A20 /* ASTNode+Validation.swift in Sources */,
 				BE76416C1E317C44004562FE /* ValueType.swift in Sources */,
@@ -725,16 +726,17 @@
 				BE24AC1D1E43C1C4008892A2 /* InstructionArgumentType.swift in Sources */,
 				BE446C441DCD3BF20085EEE0 /* Array+Safe.swift in Sources */,
 				BE446C4B1DCD3C8F0085EEE0 /* ASTChildNode.swift in Sources */,
+				BE24AC261E43C2F0008892A2 /* BytecodeEnd.swift in Sources */,
 				BE4AF0651DFE05E000ECE275 /* StdLib.swift in Sources */,
-				BE8804361E28267E00EBEC54 /* BytecodeStructHeader.swift in Sources */,
 				BE1412AD1DB27F6F00DAA385 /* BooleanNode.swift in Sources */,
 				BE2296361DB16F2100EA477A /* VariableNode.swift in Sources */,
+				BE24AC351E43C374008892A2 /* BytecodePrivateFunctionHeader.swift in Sources */,
 				BE2296321DB16F1B00EA477A /* String+RegEx.swift in Sources */,
-				BEE50BAF1E05EC5B006D8EE3 /* BytecodeEnd.swift in Sources */,
 				BED616D41DFA03CF00A70820 /* BreakLoopNode.swift in Sources */,
 				BE25BA221DDBC83700041A20 /* ScopeNode.swift in Sources */,
 				BE25BA261DDD2B7A00041A20 /* InternalVariableNode.swift in Sources */,
 				BE446C461DCD3C5B0085EEE0 /* CompileError.swift in Sources */,
+				BE24AC391E43C3C1008892A2 /* BytecodeInstruction.swift in Sources */,
 				BE22963C1DB16F2100EA477A /* BytecodeCompiler.swift in Sources */,
 				BE37DFA51DBB8FBD003F6A3E /* ParseError.swift in Sources */,
 				BE2CC65F1DB41E4400F74DBE /* ConditionalStatementNode.swift in Sources */,
@@ -743,25 +745,23 @@
 				BE37DFAD1DBBBAEA003F6A3E /* ContinueNode.swift in Sources */,
 				BE25BA1F1DD9228D00041A20 /* DoStatementNode.swift in Sources */,
 				BEE50BAB1E05D869006D8EE3 /* ReturnNode.swift in Sources */,
-				BE4AF0601DFD88B900ECE275 /* BytecodeLine.swift in Sources */,
 				BEAD9A7F1DB3A1A000A6DDC1 /* Runner.swift in Sources */,
-				BE446C421DCD3BD40085EEE0 /* BytecodeInstructionError.swift in Sources */,
 				BEEB63711DC14E570019BC50 /* BodyNode.swift in Sources */,
 				BE2296301DB16F1B00EA477A /* Token.swift in Sources */,
 				BE3CCDC91E0330EE00977DCE /* InterpreterError.swift in Sources */,
 				BE76416F1E32861A004562FE /* Stack.swift in Sources */,
-				BE4AF05D1DFD855F00ECE275 /* BytecodeFunctionHeader.swift in Sources */,
+				BE24AC3B1E43C3C1008892A2 /* BytecodeInstructionType.swift in Sources */,
 				BE2296351DB16F2100EA477A /* NumberNode.swift in Sources */,
 				BE193A8A1DF47910002DCC77 /* RepeatWhileStatementNode.swift in Sources */,
 				BE2296371DB16F2100EA477A /* AssignmentNode.swift in Sources */,
+				BE24AC311E43C374008892A2 /* BytecodeFunctionHeader.swift in Sources */,
 				BE2296391DB16F2100EA477A /* CallNode.swift in Sources */,
 				BE88005B1E244BDC00EBEC54 /* StructNode.swift in Sources */,
-				BE22963D1DB16F2100EA477A /* BytecodeInstruction.swift in Sources */,
 				BE2296381DB16F2100EA477A /* BinaryOpNode.swift in Sources */,
 				BE2296341DB16F2100EA477A /* ASTNode.swift in Sources */,
+				BE24AC2C1E43C2F0008892A2 /* BytecodeStructHeader.swift in Sources */,
 				BE2CC6671DBA79AD00F74DBE /* WhileStatementNode.swift in Sources */,
-				BE22963E1DB16F2100EA477A /* BytecodeInstructionType.swift in Sources */,
-				BE2ECC491E1C552300CCD588 /* BytecodePrivateFunctionHeader.swift in Sources */,
+				BE24AC2A1E43C2F0008892A2 /* BytecodeMainHeader.swift in Sources */,
 				BE446C491DCD3C7B0085EEE0 /* ASTNodeDescriptor.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -784,11 +784,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BE24AC291E43C2F0008892A2 /* BytecodeLine.swift in Sources */,
 				BE58C1701E16D80500BC73CA /* NumberNode.swift in Sources */,
 				BE58C1681E16D7F900BC73CA /* ScopeNode.swift in Sources */,
 				BE58C1711E16D80500BC73CA /* VariableNode.swift in Sources */,
 				BE58C15D1E16D7EC00BC73CA /* Array+Safe.swift in Sources */,
-				BE2ECC471E1C54CD00CCD588 /* BytecodePrivateEnd.swift in Sources */,
+				BE24AC341E43C374008892A2 /* BytecodePrivateEnd.swift in Sources */,
+				BE24AC211E43C2DD008892A2 /* BytecodeInstructionError.swift in Sources */,
 				BE8800621E25760B00EBEC54 /* StructPrototypeNode.swift in Sources */,
 				BE58C1771E16D80500BC73CA /* ReturnNode.swift in Sources */,
 				BE76416D1E317C44004562FE /* ValueType.swift in Sources */,
@@ -797,44 +799,42 @@
 				BE58C17A1E16D80500BC73CA /* WhileStatementNode.swift in Sources */,
 				BE24AC1E1E43C1C4008892A2 /* InstructionArgumentType.swift in Sources */,
 				BE58C1811E16D80A00BC73CA /* ParseError.swift in Sources */,
+				BE24AC271E43C2F0008892A2 /* BytecodeEnd.swift in Sources */,
 				BE58C1601E16D7F900BC73CA /* CompileError.swift in Sources */,
 				BE58C16E1E16D80500BC73CA /* BodyNode.swift in Sources */,
-				BE8804371E28267E00EBEC54 /* BytecodeStructHeader.swift in Sources */,
 				BE58C15B1E16D7E900BC73CA /* StdLib.swift in Sources */,
+				BE24AC361E43C374008892A2 /* BytecodePrivateFunctionHeader.swift in Sources */,
 				BE58C1821E16D80A00BC73CA /* Parser.swift in Sources */,
 				BE58C1761E16D80500BC73CA /* FunctionNode.swift in Sources */,
 				BE58C17E1E16D80500BC73CA /* ContinueNode.swift in Sources */,
 				BE58C16F1E16D80500BC73CA /* BooleanNode.swift in Sources */,
 				BE58C1791E16D80500BC73CA /* LoopNode.swift in Sources */,
+				BE24AC3A1E43C3C1008892A2 /* BytecodeInstruction.swift in Sources */,
 				BE58C16C1E16D80500BC73CA /* ASTChildNode.swift in Sources */,
 				BE58C1741E16D80500BC73CA /* CallNode.swift in Sources */,
-				BE58C1671E16D7F900BC73CA /* BytecodeInstructionError.swift in Sources */,
 				BE58C1801E16D80500BC73CA /* InternalVariableNode.swift in Sources */,
 				BE58C1831E16D80D00BC73CA /* Token.swift in Sources */,
 				BE88005F1E244BF400EBEC54 /* StructMemberNode.swift in Sources */,
 				BE58C1841E16D80D00BC73CA /* Lexer.swift in Sources */,
-				BE58C1641E16D7F900BC73CA /* BytecodeEnd.swift in Sources */,
 				BE58C17F1E16D80500BC73CA /* BreakLoopNode.swift in Sources */,
-				BE58C1611E16D7F900BC73CA /* BytecodeLine.swift in Sources */,
 				BE58C1851E16D80D00BC73CA /* String+RegEx.swift in Sources */,
 				BE58C1721E16D80500BC73CA /* AssignmentNode.swift in Sources */,
 				BE58C16B1E16D80500BC73CA /* ASTNode.swift in Sources */,
-				BE58C1651E16D7F900BC73CA /* BytecodeInstruction.swift in Sources */,
-				BE58C1621E16D7F900BC73CA /* BytecodeFunctionHeader.swift in Sources */,
 				BE58C1731E16D80500BC73CA /* BinaryOpNode.swift in Sources */,
 				BE7641701E32861A004562FE /* Stack.swift in Sources */,
 				BE58C17B1E16D80500BC73CA /* RepeatWhileStatementNode.swift in Sources */,
+				BE24AC3C1E43C3C1008892A2 /* BytecodeInstructionType.swift in Sources */,
 				BE58C15C1E16D7EC00BC73CA /* Runner.swift in Sources */,
 				BE58C17D1E16D80500BC73CA /* DoStatementNode.swift in Sources */,
+				BE24AC321E43C374008892A2 /* BytecodeFunctionHeader.swift in Sources */,
 				BE58C1691E16D7F900BC73CA /* BytecodeCompiler.swift in Sources */,
 				BE58C17C1E16D80500BC73CA /* ForStatementNode.swift in Sources */,
 				BE88005C1E244BDC00EBEC54 /* StructNode.swift in Sources */,
 				BE58C15E1E16D7F100BC73CA /* InterpreterError.swift in Sources */,
 				BE58C1751E16D80500BC73CA /* FunctionPrototypeNode.swift in Sources */,
-				BE58C1631E16D7F900BC73CA /* BytecodeMainHeader.swift in Sources */,
-				BE58C1661E16D7F900BC73CA /* BytecodeInstructionType.swift in Sources */,
+				BE24AC2D1E43C2F0008892A2 /* BytecodeStructHeader.swift in Sources */,
+				BE24AC2B1E43C2F0008892A2 /* BytecodeMainHeader.swift in Sources */,
 				BE58C1781E16D80500BC73CA /* ConditionalStatementNode.swift in Sources */,
-				BE2ECC4A1E1C552300CCD588 /* BytecodePrivateFunctionHeader.swift in Sources */,
 				BE58C16A1E16D80500BC73CA /* ASTNodeDescriptor.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
