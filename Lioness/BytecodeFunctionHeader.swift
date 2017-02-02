@@ -11,9 +11,9 @@ import Foundation
 public class BytecodeFunctionHeader: BytecodeLine {
 
 	let id: Int
-	let name: String?
-	
-	let arguments: [String]
+
+	private let name: String?
+	private let arguments: [String]
 
 	init(id: Int, name: String? = nil, arguments: [String] = []) {
 		self.id = id

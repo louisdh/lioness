@@ -11,7 +11,8 @@ import Foundation
 public class BytecodePrivateFunctionHeader: BytecodeLine {
 	
 	let id: Int
-	let name: String?
+	
+	private let name: String?
 	
 	init(id: Int, name: String? = nil) {
 		self.id = id

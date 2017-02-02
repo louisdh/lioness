@@ -12,9 +12,9 @@ import Foundation
 public class BytecodeStructHeader: BytecodeLine {
 	
 	let id: Int
-	let name: String?
 	
-	let members: [String]
+	private let name: String?
+	private let members: [String]
 	
 	init(id: Int, name: String? = nil, members: [String]) {
 		self.id = id
