@@ -296,7 +296,7 @@ public class BytecodeInterpreter {
 	// MARK: - Execution
 
 	private func executePushConst(_ instruction: BytecodeInstruction, pc: Int) throws -> Int {
-		// TODO: add enum support
+
 		guard let arg = instruction.arguments.first, case let .value(f) = arg else {
 			throw error(.unexpectedArgument)
 		}
