@@ -18,17 +18,14 @@ public class BytecodeInterpreter {
 	/// Stack
 	private(set) public var stack: Stack<ValueType>
 	
-	// TODO: rename "function" to "virtual"? (also used for structs)
+	/// Virtual map with id as key and program counter as value
+	private var virtualMap = [Int : Int]()
 
-	// TODO: use int as key?
-	/// Function map with id as key and program counter as value
-	private var functionMap = [Int : Int]()
+	private var virtualEndMap = [Int : Int]()
 
-	private var functionEndMap = [Int : Int]()
-
-	private var functionInvokeStack: Stack<Int>
+	private var virtualInvokeStack: Stack<Int>
 	
-	private var functionDepth = 0
+	private var virtualDepth = 0
 
 	/// Registers
 	private(set) public var registers = [Int : ValueType]()
@@ -45,7 +42,7 @@ public class BytecodeInterpreter {
 		
 		stack = Stack<ValueType>(withLimit: stackLimit)
 		registers = [Int : ValueType]()
-		functionInvokeStack = Stack<Int>(withLimit: stackLimit)
+		virtualInvokeStack = Stack<Int>(withLimit: stackLimit)
 		
 		try createFunctionMap()
 	}
@@ -59,7 +56,7 @@ public class BytecodeInterpreter {
 		
 		stack = Stack<ValueType>(withLimit: stackLimit)
 		registers = [Int : ValueType]()
-		functionInvokeStack = Stack<Int>(withLimit: stackLimit)
+		virtualInvokeStack = Stack<Int>(withLimit: stackLimit)
 
 		var bytecode = BytecodeBody()
 		
@@ -92,7 +89,7 @@ public class BytecodeInterpreter {
 			if let virtualLine = line as? BytecodeVirtualHeader {
 				// + 1 for first line in virtual
 				// header should never be jumped to
-				functionMap[virtualLine.id] = pc + 1
+				virtualMap[virtualLine.id] = pc + 1
 
 				funcStack.append(virtualLine.id)
 			}
@@ -100,7 +97,7 @@ public class BytecodeInterpreter {
 			if let funcLine = line as? BytecodePrivateFunctionHeader {
 				// + 1 for first line in function
 				// header should never be jumped to
-				functionMap[funcLine.id] = pc + 1
+				virtualMap[funcLine.id] = pc + 1
 				
 				funcStack.append(funcLine.id)
 			}
@@ -111,7 +108,7 @@ public class BytecodeInterpreter {
 					throw error(.unexpectedArgument)
 				}
 				
-				functionEndMap[currentFunc] = pc
+				virtualEndMap[currentFunc] = pc
 				
 			}
 			
@@ -150,11 +147,11 @@ public class BytecodeInterpreter {
 		} else if line is BytecodeEnd {
 			
 			// In theory should never be called?
-			return try functionInvokeStack.pop()
+			return try virtualInvokeStack.pop()
 			
 		} else if let virtualHeader = line as? BytecodeVirtualHeader {
 			
-			guard let virtualEndPc = functionEndMap[virtualHeader.id] else {
+			guard let virtualEndPc = virtualEndMap[virtualHeader.id] else {
 				throw error(.unexpectedArgument)
 			}
 			
@@ -162,11 +159,11 @@ public class BytecodeInterpreter {
 			
 		} else if line is BytecodePrivateEnd {
 			
-			return try functionInvokeStack.pop()
+			return try virtualInvokeStack.pop()
 			
 		} else if let functionHeader = line as? BytecodePrivateFunctionHeader {
 			
-			guard let funcEndPc = functionEndMap[functionHeader.id] else {
+			guard let funcEndPc = virtualEndMap[functionHeader.id] else {
 				throw error(.unexpectedArgument)
 			}
 			
@@ -561,16 +558,15 @@ public class BytecodeInterpreter {
 			throw error(.unexpectedArgument)
 		}
 		
-		guard let idPc = functionMap[i] else {
+		guard let idPc = virtualMap[i] else {
 			throw error(.unexpectedArgument)
 		}
 		
-		// return to next pc after function returns
-		try functionInvokeStack.push(pc + 1)
+		// return to next pc after virtual returns
+		try virtualInvokeStack.push(pc + 1)
 		
-		// TODO: if not private function {
 		if bytecode[idPc - 1] is BytecodeVirtualHeader {
-			functionDepth += 1
+			virtualDepth += 1
 		}
 
 		return idPc
@@ -578,11 +574,11 @@ public class BytecodeInterpreter {
 	
 	private func executeExitFunction(_ instruction: BytecodeInstruction, pc: Int) throws -> Int {
 		
-		guard let exitFunctionLabel = try? functionInvokeStack.pop() else {
+		guard let exitFunctionLabel = try? virtualInvokeStack.pop() else {
 			throw error(.unexpectedArgument)
 		}
 		
-		functionDepth -= 1
+		virtualDepth -= 1
 		
 		return exitFunctionLabel
 	}
@@ -784,13 +780,13 @@ public class BytecodeInterpreter {
 	
 	private func setRegValue(_ value: ValueType, for reg: Int) {
 		
-		let privateKey = functionDepth * regPrivateKeyPrefixSize + reg
+		let privateKey = virtualDepth * regPrivateKeyPrefixSize + reg
 		
 		// FIXME: make faster?
 		if regMap[reg] != nil {
-			regMap[reg]?.append(functionDepth)
+			regMap[reg]?.append(virtualDepth)
 		} else {
-			regMap[reg] = [functionDepth]
+			regMap[reg] = [virtualDepth]
 		}
 		
 		registers[privateKey] = value
@@ -871,9 +867,9 @@ public class BytecodeInterpreter {
 		
 		if foundLabel == nil {
 			
-			if let exitFunctionLabel = try? functionInvokeStack.pop() {
+			if let exitFunctionLabel = try? virtualInvokeStack.pop() {
 				
-				functionDepth -= 1
+				virtualDepth -= 1
 				
 				return exitFunctionLabel
 			}
