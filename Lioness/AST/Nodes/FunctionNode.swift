@@ -30,7 +30,7 @@ public class FunctionNode: ASTNode {
 		let functionId = ctx.getFunctionId(for: self)
 		let exitId = try ctx.getExitScopeFunctionId(for: self)
 
-		let headerInstruction = BytecodeFunctionHeader(id: functionId, name: prototype.name, arguments: prototype.argumentNames)
+		let headerInstruction = BytecodeVirtualHeader(id: functionId, name: prototype.name, arguments: prototype.argumentNames)
 		
 		
 		bytecode.append(headerInstruction)

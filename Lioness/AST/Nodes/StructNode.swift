@@ -22,7 +22,7 @@ public class StructNode: ASTNode {
 		
 		let structId = ctx.getStructId(for: self)
 		
-		let header = BytecodeStructHeader(id: structId, name: prototype.name, members: prototype.members)
+		let header = BytecodeVirtualHeader(id: structId, name: prototype.name, arguments: prototype.members)
 		bytecode.append(header)
 
 		let initInstr = BytecodeInstruction(label: ctx.nextIndexLabel(), type: .structInit, comment: "init \(prototype.name)")

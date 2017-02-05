@@ -1,5 +1,5 @@
 //
-//  BytecodeStructHeader.swift
+//  BytecodeVirtualHeader.swift
 //  Lioness
 //
 //  Created by Louis D'hauwe on 12/01/2017.
@@ -8,18 +8,17 @@
 
 import Foundation
 
-// TODO: Merge with function header, rename to "virtual"
-public class BytecodeStructHeader: BytecodeLine {
+public class BytecodeVirtualHeader: BytecodeLine {
 	
 	let id: Int
 	
 	private let name: String?
-	private let members: [String]
+	private let arguments: [String]
 	
-	init(id: Int, name: String? = nil, members: [String]) {
+	init(id: Int, name: String? = nil, arguments: [String] = []) {
 		self.id = id
 		self.name = name
-		self.members = members
+		self.arguments = arguments
 	}
 	
 	/// Debug description
@@ -29,15 +28,15 @@ public class BytecodeStructHeader: BytecodeLine {
 		if let name = name {
 			descr += "\(name)("
 			
-			var isFirstMember = true
+			var isFirstArg = true
 			
-			for member in members {
-				if !isFirstMember {
+			for arg in arguments {
+				if !isFirstArg {
 					descr += ","
 				}
-				descr += member
+				descr += arg
 				
-				isFirstMember = false
+				isFirstArg = false
 			}
 			
 			descr += ")"

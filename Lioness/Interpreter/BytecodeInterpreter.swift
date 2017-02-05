@@ -89,24 +89,16 @@ public class BytecodeInterpreter {
 		
 		for line in bytecode {
 			
-			if let funcLine = line as? BytecodeFunctionHeader {
-				// + 1 for first line in function
+			if let virtualLine = line as? BytecodeVirtualHeader {
+				// + 1 for first line in virtual
 				// header should never be jumped to
-				functionMap[funcLine.id] = pc + 1
+				functionMap[virtualLine.id] = pc + 1
 
-				funcStack.append(funcLine.id)
+				funcStack.append(virtualLine.id)
 			}
 
 			if let funcLine = line as? BytecodePrivateFunctionHeader {
 				// + 1 for first line in function
-				// header should never be jumped to
-				functionMap[funcLine.id] = pc + 1
-				
-				funcStack.append(funcLine.id)
-			}
-			
-			if let funcLine = line as? BytecodeStructHeader {
-				// + 1 for first line in struct
 				// header should never be jumped to
 				functionMap[funcLine.id] = pc + 1
 				
@@ -160,13 +152,13 @@ public class BytecodeInterpreter {
 			// In theory should never be called?
 			return try functionInvokeStack.pop()
 			
-		} else if let functionHeader = line as? BytecodeFunctionHeader {
+		} else if let virtualHeader = line as? BytecodeVirtualHeader {
 			
-			guard let funcEndPc = functionEndMap[functionHeader.id] else {
+			guard let virtualEndPc = functionEndMap[virtualHeader.id] else {
 				throw error(.unexpectedArgument)
 			}
 			
-			return funcEndPc + 1
+			return virtualEndPc + 1
 			
 		} else if line is BytecodePrivateEnd {
 			
@@ -175,14 +167,6 @@ public class BytecodeInterpreter {
 		} else if let functionHeader = line as? BytecodePrivateFunctionHeader {
 			
 			guard let funcEndPc = functionEndMap[functionHeader.id] else {
-				throw error(.unexpectedArgument)
-			}
-			
-			return funcEndPc + 1
-			
-		} else if let structHeader = line as? BytecodeStructHeader {
-			
-			guard let funcEndPc = functionEndMap[structHeader.id] else {
 				throw error(.unexpectedArgument)
 			}
 			
@@ -585,7 +569,7 @@ public class BytecodeInterpreter {
 		try functionInvokeStack.push(pc + 1)
 		
 		// TODO: if not private function {
-		if bytecode[idPc - 1] is BytecodeFunctionHeader {
+		if bytecode[idPc - 1] is BytecodeVirtualHeader {
 			functionDepth += 1
 		}
 
