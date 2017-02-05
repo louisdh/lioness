@@ -8,6 +8,7 @@
 
 import Foundation
 
+// TODO: replace by BytecodeVirtualHeader
 public class BytecodePrivateFunctionHeader: BytecodeLine {
 	
 	let id: Int

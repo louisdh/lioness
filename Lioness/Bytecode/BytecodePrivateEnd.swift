@@ -8,6 +8,7 @@
 
 import Foundation
 
+// TODO: replace by BytecodeEnd
 public class BytecodePrivateEnd: BytecodeLine {
 	
 	/// Debug description
