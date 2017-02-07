@@ -19,8 +19,6 @@
 		BE24AC291E43C2F0008892A2 /* BytecodeLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE24AC231E43C2F0008892A2 /* BytecodeLine.swift */; };
 		BE24AC2C1E43C2F0008892A2 /* BytecodeVirtualHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE24AC251E43C2F0008892A2 /* BytecodeVirtualHeader.swift */; };
 		BE24AC2D1E43C2F0008892A2 /* BytecodeVirtualHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE24AC251E43C2F0008892A2 /* BytecodeVirtualHeader.swift */; };
-		BE24AC331E43C374008892A2 /* BytecodePrivateEnd.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE24AC2F1E43C374008892A2 /* BytecodePrivateEnd.swift */; };
-		BE24AC341E43C374008892A2 /* BytecodePrivateEnd.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE24AC2F1E43C374008892A2 /* BytecodePrivateEnd.swift */; };
 		BE24AC351E43C374008892A2 /* BytecodePrivateFunctionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE24AC301E43C374008892A2 /* BytecodePrivateFunctionHeader.swift */; };
 		BE24AC361E43C374008892A2 /* BytecodePrivateFunctionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE24AC301E43C374008892A2 /* BytecodePrivateFunctionHeader.swift */; };
 		BE24AC391E43C3C1008892A2 /* BytecodeInstruction.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE24AC371E43C3C1008892A2 /* BytecodeInstruction.swift */; };
@@ -147,7 +145,6 @@
 		BE24AC221E43C2F0008892A2 /* BytecodeEnd.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BytecodeEnd.swift; path = Bytecode/BytecodeEnd.swift; sourceTree = "<group>"; };
 		BE24AC231E43C2F0008892A2 /* BytecodeLine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BytecodeLine.swift; path = Bytecode/BytecodeLine.swift; sourceTree = "<group>"; };
 		BE24AC251E43C2F0008892A2 /* BytecodeVirtualHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BytecodeVirtualHeader.swift; path = Bytecode/BytecodeVirtualHeader.swift; sourceTree = "<group>"; };
-		BE24AC2F1E43C374008892A2 /* BytecodePrivateEnd.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BytecodePrivateEnd.swift; path = Bytecode/BytecodePrivateEnd.swift; sourceTree = "<group>"; };
 		BE24AC301E43C374008892A2 /* BytecodePrivateFunctionHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BytecodePrivateFunctionHeader.swift; path = Bytecode/BytecodePrivateFunctionHeader.swift; sourceTree = "<group>"; };
 		BE24AC371E43C3C1008892A2 /* BytecodeInstruction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BytecodeInstruction.swift; path = Bytecode/Instruction/BytecodeInstruction.swift; sourceTree = "<group>"; };
 		BE24AC381E43C3C1008892A2 /* BytecodeInstructionType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BytecodeInstructionType.swift; path = Bytecode/Instruction/BytecodeInstructionType.swift; sourceTree = "<group>"; };
@@ -487,7 +484,6 @@
 				BE24AC231E43C2F0008892A2 /* BytecodeLine.swift */,
 				BE24AC221E43C2F0008892A2 /* BytecodeEnd.swift */,
 				BE24AC251E43C2F0008892A2 /* BytecodeVirtualHeader.swift */,
-				BE24AC2F1E43C374008892A2 /* BytecodePrivateEnd.swift */,
 				BE24AC301E43C374008892A2 /* BytecodePrivateFunctionHeader.swift */,
 				BED616D81DFD7EA000A70820 /* Instruction */,
 			);
@@ -709,7 +705,6 @@
 				BE24AC701E43C50C008892A2 /* BooleanNode.swift in Sources */,
 				BE24AC9B1E43C65D008892A2 /* Parser.swift in Sources */,
 				BE24AC201E43C2DD008892A2 /* BytecodeInstructionError.swift in Sources */,
-				BE24AC331E43C374008892A2 /* BytecodePrivateEnd.swift in Sources */,
 				BE24AC6E1E43C50C008892A2 /* BodyNode.swift in Sources */,
 				BE24AC4F1E43C4FD008892A2 /* ContinueNode.swift in Sources */,
 				BE24AC801E43C50D008892A2 /* StructMemberNode.swift in Sources */,
@@ -780,7 +775,6 @@
 				BE24AC711E43C50C008892A2 /* BooleanNode.swift in Sources */,
 				BE24AC9C1E43C65D008892A2 /* Parser.swift in Sources */,
 				BE58C15D1E16D7EC00BC73CA /* Array+Safe.swift in Sources */,
-				BE24AC341E43C374008892A2 /* BytecodePrivateEnd.swift in Sources */,
 				BE24AC6F1E43C50C008892A2 /* BodyNode.swift in Sources */,
 				BE24AC501E43C4FD008892A2 /* ContinueNode.swift in Sources */,
 				BE24AC811E43C50D008892A2 /* StructMemberNode.swift in Sources */,

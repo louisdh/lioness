@@ -102,7 +102,7 @@ public class BytecodeInterpreter {
 				funcStack.append(funcLine.id)
 			}
 			
-			if line is BytecodeEnd || line is BytecodePrivateEnd {
+			if line is BytecodeEnd {
 				
 				guard let currentFunc = funcStack.popLast() else {
 					throw error(.unexpectedArgument)
@@ -157,9 +157,6 @@ public class BytecodeInterpreter {
 			
 			return virtualEndPc + 1
 			
-		} else if line is BytecodePrivateEnd {
-			
-			return try virtualInvokeStack.pop()
 			
 		} else if let functionHeader = line as? BytecodePrivateFunctionHeader {
 			

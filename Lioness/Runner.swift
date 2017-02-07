@@ -378,7 +378,7 @@ public class Runner {
 		
 		for b in bytecode {
 			
-			if b is BytecodeEnd || b is BytecodePrivateEnd {
+			if b is BytecodeEnd {
 				indentLevel -= 1
 			}
 			
@@ -394,7 +394,7 @@ public class Runner {
 			
 			description += b.description
 			
-			if b is BytecodeEnd || b is BytecodePrivateEnd {
+			if b is BytecodeEnd {
 				description += "\n"
 			}
 			
