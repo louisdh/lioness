@@ -17,8 +17,6 @@
 		BE24AC271E43C2F0008892A2 /* BytecodeEnd.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE24AC221E43C2F0008892A2 /* BytecodeEnd.swift */; };
 		BE24AC281E43C2F0008892A2 /* BytecodeLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE24AC231E43C2F0008892A2 /* BytecodeLine.swift */; };
 		BE24AC291E43C2F0008892A2 /* BytecodeLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE24AC231E43C2F0008892A2 /* BytecodeLine.swift */; };
-		BE24AC2A1E43C2F0008892A2 /* BytecodeMainHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE24AC241E43C2F0008892A2 /* BytecodeMainHeader.swift */; };
-		BE24AC2B1E43C2F0008892A2 /* BytecodeMainHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE24AC241E43C2F0008892A2 /* BytecodeMainHeader.swift */; };
 		BE24AC2C1E43C2F0008892A2 /* BytecodeVirtualHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE24AC251E43C2F0008892A2 /* BytecodeVirtualHeader.swift */; };
 		BE24AC2D1E43C2F0008892A2 /* BytecodeVirtualHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE24AC251E43C2F0008892A2 /* BytecodeVirtualHeader.swift */; };
 		BE24AC331E43C374008892A2 /* BytecodePrivateEnd.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE24AC2F1E43C374008892A2 /* BytecodePrivateEnd.swift */; };
@@ -148,7 +146,6 @@
 		BE24AC1F1E43C2DD008892A2 /* BytecodeInstructionError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BytecodeInstructionError.swift; path = Bytecode/Instruction/BytecodeInstructionError.swift; sourceTree = "<group>"; };
 		BE24AC221E43C2F0008892A2 /* BytecodeEnd.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BytecodeEnd.swift; path = Bytecode/BytecodeEnd.swift; sourceTree = "<group>"; };
 		BE24AC231E43C2F0008892A2 /* BytecodeLine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BytecodeLine.swift; path = Bytecode/BytecodeLine.swift; sourceTree = "<group>"; };
-		BE24AC241E43C2F0008892A2 /* BytecodeMainHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BytecodeMainHeader.swift; path = Bytecode/BytecodeMainHeader.swift; sourceTree = "<group>"; };
 		BE24AC251E43C2F0008892A2 /* BytecodeVirtualHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BytecodeVirtualHeader.swift; path = Bytecode/BytecodeVirtualHeader.swift; sourceTree = "<group>"; };
 		BE24AC2F1E43C374008892A2 /* BytecodePrivateEnd.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BytecodePrivateEnd.swift; path = Bytecode/BytecodePrivateEnd.swift; sourceTree = "<group>"; };
 		BE24AC301E43C374008892A2 /* BytecodePrivateFunctionHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BytecodePrivateFunctionHeader.swift; path = Bytecode/BytecodePrivateFunctionHeader.swift; sourceTree = "<group>"; };
@@ -487,9 +484,8 @@
 		BEBB9C411E2AA4E800DCBA4D /* Bytecode */ = {
 			isa = PBXGroup;
 			children = (
-				BE24AC221E43C2F0008892A2 /* BytecodeEnd.swift */,
 				BE24AC231E43C2F0008892A2 /* BytecodeLine.swift */,
-				BE24AC241E43C2F0008892A2 /* BytecodeMainHeader.swift */,
+				BE24AC221E43C2F0008892A2 /* BytecodeEnd.swift */,
 				BE24AC251E43C2F0008892A2 /* BytecodeVirtualHeader.swift */,
 				BE24AC2F1E43C374008892A2 /* BytecodePrivateEnd.swift */,
 				BE24AC301E43C374008892A2 /* BytecodePrivateFunctionHeader.swift */,
@@ -754,7 +750,6 @@
 				BE24AC6C1E43C50C008892A2 /* BinaryOpNode.swift in Sources */,
 				BE24AC8B1E43C5B2008892A2 /* Lexer.swift in Sources */,
 				BE24AC2C1E43C2F0008892A2 /* BytecodeVirtualHeader.swift in Sources */,
-				BE24AC2A1E43C2F0008892A2 /* BytecodeMainHeader.swift in Sources */,
 				BE24AC821E43C50D008892A2 /* StructNode.swift in Sources */,
 				BE24AC4D1E43C4FD008892A2 /* BreakLoopNode.swift in Sources */,
 				BE24AC9E1E43C687008892A2 /* BytecodeInterpreter.swift in Sources */,
@@ -826,7 +821,6 @@
 				BE24AC8C1E43C5B2008892A2 /* Lexer.swift in Sources */,
 				BE58C15E1E16D7F100BC73CA /* InterpreterError.swift in Sources */,
 				BE24AC2D1E43C2F0008892A2 /* BytecodeVirtualHeader.swift in Sources */,
-				BE24AC2B1E43C2F0008892A2 /* BytecodeMainHeader.swift in Sources */,
 				BE24AC831E43C50D008892A2 /* StructNode.swift in Sources */,
 				BE24AC4E1E43C4FD008892A2 /* BreakLoopNode.swift in Sources */,
 				BE24AC9F1E43C687008892A2 /* BytecodeInterpreter.swift in Sources */,
