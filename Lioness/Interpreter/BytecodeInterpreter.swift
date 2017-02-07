@@ -93,14 +93,6 @@ public class BytecodeInterpreter {
 
 				funcStack.append(virtualLine.id)
 			}
-
-			if let funcLine = line as? BytecodePrivateFunctionHeader {
-				// + 1 for first line in function
-				// header should never be jumped to
-				virtualMap[funcLine.id] = pc + 1
-				
-				funcStack.append(funcLine.id)
-			}
 			
 			if line is BytecodeEnd {
 				
@@ -156,15 +148,6 @@ public class BytecodeInterpreter {
 			}
 			
 			return virtualEndPc + 1
-			
-			
-		} else if let functionHeader = line as? BytecodePrivateFunctionHeader {
-			
-			guard let funcEndPc = virtualEndMap[functionHeader.id] else {
-				throw error(.unexpectedArgument)
-			}
-			
-			return funcEndPc + 1
 			
 		} else {
 			
