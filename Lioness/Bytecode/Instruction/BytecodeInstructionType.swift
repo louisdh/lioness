@@ -62,6 +62,10 @@ public enum BytecodeInstructionType: UInt8, CustomStringConvertible {
 	case structSet = 25
 	case structUpdate = 26
 	case structGet = 27
+
+	// TODO: add
+//	case virtualHeader = 28
+//	case virtualEnd = 29
 	
 	public var opCode: UInt8 {
 		return self.rawValue
