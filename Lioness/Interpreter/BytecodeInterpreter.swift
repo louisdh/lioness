@@ -44,7 +44,7 @@ public class BytecodeInterpreter {
 		registers = [Int : ValueType]()
 		virtualInvokeStack = Stack<Int>(withLimit: stackLimit)
 		
-		try createFunctionMap()
+		try createVirtualMap()
 	}
 	
 	/// Initalize a BytecodeInterpreter with an array of String
@@ -71,14 +71,14 @@ public class BytecodeInterpreter {
 		self.bytecode = bytecode
 		
 		do {
-			try createFunctionMap()
+			try createVirtualMap()
 		} catch {
 			return nil
 		}
 		
 	}
 	
-	private func createFunctionMap() throws {
+	private func createVirtualMap() throws {
 		
 		var pc = 0
 		
@@ -225,11 +225,11 @@ public class BytecodeInterpreter {
 			case .ifFalse:
 				newPc = try executeIfFalse(instruction, pc: pc)
 			
-			case .invokeFunc:
-				newPc = try executeInvokeFunction(instruction, pc: pc)
+			case .invokeVirtual:
+				newPc = try executeInvokeVirtual(instruction, pc: pc)
 			
-			case .exitFunc:
-				newPc = try executeExitFunction(instruction, pc: pc)
+			case .exitVirtual:
+				newPc = try executeExitVirtual(instruction, pc: pc)
 
 			case .pop:
 				newPc = try executePop(instruction, pc: pc)
@@ -528,7 +528,7 @@ public class BytecodeInterpreter {
 		return pc + 1
 	}
 	
-	private func executeInvokeFunction(_ instruction: BytecodeInstruction, pc: Int) throws -> Int {
+	private func executeInvokeVirtual(_ instruction: BytecodeInstruction, pc: Int) throws -> Int {
 		
 		guard let id = instruction.arguments.first else {
 			throw error(.unexpectedArgument)
@@ -552,15 +552,15 @@ public class BytecodeInterpreter {
 		return idPc
 	}
 	
-	private func executeExitFunction(_ instruction: BytecodeInstruction, pc: Int) throws -> Int {
+	private func executeExitVirtual(_ instruction: BytecodeInstruction, pc: Int) throws -> Int {
 		
-		guard let exitFunctionLabel = try? virtualInvokeStack.pop() else {
+		guard let exitVirtualLabel = try? virtualInvokeStack.pop() else {
 			throw error(.unexpectedArgument)
 		}
 		
 		virtualDepth -= 1
 		
-		return exitFunctionLabel
+		return exitVirtualLabel
 	}
 	
 	private func executePop(_ instruction: BytecodeInstruction, pc: Int) throws -> Int {
@@ -847,11 +847,11 @@ public class BytecodeInterpreter {
 		
 		if foundLabel == nil {
 			
-			if let exitFunctionLabel = try? virtualInvokeStack.pop() {
+			if let exitVirtualLabel = try? virtualInvokeStack.pop() {
 				
 				virtualDepth -= 1
 				
-				return exitFunctionLabel
+				return exitVirtualLabel
 			}
 			
 		}

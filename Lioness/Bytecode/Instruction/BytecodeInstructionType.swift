@@ -50,9 +50,9 @@ public enum BytecodeInstructionType: UInt8, CustomStringConvertible {
 	case registerClear = 18
 	case registerLoad = 19
 	
-	case invokeFunc = 20
+	case invokeVirtual = 20
 
-	case exitFunc = 21
+	case exitVirtual = 21
 
 	case pop = 22
 
@@ -135,13 +135,11 @@ public enum BytecodeInstructionType: UInt8, CustomStringConvertible {
 		case .registerLoad:
 			return "reg_load"
 			
-		// TODO: rename to "virtual"?
-		case .invokeFunc:
-			return "invoke_func"
+		case .invokeVirtual:
+			return "invoke_virtual"
 			
-		// TODO: rename to "virtual"?
-		case .exitFunc:
-			return "exit_func"
+		case .exitVirtual:
+			return "exit_virtual"
 			
 		case .pop:
 			return "pop"

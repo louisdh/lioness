@@ -66,10 +66,10 @@ public class FunctionNode: ASTNode {
 		let skipExitInstruction = BytecodeInstruction(label: skipExitInstrLabel, type: .skipPast, arguments: [.index(exitFunctionInstrLabel)], comment: "skip exit instruction")
 		bytecode.append(skipExitInstruction)
 		
-		let invokeInstruction = BytecodeInstruction(label: cleanupFunctionCallInstrLabel, type: .invokeFunc, arguments: [.index(exitId)], comment: "cleanup_\(prototype.name)()")
+		let invokeInstruction = BytecodeInstruction(label: cleanupFunctionCallInstrLabel, type: .invokeVirtual, arguments: [.index(exitId)], comment: "cleanup_\(prototype.name)()")
 		bytecode.append(invokeInstruction)
 		
-		let exitFunctionInstruction = BytecodeInstruction(label: exitFunctionInstrLabel, type: .exitFunc, comment: "exit function")
+		let exitFunctionInstruction = BytecodeInstruction(label: exitFunctionInstrLabel, type: .exitVirtual, comment: "exit function")
 		bytecode.append(exitFunctionInstruction)
 		
 		
