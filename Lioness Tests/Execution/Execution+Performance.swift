@@ -29,6 +29,18 @@ class Execution_Performance: BaseTestCase {
 	
 	// TODO: make tests generic
 	
+	func testTrigonometryPerformance() {
+		
+		guard let bytecode = preparePerformanceTest(for: "Trigonometry") else {
+			return
+		}
+		
+		self.measure {
+			self.execute(bytecode)
+		}
+		
+	}
+	
 	func testModulusPerformance() {
 		
 		guard let bytecode = preparePerformanceTest(for: "Modulus") else {
@@ -48,7 +60,9 @@ class Execution_Performance: BaseTestCase {
 		}
 		
 		self.measure {
-			self.execute(bytecode)
+			for _ in 1...100 {
+				self.execute(bytecode)
+			}
 		}
 
 	}
@@ -60,7 +74,9 @@ class Execution_Performance: BaseTestCase {
 		}
 	
 		self.measure {
-			self.execute(bytecode)
+			for _ in 1...100 {
+				self.execute(bytecode)
+			}
 		}
 		
 	}

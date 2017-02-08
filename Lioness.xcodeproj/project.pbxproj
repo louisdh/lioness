@@ -91,6 +91,7 @@
 		BE24AC9F1E43C687008892A2 /* BytecodeInterpreter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE24AC9D1E43C687008892A2 /* BytecodeInterpreter.swift */; };
 		BE24ACA11E4BB0A7008892A2 /* BytecodePrivateVirtualHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE24ACA01E4BB0A7008892A2 /* BytecodePrivateVirtualHeader.swift */; };
 		BE24ACA21E4BB0A7008892A2 /* BytecodePrivateVirtualHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE24ACA01E4BB0A7008892A2 /* BytecodePrivateVirtualHeader.swift */; };
+		BE24ACA41E4BC986008892A2 /* Trigonometry.lion in Resources */ = {isa = PBXBuildFile; fileRef = BE24ACA31E4BC986008892A2 /* Trigonometry.lion */; };
 		BE25BA241DDD1F0000041A20 /* ASTNode+Validation.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE25BA231DDD1F0000041A20 /* ASTNode+Validation.swift */; };
 		BE295CEB1DB14DCE0019EC57 /* Lexer+Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE295CEA1DB14DCE0019EC57 /* Lexer+Tests.swift */; };
 		BE2B29151E21A627007978BE /* FunctionGlobalVar.lion in Resources */ = {isa = PBXBuildFile; fileRef = BE2B29141E21A627007978BE /* FunctionGlobalVar.lion */; };
@@ -181,6 +182,7 @@
 		BE24AC9A1E43C65D008892A2 /* Parser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Parser.swift; path = Parser/Parser.swift; sourceTree = "<group>"; };
 		BE24AC9D1E43C687008892A2 /* BytecodeInterpreter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BytecodeInterpreter.swift; path = Interpreter/BytecodeInterpreter.swift; sourceTree = "<group>"; };
 		BE24ACA01E4BB0A7008892A2 /* BytecodePrivateVirtualHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BytecodePrivateVirtualHeader.swift; path = Bytecode/BytecodePrivateVirtualHeader.swift; sourceTree = "<group>"; };
+		BE24ACA31E4BC986008892A2 /* Trigonometry.lion */ = {isa = PBXFileReference; explicitFileType = sourcecode.glsl; fileEncoding = 4; path = Trigonometry.lion; sourceTree = "<group>"; };
 		BE25BA231DDD1F0000041A20 /* ASTNode+Validation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = "ASTNode+Validation.swift"; path = "AST/ASTNode+Validation.swift"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		BE295CE81DB14DCE0019EC57 /* Lioness macOS Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Lioness macOS Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BE295CEA1DB14DCE0019EC57 /* Lexer+Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Lexer+Tests.swift"; sourceTree = "<group>"; };
@@ -453,6 +455,7 @@
 				BE809A161E22C5C80005370D /* UnusedFunctionResult.lion */,
 				BE809A181E2428270005370D /* FunctionInFunction.lion */,
 				BE8800631E25A6F600EBEC54 /* Modulus.lion */,
+				BE24ACA31E4BC986008892A2 /* Trigonometry.lion */,
 			);
 			name = "Test source files";
 			sourceTree = "<group>";
@@ -678,6 +681,7 @@
 				BE2B29151E21A627007978BE /* FunctionGlobalVar.lion in Resources */,
 				BE8800661E25A97B00EBEC54 /* Modulus.lion in Resources */,
 				BE2ED01F1E211C1D00CCD588 /* GreatestCommonDivisor.lion in Resources */,
+				BE24ACA41E4BC986008892A2 /* Trigonometry.lion in Resources */,
 				BE2CC6611DB94BF800F74DBE /* LargeMathOperation.lion in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
