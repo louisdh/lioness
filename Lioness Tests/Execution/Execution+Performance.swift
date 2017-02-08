@@ -78,16 +78,8 @@ class Execution_Performance: BaseTestCase {
 			XCTFail("Failed to compile stdlib")
 			return nil
 		}
-
 		
-		let fileURL = getFilePath(for: file)
-		
-		guard let path = fileURL?.path else {
-			XCTFail("Invalid path for test")
-			return nil
-		}
-		
-		guard let source = try? String(contentsOfFile: path, encoding: .utf8) else {
+		guard let source = getSource(for: file) else {
 			XCTFail("Failed to get source")
 			return nil
 		}

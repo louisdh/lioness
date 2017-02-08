@@ -30,5 +30,21 @@ class BaseTestCase: XCTestCase {
 		return fileURL
 		
 	}
-
+	
+	func getSource(for fileName: String) -> String? {
+		
+		let fileURL = getFilePath(for: fileName)
+		
+		guard let path = fileURL?.path else {
+			return nil
+		}
+		
+		guard let source = try? String(contentsOfFile: path, encoding: .utf8) else {
+			return nil
+		}
+		
+		return source
+		
+	}
+	
 }
