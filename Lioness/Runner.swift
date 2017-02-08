@@ -384,7 +384,7 @@ public class Runner {
 			
 			var description = ""
 			
-			if b is BytecodeVirtualHeader {
+			if b is BytecodeVirtualHeader || b is BytecodePrivateVirtualHeader {
 				description += "\n"
 			}
 			
@@ -400,7 +400,7 @@ public class Runner {
 			
 			log(description)
 			
-			if b is BytecodeVirtualHeader {
+			if b is BytecodeVirtualHeader || b is BytecodePrivateVirtualHeader {
 				indentLevel += 1
 			}
 			

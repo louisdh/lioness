@@ -65,7 +65,8 @@ public enum BytecodeInstructionType: UInt8, CustomStringConvertible {
 
 	// TODO: add
 //	case virtualHeader = 28
-//	case virtualEnd = 29
+//	case privateVirtualHeader = 29
+//	case virtualEnd = 30
 	
 	public var opCode: UInt8 {
 		return self.rawValue

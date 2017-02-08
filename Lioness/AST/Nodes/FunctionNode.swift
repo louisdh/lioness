@@ -51,7 +51,7 @@ public class FunctionNode: ASTNode {
 		
 		let _ = ctx.nextIndexLabel()
 		
-		let exitHeaderInstruction = BytecodeVirtualHeader(id: exitId, name: "cleanup_\(prototype.name)")
+		let exitHeaderInstruction = BytecodePrivateVirtualHeader(id: exitId, name: "cleanup_\(prototype.name)")
 		
 		ctx.popFunctionExit()
 		

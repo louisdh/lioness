@@ -94,6 +94,14 @@ public class BytecodeInterpreter {
 				funcStack.append(virtualLine.id)
 			}
 			
+			if let virtualLine = line as? BytecodePrivateVirtualHeader {
+				// + 1 for first line in virtual
+				// header should never be jumped to
+				virtualMap[virtualLine.id] = pc + 1
+				
+				funcStack.append(virtualLine.id)
+			}
+			
 			if line is BytecodeEnd {
 				
 				guard let currentFunc = funcStack.popLast() else {
@@ -142,6 +150,14 @@ public class BytecodeInterpreter {
 			return try virtualInvokeStack.pop()
 			
 		} else if let virtualHeader = line as? BytecodeVirtualHeader {
+			
+			guard let virtualEndPc = virtualEndMap[virtualHeader.id] else {
+				throw error(.unexpectedArgument)
+			}
+			
+			return virtualEndPc + 1
+			
+		} else if let virtualHeader = line as? BytecodePrivateVirtualHeader {
 			
 			guard let virtualEndPc = virtualEndMap[virtualHeader.id] else {
 				throw error(.unexpectedArgument)
@@ -545,6 +561,7 @@ public class BytecodeInterpreter {
 		// return to next pc after virtual returns
 		try virtualInvokeStack.push(pc + 1)
 		
+		// Only increment depth if non-private virtual is called
 		if bytecode[idPc - 1] is BytecodeVirtualHeader {
 			virtualDepth += 1
 		}
