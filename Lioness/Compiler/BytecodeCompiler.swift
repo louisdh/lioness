@@ -244,7 +244,7 @@ public class BytecodeCompiler {
 		return decompiledVarName
 	}
 	
-	func cleanupRegisterInstructions() -> [BytecodeLine] {
+	func cleanupRegisterInstructions() -> BytecodeBody {
 		return cleanupRegisterInstructions(for: currentScopeNode)
 	}
 	
@@ -261,9 +261,9 @@ public class BytecodeCompiler {
 		return registersToCleanup
 	}
 		
-	private func cleanupRegisterInstructions(for scopeNode: ScopeNode) -> [BytecodeInstruction] {
+	private func cleanupRegisterInstructions(for scopeNode: ScopeNode) -> BytecodeBody {
 		
-		var instructions = [BytecodeInstruction]()
+		var instructions = BytecodeBody()
 	
 		for (reg, decompiledVarName) in scopeNode.registersToClean {
 			

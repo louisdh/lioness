@@ -63,10 +63,9 @@ public enum BytecodeInstructionType: UInt8, CustomStringConvertible {
 	case structUpdate = 26
 	case structGet = 27
 
-	// TODO: add
-//	case virtualHeader = 28
-//	case privateVirtualHeader = 29
-//	case virtualEnd = 30
+	case virtualHeader = 28
+	case privateVirtualHeader = 29
+	case virtualEnd = 30
 	
 	public var opCode: UInt8 {
 		return self.rawValue
@@ -160,6 +159,15 @@ public enum BytecodeInstructionType: UInt8, CustomStringConvertible {
 		case .structGet:
 			return "struct_get"
 			
+		case .virtualHeader:
+			return "virt_h"
+			
+		case .privateVirtualHeader:
+			return "pvirt_h"
+			
+		case .virtualEnd:
+			return "virt_e"
+
 		}
 		
 	}

@@ -13,7 +13,7 @@ public class BytecodeInterpreter {
 	
 	private let stackLimit = 65_536
 	
-	private let bytecode: BytecodeBody
+	private let bytecode: [BytecodeInstruction]
 	
 	/// Stack
 	private(set) public var stack: Stack<ValueType>
@@ -37,7 +37,7 @@ public class BytecodeInterpreter {
 	/// Initalize a BytecodeInterpreter with an array of BytecodeInstruction
 	///
 	/// - Parameter bytecode: Array of BytecodeInstruction
-	public init(bytecode: BytecodeBody) throws {
+	public init(bytecode: [BytecodeInstruction]) throws {
 		self.bytecode = bytecode
 		
 		stack = Stack<ValueType>(withLimit: stackLimit)
@@ -45,37 +45,6 @@ public class BytecodeInterpreter {
 		virtualInvokeStack = Stack<Int>(withLimit: stackLimit)
 		
 		try createVirtualMap()
-	}
-	
-	/// Initalize a BytecodeInterpreter with an array of String
-	///
-	/// The strings will be parsed into Bytecode Instructions
-	///
-	/// - Parameter bytecodeStrings: bytecode instructions as strings
-	public init?(bytecodeStrings: [String]) {
-		
-		stack = Stack<ValueType>(withLimit: stackLimit)
-		registers = [Int : ValueType]()
-		virtualInvokeStack = Stack<Int>(withLimit: stackLimit)
-
-		var bytecode = BytecodeBody()
-		
-		for s in bytecodeStrings {
-			if let instruction = try? BytecodeInstruction(instructionString: s) {
-				bytecode.append(instruction)
-			} else {
-				return nil
-			}
-		}
-		
-		self.bytecode = bytecode
-		
-		do {
-			try createVirtualMap()
-		} catch {
-			return nil
-		}
-		
 	}
 	
 	private func createVirtualMap() throws {
@@ -86,23 +55,33 @@ public class BytecodeInterpreter {
 		
 		for line in bytecode {
 			
-			if let virtualLine = line as? BytecodeVirtualHeader {
-				// + 1 for first line in virtual
-				// header should never be jumped to
-				virtualMap[virtualLine.id] = pc + 1
-
-				funcStack.append(virtualLine.id)
-			}
-			
-			if let virtualLine = line as? BytecodePrivateVirtualHeader {
-				// + 1 for first line in virtual
-				// header should never be jumped to
-				virtualMap[virtualLine.id] = pc + 1
+			if line.type == .virtualHeader {
 				
-				funcStack.append(virtualLine.id)
+				guard let arg = line.arguments.first, case let .index(id) = arg else {
+					throw error(.unexpectedArgument)
+				}
+				
+				// + 1 for first line in virtual
+				// header should never be jumped to
+				virtualMap[id] = pc + 1
+
+				funcStack.append(id)
 			}
 			
-			if line is BytecodeEnd {
+			if line.type == .privateVirtualHeader {
+				
+				guard let arg = line.arguments.first, case let .index(id) = arg else {
+					throw error(.unexpectedArgument)
+				}
+				
+				// + 1 for first line in virtual
+				// header should never be jumped to
+				virtualMap[id] = pc + 1
+				
+				funcStack.append(id)
+			}
+			
+			if line.type == .virtualEnd {
 				
 				guard let currentFunc = funcStack.popLast() else {
 					throw error(.unexpectedArgument)
@@ -132,42 +111,7 @@ public class BytecodeInterpreter {
 		while pc < bytecode.count {
 			
 			pcTrace.append(pc)
-			pc = try executeLine(bytecode[pc], pc: pc)
-			
-		}
-		
-	}
-	
-	private func executeLine(_ line: BytecodeLine, pc: Int) throws -> Int {
-		
-		if let instruction = line as? BytecodeInstruction {
-			
-			return try executeInstruction(instruction, pc: pc)
-			
-		} else if line is BytecodeEnd {
-			
-			// In theory should never be called?
-			return try virtualInvokeStack.pop()
-			
-		} else if let virtualHeader = line as? BytecodeVirtualHeader {
-			
-			guard let virtualEndPc = virtualEndMap[virtualHeader.id] else {
-				throw error(.unexpectedArgument)
-			}
-			
-			return virtualEndPc + 1
-			
-		} else if let virtualHeader = line as? BytecodePrivateVirtualHeader {
-			
-			guard let virtualEndPc = virtualEndMap[virtualHeader.id] else {
-				throw error(.unexpectedArgument)
-			}
-			
-			return virtualEndPc + 1
-			
-		} else {
-			
-			throw error(.unexpectedArgument)
+			pc = try executeInstruction(bytecode[pc], pc: pc)
 			
 		}
 		
@@ -265,6 +209,16 @@ public class BytecodeInterpreter {
 			case .structGet:
 				newPc = try executeStructGet(instruction, pc: pc)
 
+			case .virtualHeader:
+				newPc = try executeVirtualHeader(instruction, pc: pc)
+			
+			case .privateVirtualHeader:
+				newPc = try executePrivateVirtualHeader(instruction, pc: pc)
+
+			case .virtualEnd:
+				newPc = try executeVirtualEnd(instruction, pc: pc)
+
+			
 		}
 		
 		return newPc
@@ -562,7 +516,7 @@ public class BytecodeInterpreter {
 		try virtualInvokeStack.push(pc + 1)
 		
 		// Only increment depth if non-private virtual is called
-		if bytecode[idPc - 1] is BytecodeVirtualHeader {
+		if bytecode[idPc - 1].type == .virtualHeader {
 			virtualDepth += 1
 		}
 
@@ -673,6 +627,41 @@ public class BytecodeInterpreter {
 		try stack.push(memberValue)
 		
 		return pc + 1
+	}
+	
+	private func executeVirtualHeader(_ instruction: BytecodeInstruction, pc: Int) throws -> Int {
+		
+		guard let arg = instruction.arguments.first, case let .index(id) = arg else {
+			throw error(.unexpectedArgument)
+		}
+		
+		guard let virtualEndPc = virtualEndMap[id] else {
+			throw error(.unexpectedArgument)
+		}
+		
+		return virtualEndPc + 1
+
+	}
+	
+	private func executePrivateVirtualHeader(_ instruction: BytecodeInstruction, pc: Int) throws -> Int {
+		
+		guard let arg = instruction.arguments.first, case let .index(id) = arg else {
+			throw error(.unexpectedArgument)
+		}
+		
+		guard let virtualEndPc = virtualEndMap[id] else {
+			throw error(.unexpectedArgument)
+		}
+		
+		return virtualEndPc + 1
+
+	}
+	
+	private func executeVirtualEnd(_ instruction: BytecodeInstruction, pc: Int) throws -> Int {
+		
+		// In theory should never be called?
+		return try virtualInvokeStack.pop()
+		
 	}
 	
 	// MARK: - Structs
@@ -856,10 +845,7 @@ public class BytecodeInterpreter {
 		}
 		
 		let foundLabel = bytecode.index(where: { (b) -> Bool in
-			if let b = b as? BytecodeInstruction {
-				return b.label == label
-			}
-			return false
+			return b.label == label
 		})
 		
 		if foundLabel == nil {

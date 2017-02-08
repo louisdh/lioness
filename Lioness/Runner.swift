@@ -378,13 +378,13 @@ public class Runner {
 		
 		for b in bytecode {
 			
-			if b is BytecodeEnd {
+			if b.type == .virtualEnd {
 				indentLevel -= 1
 			}
 			
 			var description = ""
 			
-			if b is BytecodeVirtualHeader || b is BytecodePrivateVirtualHeader {
+			if b.type == .virtualHeader || b.type == .privateVirtualHeader {
 				description += "\n"
 			}
 			
@@ -394,13 +394,13 @@ public class Runner {
 			
 			description += b.description
 			
-			if b is BytecodeEnd {
+			if b.type == .virtualEnd {
 				description += "\n"
 			}
 			
 			log(description)
 			
-			if b is BytecodeVirtualHeader || b is BytecodePrivateVirtualHeader {
+			if b.type == .virtualHeader || b.type == .privateVirtualHeader {
 				indentLevel += 1
 			}
 			

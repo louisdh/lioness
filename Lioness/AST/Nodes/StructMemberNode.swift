@@ -19,7 +19,7 @@ public class StructMemberNode: ASTNode {
 	}
 	
 	public func compile(with ctx: BytecodeCompiler, in parent: ASTNode?) throws -> BytecodeBody {
-		var bytecode = [BytecodeLine]()
+		var bytecode = BytecodeBody()
 
 		bytecode.append(contentsOf: try variable.compile(with: ctx, in: self))
 		

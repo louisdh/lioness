@@ -8,15 +8,14 @@
 
 import Foundation
 
+public typealias BytecodeBody = [BytecodeInstruction]
+
 /// Scorpion Bytecode Instruction
-public class BytecodeInstruction: BytecodeLine {
+public class BytecodeInstruction {
 	
 	let label: Int
-	
 	let type: BytecodeInstructionType
-	
 	let arguments: [InstructionArgumentType]
-	
 	let comment: String?
 	
 	/// Use for decoding compiled instructions.
@@ -88,10 +87,12 @@ public class BytecodeInstruction: BytecodeLine {
 	}
 	
 	init(label: Int, type: BytecodeInstructionType, arguments: [InstructionArgumentType] = [], comment: String? = nil) {
+
 		self.label = label
 		self.type = type
 		self.arguments = arguments
 		self.comment = comment
+
 	}
 
 	/// Encoding string to use for saving compiled instruction (e.g. to disk).

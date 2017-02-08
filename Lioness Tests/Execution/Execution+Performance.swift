@@ -81,7 +81,7 @@ class Execution_Performance: BaseTestCase {
 		
 	}
 	
-	func preparePerformanceTest(for file: String) -> [BytecodeLine]? {
+	func preparePerformanceTest(for file: String) -> BytecodeBody? {
 		
 		let runner = Runner()
 		
@@ -111,7 +111,7 @@ class Execution_Performance: BaseTestCase {
 
 	}
 	
-	func execute(_ bytecode: [BytecodeLine]) {
+	func execute(_ bytecode: BytecodeBody) {
 		
 		let interpreter = try! BytecodeInterpreter(bytecode: bytecode)
 		try! interpreter.interpret()

@@ -26,11 +26,11 @@ public class FunctionNode: ASTNode {
 		ctx.enterNewScope()
 		
 		
-		let _ = ctx.nextIndexLabel()
+		let headerIndex = ctx.nextIndexLabel()
 		let functionId = ctx.getFunctionId(for: self)
 		let exitId = try ctx.getExitScopeFunctionId(for: self)
 
-		let headerInstruction = BytecodeVirtualHeader(id: functionId, name: prototype.name, arguments: prototype.argumentNames)
+		let headerInstruction = BytecodeInstruction(label: headerIndex, type: .virtualHeader, arguments: [.index(functionId)], comment: "\(prototype.name)(\(prototype.argumentNames))")
 		
 		
 		bytecode.append(headerInstruction)
@@ -49,9 +49,9 @@ public class FunctionNode: ASTNode {
 		let compiledFunction = try compileFunction(with: ctx)
 		
 		
-		let _ = ctx.nextIndexLabel()
+		let exitHeaderLabel = ctx.nextIndexLabel()
 		
-		let exitHeaderInstruction = BytecodePrivateVirtualHeader(id: exitId, name: "cleanup_\(prototype.name)")
+		let exitHeaderInstruction = BytecodeInstruction(label: exitHeaderLabel, type: .privateVirtualHeader, arguments: [.index(exitId)], comment: "cleanup_\(prototype.name)")
 		
 		ctx.popFunctionExit()
 		
@@ -59,7 +59,7 @@ public class FunctionNode: ASTNode {
 		let cleanupInstructions = ctx.cleanupRegisterInstructions()
 		try ctx.leaveCurrentScope()
 		
-		let _ = ctx.nextIndexLabel()
+		let cleanupEndLabel = ctx.nextIndexLabel()
 		
 	
 
@@ -83,14 +83,14 @@ public class FunctionNode: ASTNode {
 		bytecode.append(exitHeaderInstruction)
 		bytecode.append(contentsOf: cleanupInstructions)
 
-		bytecode.append(BytecodeEnd())
+		bytecode.append(BytecodeInstruction(label: cleanupEndLabel, type: .virtualEnd))
 		
 		//
 		
 		
 		
-		let _ = ctx.nextIndexLabel()
-		bytecode.append(BytecodeEnd())
+		let endLabel = ctx.nextIndexLabel()
+		bytecode.append(BytecodeInstruction(label: endLabel, type: .virtualEnd))
 		
 		return bytecode
 

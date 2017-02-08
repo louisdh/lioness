@@ -22,7 +22,9 @@ public class StructNode: ASTNode {
 		
 		let structId = ctx.getStructId(for: self)
 		
-		let header = BytecodeVirtualHeader(id: structId, name: prototype.name, arguments: prototype.members)
+		let headerLabel = ctx.nextIndexLabel()
+		
+		let header = BytecodeInstruction(label: headerLabel, type: .virtualHeader, arguments: [.index(structId)], comment: "\(prototype.name)(\(prototype.members))")
 		bytecode.append(header)
 
 		let initInstr = BytecodeInstruction(label: ctx.nextIndexLabel(), type: .structInit, comment: "init \(prototype.name)")
@@ -39,7 +41,7 @@ public class StructNode: ASTNode {
 
 		}
 		
-		bytecode.append(BytecodeEnd())
+		bytecode.append(BytecodeInstruction(label: ctx.nextIndexLabel(), type: .virtualEnd))
 		
 		return bytecode
 		
