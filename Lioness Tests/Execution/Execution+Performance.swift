@@ -81,7 +81,7 @@ class Execution_Performance: BaseTestCase {
 		
 	}
 	
-	func preparePerformanceTest(for file: String) -> BytecodeBody? {
+	func preparePerformanceTest(for file: String) -> [BytecodeExecutionInstruction]? {
 		
 		let runner = Runner()
 		
@@ -107,11 +107,13 @@ class Execution_Performance: BaseTestCase {
 		
 		let bytecode = compiledStdLib + compiledSource
 		
-		return bytecode
+		let executionBytecode = bytecode.map { $0.executionInstruction }
+
+		return executionBytecode
 
 	}
 	
-	func execute(_ bytecode: BytecodeBody) {
+	func execute(_ bytecode: [BytecodeExecutionInstruction]) {
 		
 		let interpreter = try! BytecodeInterpreter(bytecode: bytecode)
 		try! interpreter.interpret()

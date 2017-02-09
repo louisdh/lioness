@@ -65,7 +65,9 @@ public class Runner {
 
 		let bytecode = compiledStdLib + compiledSource
 		
-		let interpreter = try BytecodeInterpreter(bytecode: bytecode)
+		let executionBytecode = bytecode.map { $0.executionInstruction }
+		
+		let interpreter = try BytecodeInterpreter(bytecode: executionBytecode)
 		try interpreter.interpret()
 	
 		guard let reg = compiler.getCompiledRegister(for: varName) else {
@@ -290,7 +292,9 @@ public class Runner {
 		
 		do {
 			
-			let interpreter = try BytecodeInterpreter(bytecode: bytecode)
+			let executionBytecode = bytecode.map { $0.executionInstruction }
+
+			let interpreter = try BytecodeInterpreter(bytecode: executionBytecode)
 
 			self.interpreter = interpreter
 			

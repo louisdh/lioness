@@ -8,8 +8,18 @@
 
 import Foundation
 
-// TODO: make struct and test performance
-public class BytecodeExecutionInstruction {
+extension BytecodeInstruction {
+	
+	var executionInstruction: BytecodeExecutionInstruction {
+		return BytecodeExecutionInstruction(label: label, type: type, arguments: arguments)
+	}
+	
+}
+
+// BytecodeExecutionInstruction is a simplified version of BytecodeInstruction,
+// in that it has no string members, and is a struct.
+// This eliminates reference counting which leads to improved performance.
+public struct BytecodeExecutionInstruction {
 	
 	let label: Int
 	

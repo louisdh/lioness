@@ -13,7 +13,7 @@ public class BytecodeInterpreter {
 	
 	private let stackLimit = 65_536
 	
-	private let bytecode: [BytecodeInstruction]
+	private let bytecode: [BytecodeExecutionInstruction]
 	
 	/// Stack
 	private(set) public var stack: Stack<ValueType>
@@ -34,10 +34,10 @@ public class BytecodeInterpreter {
 
 	// MARK: - Init
 	
-	/// Initalize a BytecodeInterpreter with an array of BytecodeInstruction
+	/// Initalize a BytecodeInterpreter with an array of BytecodeExecutionInstruction
 	///
-	/// - Parameter bytecode: Array of BytecodeInstruction
-	public init(bytecode: [BytecodeInstruction]) throws {
+	/// - Parameter bytecode: Array of BytecodeExecutionInstruction
+	public init(bytecode: [BytecodeExecutionInstruction]) throws {
 		self.bytecode = bytecode
 		
 		stack = Stack<ValueType>(withLimit: stackLimit)
@@ -117,7 +117,7 @@ public class BytecodeInterpreter {
 		
 	}
 	
-	private func executeInstruction(_ instruction: BytecodeInstruction, pc: Int) throws -> Int {
+	private func executeInstruction(_ instruction: BytecodeExecutionInstruction, pc: Int) throws -> Int {
 		
 		let newPc: Int
 		
@@ -226,7 +226,7 @@ public class BytecodeInterpreter {
 
 	// MARK: - Execution
 
-	private func executePushConst(_ instruction: BytecodeInstruction, pc: Int) throws -> Int {
+	private func executePushConst(_ instruction: BytecodeExecutionInstruction, pc: Int) throws -> Int {
 
 		guard let arg = instruction.arguments.first, case let .value(f) = arg else {
 			throw error(.unexpectedArgument)
@@ -370,7 +370,7 @@ public class BytecodeInterpreter {
 		return pc + 1
 	}
 	
-	private func executeIfTrue(_ instruction: BytecodeInstruction, pc: Int) throws -> Int {
+	private func executeIfTrue(_ instruction: BytecodeExecutionInstruction, pc: Int) throws -> Int {
 		
 		guard let label = instruction.arguments.first else {
 			throw error(.unexpectedArgument)
@@ -394,7 +394,7 @@ public class BytecodeInterpreter {
 		
 	}
 	
-	private func executeIfFalse(_ instruction: BytecodeInstruction, pc: Int) throws -> Int {
+	private func executeIfFalse(_ instruction: BytecodeExecutionInstruction, pc: Int) throws -> Int {
 		
 		guard let label = instruction.arguments.first else {
 			throw error(.unexpectedArgument)
@@ -418,7 +418,7 @@ public class BytecodeInterpreter {
 		
 	}
 	
-	private func executeGoto(_ instruction: BytecodeInstruction) throws -> Int {
+	private func executeGoto(_ instruction: BytecodeExecutionInstruction) throws -> Int {
 		
 		guard let label = instruction.arguments.first else {
 			throw error(.unexpectedArgument)
@@ -436,7 +436,7 @@ public class BytecodeInterpreter {
 		
 	}
 	
-	private func executeStore(_ instruction: BytecodeInstruction, pc: Int) throws -> Int {
+	private func executeStore(_ instruction: BytecodeExecutionInstruction, pc: Int) throws -> Int {
 		
 		guard let reg = instruction.arguments.first else {
 			throw error(.unexpectedArgument)
@@ -451,7 +451,7 @@ public class BytecodeInterpreter {
 		return pc + 1
 	}
 	
-	private func executeRegisterUpdate(_ instruction: BytecodeInstruction, pc: Int) throws -> Int {
+	private func executeRegisterUpdate(_ instruction: BytecodeExecutionInstruction, pc: Int) throws -> Int {
 		
 		guard let reg = instruction.arguments.first else {
 			throw error(.unexpectedArgument)
@@ -466,7 +466,7 @@ public class BytecodeInterpreter {
 		return pc + 1
 	}
 	
-	private func executeRegisterClear(_ instruction: BytecodeInstruction, pc: Int) throws -> Int {
+	private func executeRegisterClear(_ instruction: BytecodeExecutionInstruction, pc: Int) throws -> Int {
 
 		guard let reg = instruction.arguments.first else {
 			throw error(.unexpectedArgument)
@@ -481,7 +481,7 @@ public class BytecodeInterpreter {
 		return pc + 1
 	}
 	
-	private func executeRegisterLoad(_ instruction: BytecodeInstruction, pc: Int) throws -> Int {
+	private func executeRegisterLoad(_ instruction: BytecodeExecutionInstruction, pc: Int) throws -> Int {
 		
 		guard let reg = instruction.arguments.first else {
 			throw error(.unexpectedArgument)
@@ -498,7 +498,7 @@ public class BytecodeInterpreter {
 		return pc + 1
 	}
 	
-	private func executeInvokeVirtual(_ instruction: BytecodeInstruction, pc: Int) throws -> Int {
+	private func executeInvokeVirtual(_ instruction: BytecodeExecutionInstruction, pc: Int) throws -> Int {
 		
 		guard let id = instruction.arguments.first else {
 			throw error(.unexpectedArgument)
@@ -523,7 +523,7 @@ public class BytecodeInterpreter {
 		return idPc
 	}
 	
-	private func executeExitVirtual(_ instruction: BytecodeInstruction, pc: Int) throws -> Int {
+	private func executeExitVirtual(_ instruction: BytecodeExecutionInstruction, pc: Int) throws -> Int {
 		
 		guard let exitVirtualLabel = try? virtualInvokeStack.pop() else {
 			throw error(.unexpectedArgument)
@@ -534,14 +534,14 @@ public class BytecodeInterpreter {
 		return exitVirtualLabel
 	}
 	
-	private func executePop(_ instruction: BytecodeInstruction, pc: Int) throws -> Int {
+	private func executePop(_ instruction: BytecodeExecutionInstruction, pc: Int) throws -> Int {
 		
 		_ = try stack.pop()
 		
 		return pc + 1
 	}
 	
-	private func executeSkipPast(_ instruction: BytecodeInstruction, pc: Int) throws -> Int {
+	private func executeSkipPast(_ instruction: BytecodeExecutionInstruction, pc: Int) throws -> Int {
 		
 		guard let label = instruction.arguments.first else {
 			throw error(.unexpectedArgument)
@@ -560,7 +560,7 @@ public class BytecodeInterpreter {
 		
 	}
 	
-	private func executeStructInit(_ instruction: BytecodeInstruction, pc: Int) throws -> Int {
+	private func executeStructInit(_ instruction: BytecodeExecutionInstruction, pc: Int) throws -> Int {
 
 		let newStruct = ValueType.struct([:])
 		
@@ -569,7 +569,7 @@ public class BytecodeInterpreter {
 		return pc + 1
 	}
 
-	private func executeStructSet(_ instruction: BytecodeInstruction, pc: Int) throws -> Int {
+	private func executeStructSet(_ instruction: BytecodeExecutionInstruction, pc: Int) throws -> Int {
 		
 		guard let arg = instruction.arguments.first, case let .index(key) = arg else {
 			throw error(.unexpectedArgument)
@@ -588,7 +588,7 @@ public class BytecodeInterpreter {
 		return pc + 1
 	}
 
-	private func executeStructUpdate(_ instruction: BytecodeInstruction, pc: Int) throws -> Int {
+	private func executeStructUpdate(_ instruction: BytecodeExecutionInstruction, pc: Int) throws -> Int {
 
 		let memberIds: [Int] = instruction.arguments.flatMap {
 			if case let .index(i) = $0 {
@@ -610,7 +610,7 @@ public class BytecodeInterpreter {
 		return pc + 1
 	}
 	
-	private func executeStructGet(_ instruction: BytecodeInstruction, pc: Int) throws -> Int {
+	private func executeStructGet(_ instruction: BytecodeExecutionInstruction, pc: Int) throws -> Int {
 		
 		guard let arg = instruction.arguments.first, case let .index(key) = arg else {
 			throw error(.unexpectedArgument)
@@ -629,7 +629,7 @@ public class BytecodeInterpreter {
 		return pc + 1
 	}
 	
-	private func executeVirtualHeader(_ instruction: BytecodeInstruction, pc: Int) throws -> Int {
+	private func executeVirtualHeader(_ instruction: BytecodeExecutionInstruction, pc: Int) throws -> Int {
 		
 		guard let arg = instruction.arguments.first, case let .index(id) = arg else {
 			throw error(.unexpectedArgument)
@@ -643,7 +643,7 @@ public class BytecodeInterpreter {
 
 	}
 	
-	private func executePrivateVirtualHeader(_ instruction: BytecodeInstruction, pc: Int) throws -> Int {
+	private func executePrivateVirtualHeader(_ instruction: BytecodeExecutionInstruction, pc: Int) throws -> Int {
 		
 		guard let arg = instruction.arguments.first, case let .index(id) = arg else {
 			throw error(.unexpectedArgument)
@@ -657,7 +657,7 @@ public class BytecodeInterpreter {
 
 	}
 	
-	private func executeVirtualEnd(_ instruction: BytecodeInstruction, pc: Int) throws -> Int {
+	private func executeVirtualEnd(_ instruction: BytecodeExecutionInstruction, pc: Int) throws -> Int {
 		
 		// In theory should never be called?
 		return try virtualInvokeStack.pop()
