@@ -30,26 +30,23 @@ public struct Stack<Element>: CustomStringConvertible {
 	
 	mutating func push(_ item: Element) throws {
 		
-		if size >= limit {
+		guard size < limit else {
 			throw InterpreterError.stackOverflow
 		}
 		
 		items.append(item)
 		size += 1
 	}
-	
+
 	mutating func pop() throws -> Element {
-		
-		// TODO: is this faster than popLast()?
-//		let last = items.remove(at: size - 1)
-		
-		guard let last = items.popLast() else {
+
+		guard size > 0 else {
 			throw InterpreterError.illegalStackOperation
 		}
-		
+
 		size -= 1
 		
-		return last
+		return items.removeLast()
 	}
 	
 	public var description: String {
