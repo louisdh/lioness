@@ -125,6 +125,8 @@ public class Runner {
 
 			log("\nInterpret execution time: \(interpretTimeElapsed)s")
 
+			log("Instructions executed: \(interpreter?.pcTrace.count ?? 0)")
+
 		}
 		
 	}
@@ -157,6 +159,8 @@ public class Runner {
 			let interpretTimeElapsed = CFAbsoluteTimeGetCurrent() - interpretStartTime
 			log("\nInterpret execution time: \(interpretTimeElapsed)s")
 			
+			log("Instructions executed: \(interpreter?.pcTrace.count ?? 0)")
+
 		}
 		
 	}
