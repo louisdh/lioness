@@ -228,9 +228,12 @@ public class Parser {
 	}
 	
 	@discardableResult
-	private func popCurrentToken() -> Token {
+	private func popCurrentToken() -> Token? {
 		
-		let t = tokens[index]
+		guard let t = tokens[safe: index] else {
+			return nil
+		}
+		
 		index += 1
 		
 		return t
@@ -239,7 +242,9 @@ public class Parser {
 	@discardableResult
 	private func popCurrentToken(andExpect type: TokenType, _ tokenString: String? = nil) throws  -> Token {
 		
-		let currentToken = popCurrentToken()
+		guard let currentToken = popCurrentToken() else {
+			throw error(.unexpectedToken)
+		}
 		
 		guard type == currentToken.type else {
 			
@@ -301,7 +306,11 @@ public class Parser {
 
 	private func parseAssignment() throws -> AssignmentNode {
 		
-		guard case let .identifier(varName) = popCurrentToken().type else {
+		guard let currentToken = popCurrentToken() else {
+			throw error(.unexpectedToken)
+		}
+		
+		guard case let .identifier(varName) = currentToken.type else {
 			throw error(.unexpectedToken)
 		}
 		
@@ -318,7 +327,11 @@ public class Parser {
 	
 	private func parseNumber() throws -> NumberNode {
 		
-		guard case let .number(value) = popCurrentToken().type else {
+		guard let currentToken = popCurrentToken() else {
+			throw error(.unexpectedToken)
+		}
+		
+		guard case let .number(value) = currentToken.type else {
 			throw error(.unexpectedToken)
 		}
 		
@@ -425,7 +438,11 @@ public class Parser {
 				
 				try popCurrentToken(andExpect: .dot, ".")
 				
-				guard case let .identifier(variable) = popCurrentToken().type else {
+				guard let idToken = popCurrentToken() else {
+					throw error(.unexpectedToken)
+				}
+				
+				guard case let .identifier(variable) = idToken.type else {
 					throw error(.unexpectedToken)
 				}
 				
@@ -466,7 +483,11 @@ public class Parser {
 	
 	private func parseIdentifier() throws -> ASTNode {
 		
-		guard case let .identifier(name) = popCurrentToken().type else {
+		guard let idToken = popCurrentToken() else {
+			throw error(.unexpectedToken)
+		}
+		
+		guard case let .identifier(name) = idToken.type else {
 			throw error(.unexpectedToken)
 		}
 
@@ -491,7 +512,11 @@ public class Parser {
 					break
 				}
 				
-				guard case .comma = popCurrentToken().type else {
+				guard let commaToken = popCurrentToken() else {
+					throw error(.unexpectedToken)
+				}
+				
+				guard case .comma = commaToken.type else {
 					throw error(.expectedArgumentList)
 				}
 				
@@ -810,7 +835,9 @@ public class Parser {
 				return lhs
 			}
 			
-			let token = popCurrentToken()
+			guard let token = popCurrentToken() else {
+				throw error(.unexpectedToken)
+			}
 			
 			guard let op = operatorString(for: token.type) else {
 				throw error(.unexpectedToken)
@@ -839,8 +866,12 @@ public class Parser {
 	private var currentFunctionReturns = false
 	
 	private func parseFunctionPrototype() throws -> FunctionPrototypeNode {
-		
-		guard case let .identifier(name) = popCurrentToken().type else {
+
+		guard let idToken = popCurrentToken() else {
+			throw error(.unexpectedToken)
+		}
+
+		guard case let .identifier(name) = idToken.type else {
 			throw error(.expectedFunctionName)
 		}
 		
@@ -855,7 +886,11 @@ public class Parser {
 				break
 			}
 			
-			guard case .comma = popCurrentToken().type else {
+			guard let commaToken = popCurrentToken() else {
+				throw error(.unexpectedToken)
+			}
+			
+			guard case .comma = commaToken.type else {
 				throw error(.expectedArgumentList)
 			}
 		}
@@ -892,7 +927,11 @@ public class Parser {
 		
 		try popCurrentToken(andExpect: .struct)
 		
-		guard case let .identifier(name) = popCurrentToken().type else {
+		guard let idToken = popCurrentToken() else {
+			throw error(.expectedFunctionName)
+		}
+		
+		guard case let .identifier(name) = idToken.type else {
 			throw error(.expectedFunctionName)
 		}
 
@@ -908,7 +947,11 @@ public class Parser {
 				break
 			}
 			
-			guard case .comma = popCurrentToken().type else {
+			guard let commaToken = popCurrentToken() else {
+				throw error(.expectedFunctionName)
+			}
+			
+			guard case .comma = commaToken.type else {
 				throw error(.expectedMemberList)
 			}
 		}
