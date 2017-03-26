@@ -11,7 +11,7 @@ Lioness is a high-level programming language designed for mathematical purposes.
 
 Lioness is inspired by Swift in terms of its syntax, and inspired by shader languages (e.g. GLSL) for its feature set.
 
-The standard library (abbreviated: stdlib) contains basic functions for number manipulation, such as: max/min, ceil, floor, trigonometric functions, etc. However, functions to calculate prime numbers and the like are not considered relevant for the standard library.
+The standard library (abbreviated: stdlib) contains basic functions for number manipulation, such as: max/min, ceil, floor, trigonometry, etc. However, functions to calculate prime numbers and the like are not considered relevant for the standard library.
 
 
 ## Example
@@ -54,7 +54,7 @@ a = factorial(5) // a = 120
 * ```if```/```else```/```else if``` statements
 
 ## Running
-Since the project does not rely on any dependencies, running it is very simple. Open the Xcode project (preferable in the latest non-beta version of Xcode) and hit run.
+Since the project does not rely on any dependencies, running it is very simple. Open ```Lioness.xcworkspace``` (preferably in the latest non-beta version of Xcode) and hit run.
 
 ## Roadmap
 - [x] Structs
