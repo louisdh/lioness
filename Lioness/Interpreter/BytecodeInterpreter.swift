@@ -25,7 +25,7 @@ public class BytecodeInterpreter {
 
 	private var virtualInvokeStack: Stack<Int>
 	
-	private var virtualDepth = 0
+	private var virtualDepth = Counter(start: 0)
 
 	/// Registers
 	private(set) public var registers = [Int : ValueType]()
@@ -82,6 +82,16 @@ public class BytecodeInterpreter {
 			}
 			
 			if line.type == .virtualEnd {
+				
+				guard let currentFunc = funcStack.popLast() else {
+					throw error(.unexpectedArgument)
+				}
+				
+				virtualEndMap[currentFunc] = pc
+				
+			}
+			
+			if line.type == .privateVirtualEnd {
 				
 				guard let currentFunc = funcStack.popLast() else {
 					throw error(.unexpectedArgument)
@@ -218,7 +228,9 @@ public class BytecodeInterpreter {
 			case .virtualEnd:
 				newPc = try executeVirtualEnd(instruction, pc: pc)
 
-			
+			case .privateVirtualEnd:
+				newPc = try executePrivateVirtualEnd(instruction, pc: pc)
+
 		}
 		
 		return newPc
@@ -382,7 +394,7 @@ public class BytecodeInterpreter {
 		
 		if try popNumber() == 1.0 {
 			
-			if let newPc = progamCounter(for: i) {
+			if let newPc = try progamCounter(for: i) {
 				return newPc
 			} else {
 				return bytecode.count
@@ -406,7 +418,7 @@ public class BytecodeInterpreter {
 		
 		if try popNumber() == 0.0 {
 			
-			if let newPc = progamCounter(for: i) {
+			if let newPc = try progamCounter(for: i) {
 				return newPc
 			} else {
 				return bytecode.count
@@ -428,7 +440,7 @@ public class BytecodeInterpreter {
 			throw error(.unexpectedArgument)
 		}
 		
-		if let newPc = progamCounter(for: i) {
+		if let newPc = try progamCounter(for: i) {
 			return newPc
 		} else {
 			return bytecode.count
@@ -517,7 +529,7 @@ public class BytecodeInterpreter {
 		
 		// Only increment depth if non-private virtual is called
 		if bytecode[idPc - 1].type == .virtualHeader {
-			virtualDepth += 1
+			virtualDepth.increment()
 		}
 
 		return idPc
@@ -529,7 +541,7 @@ public class BytecodeInterpreter {
 			throw error(.unexpectedArgument)
 		}
 		
-		virtualDepth -= 1
+		try virtualDepth.decrement()
 		
 		return exitVirtualLabel
 	}
@@ -551,7 +563,7 @@ public class BytecodeInterpreter {
 			throw error(.unexpectedArgument)
 		}
 		
-		if let newPc = progamCounter(for: i) {
+		if let newPc = try progamCounter(for: i) {
 			// FIXME: need to check if newPc >= bytecode.count?
 			return newPc + 1
 		} else {
@@ -659,9 +671,14 @@ public class BytecodeInterpreter {
 	
 	private func executeVirtualEnd(_ instruction: BytecodeExecutionInstruction, pc: Int) throws -> Int {
 		
-		// In theory should never be called?
-		return try virtualInvokeStack.pop()
+		try virtualDepth.decrement()
 		
+		return try virtualInvokeStack.pop()
+	}
+	
+	private func executePrivateVirtualEnd(_ instruction: BytecodeExecutionInstruction, pc: Int) throws -> Int {
+		
+		return try virtualInvokeStack.pop()
 	}
 	
 	// MARK: - Structs
@@ -766,13 +783,13 @@ public class BytecodeInterpreter {
 	
 	private func setRegValue(_ value: ValueType, for reg: Int) {
 		
-		let privateKey = virtualDepth * regPrivateKeyPrefixSize + reg
+		let privateKey = virtualDepth.value * regPrivateKeyPrefixSize + reg
 		
 		// FIXME: make faster?
 		if regMap[reg] != nil {
-			regMap[reg]?.append(virtualDepth)
+			regMap[reg]?.append(virtualDepth.value)
 		} else {
-			regMap[reg] = [virtualDepth]
+			regMap[reg] = [virtualDepth.value]
 		}
 		
 		registers[privateKey] = value
@@ -838,7 +855,7 @@ public class BytecodeInterpreter {
 	// TODO: max cache size?
 	private var labelProgramCountersCache = [Int : Int]()
 	
-	private func progamCounter(for label: Int) -> Int? {
+	private func progamCounter(for label: Int) throws -> Int? {
 		
 		if let pc = labelProgramCountersCache[label] {
 			return pc
@@ -852,7 +869,7 @@ public class BytecodeInterpreter {
 			
 			if let exitVirtualLabel = try? virtualInvokeStack.pop() {
 				
-				virtualDepth -= 1
+				try virtualDepth.decrement()
 				
 				return exitVirtualLabel
 			}

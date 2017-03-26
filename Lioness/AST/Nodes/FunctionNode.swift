@@ -83,7 +83,7 @@ public class FunctionNode: ASTNode {
 		bytecode.append(exitHeaderInstruction)
 		bytecode.append(contentsOf: cleanupInstructions)
 
-		bytecode.append(BytecodeInstruction(label: cleanupEndLabel, type: .virtualEnd))
+		bytecode.append(BytecodeInstruction(label: cleanupEndLabel, type: .privateVirtualEnd))
 		
 		//
 		
