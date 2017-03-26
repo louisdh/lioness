@@ -282,9 +282,11 @@ public class BytecodeCompiler {
 			
 		}
 				
-		for (_, key) in scopeNode.registersToClean {
+		for (id, key) in scopeNode.registersToClean {
 			if let key = key {
-				scopeNode.registerMap.removeValue(forKey: key)
+				if scopeNode.registerMap[key] == id {
+					scopeNode.registerMap.removeValue(forKey: key)
+				}
 			}
 		}
 		
