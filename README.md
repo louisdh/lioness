@@ -1,6 +1,6 @@
 <center><img src="doc-resources/readme/logo.png" style="max-height: 300px; margin-bottom:-55px; margin-top:-50px;"></center>
 
-#<center>The Lioness Programming Language</center>
+# <center>The Lioness Programming Language</center>
 
 <center>
 [![Swift](https://img.shields.io/badge/Swift-3.0.2-orange.svg?style=flat")](https://developer.apple.com/swift/)
