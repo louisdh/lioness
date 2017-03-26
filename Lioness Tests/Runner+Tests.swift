@@ -85,12 +85,18 @@ class Runner_Tests: BaseTestCase {
 		
 	}
 	
+	func testVarAssignAfterScopeLeave() {
+		
+		assert(in: "VarAssignAfterScopeLeave", that: "a", equals: .number(1))
+		
+	}
+	
 	// MARK: - Boilerplate
 	
 	// TODO: Maybe set expectedValue in source file?
-	func assert(in file: String, that `var`: String, equals expectedValue: ValueType) {
+	func assert(in file: String, that `var`: String, equals expectedValue: ValueType, useStdLib: Bool = true) {
 		
-		guard let result = try? execute(file, get: `var`) else {
+		guard let result = try? execute(file, get: `var`, useStdLib: useStdLib) else {
 			
 			let message = "[\(file).lion]: Expected \(expectedValue) as the value of \(`var`), but found: nil"
 
@@ -104,7 +110,7 @@ class Runner_Tests: BaseTestCase {
 		
 	}
 	
-	func execute(_ file: String, get varName: String) throws -> ValueType {
+	func execute(_ file: String, get varName: String, useStdLib: Bool = true) throws -> ValueType {
 	
 		let runner = Runner(logDebug: false)
 		
@@ -116,7 +122,7 @@ class Runner_Tests: BaseTestCase {
 		
 		do {
 			
-			let result = try runner.runSource(at: path, get: varName)
+			let result = try runner.runSource(at: path, get: varName, useStdLib: useStdLib)
 			
 			return result
 			

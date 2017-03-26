@@ -8,22 +8,6 @@
 
 import Foundation
 
-public protocol RunnerDelegate {
-	
-	func log(_ message: String)
-	
-	func log(_ error: Error)
-	
-	func log(_ token: Token)
-	
-}
-
-public enum RunnerError: Error {
-	case registerNotFound
-	case stdlibFailed
-	case runFailed
-}
-
 /// Runs through full pipeline, from lexer to interpreter
 public class Runner {
 	
@@ -44,26 +28,36 @@ public class Runner {
 		compiler = BytecodeCompiler()
 	}
 	
-	public func runSource(at path: String, get varName: String) throws -> ValueType {
+	public func runSource(at path: String, get varName: String, useStdLib: Bool = true) throws -> ValueType {
 		
 		let source = try String(contentsOfFile: path, encoding: .utf8)
 		
-		return try run(source, get: varName)
+		return try run(source, get: varName, useStdLib: useStdLib)
 	}
 	
-	func run(_ source: String, get varName: String) throws -> ValueType {
+	func run(_ source: String, get varName: String, useStdLib: Bool = true) throws -> ValueType {
 		
-		let stdLib = try StdLib().stdLibCode()
-		
-		guard let compiledStdLib = compileLionessSourceCode(stdLib) else {
-			throw RunnerError.stdlibFailed
-		}
+		let bytecode: BytecodeBody
 		
 		guard let compiledSource = compileLionessSourceCode(source) else {
 			throw RunnerError.runFailed
 		}
 
-		let bytecode = compiledStdLib + compiledSource
+		if useStdLib {
+			
+			let stdLib = try StdLib().stdLibCode()
+			
+			guard let compiledStdLib = compileLionessSourceCode(stdLib) else {
+				throw RunnerError.stdlibFailed
+			}
+			
+			bytecode = compiledStdLib + compiledSource
+
+		} else {
+			
+			bytecode = compiledSource
+
+		}
 		
 		let executionBytecode = bytecode.map { $0.executionInstruction }
 		
