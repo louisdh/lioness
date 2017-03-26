@@ -33,4 +33,4 @@ In practice it is common to want to compile source code once and execute it mult
 
 The encoding/decoding will typically be followed by writing/reading the bytecode to disk, to enable efficient distribution. 
 
-Generally the performance of the interpreter step is deemed more important than compilation time (pipeline 1). A concrete example of this is compile time code optimization: this will, by definition, slow down compilation time. But the performance gains at runtime are worth it.
+Generally the performance of the interpreter step (pipeline 2) is deemed more important than compilation time (pipeline 1). A concrete example of this is compile time code optimization: this will, by definition, slow down compilation time. But the performance gains at runtime are worth it.
