@@ -104,7 +104,7 @@ public class BinaryOpNode: ASTNode {
 	}
 	
 	public var description: String {
-		return "BinaryOpNode(\(op), lhs: \(lhs), rhs: \(rhs))"
+		return "BinaryOpNode(\(op), lhs: \(lhs), rhs: \(String(describing: rhs)))"
 	}
 	
 	public var nodeDescription: String? {
