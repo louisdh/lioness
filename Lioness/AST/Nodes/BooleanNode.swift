@@ -9,54 +9,53 @@
 import Foundation
 
 public class BooleanNode: ASTNode {
-	
+
 	/// Either 0 (false) or 1 (true)
 	public let value: UInt8
-	
+
 	public var boolValue: Bool {
 		return value == 1
 	}
-	
+
 	public init?(value: UInt8) {
-		
+
 		if value != 0 && value != 1 {
 			return nil
 		}
-		
+
 		self.value = value
 	}
-	
+
 	public init(bool: Bool) {
-		
+
 		if bool == true {
-			
+
 			self.value = 1
 
 		} else {
-			
+
 			self.value = 0
 
 		}
-		
+
 	}
-	
+
 	public func compile(with ctx: BytecodeCompiler, in parent: ASTNode?) throws -> BytecodeBody {
-		
+
 		let i = boolValue ? 1.0 : 0.0
 		let label = ctx.nextIndexLabel()
 		return [BytecodeInstruction(label: label, type: .pushConst, arguments: [.value(i)])]
-		
+
 	}
-	
+
 	public var childNodes: [ASTNode] {
 		return []
 	}
-	
-	
+
 	public var description: String {
 		return "BooleanNode(\(value))"
 	}
-	
+
 	public var nodeDescription: String? {
 		if boolValue == true {
 			return "true"
@@ -64,9 +63,9 @@ public class BooleanNode: ASTNode {
 			return "false"
 		}
 	}
-	
+
 	public var descriptionChildNodes: [ASTChildNode] {
 		return []
 	}
-	
+
 }

@@ -9,35 +9,35 @@
 import Foundation
 
 public class NumberNode: ASTNode {
-	
+
 	public let value: Double
-	
+
 	public init(value: Double) {
 		self.value = value
 	}
-	
+
 	public func compile(with ctx: BytecodeCompiler, in parent: ASTNode?) throws -> BytecodeBody {
-		
+
 		let i = self.value
 		let label = ctx.nextIndexLabel()
 		return [BytecodeInstruction(label: label, type: .pushConst, arguments: [.value(i)])]
-		
+
 	}
 
 	public var childNodes: [ASTNode] {
 		return []
 	}
-	
+
 	public var description: String {
 		return "NumberNode(\(value))"
 	}
-	
+
 	public var nodeDescription: String? {
 		return "\(value)"
 	}
-	
+
 	public var descriptionChildNodes: [ASTChildNode] {
 		return []
 	}
-	
+
 }

@@ -9,11 +9,11 @@
 import Foundation
 
 public protocol RunnerDelegate {
-	
+
 	func log(_ message: String)
-	
+
 	func log(_ error: Error)
-	
+
 	func log(_ token: Token)
-	
+
 }

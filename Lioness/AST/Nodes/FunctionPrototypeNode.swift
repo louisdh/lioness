@@ -9,7 +9,7 @@
 import Foundation
 
 public class FunctionPrototypeNode: ASTNode {
-	
+
 	public let name: String
 	public let argumentNames: [String]
 	public let returns: Bool
@@ -19,26 +19,26 @@ public class FunctionPrototypeNode: ASTNode {
 		self.argumentNames = argumentNames
 		self.returns = returns
 	}
-	
+
 	// TODO: make ASTNode protocol without compile function? (and make one with compile func)
 	public func compile(with ctx: BytecodeCompiler, in parent: ASTNode?) throws -> BytecodeBody {
 		return []
 	}
-	
+
 	public var childNodes: [ASTNode] {
 		return []
 	}
-	
+
 	public var description: String {
 		return "FunctionPrototypeNode(name: \(name), argumentNames: \(argumentNames), returns: \(returns))"
 	}
-	
+
 	public var nodeDescription: String? {
 		return "Function Prototype"
 	}
-	
+
 	public var descriptionChildNodes: [ASTChildNode] {
 		return []
 	}
-	
+
 }

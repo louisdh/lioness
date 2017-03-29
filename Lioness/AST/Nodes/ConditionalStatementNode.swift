@@ -9,7 +9,7 @@
 import Foundation
 
 public class ConditionalStatementNode: ASTNode {
-	
+
 	public let condition: ASTNode
 	public let body: BodyNode
 	public let elseBody: BodyNode?
@@ -19,16 +19,15 @@ public class ConditionalStatementNode: ASTNode {
 		self.body = body
 		self.elseBody = elseBody
 	}
-	
+
 	public func compile(with ctx: BytecodeCompiler, in parent: ASTNode?) throws -> BytecodeBody {
-		
+
 		var bytecode = BytecodeBody()
 
 		let conditionInstruction = try condition.compile(with: ctx, in: self)
 		bytecode.append(contentsOf: conditionInstruction)
 
 		let ifeqLabel = ctx.nextIndexLabel()
-		
 
 		var bodyBytecode = BytecodeBody()
 
@@ -36,19 +35,18 @@ public class ConditionalStatementNode: ASTNode {
 
 		let bodyInstructions = try body.compile(with: ctx, in: self)
 		bodyBytecode.append(contentsOf: bodyInstructions)
-		
+
 		let goToEndLabel = ctx.nextIndexLabel()
 
-		
 		let peekNextLabel = ctx.peekNextIndexLabel()
 		let ifeq = BytecodeInstruction(label: ifeqLabel, type: .ifFalse, arguments: [.index(peekNextLabel)])
 		bytecode.append(ifeq)
-		
+
 		if let elseBody = elseBody {
-			
+
 			let instructions = try elseBody.compile(with: ctx, in: self)
 			elseBodyBytecode.append(contentsOf: instructions)
-			
+
 		}
 
 		bytecode.append(contentsOf: bodyBytecode)
@@ -57,57 +55,56 @@ public class ConditionalStatementNode: ASTNode {
 			let goToEnd = BytecodeInstruction(label: goToEndLabel, type: .goto, arguments: [.index(ctx.peekNextIndexLabel())])
 			bytecode.append(goToEnd)
 		}
-		
+
 		bytecode.append(contentsOf: elseBodyBytecode)
-	
+
 		return bytecode
-		
+
 	}
-	
+
 	public var childNodes: [ASTNode] {
 		var children = [condition, body]
-		
+
 		if let elseBody = elseBody {
 			children.append(elseBody)
 		}
-		
+
 		return children
 	}
-	
+
 	public var description: String {
-		
+
 		var str = "ConditionalStatementNode(condition: \(condition), body: ["
-		
+
 		str += "\n    \(body.description)"
-		
+
 		if let elseBody = elseBody {
 
 			str += ", elseBody: "
-			
+
 			str += "\n    \(elseBody.description)"
 
 			str += "\n)"
-			
+
 		} else {
-			
+
 			str += "\n])"
 
 		}
-		
+
 		return str
 	}
-	
+
 	public var nodeDescription: String? {
 		return "if"
 	}
-	
+
 	public var descriptionChildNodes: [ASTChildNode] {
 		var children = [ASTChildNode]()
-		
+
 		let conditionChildNode = ASTChildNode(connectionToParent: "condition", isConnectionConditional: false, node: condition)
 		children.append(conditionChildNode)
-		
-		
+
 		let ifChildNode = ASTChildNode(connectionToParent: "if", isConnectionConditional: true, node: body)
 		children.append(ifChildNode)
 
@@ -115,8 +112,8 @@ public class ConditionalStatementNode: ASTNode {
 			let elseChildNode = ASTChildNode(connectionToParent: "else", isConnectionConditional: true, node: elseBody)
 			children.append(elseChildNode)
 		}
-		
+
 		return children
 	}
-	
+
 }

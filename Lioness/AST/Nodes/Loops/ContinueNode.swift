@@ -9,33 +9,33 @@
 import Foundation
 
 public class ContinueNode: ASTNode {
-	
+
 	public func compile(with ctx: BytecodeCompiler, in parent: ASTNode?) throws -> BytecodeBody {
-		
+
 		let label = ctx.nextIndexLabel()
-		
+
 		guard let continueLabel = ctx.peekLoopContinue() else {
 			throw CompileError.unexpectedCommand
 		}
-		
+
 		return [BytecodeInstruction(label: label, type: .goto, arguments: [.index(continueLabel)], comment: "continue")]
-		
+
 	}
-	
+
 	public var childNodes: [ASTNode] {
 		return []
 	}
-	
+
 	public var description: String {
 		return "ContinueNode"
 	}
-	
+
 	public var nodeDescription: String? {
 		return "continue"
 	}
-	
+
 	public var descriptionChildNodes: [ASTChildNode] {
 		return []
 	}
-	
+
 }

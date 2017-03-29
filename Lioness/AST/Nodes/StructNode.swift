@@ -11,56 +11,56 @@ import Foundation
 public class StructNode: ASTNode {
 
 	public let prototype: StructPrototypeNode
-	
+
 	init(prototype: StructPrototypeNode) {
 		self.prototype = prototype
 	}
-	
+
 	public func compile(with ctx: BytecodeCompiler, in parent: ASTNode?) throws -> BytecodeBody {
 
 		var bytecode = BytecodeBody()
-		
+
 		let structId = ctx.getStructId(for: self)
-		
+
 		let headerLabel = ctx.nextIndexLabel()
-		
+
 		let header = BytecodeInstruction(label: headerLabel, type: .virtualHeader, arguments: [.index(structId)], comment: "\(prototype.name)(\(prototype.members))")
 		bytecode.append(header)
 
 		let initInstr = BytecodeInstruction(label: ctx.nextIndexLabel(), type: .structInit, comment: "init \(prototype.name)")
 		bytecode.append(initInstr)
-		
+
 		for member in prototype.members.reversed() {
-			
+
 			guard let id = ctx.getStructMemberId(for: member) else {
 				throw CompileError.unexpectedCommand
 			}
-			
+
 			let instr = BytecodeInstruction(label: ctx.nextIndexLabel(), type: .structSet, arguments: [.index(id)], comment: "set \(member)")
 			bytecode.append(instr)
 
 		}
-		
+
 		bytecode.append(BytecodeInstruction(label: ctx.nextIndexLabel(), type: .virtualEnd))
-		
+
 		return bytecode
-		
+
 	}
-	
+
 	public var childNodes: [ASTNode] {
 		return [prototype]
 	}
-	
+
 	public var description: String {
 		return "StructNode(prototype: \(prototype))"
 	}
-	
+
 	public var nodeDescription: String? {
 		return "Struct"
 	}
-	
+
 	public var descriptionChildNodes: [ASTChildNode] {
 		return []
 	}
-	
+
 }

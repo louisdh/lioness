@@ -9,33 +9,33 @@
 import Foundation
 
 public class BreakLoopNode: ASTNode {
-	
+
 	public func compile(with ctx: BytecodeCompiler, in parent: ASTNode?) throws -> BytecodeBody {
-		
+
 		let label = ctx.nextIndexLabel()
-		
+
 		guard let breakLabel = ctx.peekLoopHeader() else {
 			throw CompileError.unexpectedCommand
 		}
-		
+
 		return [BytecodeInstruction(label: label, type: .goto, arguments: [.index(breakLabel)], comment: "break")]
-		
+
 	}
-	
+
 	public var childNodes: [ASTNode] {
 		return []
 	}
-	
+
 	public var description: String {
 		return "BreakLoopNode"
 	}
-	
+
 	public var nodeDescription: String? {
 		return "break"
 	}
-	
+
 	public var descriptionChildNodes: [ASTChildNode] {
 		return []
 	}
-	
+
 }

@@ -9,27 +9,27 @@
 import Foundation
 
 extension ASTNode {
-	
+
 	var isValidConditionNode: Bool {
-		
+
 		if self is BinaryOpNode || self is VariableNode || self is InternalVariableNode || self is BooleanNode || self is CallNode || self is StructMemberNode {
 			return true
 		}
-		
+
 		return false
 	}
-	
+
 }
 
 extension ASTNode {
-	
+
 	var isValidBinaryOpNode: Bool {
-		
+
 		if self is BinaryOpNode || self is NumberNode || self is VariableNode || self is InternalVariableNode || self is BooleanNode || self is CallNode || self is StructMemberNode {
 			return true
 		}
-		
+
 		return false
 	}
-	
+
 }
