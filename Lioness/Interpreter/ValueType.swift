@@ -8,8 +8,6 @@
 
 import Foundation
 
-public typealias NumberType = Double
-
 public enum ValueType: Equatable {
 
 	case number(NumberType)

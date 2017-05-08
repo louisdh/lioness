@@ -15,7 +15,7 @@ public enum TokenType {
 	case comment
 
 	case identifier(String)
-	case number(Double)
+	case number(NumberType)
 
 	case parensOpen
 	case parensClose

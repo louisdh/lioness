@@ -98,6 +98,8 @@
 		BE37DFA51DBB8FBD003F6A3E /* ParseError.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE37DFA41DBB8FBD003F6A3E /* ParseError.swift */; };
 		BE37DFAB1DBB96CF003F6A3E /* Runner+Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE37DFAA1DBB96CF003F6A3E /* Runner+Tests.swift */; };
 		BE37DFAF1DBBE2D3003F6A3E /* InnerWhileLoops.lion in Resources */ = {isa = PBXBuildFile; fileRef = BE37DFAE1DBBE2D3003F6A3E /* InnerWhileLoops.lion */; };
+		BE38E7FE1EBE72050084470F /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE38E7FD1EBE72050084470F /* Config.swift */; };
+		BE38E7FF1EBE72050084470F /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE38E7FD1EBE72050084470F /* Config.swift */; };
 		BE3CCDC91E0330EE00977DCE /* InterpreterError.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3CCDC81E0330EE00977DCE /* InterpreterError.swift */; };
 		BE446C441DCD3BF20085EEE0 /* Array+Safe.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE446C431DCD3BF20085EEE0 /* Array+Safe.swift */; };
 		BE4AF0631DFE019F00ECE275 /* Geometry.lion in Resources */ = {isa = PBXBuildFile; fileRef = BE4AF0621DFE019F00ECE275 /* Geometry.lion */; };
@@ -195,6 +197,7 @@
 		BE37DFA41DBB8FBD003F6A3E /* ParseError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = ParseError.swift; path = Parser/ParseError.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		BE37DFAA1DBB96CF003F6A3E /* Runner+Tests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = "Runner+Tests.swift"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		BE37DFAE1DBBE2D3003F6A3E /* InnerWhileLoops.lion */ = {isa = PBXFileReference; explicitFileType = sourcecode.glsl; fileEncoding = 4; path = InnerWhileLoops.lion; sourceTree = "<group>"; };
+		BE38E7FD1EBE72050084470F /* Config.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
 		BE3CCDC81E0330EE00977DCE /* InterpreterError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = InterpreterError.swift; path = Interpreter/InterpreterError.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		BE446C431DCD3BF20085EEE0 /* Array+Safe.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = "Array+Safe.swift"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		BE4AF0621DFE019F00ECE275 /* Geometry.lion */ = {isa = PBXFileReference; explicitFileType = sourcecode.glsl; fileEncoding = 4; name = Geometry.lion; path = "Standard Library/Geometry.lion"; sourceTree = "<group>"; };
@@ -524,6 +527,7 @@
 		BEF913AB1DB151610075C6CC /* Lioness */ = {
 			isa = PBXGroup;
 			children = (
+				BE38E7FD1EBE72050084470F /* Config.swift */,
 				BEEBBD031E8859E1009AADC1 /* Runner */,
 				BE4AF0611DFE009A00ECE275 /* Standard Library */,
 				BE446C431DCD3BF20085EEE0 /* Array+Safe.swift */,
@@ -744,6 +748,7 @@
 				BE24AC401E43C498008892A2 /* ASTChildNode.swift in Sources */,
 				BEAD9A7F1DB3A1A000A6DDC1 /* Runner.swift in Sources */,
 				BE3CCDC91E0330EE00977DCE /* InterpreterError.swift in Sources */,
+				BE38E7FE1EBE72050084470F /* Config.swift in Sources */,
 				BE76416F1E32861A004562FE /* Stack.swift in Sources */,
 				BEEBBD081E885A12009AADC1 /* RunnerDelegate.swift in Sources */,
 				BE24AC981E43C62B008892A2 /* CompileError.swift in Sources */,
@@ -814,6 +819,7 @@
 				BE24AC411E43C498008892A2 /* ASTChildNode.swift in Sources */,
 				BE7641701E32861A004562FE /* Stack.swift in Sources */,
 				BE58C15C1E16D7EC00BC73CA /* Runner.swift in Sources */,
+				BE38E7FF1EBE72050084470F /* Config.swift in Sources */,
 				BE24AC991E43C62B008892A2 /* CompileError.swift in Sources */,
 				BEEBBD091E885A12009AADC1 /* RunnerDelegate.swift in Sources */,
 				BE24AC431E43C498008892A2 /* ASTNode.swift in Sources */,

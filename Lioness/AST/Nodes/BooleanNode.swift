@@ -44,7 +44,7 @@ public class BooleanNode: ASTNode {
 
 		let i = boolValue ? 1.0 : 0.0
 		let label = ctx.nextIndexLabel()
-		return [BytecodeInstruction(label: label, type: .pushConst, arguments: [.value(i)])]
+		return [BytecodeInstruction(label: label, type: .pushConst, arguments: [.value(NumberType(i))])]
 
 	}
 

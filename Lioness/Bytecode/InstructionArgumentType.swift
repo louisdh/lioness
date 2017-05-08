@@ -10,7 +10,7 @@ import Foundation
 
 public enum InstructionArgumentType {
 
-	case value(Double)
+	case value(NumberType)
 	case index(Int)
 
 	var encoded: String {

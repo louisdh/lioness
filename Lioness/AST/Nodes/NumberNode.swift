@@ -10,9 +10,9 @@ import Foundation
 
 public class NumberNode: ASTNode {
 
-	public let value: Double
+	public let value: NumberType
 
-	public init(value: Double) {
+	public init(value: NumberType) {
 		self.value = value
 	}
 

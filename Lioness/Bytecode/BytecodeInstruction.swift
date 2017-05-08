@@ -66,7 +66,7 @@ public class BytecodeInstruction {
 
 					arg = arg.replacingOccurrences(of: "v", with: "")
 
-					guard let v = Double(arg) else {
+					guard let v = NumberType(arg) else {
 						throw BytecodeInstruction.error(.invalidDecoding)
 					}
 
