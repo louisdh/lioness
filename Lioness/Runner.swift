@@ -380,7 +380,7 @@ public class Runner {
 
 		for b in bytecode {
 
-			if b.type == .virtualEnd {
+			if b.type == .virtualEnd || b.type == .privateVirtualEnd {
 				indentLevel -= 1
 			}
 
@@ -396,7 +396,7 @@ public class Runner {
 
 			description += b.description
 
-			if b.type == .virtualEnd {
+			if b.type == .virtualEnd || b.type == .privateVirtualEnd {
 				description += "\n"
 			}
 
