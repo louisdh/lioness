@@ -8,8 +8,29 @@
 
 import Foundation
 
+
 public typealias NumberType = Double
 
 // TODO: add compiler flag for Decimal usage
 //public typealias NumberType = Decimal
+
+//extension Decimal {
+//	
+//	var doubleValue: Double {
+//		return NSDecimalNumber(decimal: self).doubleValue
+//	}
+//	
+//	init?(_ string: String) {
+//		
+//		if string == "-" {
+//			return nil
+//		}
+//		
+//		let decNum = NSDecimalNumber(string: string)
+//		
+//		self = decNum.decimalValue
+//		
+//	}
+//	
+//}
 
