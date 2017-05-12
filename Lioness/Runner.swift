@@ -85,6 +85,8 @@ public class Runner {
 
 	public func run(_ source: String) throws {
 
+		let startTime = CFAbsoluteTimeGetCurrent()
+		
 		let stdLib = try StdLib().stdLibCode()
 
 		guard let compiledStdLib = compileLionessSourceCode(stdLib) else {
@@ -92,8 +94,6 @@ public class Runner {
 		}
 
 		self.source = source
-
-		let startTime = CFAbsoluteTimeGetCurrent()
 
 		if logDebug {
 			logSourceCode(source)
