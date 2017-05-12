@@ -39,10 +39,6 @@ public class Runner {
 
 		let bytecode: BytecodeBody
 
-		guard let compiledSource = compileLionessSourceCode(source) else {
-			throw RunnerError.runFailed
-		}
-
 		if useStdLib {
 
 			let stdLib = try StdLib().stdLibCode()
@@ -51,10 +47,18 @@ public class Runner {
 				throw RunnerError.stdlibFailed
 			}
 
+			guard let compiledSource = compileLionessSourceCode(source) else {
+				throw RunnerError.runFailed
+			}
+			
 			bytecode = compiledStdLib + compiledSource
 
 		} else {
 
+			guard let compiledSource = compileLionessSourceCode(source) else {
+				throw RunnerError.runFailed
+			}
+			
 			bytecode = compiledSource
 
 		}
