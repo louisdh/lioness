@@ -14,7 +14,7 @@ Lioness is inspired by Swift in terms of its syntax, and inspired by shader lang
 The standard library (abbreviated: stdlib) contains basic functions for number manipulation, such as: max/min, ceil, floor, trigonometry, etc. However, functions to calculate prime numbers and the like are not considered relevant for the standard library.
 
 
-## Example
+## Source example
 The following Lioness code calculates factorials recursively:
 
 ```
