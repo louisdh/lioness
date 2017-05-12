@@ -816,7 +816,7 @@ public class BytecodeInterpreter {
 	private var regMap = [Int: [Int]]()
 
 	// Also the max number of private keys for each reg
-	private var regPrivateKeyPrefixSize = 10_000
+	private let regPrivateKeyPrefixSize = 10_000
 
 	private func privateReg(for reg: Int) -> Int? {
 
