@@ -10,12 +10,8 @@ import Foundation
 
 public protocol ASTNodeDescriptor {
 
-	var nodeDescription: String? {
-		get
-	}
+	var nodeDescription: String? { get }
 
-	var descriptionChildNodes: [ASTChildNode] {
-		get
-	}
+	var descriptionChildNodes: [ASTChildNode] { get }
 
 }
