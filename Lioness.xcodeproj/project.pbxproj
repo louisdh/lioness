@@ -188,12 +188,12 @@
 		BE295CEA1DB14DCE0019EC57 /* Lexer+Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Lexer+Tests.swift"; sourceTree = "<group>"; };
 		BE295CEC1DB14DCE0019EC57 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BE2B29141E21A627007978BE /* FunctionGlobalVar.lion */ = {isa = PBXFileReference; explicitFileType = sourcecode.glsl; fileEncoding = 4; path = FunctionGlobalVar.lion; sourceTree = "<group>"; };
-		BE2CC6601DB94BF800F74DBE /* LargeMathOperation.lion */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LargeMathOperation.lion; sourceTree = "<group>"; };
+		BE2CC6601DB94BF800F74DBE /* LargeMathOperation.lion */ = {isa = PBXFileReference; explicitFileType = sourcecode.glsl; fileEncoding = 4; path = LargeMathOperation.lion; sourceTree = "<group>"; };
 		BE2CC6621DB94D3500F74DBE /* Runner+Performance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = "Runner+Performance.swift"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		BE2CC6641DB94F7100F74DBE /* Lexer+Performance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = "Lexer+Performance.swift"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		BE2ED01A1E202E1D00CCD588 /* Stdlib+Tests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Stdlib+Tests.swift"; path = "Stdlib/Stdlib+Tests.swift"; sourceTree = "<group>"; };
-		BE2ED01C1E211C1D00CCD588 /* Fibonacci.lion */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Fibonacci.lion; sourceTree = "<group>"; };
-		BE2ED01D1E211C1D00CCD588 /* GreatestCommonDivisor.lion */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = GreatestCommonDivisor.lion; sourceTree = "<group>"; };
+		BE2ED01C1E211C1D00CCD588 /* Fibonacci.lion */ = {isa = PBXFileReference; explicitFileType = sourcecode.glsl; fileEncoding = 4; path = Fibonacci.lion; sourceTree = "<group>"; };
+		BE2ED01D1E211C1D00CCD588 /* GreatestCommonDivisor.lion */ = {isa = PBXFileReference; explicitFileType = sourcecode.glsl; fileEncoding = 4; path = GreatestCommonDivisor.lion; sourceTree = "<group>"; };
 		BE37DFA41DBB8FBD003F6A3E /* ParseError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = ParseError.swift; path = Parser/ParseError.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		BE37DFAA1DBB96CF003F6A3E /* Runner+Tests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = "Runner+Tests.swift"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		BE37DFAE1DBBE2D3003F6A3E /* InnerWhileLoops.lion */ = {isa = PBXFileReference; explicitFileType = sourcecode.glsl; fileEncoding = 4; path = InnerWhileLoops.lion; sourceTree = "<group>"; };
