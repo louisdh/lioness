@@ -77,10 +77,17 @@ func sin(x) returns {
 	sum = x
 	
 	terms = 10
+	add = true
 	
 	for i = 1, i <= terms, i += 1 {
-		// TODO: don't use mod, just a boolean that toggles?
-		if mod(i, 2) == 0 {
+		
+		if add {
+			add = false
+		} else {
+			add = true
+		}
+		
+		if add {
 			sum += x^(2 * i + 1) / factorial(2 * i + 1)
 		} else {
 			sum -= x^(2 * i + 1) / factorial(2 * i + 1)
@@ -98,10 +105,17 @@ func cos(x) returns {
 	sum = 1
 	
 	terms = 10
-	
+	add = true
+
 	for i = 1, i <= terms, i += 1 {
-		// TODO: don't use mod, just a boolean that toggles?
-		if mod(i, 2) == 0 {
+
+		if add {
+			add = false
+		} else {
+			add = true
+		}
+		
+		if add {
 			sum += x^(2 * i) / factorial(2 * i)
 		} else {
 			sum -= x^(2 * i) / factorial(2 * i)
