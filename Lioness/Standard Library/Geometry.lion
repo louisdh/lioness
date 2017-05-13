@@ -78,12 +78,16 @@ func sin(x) returns {
 	
 	terms = 10
 	sign = -1
+	exponent = 3
+	fact = factorial(3)
 	
-	for i = 1, i <= terms, i += 1 {
+	do terms times {
 		
-		sum += sign * (x^(2 * i + 1) / factorial(2 * i + 1))
+		sum += sign * (x^exponent / fact)
 
 		sign *= -1
+		fact *= (exponent + 1) * (exponent + 2)
+		exponent += 2
 		
 	}
 	
@@ -99,13 +103,16 @@ func cos(x) returns {
 	
 	terms = 10
 	sign = -1
+	exponent = 2
+	fact = factorial(2)
+	
+	do terms times {
 
-	for i = 1, i <= terms, i += 1 {
-
-		sum += sign * (x^(2 * i) / factorial(2 * i))
+		sum += sign * (x^exponent / fact)
 
 		sign *= -1
-
+		fact *= (exponent + 1) * (exponent + 2)
+		exponent += 2
 	}
 	
 	return sum
