@@ -77,21 +77,14 @@ func sin(x) returns {
 	sum = x
 	
 	terms = 10
-	add = true
+	sign = -1
 	
 	for i = 1, i <= terms, i += 1 {
 		
-		if add {
-			add = false
-		} else {
-			add = true
-		}
+		sum += sign * (x^(2 * i + 1) / factorial(2 * i + 1))
+
+		sign *= -1
 		
-		if add {
-			sum += x^(2 * i + 1) / factorial(2 * i + 1)
-		} else {
-			sum -= x^(2 * i + 1) / factorial(2 * i + 1)
-		}
 	}
 	
 	return sum
@@ -105,21 +98,14 @@ func cos(x) returns {
 	sum = 1
 	
 	terms = 10
-	add = true
+	sign = -1
 
 	for i = 1, i <= terms, i += 1 {
 
-		if add {
-			add = false
-		} else {
-			add = true
-		}
-		
-		if add {
-			sum += x^(2 * i) / factorial(2 * i)
-		} else {
-			sum -= x^(2 * i) / factorial(2 * i)
-		}
+		sum += sign * (x^(2 * i) / factorial(2 * i))
+
+		sign *= -1
+
 	}
 	
 	return sum
