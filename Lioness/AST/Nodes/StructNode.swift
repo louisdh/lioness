@@ -24,7 +24,8 @@ public class StructNode: ASTNode {
 
 		let headerLabel = ctx.nextIndexLabel()
 
-		let header = BytecodeInstruction(label: headerLabel, type: .virtualHeader, arguments: [.index(structId)], comment: "\(prototype.name)(\(prototype.members))")
+		let headerComment = "\(prototype.name)(\(prototype.members.joined(separator: ", ")))"
+		let header = BytecodeInstruction(label: headerLabel, type: .virtualHeader, arguments: [.index(structId)], comment: headerComment)
 		bytecode.append(header)
 
 		let initInstr = BytecodeInstruction(label: ctx.nextIndexLabel(), type: .structInit, comment: "init \(prototype.name)")

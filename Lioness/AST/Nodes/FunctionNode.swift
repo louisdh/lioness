@@ -28,7 +28,9 @@ public class FunctionNode: ASTNode {
 		let functionId = ctx.getFunctionId(for: self)
 		let exitId = try ctx.getExitScopeFunctionId(for: self)
 
-		let headerInstruction = BytecodeInstruction(label: headerIndex, type: .virtualHeader, arguments: [.index(functionId)], comment: "\(prototype.name)(\(prototype.argumentNames))")
+		let headerComment = "\(prototype.name)(\(prototype.argumentNames.joined(separator: ", ")))"
+		
+		let headerInstruction = BytecodeInstruction(label: headerIndex, type: .virtualHeader, arguments: [.index(functionId)], comment: headerComment)
 
 		bytecode.append(headerInstruction)
 
