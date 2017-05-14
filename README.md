@@ -9,12 +9,12 @@
 
 Lioness is a high-level programming language designed for mathematical purposes. This project includes a lexer, parser, compiler and interpreter. All of these are 100% written in Swift with no dependencies. 
 
-Lioness is inspired by Swift in terms of its syntax, and inspired by shader languages (e.g. GLSL) for its feature set.
+The syntax of Lioness is inspired by Swift, and its feature set is akin to shader languages such as GLSL.
 
-The standard library (abbreviated: stdlib) contains basic functions for number manipulation, such as: max/min, ceil, floor, trigonometry, etc. However, functions to calculate prime numbers and the like are not considered relevant for the standard library.
+The standard library (abbreviated: stdlib) contains basic functions for number manipulation, including: max/min, ceil, floor, trigonometry, etc. However, more trivial functions, such as to calculate prime numbers, are not considered relevant for the standard library.
 
 
-## Source example
+## Source examples
 The following Lioness code calculates factorials recursively:
 
 ```
@@ -29,11 +29,27 @@ func factorial(x) returns {
 
 a = factorial(5) // a = 120
 ```
+
+The following Lioness code uses a ```do times``` loop:
+
+```
+a = 1
+n = 10
+do n times {
+	a += a
+}
+// a = 1024
+```
+
 *More examples can be found [here](Source examples).*
 
 ## Features
 
+* Minimalistic, yet expressive, syntax
 * **All types are inferred**
+* 5 basic operators: ```+```, ```-```, ```/```, ```*``` and ```^```
+	* ```^``` means "to the power of", e.g. ```2^10``` would equal 1024
+	* all operators have a shorthand, e.g. ```+=``` for ```+```
 * Numbers
 	* All numbers are floating point 
 * Booleans
