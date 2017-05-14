@@ -20,16 +20,14 @@ public extension ValueType {
 
 	func description(with ctx: BytecodeCompiler) -> String {
 
-		var descr = ""
-
 		switch self {
 		case let .number(val):
 
-			descr += "\(val)"
+			return "\(val)"
 
 		case let .struct(val):
 
-			descr += "{ "
+			var descr = "{ "
 
 			for (k, v) in val {
 
@@ -44,16 +42,17 @@ public extension ValueType {
 			}
 
 			descr += " }"
+			
+			return descr
 
 		case let .bool(val):
 			if val == true {
-				descr += "true"
+				return "true"
 			} else {
-				descr += "false"
+				return "false"
 			}
 		}
 
-		return descr
 	}
 
 }
