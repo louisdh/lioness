@@ -8,7 +8,7 @@
 
 import Foundation
 
-public class ForStatementNode: LoopNode {
+public struct ForStatementNode: LoopNode {
 
 	public let assignment: AssignmentNode
 	public let condition: ASTNode
@@ -33,7 +33,7 @@ public class ForStatementNode: LoopNode {
 		self.body = body
 	}
 
-	override func compileLoop(with ctx: BytecodeCompiler, scopeStart: Int) throws -> BytecodeBody {
+	func compileLoop(with ctx: BytecodeCompiler, scopeStart: Int) throws -> BytecodeBody {
 
 		var bytecode = BytecodeBody()
 
@@ -87,11 +87,11 @@ public class ForStatementNode: LoopNode {
 
 	}
 
-	public override var childNodes: [ASTNode] {
+	public var childNodes: [ASTNode] {
 		return [assignment, condition, interval, body]
 	}
 
-	public override var description: String {
+	public var description: String {
 
 		var str = "ForStatementNode(assignment: \(assignment), "
 
@@ -106,11 +106,11 @@ public class ForStatementNode: LoopNode {
 		return str
 	}
 
-	public override var nodeDescription: String? {
+	public var nodeDescription: String? {
 		return "for"
 	}
 
-	public override var descriptionChildNodes: [ASTChildNode] {
+	public var descriptionChildNodes: [ASTChildNode] {
 		var children = [ASTChildNode]()
 
 		let assignmentChildNode = ASTChildNode(connectionToParent: "assignment", isConnectionConditional: false, node: assignment)

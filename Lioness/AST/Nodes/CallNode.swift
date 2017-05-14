@@ -9,7 +9,7 @@
 import Foundation
 
 /// Either calls a function or the init of a struct
-public class CallNode: ASTNode {
+public struct CallNode: ASTNode {
 
 	public let callee: String
 	public let arguments: [ASTNode]

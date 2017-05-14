@@ -9,7 +9,7 @@
 import Foundation
 
 /// Body that defines a scope, `compile(with ctx)`.
-public class BodyNode: ASTNode {
+public struct BodyNode: ASTNode {
 
 	public let nodes: [ASTNode]
 

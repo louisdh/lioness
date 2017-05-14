@@ -8,7 +8,7 @@
 
 import Foundation
 
-public class StructMemberNode: ASTNode {
+public struct StructMemberNode: ASTNode {
 
 	public let variable: ASTNode
 	public let name: String

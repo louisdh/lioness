@@ -8,7 +8,7 @@
 
 import Foundation
 
-public class BreakLoopNode: ASTNode {
+public struct BreakLoopNode: ASTNode {
 
 	public func compile(with ctx: BytecodeCompiler, in parent: ASTNode?) throws -> BytecodeBody {
 

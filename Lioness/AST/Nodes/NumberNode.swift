@@ -8,7 +8,7 @@
 
 import Foundation
 
-public class NumberNode: ASTNode {
+public struct NumberNode: ASTNode {
 
 	public let value: NumberType
 

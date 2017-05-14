@@ -8,7 +8,7 @@
 
 import Foundation
 
-public class ReturnNode: ASTNode {
+public struct ReturnNode: ASTNode {
 
 	public let value: ASTNode?
 

@@ -8,7 +8,13 @@
 
 import Foundation
 
-public class LoopNode: ASTNode {
+protocol LoopNode: ASTNode {
+
+	func compileLoop(with ctx: BytecodeCompiler, scopeStart: Int) throws -> BytecodeBody
+	
+}
+
+extension LoopNode {
 
 	public func compile(with ctx: BytecodeCompiler, in parent: ASTNode?) throws -> BytecodeBody {
 
@@ -41,26 +47,6 @@ public class LoopNode: ASTNode {
 		try ctx.leaveCurrentScope()
 
 		return bytecode
-	}
-
-	public var childNodes: [ASTNode] {
-		return []
-	}
-
-	func compileLoop(with ctx: BytecodeCompiler, scopeStart: Int) throws -> BytecodeBody {
-		return []
-	}
-
-	public var description: String {
-		return ""
-	}
-
-	public var nodeDescription: String? {
-		return nil
-	}
-
-	public var descriptionChildNodes: [ASTChildNode] {
-		return []
 	}
 
 }

@@ -8,7 +8,7 @@
 
 import Foundation
 
-public class FunctionNode: ASTNode {
+public struct FunctionNode: ASTNode {
 
 	public let prototype: FunctionPrototypeNode
 	public let body: BodyNode

@@ -8,7 +8,7 @@
 
 import Foundation
 
-public class DoStatementNode: LoopNode {
+public struct DoStatementNode: LoopNode {
 
 	public let amount: ASTNode
 
@@ -36,7 +36,7 @@ public class DoStatementNode: LoopNode {
 		self.body = body
 	}
 
-	override func compileLoop(with ctx: BytecodeCompiler, scopeStart: Int) throws -> BytecodeBody {
+	func compileLoop(with ctx: BytecodeCompiler, scopeStart: Int) throws -> BytecodeBody {
 
 		var bytecode = BytecodeBody()
 
@@ -148,13 +148,13 @@ public class DoStatementNode: LoopNode {
 
 	}
 
-	public override var childNodes: [ASTNode] {
+	public var childNodes: [ASTNode] {
 		return [amount, body]
 	}
 
 	// MARK: -
 
-	public override var description: String {
+	public var description: String {
 
 		var str = "DoStatementNode(amount: \(amount), "
 
@@ -165,11 +165,11 @@ public class DoStatementNode: LoopNode {
 		return str
 	}
 
-	public override var nodeDescription: String? {
+	public var nodeDescription: String? {
 		return "do"
 	}
 
-	public override var descriptionChildNodes: [ASTChildNode] {
+	public var descriptionChildNodes: [ASTChildNode] {
 		var children = [ASTChildNode]()
 
 		let amountChildNode = ASTChildNode(connectionToParent: "amount", isConnectionConditional: false, node: amount)

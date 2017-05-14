@@ -8,7 +8,7 @@
 
 import Foundation
 
-public class BinaryOpNode: ASTNode {
+public struct BinaryOpNode: ASTNode {
 
 	static var opTypes: [String : BytecodeInstructionType] {
 		return ["+": .add,

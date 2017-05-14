@@ -8,7 +8,7 @@
 
 import Foundation
 
-public class ConditionalStatementNode: ASTNode {
+public struct ConditionalStatementNode: ASTNode {
 
 	public let condition: ASTNode
 	public let body: BodyNode

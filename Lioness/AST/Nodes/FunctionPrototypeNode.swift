@@ -8,7 +8,7 @@
 
 import Foundation
 
-public class FunctionPrototypeNode: ASTNode {
+public struct FunctionPrototypeNode: ASTNode {
 
 	public let name: String
 	public let argumentNames: [String]

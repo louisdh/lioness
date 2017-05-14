@@ -8,7 +8,7 @@
 
 import Foundation
 
-public class InternalVariableNode: ASTNode {
+public struct InternalVariableNode: ASTNode {
 
 	public let register: Int
 	public let debugName: String?

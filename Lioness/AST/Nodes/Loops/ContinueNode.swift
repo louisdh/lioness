@@ -8,7 +8,7 @@
 
 import Foundation
 
-public class ContinueNode: ASTNode {
+public struct ContinueNode: ASTNode {
 
 	public func compile(with ctx: BytecodeCompiler, in parent: ASTNode?) throws -> BytecodeBody {
 

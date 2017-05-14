@@ -8,7 +8,7 @@
 
 import Foundation
 
-public class VariableNode: ASTNode {
+public struct VariableNode: ASTNode {
 
 	public let name: String
 

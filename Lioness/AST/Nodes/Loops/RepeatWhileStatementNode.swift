@@ -8,7 +8,7 @@
 
 import Foundation
 
-public class RepeatWhileStatementNode: LoopNode {
+public struct RepeatWhileStatementNode: LoopNode {
 
 	public let condition: ASTNode
 	public let body: BodyNode
@@ -23,7 +23,7 @@ public class RepeatWhileStatementNode: LoopNode {
 		self.body = body
 	}
 
-	override func compileLoop(with ctx: BytecodeCompiler, scopeStart: Int) throws -> BytecodeBody {
+	func compileLoop(with ctx: BytecodeCompiler, scopeStart: Int) throws -> BytecodeBody {
 
 		var bytecode = BytecodeBody()
 
@@ -55,11 +55,11 @@ public class RepeatWhileStatementNode: LoopNode {
 
 	}
 
-	public override var childNodes: [ASTNode] {
+	public var childNodes: [ASTNode] {
 		return [condition, body]
 	}
 
-	public override var description: String {
+	public var description: String {
 
 		var str = "RepeatWhileStatementNode(condition: \(condition), body: "
 
@@ -70,11 +70,11 @@ public class RepeatWhileStatementNode: LoopNode {
 		return str
 	}
 
-	public override var nodeDescription: String? {
+	public var nodeDescription: String? {
 		return "repeat"
 	}
 
-	public override var descriptionChildNodes: [ASTChildNode] {
+	public var descriptionChildNodes: [ASTChildNode] {
 		var children = [ASTChildNode]()
 
 		let bodyChildNode = ASTChildNode(node: body)

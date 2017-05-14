@@ -505,9 +505,9 @@
 			children = (
 				BE24AC461E43C4FD008892A2 /* BreakLoopNode.swift */,
 				BE24AC471E43C4FD008892A2 /* ContinueNode.swift */,
+				BE24AC4A1E43C4FD008892A2 /* LoopNode.swift */,
 				BE24AC481E43C4FD008892A2 /* DoStatementNode.swift */,
 				BE24AC491E43C4FD008892A2 /* ForStatementNode.swift */,
-				BE24AC4A1E43C4FD008892A2 /* LoopNode.swift */,
 				BE24AC4B1E43C4FD008892A2 /* RepeatWhileStatementNode.swift */,
 				BE24AC4C1E43C4FD008892A2 /* WhileStatementNode.swift */,
 			);

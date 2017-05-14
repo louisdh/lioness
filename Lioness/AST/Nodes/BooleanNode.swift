@@ -8,7 +8,7 @@
 
 import Foundation
 
-public class BooleanNode: ASTNode {
+public struct BooleanNode: ASTNode {
 
 	/// Either 0 (false) or 1 (true)
 	public let value: UInt8

@@ -9,7 +9,7 @@
 import Foundation
 
 /// AST node with a compile function to compile to Scorpion
-public protocol ASTNode: class, CustomStringConvertible, ASTNodeDescriptor {
+public protocol ASTNode: CustomStringConvertible, ASTNodeDescriptor {
 
 	/// Compiles to Scorpion bytecode instructions
 	func compile(with ctx: BytecodeCompiler, in parent: ASTNode?) throws -> BytecodeBody
