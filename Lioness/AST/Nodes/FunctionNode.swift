@@ -122,7 +122,7 @@ public class FunctionNode: ASTNode {
 	}
 
 	public var nodeDescription: String? {
-		return "Function"
+		return "\(prototype.name)(\(prototype.argumentNames.joined(separator: ", ")))"
 	}
 
 	public var descriptionChildNodes: [ASTChildNode] {

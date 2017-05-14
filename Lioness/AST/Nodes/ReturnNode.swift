@@ -54,6 +54,11 @@ public class ReturnNode: ASTNode {
 	}
 
 	public var descriptionChildNodes: [ASTChildNode] {
+		
+		if let value = value {
+			return [ASTChildNode(node: value)]
+		}
+		
 		return []
 	}
 
