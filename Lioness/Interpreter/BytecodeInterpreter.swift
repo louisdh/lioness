@@ -244,7 +244,7 @@ public class BytecodeInterpreter {
 			throw error(.unexpectedArgument)
 		}
 
-		try stack.push(.number(f))
+		try stack.push(f)
 
 		return pc + 1
 	}
@@ -306,35 +306,35 @@ public class BytecodeInterpreter {
 
 	private func executeAnd(pc: Int) throws -> Int {
 
-		let rhs = try popNumber() == 1.0
-		let lhs = try popNumber() == 1.0
+		let rhs = try popBool()
+		let lhs = try popBool()
 
-		let and: NumberType = (rhs && lhs) == true ? 1.0 : 0.0
+		let and: Bool = rhs && lhs
 
-		try stack.push(.number(and))
+		try stack.push(.bool(and))
 
 		return pc + 1
 	}
 
 	private func executeOr(pc: Int) throws -> Int {
 
-		let rhs = try popNumber() == 1.0
-		let lhs = try popNumber() == 1.0
+		let rhs = try popBool()
+		let lhs = try popBool()
 
-		let and: NumberType = (rhs || lhs) == true ? 1.0 : 0.0
+		let and: Bool = rhs || lhs
 
-		try stack.push(.number(and))
+		try stack.push(.bool(and))
 
 		return pc + 1
 	}
 
 	private func executeNot(pc: Int) throws -> Int {
 
-		let b = try popNumber() == 1.0
+		let b = try popBool()
 
-		let not: NumberType = (!b) == true ? 1.0 : 0.0
+		let not: Bool = !b
 
-		try stack.push(.number(not))
+		try stack.push(.bool(not))
 
 		return pc + 1
 	}
@@ -344,9 +344,9 @@ public class BytecodeInterpreter {
 		let rhs = try stack.pop()
 		let lhs = try stack.pop()
 
-		let eq: NumberType = (lhs == rhs) ? 1.0 : 0.0
+		let eq: Bool = lhs == rhs
 
-		try stack.push(.number(eq))
+		try stack.push(.bool(eq))
 
 		return pc + 1
 	}
@@ -356,9 +356,9 @@ public class BytecodeInterpreter {
 		let rhs = try stack.pop()
 		let lhs = try stack.pop()
 
-		let neq: NumberType = (lhs != rhs) ? 1.0 : 0.0
+		let neq: Bool = lhs != rhs
 
-		try stack.push(.number(neq))
+		try stack.push(.bool(neq))
 
 		return pc + 1
 	}
@@ -368,9 +368,9 @@ public class BytecodeInterpreter {
 		let rhs = try popNumber()
 		let lhs = try popNumber()
 
-		let cmp: NumberType = (lhs <= rhs) ? 1.0 : 0.0
+		let cmp: Bool = lhs <= rhs
 
-		try stack.push(.number(cmp))
+		try stack.push(.bool(cmp))
 
 		return pc + 1
 	}
@@ -380,9 +380,9 @@ public class BytecodeInterpreter {
 		let rhs = try popNumber()
 		let lhs = try popNumber()
 
-		let cmp: NumberType = (lhs < rhs) ? 1.0 : 0.0
+		let cmp: Bool = lhs < rhs
 
-		try stack.push(.number(cmp))
+		try stack.push(.bool(cmp))
 
 		return pc + 1
 	}
@@ -397,7 +397,7 @@ public class BytecodeInterpreter {
 			throw error(.unexpectedArgument)
 		}
 
-		if try popNumber() == 1.0 {
+		if try popBool() == true {
 
 			if let newPc = try progamCounter(for: i) {
 				return newPc
@@ -421,7 +421,7 @@ public class BytecodeInterpreter {
 			throw error(.unexpectedArgument)
 		}
 
-		if try popNumber() == 0.0 {
+		if try popBool() == false {
 
 			if let newPc = try progamCounter(for: i) {
 				return newPc
@@ -896,6 +896,17 @@ public class BytecodeInterpreter {
 		}
 
 		return number
+	}
+	
+	private func popBool() throws -> Bool {
+		
+		let last = try stack.pop()
+		
+		guard case let ValueType.bool(bool) = last else {
+			throw error(.unexpectedArgument)
+		}
+		
+		return bool
 	}
 
 	// MARK: -

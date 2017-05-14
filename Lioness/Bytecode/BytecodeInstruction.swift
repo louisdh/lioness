@@ -66,11 +66,12 @@ public class BytecodeInstruction {
 
 					arg = arg.replacingOccurrences(of: "v", with: "")
 
-					guard let v = NumberType(arg) else {
-						throw BytecodeInstruction.error(.invalidDecoding)
-					}
-
-					argsParsed.append(InstructionArgumentType.value(v))
+					// TODO: support decoding
+//					guard let v = NumberType(arg) else {
+//						throw BytecodeInstruction.error(.invalidDecoding)
+//					}
+//
+//					argsParsed.append(InstructionArgumentType.value(v))
 
 				}
 
