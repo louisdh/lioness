@@ -10,7 +10,25 @@ import Foundation
 
 public class BinaryOpNode: ASTNode {
 
+	static var opTypes: [String : BytecodeInstructionType] {
+		return ["+": .add,
+		        "-": .sub,
+		        "*": .mul,
+		        "/": .div,
+		        "^": .pow,
+		        "==": .eq,
+		        "!=": .neq,
+		        ">": .cmplt,
+		        "<": .cmplt,
+		        ">=": .cmple,
+		        "<=": .cmple,
+		        "&&": .and,
+		        "||": .or,
+		        "!": .not]
+	}
+	
 	public let op: String
+	public let opInstructionType: BytecodeInstructionType
 	public let lhs: ASTNode
 
 	/// Can be nil, e.g. for 'not' operation
@@ -28,6 +46,12 @@ public class BinaryOpNode: ASTNode {
 				throw CompileError.unexpectedCommand
 			}
 		}
+		
+		guard let type = BinaryOpNode.opTypes[op] else {
+			throw CompileError.unexpectedBinaryOperator
+		}
+		
+		self.opInstructionType = type
 
 		self.lhs = lhs
 		self.rhs = rhs
@@ -36,27 +60,6 @@ public class BinaryOpNode: ASTNode {
 	public func compile(with ctx: BytecodeCompiler, in parent: ASTNode?) throws -> BytecodeBody {
 
 		var bytecode = BytecodeBody()
-
-		var opTypes: [String : BytecodeInstructionType]
-
-		opTypes = ["+": .add,
-		           "-": .sub,
-		           "*": .mul,
-		           "/": .div,
-		           "^": .pow,
-		           "==": .eq,
-		           "!=": .neq,
-		           ">": .cmplt,
-		           "<": .cmplt,
-		           ">=": .cmple,
-		           "<=": .cmple,
-		           "&&": .and,
-		           "||": .or,
-		           "!": .not]
-
-		guard let type = opTypes[op] else {
-			throw CompileError.unexpectedBinaryOperator
-		}
 
 		if op == ">" || op == ">=" {
 
@@ -87,14 +90,14 @@ public class BinaryOpNode: ASTNode {
 		let label = ctx.nextIndexLabel()
 
 		// FIXME: comment "op" is wrong for ">" and ">="
-		let operation = BytecodeInstruction(label: label, type: type, comment: op)
+		let operation = BytecodeInstruction(label: label, type: opInstructionType, comment: op)
 
 		bytecode.append(operation)
 
 		return bytecode
 
 	}
-
+	
 	public var childNodes: [ASTNode] {
 		if let rhs = rhs {
 			return [lhs, rhs]
