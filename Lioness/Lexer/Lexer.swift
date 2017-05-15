@@ -42,159 +42,426 @@ public class Lexer {
 		"=": .equals
 	]
 
-	private typealias TokenGenerator = (String) -> TokenType?
-
-	/// The order of this list is important,
-	/// e.g. match identifiers before numbers
-	/// The number of regexs should be kept low for performance reasons
-	private let tokenList: [(String, TokenGenerator)] = [
-
-		// one line comment
-		("\\/\\/.*", { _ in .comment }),
-
-		// multiline comment
-		("/\\*[^*]*\\*+(?:[^/*][^*]*\\*+)*/", { _ in .comment }),
-
-		("[ \t\n]", { _ in .ignoreableToken }),
-
-		("[a-zA-Z][a-zA-Z0-9]*", {
-
-			// Prefer keywords over identifiers
-			if let t = Lexer.keywordTokens[$0] {
-				return t
-			} else {
-				return .identifier($0)
-			}
-		}),
-
-		// Don't worry about empty matches, tokenize() will ignore those
-		("(-?[0-9]*+(,[0-9]+)*(\\.[0-9]+(e-?[0-9]+)?)?)", {
-
-			if let f = NumberType($0) {
-				return .number(f)
-			}
-
-			return nil
-		}),
-
-		("==", { _ in .comparatorEqual }),
-		("!=", { _ in .notEqual }),
-
-		("&&", { _ in .booleanAnd }),
-		("\\|\\|", { _ in .booleanOr }),
-
-		(">=", { _ in .comparatorGreaterThanEqual }),
-		("<=", { _ in .comparatorLessThanEqual }),
-
-		("\\+=", { _ in .shortHandAdd }),
-		("\\-=", { _ in .shortHandSub }),
-		("\\*=", { _ in .shortHandMul }),
-		("\\/=", { _ in .shortHandDiv }),
-		("\\^=", { _ in .shortHandPow })
-
+	private static let ignorableMapping: [String : TokenType] = [
+		"\t": .ignoreableToken,
+		"\n": .ignoreableToken,
+		" ": .ignoreableToken,
 	]
+	
+	private static let twoCharTokensMapping: [String : TokenType] = [
+		"==": .comparatorEqual,
+		"!=": .notEqual,
+		
+		"&&": .booleanAnd,
+		"||": .booleanOr,
+		
+		">=": .comparatorGreaterThanEqual,
+		"<=": .comparatorLessThanEqual,
+		
+		"+=": .shortHandAdd,
+		"-=": .shortHandSub,
+		"*=": .shortHandMul,
+		"/=": .shortHandDiv,
+		"^=": .shortHandPow
+	
+	]
+	
+	private static let reservedOneCharIdentifiers: [String] = ["+", "-", "/", "*", "^"]
+	
+	lazy var invalidIdentifierCharSet: CharacterSet = {
+		
+		var chars = "-."
+		
+		reservedOneCharIdentifiers.forEach {
+			chars.append($0)
+		}
+		
+		otherMapping.keys.forEach {
+			chars.append($0)
+		}
+		
+		return CharacterSet(charactersIn: chars)
+		
+	}()
+	
+	lazy var validIdentifierCharSet: CharacterSet = {
+		return self.invalidIdentifierCharSet.inverted
+	}()
+
+	let validNumberCharSet = CharacterSet(charactersIn: "0123456789.e-")
 
 	private let input: String
+	private var content: String
 
+	private var isInLineComment = false
+	private var isInBlockComment = false
+	private var isInIdentifier = false
+	private var isInNumber = false
+	
+	private var charIndex = 0
+	
+	private var currentString = ""
+	
+	private var tokens = [Token]()
+	
 	public init(input: String) {
         self.input = input
+		content = input
     }
+		
+	public func tokenize() -> [Token] {
+		
+		content = input
 
-	// TODO: refactor needed
-    public func tokenize() -> [Token] {
+		isInLineComment = false
+		isInBlockComment = false
+		
+		charIndex = 0
 
-		let fullContent = input
-		var content = input
+		currentString = ""
+		
+		tokens = [Token]()
 
-		var tokenListToUse = [(String, TokenGenerator)]()
+		var canDoExtraRun = true
+		
+		while !content.isEmpty || canDoExtraRun {
+			
+			if content.isEmpty {
+				canDoExtraRun = false
+			}
+			
+//			print("current: \(currentString)")
+			
+			let firstChar = content.characters.first
+			
+			let nextString: String
 
-		for (pattern, generator) in tokenList {
+			if let firstChar = firstChar {
+				nextString = currentString.appending("\(firstChar)")
+			} else {
+				nextString = currentString
+			}
+			
+			var removedControlChar = false
+			
+			if removeNewLineControlChar() {
+				removedControlChar = true
+				
+				if isInLineComment {
+					
+					isInLineComment = false
+					addToken(type: .comment)
 
-			if content.hasMatch(withRegExPattern: pattern) {
-				tokenListToUse.append((pattern, generator))
+				}
+			}
+			
+			while removeControlChar() {
+				
+				removedControlChar = true
+			}
+			
+			if content.isEmpty {
+				// EOF
+				removedControlChar = true
+			}
+			
+			let isEOF = content.isEmpty
+			
+			if isCurrentStringValidNumber || isStringValidNumber(nextString) {
+				isInNumber = true
+			}
+
+			if !isInBlockComment && content.hasPrefix("/*") {
+				
+				isInBlockComment = true
+				consumeCharactersAtStart(2)
+				continue
+			}
+			
+			if !isInBlockComment && !isInLineComment {
+			
+				if isInNumber {
+					
+					if !isStringValidNumber(nextString) || isEOF {
+						if let f = NumberType(currentString) {
+							addToken(type: .number(f))
+							
+							if !content.isEmpty {
+								consumeCharactersAtStart(1)
+							}
+							
+							continue
+
+						}
+						
+						isInNumber = false
+						
+					} else {
+						
+						if !content.isEmpty {
+							consumeCharactersAtStart(1)
+						}
+						
+						continue
+						
+					}
+					
+				}
+				
+				if tokenizeTwoChar() {
+					continue
+				}
+				
+				if isStringTwoCharToken(nextString) {
+					
+					if !content.isEmpty {
+						consumeCharactersAtStart(1)
+					}
+					
+					continue
+				}
+				
+				if tokenizeReservedOneChar() {
+					continue
+				}
+				
+				if tokenizeOneChar() {
+					continue
+				}
+				
+				if (removedControlChar || (isStringValidKeyword(currentString) && !isStringValidKeyword(nextString))) && !currentString.isEmpty {
+					
+					if tokenizeKeyword() {
+						continue
+					}
+					
+					addIdentifierToken()
+					
+					continue
+				}
+				
+				if isCurrentStringValidIdentifier && !isStringValidIdentifier(nextString) {
+					addIdentifierToken()
+					
+					continue
+				}
+				
+				if content.hasPrefix("//") {
+					
+					isInLineComment = true
+					consumeCharactersAtStart(2)
+					continue
+					
+				}
+			
+			}
+			
+			if content.hasPrefix("*/") {
+				
+				consumeCharactersAtStart(2)
+				isInBlockComment = false
+				addToken(type: .comment)
+				continue
+
+			} else if isInBlockComment {
+				
+
+			}
+			
+			if !content.isEmpty {
+				consumeCharactersAtStart(1)
+			} else if isInBlockComment || isInLineComment {
+				addToken(type: .comment)
 			}
 
 		}
+		
+		return tokens
+	}
+	
+	func isStringValidKeyword(_ str: String) -> Bool {
+		return Lexer.keywordTokens.keys.contains(str)
+	}
+	
+	var isCurrentStringValidIdentifier: Bool {
+		return isStringValidIdentifier(currentString)
+	}
+	
+	func isStringValidIdentifier(_ str: String) -> Bool {
+		if str.isEmpty {
+			return false
+		}
+		return str.rangeOfCharacter(from: validIdentifierCharSet.inverted) == nil
+	}
+	
+	var isCurrentStringValidNumber: Bool {
+		return isStringValidNumber(currentString)
+	}
+	
+	func isStringValidNumber(_ str: String) -> Bool {
+		if str.isEmpty {
+			return false
+		}
+		return str.rangeOfCharacter(from: validNumberCharSet.inverted) == nil
+	}
+	
+	func addIdentifierToken() {
+		
+		addToken(type: .identifier(currentString))
 
-        var tokens = [Token]()
+	}
+	
+	func removeNewLineControlChar() -> Bool {
+		
+		let keyword = "\n"
+		
+		if content.hasPrefix(keyword) {
+			
+			let temp = currentString
+			let keywordLength = keyword.characters.count
+			consumeCharactersAtStart(keywordLength)
+			currentString = temp
+			
+			return true
+		}
+		
+		return false
+	}
+	
+	func removeControlChar() -> Bool {
+		
+		for (keyword, _) in Lexer.ignorableMapping {
+			
+			if content.hasPrefix(keyword) {
+				
+				let temp = currentString
+				let keywordLength = keyword.characters.count
+				consumeCharactersAtStart(keywordLength)
+				currentString = temp
+				
+				return true
+			}
+			
+		}
+		
+		return false
+	}
+	
+	func tokenizeKeyword() -> Bool {
 
-		var contentCutLength = 0
+		for (keyword, type) in Lexer.keywordTokens {
+			
+			if currentString == keyword {
 
-        while content.characters.count > 0 {
+				addToken(type: type)
+				
+				return true
+			}
+			
+		}
+		
+		return false
+	}
+	
+	func isStringTwoCharToken(_ str: String) -> Bool {
+		
+		for (keyword, _) in Lexer.twoCharTokensMapping {
+			
+			if str == keyword {
+				return true
+			}
+			
+		}
+		
+		return false
+		
+	}
+	
+	func tokenizeTwoChar() -> Bool {
+		
+		for (keyword, type) in Lexer.twoCharTokensMapping {
+			
+			if currentString == keyword {
+				
+				addToken(type: type)
+				
+				return true
+			}
+			
+		}
+		
+		return false
+	}
+	
+	func tokenizeOneChar() -> Bool {
+		
+		for (keyword, type) in Lexer.otherMapping {
+			
+			if currentString == keyword {
+				
+				addToken(type: type)
+				
+				return true
+			}
+			
+		}
+		
+		return false
+	}
+	
+	func tokenizeReservedOneChar() -> Bool {
+		
+		for keyword in Lexer.reservedOneCharIdentifiers {
+			
+			if currentString == keyword {
+				
+				addToken(type: .other(keyword))
+				
+				return true
+			}
+			
+		}
+		
+		return false
+	}
+	
+	
+	
+	func addToken(type: TokenType) {
+		
+		let keywordLength = currentString.characters.count
+		
+		let start = input.index(input.startIndex, offsetBy: charIndex - keywordLength)
+		let end = input.index(start, offsetBy: keywordLength)
+		let range = start..<end
+		
+		let token = Token(type: type, range: range)
+		
+		tokens.append(token)
+		
+		currentString = ""
+		
+	}
+	
+	func consumeCharactersAtStart(_ n: Int) {
+		
+		let index = content.characters.index(content.startIndex, offsetBy: n)
+		
+		currentString += content.substring(to: index)
+		charIndex += n
+		content.removeCharactersAtStart(n)
+		
+	}
 
-            var matched = false
+}
 
-            for (pattern, generator) in tokenListToUse {
-
-				if let match = content.firstMatchAtStart(withRegExPattern: pattern) {
-
-					if match.isEmpty {
-						continue
-					}
-
-                    if let t = generator(match) {
-
-						if case TokenType.ignoreableToken = t {
-
-						} else {
-
-							let start = fullContent.index(fullContent.startIndex, offsetBy: contentCutLength)
-							let end = fullContent.index(start, offsetBy: match.characters.count)
-							let range = start..<end
-
-							let token = Token(type: t, range: range)
-
-							tokens.append(token)
-						}
-
-						let index = content.characters.index(content.startIndex, offsetBy: match.characters.count)
-						content = content.substring(from: index)
-						matched = true
-
-						contentCutLength += match.characters.count
-
-						break
-
-					}
-
-                }
-
-            }
-
-            if !matched {
-
-				let start = fullContent.index(fullContent.startIndex, offsetBy: contentCutLength)
-				let end = fullContent.index(start, offsetBy: 1)
-				let range = start..<end
-
-                let index = content.characters.index(content.startIndex, offsetBy: 1)
-
-				let raw = content.substring(to: index)
-
-				if let mappedType = Lexer.otherMapping[raw] {
-
-					let otherToken = Token(type: mappedType, range: range)
-
-					tokens.append(otherToken)
-
-				} else {
-
-					let type = TokenType.other(raw)
-
-					let otherToken = Token(type: type, range: range)
-
-					tokens.append(otherToken)
-				}
-
-                content = content.substring(from: index)
-
-				contentCutLength += 1
-
-            }
-
-        }
-
-        return tokens
-    }
-
+extension String {
+	
+	mutating func removeCharactersAtStart(_ n: Int) {
+		
+		let index = self.characters.index(self.startIndex, offsetBy: n)
+		self = self.substring(from: index)
+		
+	}
+	
 }
