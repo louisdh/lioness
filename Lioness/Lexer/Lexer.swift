@@ -350,28 +350,19 @@ public class Lexer {
 
 	func tokenizeKeyword() -> Bool {
 
-		for (keyword, type) in Lexer.keywordTokens {
-
-			if currentString == keyword {
-
-				addToken(type: type)
-
-				return true
-			}
-
+		if let type = Lexer.keywordTokens[currentString] {
+			addToken(type: type)
+			
+			return true
 		}
-
+		
 		return false
 	}
 
 	func isStringTwoCharToken(_ str: String) -> Bool {
 
-		for (keyword, _) in Lexer.twoCharTokensMapping {
-
-			if str == keyword {
-				return true
-			}
-
+		if let _ = Lexer.twoCharTokensMapping[str] {
+			return true
 		}
 
 		return false
@@ -380,15 +371,10 @@ public class Lexer {
 
 	func tokenizeTwoChar() -> Bool {
 
-		for (keyword, type) in Lexer.twoCharTokensMapping {
-
-			if currentString == keyword {
-
-				addToken(type: type)
-
-				return true
-			}
-
+		if let type = Lexer.twoCharTokensMapping[currentString] {
+			addToken(type: type)
+			
+			return true
 		}
 
 		return false
@@ -396,15 +382,10 @@ public class Lexer {
 
 	func tokenizeOneChar() -> Bool {
 
-		for (keyword, type) in Lexer.otherMapping {
-
-			if currentString == keyword {
-
-				addToken(type: type)
-
-				return true
-			}
-
+		if let type = Lexer.otherMapping[currentString] {
+			addToken(type: type)
+			
+			return true
 		}
 
 		return false
