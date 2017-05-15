@@ -133,9 +133,9 @@ public struct ParseError: Error, CustomStringConvertible {
 	let type: ParseErrorType
 
 	/// The range of the token in the original source code
-	let range: Range<String.Index>?
+	let range: Range<Int>?
 
-	init(type: ParseErrorType, range: Range<String.Index>? = nil) {
+	init(type: ParseErrorType, range: Range<Int>? = nil) {
 		self.type = type
 		self.range = range
 	}
@@ -159,9 +159,9 @@ public struct ParseError: Error, CustomStringConvertible {
 
 extension String {
 
-	func lineNumber(of index: String.Index) -> Int {
+	func lineNumber(of index: Int) -> Int {
 
-		let i = self.distance(from: self.startIndex, to: index)
+		let i = self.distance(from: self.startIndex, to: self.index(self.startIndex, offsetBy: index))
 
 		let newLineIndices = self.indices(of: "\n").map { (index) -> Int in
 			return self.distance(from: self.startIndex, to: index)

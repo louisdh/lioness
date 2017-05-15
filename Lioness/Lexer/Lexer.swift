@@ -428,9 +428,10 @@ public class Lexer {
 
 		let keywordLength = currentString.characters.count
 
-		let start = input.index(input.startIndex, offsetBy: charIndex - keywordLength)
-		let end = input.index(start, offsetBy: keywordLength)
-		let range = start..<end
+		let start = charIndex - keywordLength
+		let end = charIndex
+		
+		let range: Range<Int> = start..<end
 
 		let token = Token(type: type, range: range)
 

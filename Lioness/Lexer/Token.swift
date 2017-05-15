@@ -82,9 +82,9 @@ public struct Token: CustomStringConvertible {
 	public let type: TokenType
 
 	/// The range of the token in the original source code
-	public let range: Range<String.Index>?
+	public let range: Range<Int>?
 
-	public init(type: TokenType, range: Range<String.Index>? = nil) {
+	public init(type: TokenType, range: Range<Int>? = nil) {
 		self.type = type
 		self.range = range
 	}
