@@ -14,6 +14,18 @@ CHANGELOG
 Lioness 1.0
 -----------
 
+### 2017-05-15
+* A new lexer has been implemented, removing the usage of regular expressions. This increases lexing performance up to 8x. The new lexer also supports UTF-8 characters, including emoticons, for identifier names. Example:
+
+	```lioness
+	func ∑(a, b) returns {
+		return a + b
+	}
+	
+	😀 = ∑(2, 3) // 😀 = 5
+	
+	```
+	
 ### 2017-01-15
 * Lioness now supports structs. Example:
 
