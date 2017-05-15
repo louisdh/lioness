@@ -29,7 +29,7 @@ public struct FunctionNode: ASTNode {
 		let exitId = try ctx.getExitScopeFunctionId(for: self)
 
 		let headerComment = "\(prototype.name)(\(prototype.argumentNames.joined(separator: ", ")))"
-		
+
 		let headerInstruction = BytecodeInstruction(label: headerIndex, type: .virtualHeader, arguments: [.index(functionId)], comment: headerComment)
 
 		bytecode.append(headerInstruction)

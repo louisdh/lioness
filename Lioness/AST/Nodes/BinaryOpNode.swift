@@ -26,7 +26,7 @@ public struct BinaryOpNode: ASTNode {
 		        "||": .or,
 		        "!": .not]
 	}
-	
+
 	public let op: String
 	public let opInstructionType: BytecodeInstructionType
 	public let lhs: ASTNode
@@ -46,11 +46,11 @@ public struct BinaryOpNode: ASTNode {
 				throw CompileError.unexpectedCommand
 			}
 		}
-		
+
 		guard let type = BinaryOpNode.opTypes[op] else {
 			throw CompileError.unexpectedBinaryOperator
 		}
-		
+
 		self.opInstructionType = type
 
 		self.lhs = lhs
@@ -97,7 +97,7 @@ public struct BinaryOpNode: ASTNode {
 		return bytecode
 
 	}
-	
+
 	public var childNodes: [ASTNode] {
 		if let rhs = rhs {
 			return [lhs, rhs]

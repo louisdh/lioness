@@ -11,7 +11,7 @@ import Foundation
 protocol LoopNode: ASTNode {
 
 	func compileLoop(with ctx: BytecodeCompiler, scopeStart: Int) throws -> BytecodeBody
-	
+
 }
 
 extension LoopNode {

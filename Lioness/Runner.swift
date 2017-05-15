@@ -50,7 +50,7 @@ public class Runner {
 			guard let compiledSource = compileLionessSourceCode(source) else {
 				throw RunnerError.runFailed
 			}
-			
+
 			bytecode = compiledStdLib + compiledSource
 
 		} else {
@@ -58,7 +58,7 @@ public class Runner {
 			guard let compiledSource = compileLionessSourceCode(source) else {
 				throw RunnerError.runFailed
 			}
-			
+
 			bytecode = compiledSource
 
 		}
@@ -90,7 +90,7 @@ public class Runner {
 	public func run(_ source: String) throws {
 
 		let startTime = CFAbsoluteTimeGetCurrent()
-		
+
 		let stdLib = try StdLib().stdLibCode()
 
 		guard let compiledStdLib = compileLionessSourceCode(stdLib) else {

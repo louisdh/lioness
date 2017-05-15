@@ -42,7 +42,7 @@ public extension ValueType {
 			}
 
 			descr += " }"
-			
+
 			return descr
 
 		case let .bool(val):

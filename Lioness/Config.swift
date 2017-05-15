@@ -8,7 +8,6 @@
 
 import Foundation
 
-
 public typealias NumberType = Double
 
 // TODO: add compiler flag for Decimal usage
@@ -33,4 +32,3 @@ public typealias NumberType = Double
 //	}
 //	
 //}
-

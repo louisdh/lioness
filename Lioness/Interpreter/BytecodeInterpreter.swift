@@ -293,12 +293,12 @@ public class BytecodeInterpreter {
 
 		let rhs = try popNumber()
 		let lhs = try popNumber()
-		
+
 		// TODO: use when NumberType = Decimal
 //		let p = pow(lhs, Int(rhs.doubleValue))
-		
+
 		let p = pow(lhs, rhs)
-		
+
 		try stack.push(.number(p))
 
 		return pc + 1
@@ -897,15 +897,15 @@ public class BytecodeInterpreter {
 
 		return number
 	}
-	
+
 	private func popBool() throws -> Bool {
-		
+
 		let last = try stack.pop()
-		
+
 		guard case let ValueType.bool(bool) = last else {
 			throw error(.unexpectedArgument)
 		}
-		
+
 		return bool
 	}
 
