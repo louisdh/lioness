@@ -76,8 +76,8 @@ Since the project does not rely on any dependencies, running it is very simple. 
 - [x] Structs
 - [ ] Compiler warnings
 - [ ] Compiler optimizations
-- [ ] Faster Lexer (without regex?)
-- [ ] Support emoticons for identifier names
+- [x] Faster Lexer (without regex)
+- [x] Support emoticons for identifier names
 - [ ] ```guard``` statement
 
 
