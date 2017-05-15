@@ -15,7 +15,7 @@ Lioness 1.0
 -----------
 
 ### 2017-05-15
-* A new lexer has been implemented, removing the usage of regular expressions. This increases lexing performance up to 8x. The new lexer also supports UTF-8 characters, including emoticons, for identifier names. Example:
+* A new lexer has been implemented, removing the usage of regular expressions. This increases lexing performance up to 50x. The new lexer also supports UTF-8 characters, including emoticons, for identifier names. Example:
 
 	```lioness
 	func ∑(a, b) returns {
