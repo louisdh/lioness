@@ -26,6 +26,10 @@ class Runner_Tests: BaseTestCase {
 		XCTAssert(interpreter?.stack.isEmpty == true, "Expected stack to be empty")
 	}
 	
+	func testUnicodeSumFunction() {
+		assert(in: "UnicodeSumFunction", that: "😀", equals: .number(5))
+	}
+	
 	func testBinaryOp() {
 		assert(in: "BinaryOp", that: "a", equals: .number(512.75))
 	}

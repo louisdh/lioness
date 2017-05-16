@@ -111,6 +111,7 @@
 		BE58C15E1E16D7F100BC73CA /* InterpreterError.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3CCDC81E0330EE00977DCE /* InterpreterError.swift */; };
 		BE58C16D1E16D80500BC73CA /* ASTNode+Validation.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE25BA231DDD1F0000041A20 /* ASTNode+Validation.swift */; };
 		BE58C1811E16D80A00BC73CA /* ParseError.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE37DFA41DBB8FBD003F6A3E /* ParseError.swift */; };
+		BE5962981ECBAB4200466800 /* UnicodeSumFunction.lion in Resources */ = {isa = PBXBuildFile; fileRef = BE5962971ECBAB4200466800 /* UnicodeSumFunction.lion */; };
 		BE62A8721DE6108F00A75453 /* Complex.lion in Resources */ = {isa = PBXBuildFile; fileRef = BE62A8711DE6108F00A75453 /* Complex.lion */; };
 		BE736A8D1DBBEA5F00ADC83A /* BaseTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE736A8C1DBBEA5F00ADC83A /* BaseTestCase.swift */; };
 		BE736A911DBD3C0D00ADC83A /* Execution+Performance.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE736A901DBD3C0D00ADC83A /* Execution+Performance.swift */; };
@@ -202,6 +203,7 @@
 		BE58C14C1E16D77900BC73CA /* Lioness.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Lioness.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BE58C1551E16D7BE00BC73CA /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = "Lioness iOS/Info.plist"; sourceTree = SOURCE_ROOT; };
 		BE58C1561E16D7BE00BC73CA /* Lioness.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Lioness.h; path = "Lioness iOS/Lioness.h"; sourceTree = SOURCE_ROOT; };
+		BE5962971ECBAB4200466800 /* UnicodeSumFunction.lion */ = {isa = PBXFileReference; explicitFileType = sourcecode.glsl; fileEncoding = 4; name = UnicodeSumFunction.lion; path = "Test source files/UnicodeSumFunction.lion"; sourceTree = "<group>"; };
 		BE62A8711DE6108F00A75453 /* Complex.lion */ = {isa = PBXFileReference; explicitFileType = sourcecode.glsl; fileEncoding = 4; path = Complex.lion; sourceTree = "<group>"; };
 		BE736A8C1DBBEA5F00ADC83A /* BaseTestCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = BaseTestCase.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		BE736A901DBD3C0D00ADC83A /* Execution+Performance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Execution+Performance.swift"; path = "Execution/Execution+Performance.swift"; sourceTree = "<group>"; };
@@ -458,6 +460,7 @@
 				BE8800631E25A6F600EBEC54 /* Modulus.lion */,
 				BE24ACA31E4BC986008892A2 /* Trigonometry.lion */,
 				BE9B25701E8858CB00481844 /* VarAssignAfterScopeLeave.lion */,
+				BE5962971ECBAB4200466800 /* UnicodeSumFunction.lion */,
 			);
 			name = "Test source files";
 			sourceTree = "<group>";
@@ -679,6 +682,7 @@
 				BE854DAC1E21B439003D251D /* DoTimesLoops.lion in Resources */,
 				BE9B25711E8858CB00481844 /* VarAssignAfterScopeLeave.lion in Resources */,
 				BE809A191E2428270005370D /* FunctionInFunction.lion in Resources */,
+				BE5962981ECBAB4200466800 /* UnicodeSumFunction.lion in Resources */,
 				BE809A171E22C5C80005370D /* UnusedFunctionResult.lion in Resources */,
 				BE62A8721DE6108F00A75453 /* Complex.lion in Resources */,
 				BE37DFAF1DBBE2D3003F6A3E /* InnerWhileLoops.lion in Resources */,
