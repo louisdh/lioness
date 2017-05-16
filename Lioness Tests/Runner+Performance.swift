@@ -12,28 +12,18 @@ import XCTest
 /// Performance tests for full run (from lexer to interpreter)
 class FullRun_Performance: BaseTestCase {
 
-    override func setUp() {
-        super.setUp()
-        // Put setup code here. This method is called before the invocation of each test method in the class.
-    }
-    
-    override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-        super.tearDown()
-    }
+	// MARK: - Tests
 
     func testLargeMathPerformance() {
-		
 		doFullRunTest(for: "LargeMathOperation")
-
     }
 
 	func testComplexPerformance() {
-
 		doFullRunTest(for: "Complex")
-		
 	}
 	
+	// MARK: - Boilerplate
+
 	func doFullRunTest(for fileName: String) {
 		
 		guard let source = getSource(for: fileName) else {

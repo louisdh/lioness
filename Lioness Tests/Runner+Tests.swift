@@ -17,16 +17,6 @@ class Runner_Tests: BaseTestCase {
 		case resultNotFound
 	}
 	
-	override func setUp() {
-		super.setUp()
-		// Put setup code here. This method is called before the invocation of each test method in the class.
-	}
-	
-	override func tearDown() {
-		// Put teardown code here. This method is called after the invocation of each test method in the class.
-		super.tearDown()
-	}
-	
 	// MARK: - Tests
 	
 	func testUnusedFunctionResult() {
@@ -34,61 +24,42 @@ class Runner_Tests: BaseTestCase {
 		let interpreter = try? execute("UnusedFunctionResult")
 		
 		XCTAssert(interpreter?.stack.isEmpty == true, "Expected stack to be empty")
-		
 	}
 	
 	func testBinaryOp() {
-		
 		assert(in: "BinaryOp", that: "a", equals: .number(512.75))
-
 	}
 	
 	func testInnerWhileLoops() {
-		
 		assert(in: "InnerWhileLoops", that: "sum", equals: .number(7_255_941_120))
-
 	}
 	
 	func testGCD() {
-		
 		assert(in: "GreatestCommonDivisor", that: "a", equals: .number(4))
-
 	}
 	
 	func testFibonacci() {
-		
 		assert(in: "Fibonacci", that: "a", equals: .number(55))
-
 	}
 	
 	func testFunctionGlobalVar() {
-		
 		assert(in: "FunctionGlobalVar", that: "a", equals: .number(12))
-		
 	}
 	
 	func testDoTimesLoops() {
-		
 		assert(in: "DoTimesLoops", that: "a", equals: .number(10000))
-		
 	}
 	
 	func testFunctionReturnGlobalVar() {
-		
 		assert(in: "FunctionReturnGlobalVar", that: "a", equals: .number(12))
-		
 	}
 	
 	func testFunctionInFunction() {
-		
 		assert(in: "FunctionInFunction", that: "a", equals: .number(100))
-		
 	}
 	
 	func testVarAssignAfterScopeLeave() {
-		
 		assert(in: "VarAssignAfterScopeLeave", that: "a", equals: .number(1))
-		
 	}
 	
 	// MARK: - Boilerplate

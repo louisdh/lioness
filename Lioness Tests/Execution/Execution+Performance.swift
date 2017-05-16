@@ -17,16 +17,8 @@ import XCTest
 /// Compiler optimizations should be tested here.
 class Execution_Performance: BaseTestCase {
 	
-	override func setUp() {
-		super.setUp()
-		// Put setup code here. This method is called before the invocation of each test method in the class.
-	}
-	
-	override func tearDown() {
-		// Put teardown code here. This method is called after the invocation of each test method in the class.
-		super.tearDown()
-	}
-	
+	// MARK: - Tests
+
 	func testTrigonometryPerformance() {
 		doExecutionTest(for: "Trigonometry")
 	}
@@ -42,6 +34,8 @@ class Execution_Performance: BaseTestCase {
 	func testComplexPerformance() {
 		doExecutionTest(for: "Complex", repeatSource: 100)
 	}
+	
+	// MARK: - Boilerplate
 	
 	func doExecutionTest(for fileName: String, repeatSource: Int = 1) {
 		

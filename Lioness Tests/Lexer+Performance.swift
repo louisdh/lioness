@@ -11,28 +11,18 @@ import XCTest
 
 class Lexer_Performance: BaseTestCase {
 
-    override func setUp() {
-        super.setUp()
-        // Put setup code here. This method is called before the invocation of each test method in the class.
-    }
-    
-    override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-        super.tearDown()
-    }
+	// MARK: - Tests
 
     func testLargeMathPerformance() {
-		
 		runLexerTest(for: "LargeMathOperation")
-
     }
 
 	func testComplexPerformance() {
-
 		runLexerTest(for: "Complex")
-		
 	}
 	
+	// MARK: - Boilerplate
+
 	func runLexerTest(for fileName: String) {
 	
 		guard let source = getSource(for: fileName) else {
