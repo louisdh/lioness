@@ -23,24 +23,20 @@ class Lexer_Performance: BaseTestCase {
 
     func testLargeMathPerformance() {
 		
-		guard let source = getSource(for: "LargeMathOperation") else {
-			XCTFail("Failed to get source")
-			return
-		}
-		
-        self.measure {
+		runLexerTest(for: "LargeMathOperation")
 
-			let lexer = Lexer(input: source)
-
-			_ = lexer.tokenize()
-
-		}
     }
 
 	func testComplexPerformance() {
 
-		guard let source = getSource(for: "Complex") else {
-			XCTFail("Failed to get source")
+		runLexerTest(for: "Complex")
+		
+	}
+	
+	func runLexerTest(for fileName: String) {
+	
+		guard let source = getSource(for: fileName) else {
+			XCTFail("Failed to get source for \(fileName)")
 			return
 		}
 		
@@ -51,6 +47,7 @@ class Lexer_Performance: BaseTestCase {
 			_ = lexer.tokenize()
 			
 		}
+		
 	}
 	
 }

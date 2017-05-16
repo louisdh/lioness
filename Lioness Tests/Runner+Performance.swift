@@ -24,35 +24,27 @@ class FullRun_Performance: BaseTestCase {
 
     func testLargeMathPerformance() {
 		
-		guard let source = getSource(for: "LargeMathOperation") else {
-			XCTFail("Failed to get source")
-			return
-		}
-				
-        self.measure {
+		doFullRunTest(for: "LargeMathOperation")
 
-			let runner = Runner(logDebug: false)
-
-			do {
-				try runner.run(source)
-			} catch {
-				XCTFail(error.localizedDescription)
-			}
-			
-		}
     }
 
 	func testComplexPerformance() {
 
-		guard let source = getSource(for: "Complex") else {
-			XCTFail("Failed to get source")
+		doFullRunTest(for: "Complex")
+		
+	}
+	
+	func doFullRunTest(for fileName: String) {
+		
+		guard let source = getSource(for: fileName) else {
+			XCTFail("Failed to get source for \(fileName)")
 			return
 		}
 		
 		self.measure {
 			
 			let runner = Runner(logDebug: false)
-
+			
 			do {
 				try runner.run(source)
 			} catch {
@@ -60,6 +52,7 @@ class FullRun_Performance: BaseTestCase {
 			}
 			
 		}
+		
 	}
 	
 }
