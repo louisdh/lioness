@@ -27,54 +27,31 @@ class Execution_Performance: BaseTestCase {
 		super.tearDown()
 	}
 	
-	// TODO: make tests generic
-	
 	func testTrigonometryPerformance() {
-		
-		guard let bytecode = preparePerformanceTest(for: "Trigonometry") else {
-			return
-		}
-		
-		self.measure {
-			self.execute(bytecode)
-		}
-		
+		doExecutionTest(for: "Trigonometry")
 	}
 	
 	func testModulusPerformance() {
-		
-		guard let bytecode = preparePerformanceTest(for: "Modulus") else {
-			return
-		}
-		
-		self.measure {
-			self.execute(bytecode)
-		}
-		
+		doExecutionTest(for: "Modulus")
 	}
 	
 	func testLargeMathPerformance() {
-		
-		guard let bytecode = preparePerformanceTest(for: "LargeMathOperation") else {
-			return
-		}
-		
-		self.measure {
-			for _ in 1...100 {
-				self.execute(bytecode)
-			}
-		}
-
+		doExecutionTest(for: "LargeMathOperation", repeatSource: 100)
 	}
 	
 	func testComplexPerformance() {
+		doExecutionTest(for: "Complex", repeatSource: 100)
+	}
+	
+	func doExecutionTest(for fileName: String, repeatSource: Int = 1) {
 		
-		guard let bytecode = preparePerformanceTest(for: "Complex") else {
+		guard let bytecode = preparePerformanceTest(for: fileName) else {
+			XCTFail("Failed to get source for \(fileName)")
 			return
 		}
-	
+		
 		self.measure {
-			for _ in 1...100 {
+			for _ in 1...repeatSource {
 				self.execute(bytecode)
 			}
 		}
