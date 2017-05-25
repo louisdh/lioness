@@ -1,11 +1,14 @@
-<center><img src="doc-resources/readme/logo.png" style="max-height: 300px; margin-bottom:-55px; margin-top:-50px;"></center>
+<p align="center">
+<img src="doc-resources/readme/logo.png" alt="Lioness Logo" style="max-height: 300px; margin-bottom:-55px; margin-top:-50px;">
+</p>
 
-# <center>The Lioness Programming Language</center>
+<h1 align="center">The Lioness Programming Language</h1>
 
-<center>
-[![Swift](https://img.shields.io/badge/Swift-3.1-orange.svg?style=flat")](https://developer.apple.com/swift/)
-![Platform](https://img.shields.io/badge/Platforms-iOS%20%7C%20macOS%20%7C%20tvOS%20%7C%20watchOS-lightgrey.svg)
-[![Twitter](https://img.shields.io/badge/Twitter-@LouisDhauwe-blue.svg?style=flat)](http://twitter.com/LouisDhauwe)</center>
+<p align="center">
+<a href="https://developer.apple.com/swift/"><img src="https://img.shields.io/badge/Swift-3.1-orange.svg?style=flat" style="max-height: 300px;" alt="Swift"/></a>
+<img src="https://img.shields.io/badge/Platforms-iOS%20%7C%20macOS%20%7C%20tvOS%20%7C%20watchOS-lightgrey.svg" style="max-height: 300px;" alt="Platform: iOS macOS tvOS watchOS">
+<a href="http://twitter.com/LouisDhauwe"><img src="https://img.shields.io/badge/Twitter-@LouisDhauwe-blue.svg?style=flat" style="max-height: 300px;" alt="Twitter"/></a>
+</p>
 
 Lioness is a high-level programming language designed for mathematical purposes. This project includes a lexer, parser, compiler and interpreter. All of these are 100% written in Swift without dependencies. 
 
@@ -67,7 +70,7 @@ do n times {
 	* ```repeat while```
 	* ```break```
 	* ```continue```
-* ```if```/```else```/```else if``` statements
+* ```if``` / ```else``` / ```else if``` statements
 
 ## Running
 Since the project does not rely on any dependencies, running it is very simple. Open ```Lioness.xcworkspace``` (preferably in the latest non-beta version of Xcode) and hit run.
