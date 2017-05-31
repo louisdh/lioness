@@ -12,8 +12,6 @@
 		BE1412991DB253D300DAA385 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BE1412981DB253D300DAA385 /* Assets.xcassets */; };
 		BE14129C1DB253D400DAA385 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BE14129A1DB253D400DAA385 /* Main.storyboard */; };
 		BE1412A91DB2545A00DAA385 /* A.lion in Resources */ = {isa = PBXBuildFile; fileRef = BE1412A61DB2545A00DAA385 /* A.lion */; };
-		BE1412AA1DB2545A00DAA385 /* B.lion in Resources */ = {isa = PBXBuildFile; fileRef = BE1412A71DB2545A00DAA385 /* B.lion */; };
-		BE736A8B1DBBE4F500ADC83A /* C.lion in Resources */ = {isa = PBXBuildFile; fileRef = BE1412A81DB2545A00DAA385 /* C.lion */; };
 		BEEB63731DC1545D0019BC50 /* ASTVisualizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEEB63721DC1545D0019BC50 /* ASTVisualizer.swift */; };
 /* End PBXBuildFile section */
 
@@ -25,8 +23,6 @@
 		BE14129B1DB253D400DAA385 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		BE14129D1DB253D400DAA385 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BE1412A61DB2545A00DAA385 /* A.lion */ = {isa = PBXFileReference; explicitFileType = sourcecode.glsl; fileEncoding = 4; path = A.lion; sourceTree = "<group>"; };
-		BE1412A71DB2545A00DAA385 /* B.lion */ = {isa = PBXFileReference; explicitFileType = sourcecode.glsl; fileEncoding = 4; path = B.lion; sourceTree = "<group>"; };
-		BE1412A81DB2545A00DAA385 /* C.lion */ = {isa = PBXFileReference; explicitFileType = sourcecode.glsl; fileEncoding = 4; path = C.lion; sourceTree = "<group>"; };
 		BEEB63721DC1545D0019BC50 /* ASTVisualizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = ASTVisualizer.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 /* End PBXFileReference section */
 
@@ -60,7 +56,7 @@
 		BE1412931DB253D300DAA385 /* macOS Example */ = {
 			isa = PBXGroup;
 			children = (
-				BE1412A51DB2544E00DAA385 /* Examples */,
+				BE1412A51DB2544E00DAA385 /* Lioness source */,
 				BE1412941DB253D300DAA385 /* AppDelegate.swift */,
 				BE1412961DB253D300DAA385 /* ViewController.swift */,
 				BE446C4C1DCD3D650085EEE0 /* AST Visualizer */,
@@ -71,14 +67,12 @@
 			path = "macOS Example";
 			sourceTree = "<group>";
 		};
-		BE1412A51DB2544E00DAA385 /* Examples */ = {
+		BE1412A51DB2544E00DAA385 /* Lioness source */ = {
 			isa = PBXGroup;
 			children = (
 				BE1412A61DB2545A00DAA385 /* A.lion */,
-				BE1412A71DB2545A00DAA385 /* B.lion */,
-				BE1412A81DB2545A00DAA385 /* C.lion */,
 			);
-			name = Examples;
+			name = "Lioness source";
 			sourceTree = "<group>";
 		};
 		BE446C4C1DCD3D650085EEE0 /* AST Visualizer */ = {
@@ -150,8 +144,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BE736A8B1DBBE4F500ADC83A /* C.lion in Resources */,
-				BE1412AA1DB2545A00DAA385 /* B.lion in Resources */,
 				BE1412991DB253D300DAA385 /* Assets.xcassets in Resources */,
 				BE14129C1DB253D400DAA385 /* Main.storyboard in Resources */,
 				BE1412A91DB2545A00DAA385 /* A.lion in Resources */,
