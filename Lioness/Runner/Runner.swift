@@ -8,6 +8,24 @@
 
 import Foundation
 
+precedencegroup Pipe {
+	associativity: left
+	higherThan: AdditionPrecedence
+}
+
+infix operator |> : Pipe
+
+internal func |><A, B, C>(lhs: @escaping (A) -> B,
+                       rhs: @escaping (B) -> C) -> (A) -> C {
+	return { rhs(lhs($0)) }
+}
+
+internal func |><A, B, C>(lhs: @escaping (A) throws -> B,
+                 rhs: @escaping (B) throws -> C) -> (A) throws -> C {
+	return { try rhs(lhs($0)) }
+}
+
+
 /// Runs through full pipeline, from lexer to interpreter
 public class Runner {
 
@@ -164,12 +182,10 @@ public class Runner {
 	}
 
 	// MARK: -
-
+	
 	func compileLionessSourceCode(_ source: String) -> BytecodeBody? {
 
-		let tokens = runLexer(withSource: source)
-
-		guard let ast = parseTokens(tokens) else {
+		guard let ast = (runLexer |> parseTokens)(source) else {
 			return nil
 		}
 
@@ -213,6 +229,31 @@ public class Runner {
 		return tokens
 
 	}
+	
+	// MARK: - Throwing convenience
+	
+	public func compileToBytecode(_ source: String) throws -> BytecodeBody {
+		return try (lexer |> parse |> compile)(source)
+	}
+	
+	func lexer(_ source: String) throws -> [Token] {
+		
+		let lexer = Lexer(input: source)
+		let tokens = lexer.tokenize()
+		
+		return tokens
+	}
+	
+	func parse(_ tokens: [Token]) throws -> [ASTNode] {
+		let parser = Parser(tokens: tokens)
+		return try parser.parse()
+	}
+	
+	func compile(_ ast: [ASTNode]) throws -> BytecodeBody {
+		return try compiler.compile(ast)
+	}
+	
+	// MARK: -
 
 	private func parseTokens(_ tokens: [Token]) -> [ASTNode]? {
 
