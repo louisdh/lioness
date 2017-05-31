@@ -26,6 +26,16 @@ In practice it is common to want to compile source code once and execute it mult
 | 🛬 ```source code``` | ➡️ | Lexer 	| ➡️ | Parser | ➡️ | Compiler |  ➡️ | ```Bytecode``` | ➡️ | ```encode``` 🛫 |
 |----------------------|----|------- |---|-------- |----|----------|----|----------------|--- |-------- |
 
+This pipeline can be written in Swift as:
+
+```swift
+public func compileToBytecode(_ source: String) throws -> BytecodeBody {
+    return try (lexer |> parse |> compile)(source)
+}
+```
+
+This makes use of the custom ```|>``` (pipe) operator.
+
 *Pipeline 2:*
 
 | 🛬 ```decode``` | ➡️ | ```Bytecode``` | ➡️ | Interpreter | ➡️ | ```result``` 🛫 |
