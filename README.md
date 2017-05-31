@@ -24,11 +24,11 @@ The following Lioness code calculates factorials recursively:
 ```
 func factorial(x) returns {
 	
-	if x > 1 {
-		return x * factorial(x - 1)
-	}
+    if x > 1 {
+        return x * factorial(x - 1)
+    }
 	
-	return 1
+    return 1
 }
 
 a = factorial(5) // a = 120
@@ -40,7 +40,7 @@ The following Lioness code uses a ```do times``` loop:
 a = 1
 n = 10
 do n times {
-	a += a
+    a += a
 }
 // a = 1024
 ```
