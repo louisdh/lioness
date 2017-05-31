@@ -92,6 +92,7 @@ The Standard Library is currently under active development. There currently is n
 - [x] Faster Lexer (without regex)
 - [x] Support emoticons for identifier names
 - [ ] ```guard``` statement
+- [ ] A lot more unit tests
 
 
 ## Xcode file template
