@@ -7,9 +7,12 @@ Pod::Spec.new do |s|
   s.social_media_url = 'http://twitter.com/LouisDhauwe'
   s.authors = { 'Louis D\'hauwe' => 'louisdhauwe@silverfox.be' }
   s.source = { :git => 'https://github.com/louisdh/lioness.git', :tag => s.version }
+  s.module_name  = 'Lioness'
 
-  s.ios.deployment_target = '9.0'
-  spec.osx.deployment_target  = '10.10'
+  s.ios.deployment_target = '8.0'
+  s.osx.deployment_target  = '10.12'
 
-  s.source_files = 'Lioness/**/*.swift'
+  s.ios.source_files = 'Lioness/**/*.swift', 'Lioness/**/*.lion'
+  s.osx.source_files = 'Lioness/**/*.swift', 'Lioness/**/*.lion'
+
 end
