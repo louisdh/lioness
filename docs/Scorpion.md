@@ -37,4 +37,4 @@ Lioness is compiled to Scorpion, which can be executed using an interpreter. The
 | virt_h        | 28                  |           |                               | virtual header, increments register depth                                             |
 | pvirt_h       | 29                  |           |                               | private virtual header, does not increment register depth                             |
 | virt_e        | 30                  |           |                               | virtual end, decrements register depth                                                |
-| pvirt_e       | 31                  |           |                               | private virtual end, does not increment register depth                                |
+| pvirt_e       | 31                  |           |                               | private virtual end, does not decrement register depth                                |
