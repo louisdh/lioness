@@ -75,7 +75,7 @@ do n times {
 * ```if``` / ```else``` / ```else if``` statements
 
 ## Running
-Since the project does not rely on any dependencies, running it is requires no setup. 
+Since the project does not rely on any dependencies, running it requires no setup. 
 
 ### macOS
 Open ```Lioness.xcworkspace``` (preferably in the latest non-beta version of Xcode) and run the ```macOS Example``` target. The example will run the code in ```A.lion```. The output will be printed to the console.
