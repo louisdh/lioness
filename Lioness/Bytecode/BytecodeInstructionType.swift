@@ -136,10 +136,10 @@ public enum BytecodeInstructionType: UInt8, CustomStringConvertible {
 			return "reg_load"
 
 		case .invokeVirtual:
-			return "invoke_virtual"
+			return "invoke_virt"
 
 		case .exitVirtual:
-			return "exit_virtual"
+			return "exit_virt"
 
 		case .pop:
 			return "pop"
