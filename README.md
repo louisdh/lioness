@@ -21,7 +21,7 @@ The standard library (abbreviated: stdlib) contains basic functions for number m
 ## Source examples
 The following Lioness code calculates factorials recursively:
 
-```
+```swift
 func factorial(x) returns {
 	
     if x > 1 {
@@ -36,7 +36,7 @@ a = factorial(5) // a = 120
 
 The following Lioness code uses a ```do times``` loop:
 
-```
+```swift
 a = 1
 n = 10
 do n times {
