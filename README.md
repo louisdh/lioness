@@ -1,5 +1,5 @@
 <p align="center">
-<img src="doc-resources/readme/logo.png" alt="Lioness Logo" style="max-height: 300px; margin-bottom:-55px; margin-top:-50px;">
+<img src="doc-resources/readme/logo.png" alt="Lioness Logo" style="max-height: 300px; margin-bottom:-55px; margin-top:0px;">
 </p>
 
 <h1 align="center">The Lioness Programming Language</h1>
