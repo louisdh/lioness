@@ -1,4 +1,10 @@
+1️⃣ = 1
+2️⃣ = 2
 
-a = sin(10.0)
-b = cos(degToRad(45))
-c = tan(degToRad(45))
+a = 1️⃣ + 2️⃣ // a = 3
+
+func ∑(a, b) returns {
+	return a + b
+}
+
+😀 = ∑(2, 3) // 😀 = 5
