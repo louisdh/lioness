@@ -6,8 +6,10 @@
 
 <p align="center">
 <a href="https://travis-ci.org/louisdh/lioness"><img src="https://travis-ci.org/louisdh/lioness.svg?branch=master" alt="Travis build status"/></a>
+<img src="https://img.shields.io/badge/version-0.5-blue.svg" style="max-height: 300px;" alt="version 0.5">
 <a href="https://developer.apple.com/swift/"><img src="https://img.shields.io/badge/Swift-3.1-orange.svg?style=flat" style="max-height: 300px;" alt="Swift"/></a>
 <img src="https://img.shields.io/badge/Platforms-iOS%20%7C%20macOS%20%7C%20tvOS%20%7C%20watchOS-lightgrey.svg" style="max-height: 300px;" alt="Platform: iOS macOS tvOS watchOS">
+</br>
 <img src="https://img.shields.io/badge/extension-.lion-FF9C27.svg" style="max-height: 300px;" alt="Extension: .lion">
 <a href="http://twitter.com/LouisDhauwe"><img src="https://img.shields.io/badge/Twitter-@LouisDhauwe-blue.svg?style=flat" style="max-height: 300px;" alt="Twitter"/></a>
 </p>
