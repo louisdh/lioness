@@ -55,7 +55,7 @@ do n times {
 * Minimalistic, yet expressive, syntax
 * **All types are inferred**
 * 5 basic operators: ```+```, ```-```, ```/```, ```*``` and ```^```
-	* ```^``` means "to the power of", e.g. ```2^10``` would equal 1024
+	* ```^``` means "to the power of", e.g. ```2^10``` equals 1024
 	* all operators have a shorthand, e.g. ```+=``` for ```+```
 * Numbers
 	* All numbers are floating point 
