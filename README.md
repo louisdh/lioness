@@ -102,7 +102,7 @@ To add Lioness as a framework:
 ## Standard Library
 *Please note: Lioness is currently in beta*
 
-The Standard Library is currently under active development. There currently is no one document with everything from the stdlib. The best place to look for what's available is in [the source files](Lioness/Standard%20Library).
+The Standard Library is currently under active development. There currently is no one document with everything from the stdlib. The best place to look for what's available is in [the source files](Sources/Lioness/Standard%20Library/Sources/).
 
 ## Roadmap
 - [x] Structs
