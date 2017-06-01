@@ -53,7 +53,7 @@ public class Runner {
 		return try run(source, get: varName, useStdLib: useStdLib)
 	}
 
-	func run(_ source: String, get varName: String, useStdLib: Bool = true) throws -> ValueType {
+	public func run(_ source: String, get varName: String, useStdLib: Bool = true) throws -> ValueType {
 
 		let bytecode: BytecodeBody
 
