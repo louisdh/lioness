@@ -85,6 +85,20 @@ Since the project does not rely on any dependencies, running it requires no setu
 ### macOS
 Open ```Lioness.xcworkspace``` (preferably in the latest non-beta version of Xcode) and run the ```macOS Example``` target. The example will run the code in ```A.lion```. The output will be printed to the console.
 
+## Installing framework
+To add Lioness as a framework:
+ 
+### Using Swift Package Manager
+
+- Add to your `Package.swift` file's `dependencies` section:
+
+```swift
+.Package(url: "https://github.com/louisdh/lioness.git",
+		         majorVersion: 0, minor: 5)
+```
+
+*Please note: The Swift Package Manager currently does not allow the inclusion of non ```.swift``` files, this means the Lioness Standard Library is currently unavailable from a Swift Package Manager installation.*
+
 ## Standard Library
 *Please note: Lioness is currently in beta*
 
