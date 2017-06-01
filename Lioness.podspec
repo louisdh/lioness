@@ -12,7 +12,7 @@ Pod::Spec.new do |s|
   s.ios.deployment_target = '8.0'
   s.osx.deployment_target  = '10.12'
 
-  s.ios.source_files = 'Lioness/**/*.swift', 'Lioness/**/*.lion'
-  s.osx.source_files = 'Lioness/**/*.swift', 'Lioness/**/*.lion'
+  s.source_files = 'Sources/**/*.swift'
+  s.resources = 'Sources/**/*.lion'
 
 end
