@@ -19,7 +19,7 @@ Lioness 1.0
 
 	```lioness
 	func ∑(a, b) returns {
-		return a + b
+	    return a + b
 	}
 	
 	😀 = ∑(2, 3) // 😀 = 5
@@ -32,7 +32,7 @@ Lioness 1.0
 	```lioness
 	// The Point struct is included in the stdlib
 	struct Point {
-		x, y
+	    x, y
 	}
 	
 	p = Point(2, 3)
@@ -52,13 +52,13 @@ Lioness 1.0
 	
 	func foo() {
 		
-		func bar() {
-			a += 1
-		}
+	    func bar() {
+	        a += 1
+	    }
 		
-		do 10 times {
-			bar()
-		}
+	    do 10 times {
+	        bar()
+	    }
 		
 	}
 	
@@ -73,11 +73,11 @@ Lioness 1.0
 	```lioness
 	func factorial(x) returns {
 	
-		if x > 1 {
-			return x * factorial(x - 1)
-		}
+	    if x > 1 {
+	        return x * factorial(x - 1)
+	    }
 	
-		return 1
+	    return 1
 	}
 	
 	a = factorial(5) // a = 120
@@ -92,11 +92,11 @@ Lioness 1.0
 	a = 2
 
 	do 10 times {
-		foo()
+	    foo()
 	}
 
 	func foo() {
-		a += 1
+	    a += 1
 	}
 
 	// a = 12
@@ -113,8 +113,8 @@ Lioness 1.0
 	```lioness
 	i = 0
 	repeat {
-		// will be evaluated at least once
-		i += 1
+	    // will be evaluated at least once
+	    i += 1
 	} while i < 10
 	```
     
@@ -124,7 +124,7 @@ Lioness 1.0
 
 	```lioness
 	do 10 times {
-		// do something
+	    // do something
 	}
 	```
     
@@ -134,7 +134,7 @@ Lioness 1.0
 
 	```lioness
 	for i = 0, i < 10, i += 1 {
-		// do something
+	    // do something
 	}
 	```
 
@@ -144,7 +144,7 @@ Lioness 1.0
 
 	```lioness
 	while true {
-		// do something
+	    // do something
 	}
 	```
 
