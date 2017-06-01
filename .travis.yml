@@ -12,7 +12,7 @@ env:
     - DESTINATION="OS=10.3,name=iPhone 7 Plus"     SCHEME="$IOS_FRAMEWORK_SCHEME"     RUN_TESTS="NO" BUILD_EXAMPLE="NO"  CODE_COV="NO"
     - DESTINATION="OS=9.0,name=iPhone 6"           SCHEME="$IOS_FRAMEWORK_SCHEME"     RUN_TESTS="NO" BUILD_EXAMPLE="NO"  CODE_COV="NO"
 
-    - DESTINATION="arch=x86_64"                    SCHEME="$MACOS_FRAMEWORK_SCHEME"   RUN_TESTS="NO" BUILD_EXAMPLE="YES"  CODE_COV="NO"
+    - DESTINATION="arch=x86_64"                    SCHEME="$MACOS_FRAMEWORK_SCHEME"   RUN_TESTS="YES" BUILD_EXAMPLE="YES"  CODE_COV="NO"
 
 script:
   - set -o pipefail
@@ -33,9 +33,9 @@ script:
       travis_retry xcodebuild -workspace "$WORKSPACE" -scheme "$SCHEME" -destination "$DESTINATION" -configuration Release ONLY_ACTIVE_ARCH=NO build | xcpretty;
     fi
 
-  # Build Example in Debug if specified
+  # Build Example in Release if specified
   - if [ $BUILD_EXAMPLE == "YES" ]; then
-      travis_retry xcodebuild -workspace "$WORKSPACE" -scheme "$EXAMPLE_SCHEME" -destination "$DESTINATION" -configuration Debug ONLY_ACTIVE_ARCH=NO build | xcpretty;
+      travis_retry xcodebuild -workspace "$WORKSPACE" -scheme "$EXAMPLE_SCHEME" -destination "$DESTINATION" -configuration Release ONLY_ACTIVE_ARCH=NO build | xcpretty;
     fi
 
   # Build and report code coverage if specified
