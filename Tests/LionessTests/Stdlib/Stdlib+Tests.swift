@@ -50,6 +50,20 @@ class Stdlib_Tests: BaseTestCase {
 		assert(in: file, that: "j", equals: .number(10))
 	}
 	
+	func testNumberSign() {
+		
+		let file = "NumberSign"
+		
+		assert(in: file, that: "a", equals: .bool(true))
+		assert(in: file, that: "b", equals: .bool(false))
+		assert(in: file, that: "c", equals: .bool(false))
+
+		assert(in: file, that: "d", equals: .bool(false))
+		assert(in: file, that: "e", equals: .bool(true))
+		assert(in: file, that: "f", equals: .bool(false))
+	
+	}
+	
 	func getStdlibSource() throws -> String {
 		
 		let stdLib = StdLib()
