@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		BE14125A1DB1774900DAA385 /* Lioness.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE2296281DB16EE800EA477A /* Lioness.framework */; };
 		BE35F8251EE2D95A008C6785 /* Floor.lion in Resources */ = {isa = PBXBuildFile; fileRef = BE35F8241EE2D95A008C6785 /* Floor.lion */; };
+		BE35F8271EE2FFE1008C6785 /* MinMax.lion in Resources */ = {isa = PBXBuildFile; fileRef = BE35F8261EE2FFE1008C6785 /* MinMax.lion */; };
 		BE3F26A81EE0969A00D58C83 /* Lioness.h in Headers */ = {isa = PBXBuildFile; fileRef = BE3F26A61EE0969A00D58C83 /* Lioness.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		BE3F271D1EE0A97400D58C83 /* Array+Safe.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3F26DE1EE0A97300D58C83 /* Array+Safe.swift */; };
 		BE3F271E1EE0A97400D58C83 /* Array+Safe.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3F26DE1EE0A97300D58C83 /* Array+Safe.swift */; };
@@ -144,6 +145,7 @@
 		BE2296281DB16EE800EA477A /* Lioness.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Lioness.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BE295CE81DB14DCE0019EC57 /* Lioness macOS Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Lioness macOS Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BE35F8241EE2D95A008C6785 /* Floor.lion */ = {isa = PBXFileReference; explicitFileType = sourcecode.glsl; fileEncoding = 4; path = Floor.lion; sourceTree = "<group>"; };
+		BE35F8261EE2FFE1008C6785 /* MinMax.lion */ = {isa = PBXFileReference; explicitFileType = sourcecode.glsl; fileEncoding = 4; path = MinMax.lion; sourceTree = "<group>"; };
 		BE3F26A51EE0969A00D58C83 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = "Lioness macOS/Info.plist"; sourceTree = "<group>"; };
 		BE3F26A61EE0969A00D58C83 /* Lioness.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Lioness.h; path = "Lioness macOS/Lioness.h"; sourceTree = "<group>"; };
 		BE3F26AD1EE0A3FE00D58C83 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -488,6 +490,7 @@
 				BE3F279F1EE0AB1E00D58C83 /* UnusedFunctionResult.lion */,
 				BE3F27A01EE0AB1E00D58C83 /* VarAssignAfterScopeLeave.lion */,
 				BE35F8241EE2D95A008C6785 /* Floor.lion */,
+				BE35F8261EE2FFE1008C6785 /* MinMax.lion */,
 			);
 			path = "Test source files";
 			sourceTree = "<group>";
@@ -695,6 +698,7 @@
 				BE3F27A81EE0AB1E00D58C83 /* BinaryOp.lion in Resources */,
 				BE3F27AE1EE0AB1E00D58C83 /* FunctionReturnGlobalVar.lion in Resources */,
 				BE3F27B61EE0AB1E00D58C83 /* VarAssignAfterScopeLeave.lion in Resources */,
+				BE35F8271EE2FFE1008C6785 /* MinMax.lion in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

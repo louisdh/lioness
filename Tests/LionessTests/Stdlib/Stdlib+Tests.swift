@@ -33,6 +33,23 @@ class Stdlib_Tests: BaseTestCase {
 		assert(in: "Floor", that: "d", equals: .number(-3))
 	}
 	
+	func testMinMax() {
+		
+		let file = "MinMax"
+		
+		assert(in: file, that: "a", equals: .number(10))
+		assert(in: file, that: "b", equals: .number(10))
+		assert(in: file, that: "c", equals: .number(10))
+		assert(in: file, that: "d", equals: .number(-10))
+		assert(in: file, that: "e", equals: .number(-10))
+
+		assert(in: file, that: "f", equals: .number(12))
+		assert(in: file, that: "g", equals: .number(12))
+		assert(in: file, that: "h", equals: .number(10))
+		assert(in: file, that: "i", equals: .number(10))
+		assert(in: file, that: "j", equals: .number(10))
+	}
+	
 	func getStdlibSource() throws -> String {
 		
 		let stdLib = StdLib()
