@@ -36,7 +36,7 @@ class Lexer_Tests: BaseTestCase {
 		let lexer = Lexer(input: source)
 		let tokens = lexer.tokenize()
 
-		assert(tokens.count == 3)
+		Swift.assert(tokens.count == 3)
 		
 		let token1 = tokens[0]
 		let token2 = tokens[1]

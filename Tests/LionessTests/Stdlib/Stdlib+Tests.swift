@@ -26,6 +26,13 @@ class Stdlib_Tests: BaseTestCase {
 		super.tearDown()
 	}
 	
+	func testFloor() {
+		assert(in: "Floor", that: "a", equals: .number(2))
+		assert(in: "Floor", that: "b", equals: .number(-2))
+		assert(in: "Floor", that: "c", equals: .number(0))
+		assert(in: "Floor", that: "d", equals: .number(-3))
+	}
+	
 	func getStdlibSource() throws -> String {
 		
 		let stdLib = StdLib()
