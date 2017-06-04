@@ -25,6 +25,10 @@ public struct BytecodeCompilerOptions: OptionSet {
 	static public let removeUnusedVars = BytecodeCompilerOptions(rawValue: 1 << 2)
 	static public let removeEmptyCleanups = BytecodeCompilerOptions(rawValue: 1 << 3)
 
+	static public let all: BytecodeCompilerOptions = [.generateBytecodeComments,
+	                                                  .removeUnusedFunctions,
+	                                                  .removeUnusedVars,
+	                                                  .removeEmptyCleanups]
 }
 
 /// Scorpion Bytecode Compiler
@@ -52,7 +56,7 @@ public class BytecodeCompiler {
 	
 	// MARK: -
 
-	public init(options: BytecodeCompilerOptions = [], optimizationLevel: CompilerOptimizationLevel = .none) {
+	public init(options: BytecodeCompilerOptions = .all, optimizationLevel: CompilerOptimizationLevel = .none) {
 
 		self.options = options
 		self.optimizationLevel = optimizationLevel
@@ -292,16 +296,23 @@ public class BytecodeCompiler {
 
 		for (reg, decompiledVarName) in scopeNode.registersToClean {
 
-			// TODO: add compile option (e.g. for release mode) which doesn't add these types of comments
-//			let decompiledVarName = getDecompiledVarName(for: reg)
 			let label = nextIndexLabel()
 
-			var comment = "cleanup"
+			let comment: String?
 
-			if let decompiledVarName = decompiledVarName {
-				comment += " \(decompiledVarName)"
+			if options.contains(.generateBytecodeComments) {
+				
+				if let decompiledVarName = decompiledVarName {
+					comment = "cleanup \(decompiledVarName)"
+				} else {
+					comment = "cleanup"
+				}
+				
+			} else {
+				
+				comment = nil
 			}
-
+			
 			let instr = BytecodeInstruction(label: label, type: .registerClear, arguments: [.index(reg)], comment: comment)
 			instructions.append(instr)
 
