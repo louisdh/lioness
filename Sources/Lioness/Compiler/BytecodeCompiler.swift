@@ -8,6 +8,25 @@
 
 import Foundation
 
+public enum CompilerOptimizationLevel: Int {
+	case none = 0
+}
+
+// TODO: implement
+public struct BytecodeCompilerOptions: OptionSet {
+    public let rawValue: Int
+
+	public init(rawValue: BytecodeCompilerOptions.RawValue) {
+		self.rawValue = rawValue
+	}
+	
+	static public let generateBytecodeComments = BytecodeCompilerOptions(rawValue: 1 << 0)
+	static public let removeUnusedFunctions = BytecodeCompilerOptions(rawValue: 1 << 1)
+	static public let removeUnusedVars = BytecodeCompilerOptions(rawValue: 1 << 2)
+	static public let removeEmptyCleanups = BytecodeCompilerOptions(rawValue: 1 << 3)
+
+}
+
 /// Scorpion Bytecode Compiler
 public class BytecodeCompiler {
 
@@ -28,10 +47,16 @@ public class BytecodeCompiler {
 
 	private var currentScopeNode: ScopeNode
 
+	let options: BytecodeCompilerOptions
+	let optimizationLevel: CompilerOptimizationLevel
+	
 	// MARK: -
 
-	public init() {
+	public init(options: BytecodeCompilerOptions = [], optimizationLevel: CompilerOptimizationLevel = .none) {
 
+		self.options = options
+		self.optimizationLevel = optimizationLevel
+		
 		index = 0
 
 		loopHeaderStack = [Int]()
