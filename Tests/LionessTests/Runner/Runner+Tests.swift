@@ -20,6 +20,11 @@ class Runner_Tests: BaseTestCase {
 		XCTAssert(interpreter?.stack.isEmpty == true, "Expected stack to be empty")
 	}
 	
+	func testStructUpdate() {
+		let expectedStruct = ValueType.struct([1: .number(3), 2: .number(2), 3: .number(3)])
+		assert(in: "StructUpdate", that: "bar", equals: expectedStruct, useStdLib: false)
+	}
+	
 	func testUnicodeSumFunction() {
 		assert(in: "UnicodeSumFunction", that: "😀", equals: .number(5))
 	}
