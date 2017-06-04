@@ -64,6 +64,18 @@ class Stdlib_Tests: BaseTestCase {
 	
 	}
 	
+	func testModulus() {
+		
+		let file = "Modulus"
+		
+		assert(in: file, that: "a", equals: .number(0))
+		assert(in: file, that: "b", equals: .number(1))
+		assert(in: file, that: "c", equals: .number(3))
+		assert(in: file, that: "d", equals: .number(-5))
+		assert(in: file, that: "e", equals: .number(5))
+		
+	}
+	
 	func getStdlibSource() throws -> String {
 		
 		let stdLib = StdLib()

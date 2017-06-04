@@ -2,12 +2,12 @@
 //  Modulus.lion
 //  Lioness
 //
-//  Created by Louis D'hauwe on 11/01/2017.
+//  Created by Louis D'hauwe on 04/06/2017.
 //  Copyright © 2017 Silver Fox. All rights reserved.
 //
 
-a = 5
-
-do 10000 times {
-	mod(a, a + 2)
-}
+a = mod(10, 2)
+b = mod(10, 3)
+c = mod(3, 10)
+d = mod(-5, 10)
+e = mod(5, -10)

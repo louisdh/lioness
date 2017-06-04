@@ -24,7 +24,7 @@ class Execution_Performance: BaseTestCase {
 	}
 	
 	func testModulusPerformance() {
-		doExecutionTest(for: "Modulus")
+		doExecutionTest(for: "ModulusPerf")
 	}
 	
 	func testLargeMathPerformance() {

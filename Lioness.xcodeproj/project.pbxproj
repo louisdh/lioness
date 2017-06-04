@@ -11,6 +11,7 @@
 		BE35F8251EE2D95A008C6785 /* Floor.lion in Resources */ = {isa = PBXBuildFile; fileRef = BE35F8241EE2D95A008C6785 /* Floor.lion */; };
 		BE35F8271EE2FFE1008C6785 /* MinMax.lion in Resources */ = {isa = PBXBuildFile; fileRef = BE35F8261EE2FFE1008C6785 /* MinMax.lion */; };
 		BE35F8291EE35F37008C6785 /* NumberSign.lion in Resources */ = {isa = PBXBuildFile; fileRef = BE35F8281EE35F37008C6785 /* NumberSign.lion */; };
+		BE35F82B1EE382F2008C6785 /* Modulus.lion in Resources */ = {isa = PBXBuildFile; fileRef = BE35F82A1EE382F2008C6785 /* Modulus.lion */; };
 		BE3F26A81EE0969A00D58C83 /* Lioness.h in Headers */ = {isa = PBXBuildFile; fileRef = BE3F26A61EE0969A00D58C83 /* Lioness.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		BE3F271D1EE0A97400D58C83 /* Array+Safe.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3F26DE1EE0A97300D58C83 /* Array+Safe.swift */; };
 		BE3F271E1EE0A97400D58C83 /* Array+Safe.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3F26DE1EE0A97300D58C83 /* Array+Safe.swift */; };
@@ -127,7 +128,7 @@
 		BE3F27AF1EE0AB1E00D58C83 /* GreatestCommonDivisor.lion in Resources */ = {isa = PBXBuildFile; fileRef = BE3F27991EE0AB1E00D58C83 /* GreatestCommonDivisor.lion */; };
 		BE3F27B01EE0AB1E00D58C83 /* InnerWhileLoops.lion in Resources */ = {isa = PBXBuildFile; fileRef = BE3F279A1EE0AB1E00D58C83 /* InnerWhileLoops.lion */; };
 		BE3F27B11EE0AB1E00D58C83 /* LargeMathOperation.lion in Resources */ = {isa = PBXBuildFile; fileRef = BE3F279B1EE0AB1E00D58C83 /* LargeMathOperation.lion */; };
-		BE3F27B21EE0AB1E00D58C83 /* Modulus.lion in Resources */ = {isa = PBXBuildFile; fileRef = BE3F279C1EE0AB1E00D58C83 /* Modulus.lion */; };
+		BE3F27B21EE0AB1E00D58C83 /* ModulusPerf.lion in Resources */ = {isa = PBXBuildFile; fileRef = BE3F279C1EE0AB1E00D58C83 /* ModulusPerf.lion */; };
 		BE3F27B31EE0AB1E00D58C83 /* Trigonometry.lion in Resources */ = {isa = PBXBuildFile; fileRef = BE3F279D1EE0AB1E00D58C83 /* Trigonometry.lion */; };
 		BE3F27B41EE0AB1E00D58C83 /* UnicodeSumFunction.lion in Resources */ = {isa = PBXBuildFile; fileRef = BE3F279E1EE0AB1E00D58C83 /* UnicodeSumFunction.lion */; };
 		BE3F27B51EE0AB1E00D58C83 /* UnusedFunctionResult.lion in Resources */ = {isa = PBXBuildFile; fileRef = BE3F279F1EE0AB1E00D58C83 /* UnusedFunctionResult.lion */; };
@@ -148,6 +149,7 @@
 		BE35F8241EE2D95A008C6785 /* Floor.lion */ = {isa = PBXFileReference; explicitFileType = sourcecode.glsl; fileEncoding = 4; path = Floor.lion; sourceTree = "<group>"; };
 		BE35F8261EE2FFE1008C6785 /* MinMax.lion */ = {isa = PBXFileReference; explicitFileType = sourcecode.glsl; fileEncoding = 4; path = MinMax.lion; sourceTree = "<group>"; };
 		BE35F8281EE35F37008C6785 /* NumberSign.lion */ = {isa = PBXFileReference; explicitFileType = sourcecode.glsl; fileEncoding = 4; path = NumberSign.lion; sourceTree = "<group>"; };
+		BE35F82A1EE382F2008C6785 /* Modulus.lion */ = {isa = PBXFileReference; explicitFileType = sourcecode.glsl; fileEncoding = 4; path = Modulus.lion; sourceTree = "<group>"; };
 		BE3F26A51EE0969A00D58C83 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = "Lioness macOS/Info.plist"; sourceTree = "<group>"; };
 		BE3F26A61EE0969A00D58C83 /* Lioness.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Lioness.h; path = "Lioness macOS/Lioness.h"; sourceTree = "<group>"; };
 		BE3F26AD1EE0A3FE00D58C83 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -217,7 +219,7 @@
 		BE3F27991EE0AB1E00D58C83 /* GreatestCommonDivisor.lion */ = {isa = PBXFileReference; explicitFileType = sourcecode.glsl; fileEncoding = 4; path = GreatestCommonDivisor.lion; sourceTree = "<group>"; };
 		BE3F279A1EE0AB1E00D58C83 /* InnerWhileLoops.lion */ = {isa = PBXFileReference; explicitFileType = sourcecode.glsl; fileEncoding = 4; path = InnerWhileLoops.lion; sourceTree = "<group>"; };
 		BE3F279B1EE0AB1E00D58C83 /* LargeMathOperation.lion */ = {isa = PBXFileReference; explicitFileType = sourcecode.glsl; fileEncoding = 4; path = LargeMathOperation.lion; sourceTree = "<group>"; };
-		BE3F279C1EE0AB1E00D58C83 /* Modulus.lion */ = {isa = PBXFileReference; explicitFileType = sourcecode.glsl; fileEncoding = 4; path = Modulus.lion; sourceTree = "<group>"; };
+		BE3F279C1EE0AB1E00D58C83 /* ModulusPerf.lion */ = {isa = PBXFileReference; explicitFileType = sourcecode.glsl; fileEncoding = 4; path = ModulusPerf.lion; sourceTree = "<group>"; };
 		BE3F279D1EE0AB1E00D58C83 /* Trigonometry.lion */ = {isa = PBXFileReference; explicitFileType = sourcecode.glsl; fileEncoding = 4; path = Trigonometry.lion; sourceTree = "<group>"; };
 		BE3F279E1EE0AB1E00D58C83 /* UnicodeSumFunction.lion */ = {isa = PBXFileReference; explicitFileType = sourcecode.glsl; fileEncoding = 4; path = UnicodeSumFunction.lion; sourceTree = "<group>"; };
 		BE3F279F1EE0AB1E00D58C83 /* UnusedFunctionResult.lion */ = {isa = PBXFileReference; explicitFileType = sourcecode.glsl; fileEncoding = 4; path = UnusedFunctionResult.lion; sourceTree = "<group>"; };
@@ -486,7 +488,7 @@
 				BE3F27991EE0AB1E00D58C83 /* GreatestCommonDivisor.lion */,
 				BE3F279A1EE0AB1E00D58C83 /* InnerWhileLoops.lion */,
 				BE3F279B1EE0AB1E00D58C83 /* LargeMathOperation.lion */,
-				BE3F279C1EE0AB1E00D58C83 /* Modulus.lion */,
+				BE3F279C1EE0AB1E00D58C83 /* ModulusPerf.lion */,
 				BE3F279D1EE0AB1E00D58C83 /* Trigonometry.lion */,
 				BE3F279E1EE0AB1E00D58C83 /* UnicodeSumFunction.lion */,
 				BE3F279F1EE0AB1E00D58C83 /* UnusedFunctionResult.lion */,
@@ -494,6 +496,7 @@
 				BE35F8241EE2D95A008C6785 /* Floor.lion */,
 				BE35F8261EE2FFE1008C6785 /* MinMax.lion */,
 				BE35F8281EE35F37008C6785 /* NumberSign.lion */,
+				BE35F82A1EE382F2008C6785 /* Modulus.lion */,
 			);
 			path = "Test source files";
 			sourceTree = "<group>";
@@ -686,8 +689,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				BE3F27B51EE0AB1E00D58C83 /* UnusedFunctionResult.lion in Resources */,
-				BE3F27B21EE0AB1E00D58C83 /* Modulus.lion in Resources */,
+				BE3F27B21EE0AB1E00D58C83 /* ModulusPerf.lion in Resources */,
 				BE35F8251EE2D95A008C6785 /* Floor.lion in Resources */,
+				BE35F82B1EE382F2008C6785 /* Modulus.lion in Resources */,
 				BE35F8291EE35F37008C6785 /* NumberSign.lion in Resources */,
 				BE3F27AD1EE0AB1E00D58C83 /* FunctionInFunction.lion in Resources */,
 				BE3F27B11EE0AB1E00D58C83 /* LargeMathOperation.lion in Resources */,
