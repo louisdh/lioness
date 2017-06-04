@@ -25,6 +25,8 @@ public struct BytecodeCompilerOptions: OptionSet {
 	static public let removeUnusedVars = BytecodeCompilerOptions(rawValue: 1 << 2)
 	static public let removeEmptyCleanups = BytecodeCompilerOptions(rawValue: 1 << 3)
 
+	static public let debug: BytecodeCompilerOptions = []
+	
 	static public let all: BytecodeCompilerOptions = [.generateBytecodeComments,
 	                                                  .removeUnusedFunctions,
 	                                                  .removeUnusedVars,
