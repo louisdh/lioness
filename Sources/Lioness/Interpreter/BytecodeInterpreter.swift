@@ -763,7 +763,11 @@ public class BytecodeInterpreter {
 		}
 
 		regMap[reg]?.removeLast()
-
+		
+		if regMap[reg]?.isEmpty == true {
+			regMap.removeValue(forKey: reg)
+		}
+		
 		registers.removeValue(forKey: key)
 
 		// TODO: throw error?
@@ -791,7 +795,9 @@ public class BytecodeInterpreter {
 
 		// FIXME: make faster?
 		if regMap[reg] != nil {
-			regMap[reg]?.append(virtualDepth.value)
+			if regMap[reg]?.contains(virtualDepth.value) != true {
+				regMap[reg]?.append(virtualDepth.value)
+			}
 		} else {
 			regMap[reg] = [virtualDepth.value]
 		}
