@@ -90,14 +90,21 @@ public struct BinaryOpNode: ASTNode {
 		}
 
 		let label = ctx.nextIndexLabel()
-
+		
+		let comment: String?
+		
+		if ctx.options.contains(.generateBytecodeComments) {
+			comment = op
+		} else {
+			comment = nil
+		}
+		
 		// FIXME: comment "op" is wrong for ">" and ">="
-		let operation = BytecodeInstruction(label: label, type: opInstructionType, comment: op)
+		let operation = BytecodeInstruction(label: label, type: opInstructionType, comment: comment)
 
 		bytecode.append(operation)
 
 		return bytecode
-
 	}
 
 	public var childNodes: [ASTNode] {
