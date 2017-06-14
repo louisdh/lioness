@@ -9,7 +9,7 @@
 <a href="https://codeclimate.com/github/louisdh/lioness"><img src="https://codeclimate.com/github/louisdh/lioness/badges/gpa.svg" style="max-height: 300px;" alt="Code Climate"/></a>
 <a href="https://codecov.io/gh/louisdh/lioness"><img src="https://codecov.io/gh/louisdh/lioness/branch/master/graph/badge.svg" alt="Codecov"/></a>
 <br>
-<img src="https://img.shields.io/badge/version-0.5-blue.svg" style="max-height: 300px;" alt="version 0.5">
+<img src="https://img.shields.io/badge/version-0.5.1-blue.svg" style="max-height: 300px;" alt="version 0.5">
 <a href="https://developer.apple.com/swift/"><img src="https://img.shields.io/badge/Swift-3.1-orange.svg?style=flat" style="max-height: 300px;" alt="Swift"/></a>
 <img src="https://img.shields.io/badge/Platforms-iOS%20%7C%20macOS%20%7C%20tvOS%20%7C%20watchOS-lightgrey.svg" style="max-height: 300px;" alt="Platform: iOS macOS tvOS watchOS">
 <img src="https://img.shields.io/badge/extension-.lion-FF9C27.svg" style="max-height: 300px;" alt="Extension: .lion">
@@ -96,8 +96,6 @@ To add Lioness as a framework:
 .Package(url: "https://github.com/louisdh/lioness.git",
 		         majorVersion: 0, minor: 5)
 ```
-
-*Please note: The Swift Package Manager currently does not allow the inclusion of non ```.swift``` files, this means the Lioness Standard Library is currently unavailable from a Swift Package Manager installation.*
 
 ## Standard Library
 *Please note: Lioness is currently in beta*
