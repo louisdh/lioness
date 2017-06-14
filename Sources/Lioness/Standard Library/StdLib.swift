@@ -21,12 +21,25 @@ public class StdLib {
 		var stdLib = ""
 
 		let bundle = Bundle(for: type(of: self))
-
-		for sourceName in sources {
-
+		
+		#if SWIFT_PACKAGE
+			
+			// Swift packages don't currently have a resources folder
+			
+			var url = URL(fileURLWithPath: #file)
+			url.deletePathExtension()
+			
+			let resourcesPath = url.absoluteString
+			
+		#else
+			
 			guard let resourcesPath = bundle.resourcePath else {
 				throw StdLibError.resourceNotFound
 			}
+			
+		#endif
+		
+		for sourceName in sources {
 
 			let resourcePath = "\(resourcesPath)/\(sourceName).lion"
 
@@ -34,12 +47,12 @@ public class StdLib {
 			stdLib += source
 
 		}
-
+		
 		return stdLib
 	}
 
-}
+	enum StdLibError: Error {
+		case resourceNotFound
+	}
 
-enum StdLibError: Error {
-	case resourceNotFound
 }
