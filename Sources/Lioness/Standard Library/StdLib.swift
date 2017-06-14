@@ -27,9 +27,10 @@ public class StdLib {
 			// Swift packages don't currently have a resources folder
 			
 			var url = URL(fileURLWithPath: #file)
-			url.deletePathExtension()
+			url.deleteLastPathComponent()
+			url.appendPathComponent("Sources")
 			
-			let resourcesPath = url.absoluteString
+			let resourcesPath = url.path
 			
 		#else
 			
