@@ -10,6 +10,7 @@
 <a href="https://codecov.io/gh/louisdh/lioness"><img src="https://codecov.io/gh/louisdh/lioness/branch/master/graph/badge.svg" alt="Codecov"/></a>
 <br>
 <img src="https://img.shields.io/badge/version-0.5.1-blue.svg" style="max-height: 300px;" alt="version 0.5">
+<a href="https://github.com/Carthage/Carthage"><img src="https://img.shields.io/badge/Carthage-compatible-4bc51d.svg?style=flat" style="max-height: 300px;" alt="Carthage Compatible"/></a>
 <a href="https://developer.apple.com/swift/"><img src="https://img.shields.io/badge/Swift-3.1-orange.svg?style=flat" style="max-height: 300px;" alt="Swift"/></a>
 <img src="https://img.shields.io/badge/Platforms-iOS%20%7C%20macOS%20%7C%20tvOS%20%7C%20watchOS-lightgrey.svg" style="max-height: 300px;" alt="Platform: iOS macOS tvOS watchOS">
 <img src="https://img.shields.io/badge/extension-.lion-FF9C27.svg" style="max-height: 300px;" alt="Extension: .lion">
@@ -86,16 +87,32 @@ Since the project does not rely on any dependencies, running it requires no setu
 Open ```Lioness.xcworkspace``` (preferably in the latest non-beta version of Xcode) and run the ```macOS Example``` target. The example will run the code in ```A.lion```. The output will be printed to the console.
 
 ## Installing framework
-To add Lioness as a framework:
  
 ### Using Swift Package Manager
 
-- Add to your `Package.swift` file's `dependencies` section:
+Add to your `Package.swift` file's `dependencies` section:
 
 ```swift
 .Package(url: "https://github.com/louisdh/lioness.git",
 		         majorVersion: 0, minor: 5)
 ```
+
+### Using [CocoaPods](http://cocoapods.org)
+
+Add the following line to your ```Podfile```:
+
+```ruby
+pod 'Lioness', '~> 0.5'
+```
+
+### Using [Carthage](https://github.com/Carthage/Carthage)
+Add the following line to your ```Cartfile```:
+
+```ruby
+github "louisdh/lioness" ~> 0.5
+```
+Run ```carthage update``` to build the framework and drag the built ```Lioness.framework``` into your Xcode project.
+
 
 ## Standard Library
 *Please note: Lioness is currently in beta*
