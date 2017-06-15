@@ -39,16 +39,24 @@ Lioness is compiled to Scorpion, which can be executed using an interpreter. The
 | virt_e        | 30                  |           |                               | virtual end, decrements register depth                                                |
 | pvirt_e       | 31                  |           |                               | private virtual end, does not decrement register depth                                |
 
-## Example
-The following source code:
-```swift
+## Examples
+
+<table>
+  <tr>
+    <th>Lioness</th>
+    <th>Scorpion</th> 
+  </tr>
+  
+<td>
+<pre lang="swift">
 a = 1
 b = 2
 c = a + b
-```
+</pre>
+</td>
 
-compiles to the following Scorpion bytecode:
-```asm
+<td>
+<pre lang="asm">
 1: push_const vnumber(1.0)
 2: reg_store i1               ; a
 3: push_const vnumber(2.0)
@@ -57,4 +65,9 @@ compiles to the following Scorpion bytecode:
 6: reg_load i2                ; b
 7: add                        ; +
 8: reg_store i3               ; c
-```
+</pre>
+</td>
+
+</tr>
+
+
