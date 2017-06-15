@@ -47,6 +47,8 @@ Lioness is compiled to Scorpion, which can be executed using an interpreter. The
     <th>Scorpion</th> 
   </tr>
   
+<tr>
+
 <td>
 <pre lang="swift">
 a = 1
@@ -69,5 +71,45 @@ c = a + b
 </td>
 
 </tr>
+
+<tr>
+
+<td>
+<pre lang="swift">
+func isPositive(x) returns {
+	return x > 0
+}
+
+a = isPositive(2.0)
+</pre>
+</td>
+
+<td>
+<pre lang="asm">
+1: virt_h i1                  ; isPositive(x)
+	2: skip_past i4               ; skip exit instruction
+	3: invoke_virt i2             ; cleanup_isPositive()
+	4: exit_virt                  ; exit function
+	5: reg_store i1               ; x
+	6: push_const vnumber(0.0)
+	7: reg_load i1                ; x
+	8: cmplt                      ; >
+	9: goto i3                    ; return
+
+	10: pvirt_h i2                ; cleanup_isPositive
+		11: reg_clear i1              ; cleanup x
+	12: pvirt_e
+
+13: virt_e
+
+14: push_const vnumber(2.0)
+15: invoke_virt i1            ; isPositive
+16: reg_store i2              ; a
+</pre>
+</td>
+
+</tr>
+
+</table>
 
 
