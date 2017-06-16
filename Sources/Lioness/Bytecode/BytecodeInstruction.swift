@@ -10,14 +10,6 @@ import Foundation
 
 public typealias BytecodeBody = [BytecodeInstruction]
 
-extension Array where Element == BytecodeInstruction {
-	
-	var humanReadableDescription: String {
-		return self.map({ $0.description }).joined(separator: "\n")
-	}
-	
-}
-
 /// Scorpion Bytecode Instruction
 public class BytecodeInstruction {
 
