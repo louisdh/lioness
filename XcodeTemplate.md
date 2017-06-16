@@ -1,7 +1,7 @@
 # Xcode file template
 The Lioness Xcode file template allows the creation of a Lioness source file via the ```File -> New -> File...``` menu in Xcode.
 
-<img src="doc-resources/xcode-template/new-file-menu.png" style="max-height: 500px;">
+<img src="docs/resources/xcode-template/new-file-menu.png" style="max-height: 500px;">
 
 ## Installation
 * Create a new folder in ```~/Library/Developer/Xcode/Templates/```
