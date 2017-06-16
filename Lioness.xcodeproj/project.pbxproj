@@ -141,6 +141,7 @@
 		BE3F27C21EE0AF7300D58C83 /* Geometry.lion in Resources */ = {isa = PBXBuildFile; fileRef = BE3F27BD1EE0AF7300D58C83 /* Geometry.lion */; };
 		BE3F27C31EE0AF7300D58C83 /* Graphics.lion in Resources */ = {isa = PBXBuildFile; fileRef = BE3F27BE1EE0AF7300D58C83 /* Graphics.lion */; };
 		BE3F27C41EE0AF7300D58C83 /* Graphics.lion in Resources */ = {isa = PBXBuildFile; fileRef = BE3F27BE1EE0AF7300D58C83 /* Graphics.lion */; };
+		BE57A7351EF4A29D0008DB78 /* RepeatWhileStatement.lion in Resources */ = {isa = PBXBuildFile; fileRef = BE57A7341EF4A29D0008DB78 /* RepeatWhileStatement.lion */; };
 		BE58C1581E16D7BE00BC73CA /* Lioness.h in Headers */ = {isa = PBXBuildFile; fileRef = BE58C1561E16D7BE00BC73CA /* Lioness.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		BE7682EB1EF45A7800FC784D /* Fibonacci.scorp in Resources */ = {isa = PBXBuildFile; fileRef = BE7682EA1EF45A7800FC784D /* Fibonacci.scorp */; };
 		BEEB790E1EF4609000485334 /* BytecodeDescriptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEEB790D1EF4609000485334 /* BytecodeDescriptor.swift */; };
@@ -234,6 +235,7 @@
 		BE3F27BC1EE0AF7300D58C83 /* Arithmetic.lion */ = {isa = PBXFileReference; explicitFileType = sourcecode.glsl; fileEncoding = 4; path = Arithmetic.lion; sourceTree = "<group>"; };
 		BE3F27BD1EE0AF7300D58C83 /* Geometry.lion */ = {isa = PBXFileReference; explicitFileType = sourcecode.glsl; fileEncoding = 4; path = Geometry.lion; sourceTree = "<group>"; };
 		BE3F27BE1EE0AF7300D58C83 /* Graphics.lion */ = {isa = PBXFileReference; explicitFileType = sourcecode.glsl; fileEncoding = 4; path = Graphics.lion; sourceTree = "<group>"; };
+		BE57A7341EF4A29D0008DB78 /* RepeatWhileStatement.lion */ = {isa = PBXFileReference; explicitFileType = sourcecode.glsl; fileEncoding = 4; path = RepeatWhileStatement.lion; sourceTree = "<group>"; };
 		BE58C14C1E16D77900BC73CA /* Lioness.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Lioness.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BE58C1551E16D7BE00BC73CA /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = "Lioness iOS/Info.plist"; sourceTree = SOURCE_ROOT; };
 		BE58C1561E16D7BE00BC73CA /* Lioness.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Lioness.h; path = "Lioness iOS/Lioness.h"; sourceTree = SOURCE_ROOT; };
@@ -519,6 +521,7 @@
 				BE35F8281EE35F37008C6785 /* NumberSign.lion */,
 				BE35F82A1EE382F2008C6785 /* Modulus.lion */,
 				BE35F83F1EE389C8008C6785 /* StructUpdate.lion */,
+				BE57A7341EF4A29D0008DB78 /* RepeatWhileStatement.lion */,
 			);
 			path = "Test source files";
 			sourceTree = "<group>";
@@ -720,6 +723,7 @@
 				BE3F27B11EE0AB1E00D58C83 /* LargeMathOperation.lion in Resources */,
 				BE3F27AB1EE0AB1E00D58C83 /* Fibonacci.lion in Resources */,
 				BE3F27AF1EE0AB1E00D58C83 /* GreatestCommonDivisor.lion in Resources */,
+				BE57A7351EF4A29D0008DB78 /* RepeatWhileStatement.lion in Resources */,
 				BE3F27AC1EE0AB1E00D58C83 /* FunctionGlobalVar.lion in Resources */,
 				BE3F27B01EE0AB1E00D58C83 /* InnerWhileLoops.lion in Resources */,
 				BE3F27A91EE0AB1E00D58C83 /* Complex.lion in Resources */,

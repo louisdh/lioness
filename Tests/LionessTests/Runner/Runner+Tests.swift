@@ -65,4 +65,8 @@ class Runner_Tests: BaseTestCase {
 		assert(in: "VarAssignAfterScopeLeave", that: "a", equals: .number(1))
 	}
 	
+	func testRepeatWhileStatement() {
+		assert(in: "RepeatWhileStatement", that: "i", equals: .number(16))
+	}
+
 }
