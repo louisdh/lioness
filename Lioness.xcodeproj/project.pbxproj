@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		BE14125A1DB1774900DAA385 /* Lioness.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE2296281DB16EE800EA477A /* Lioness.framework */; };
+		BE1565941EF45B0B004E3894 /* CompiledBytecodeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1565931EF45B0B004E3894 /* CompiledBytecodeTests.swift */; };
 		BE35F8251EE2D95A008C6785 /* Floor.lion in Resources */ = {isa = PBXBuildFile; fileRef = BE35F8241EE2D95A008C6785 /* Floor.lion */; };
 		BE35F8271EE2FFE1008C6785 /* MinMax.lion in Resources */ = {isa = PBXBuildFile; fileRef = BE35F8261EE2FFE1008C6785 /* MinMax.lion */; };
 		BE35F8291EE35F37008C6785 /* NumberSign.lion in Resources */ = {isa = PBXBuildFile; fileRef = BE35F8281EE35F37008C6785 /* NumberSign.lion */; };
@@ -141,10 +142,14 @@
 		BE3F27C31EE0AF7300D58C83 /* Graphics.lion in Resources */ = {isa = PBXBuildFile; fileRef = BE3F27BE1EE0AF7300D58C83 /* Graphics.lion */; };
 		BE3F27C41EE0AF7300D58C83 /* Graphics.lion in Resources */ = {isa = PBXBuildFile; fileRef = BE3F27BE1EE0AF7300D58C83 /* Graphics.lion */; };
 		BE58C1581E16D7BE00BC73CA /* Lioness.h in Headers */ = {isa = PBXBuildFile; fileRef = BE58C1561E16D7BE00BC73CA /* Lioness.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		BE7682EB1EF45A7800FC784D /* Fibonacci.scorp in Resources */ = {isa = PBXBuildFile; fileRef = BE7682EA1EF45A7800FC784D /* Fibonacci.scorp */; };
+		BEEB790E1EF4609000485334 /* BytecodeDescriptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEEB790D1EF4609000485334 /* BytecodeDescriptor.swift */; };
+		BEEB790F1EF4609000485334 /* BytecodeDescriptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEEB790D1EF4609000485334 /* BytecodeDescriptor.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		BE1412571DB1755E00DAA385 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
+		BE1565931EF45B0B004E3894 /* CompiledBytecodeTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CompiledBytecodeTests.swift; path = LionessTests/Bytecode/CompiledBytecodeTests.swift; sourceTree = "<group>"; };
 		BE2296281DB16EE800EA477A /* Lioness.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Lioness.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BE295CE81DB14DCE0019EC57 /* Lioness macOS Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Lioness macOS Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BE35F8241EE2D95A008C6785 /* Floor.lion */ = {isa = PBXFileReference; explicitFileType = sourcecode.glsl; fileEncoding = 4; path = Floor.lion; sourceTree = "<group>"; };
@@ -232,6 +237,8 @@
 		BE58C14C1E16D77900BC73CA /* Lioness.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Lioness.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BE58C1551E16D7BE00BC73CA /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = "Lioness iOS/Info.plist"; sourceTree = SOURCE_ROOT; };
 		BE58C1561E16D7BE00BC73CA /* Lioness.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Lioness.h; path = "Lioness iOS/Lioness.h"; sourceTree = SOURCE_ROOT; };
+		BE7682EA1EF45A7800FC784D /* Fibonacci.scorp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Fibonacci.scorp; sourceTree = "<group>"; };
+		BEEB790D1EF4609000485334 /* BytecodeDescriptor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BytecodeDescriptor.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -266,6 +273,15 @@
 				BE1412571DB1755E00DAA385 /* Cocoa.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		BE1565921EF45ADF004E3894 /* Bytecode */ = {
+			isa = PBXGroup;
+			children = (
+				BE1565931EF45B0B004E3894 /* CompiledBytecodeTests.swift */,
+			);
+			name = Bytecode;
+			path = ..;
 			sourceTree = "<group>";
 		};
 		BE3F25F71EE0963800D58C83 /* Sources */ = {
@@ -359,6 +375,7 @@
 				BE3F26FF1EE0A97400D58C83 /* BytecodeInstructionError.swift */,
 				BE3F27001EE0A97400D58C83 /* BytecodeInstructionType.swift */,
 				BE3F27011EE0A97400D58C83 /* InstructionArgumentType.swift */,
+				BEEB790D1EF4609000485334 /* BytecodeDescriptor.swift */,
 			);
 			path = Bytecode;
 			sourceTree = "<group>";
@@ -434,6 +451,7 @@
 			isa = PBXGroup;
 			children = (
 				BE3F27861EE0AB1E00D58C83 /* BaseTestCase.swift */,
+				BE1565921EF45ADF004E3894 /* Bytecode */,
 				BE3F27871EE0AB1E00D58C83 /* Execution */,
 				BE3F27891EE0AB1E00D58C83 /* Lexer */,
 				BE3F278C1EE0AB1E00D58C83 /* Runner */,
@@ -484,6 +502,7 @@
 				BE3F27931EE0AB1E00D58C83 /* Complex.lion */,
 				BE3F27941EE0AB1E00D58C83 /* DoTimesLoops.lion */,
 				BE3F27951EE0AB1E00D58C83 /* Fibonacci.lion */,
+				BE7682EA1EF45A7800FC784D /* Fibonacci.scorp */,
 				BE3F27961EE0AB1E00D58C83 /* FunctionGlobalVar.lion */,
 				BE3F27971EE0AB1E00D58C83 /* FunctionInFunction.lion */,
 				BE3F27981EE0AB1E00D58C83 /* FunctionReturnGlobalVar.lion */,
@@ -705,6 +724,7 @@
 				BE3F27B01EE0AB1E00D58C83 /* InnerWhileLoops.lion in Resources */,
 				BE3F27A91EE0AB1E00D58C83 /* Complex.lion in Resources */,
 				BE3F27B31EE0AB1E00D58C83 /* Trigonometry.lion in Resources */,
+				BE7682EB1EF45A7800FC784D /* Fibonacci.scorp in Resources */,
 				BE3F27AA1EE0AB1E00D58C83 /* DoTimesLoops.lion in Resources */,
 				BE3F27B41EE0AB1E00D58C83 /* UnicodeSumFunction.lion in Resources */,
 				BE3F27A81EE0AB1E00D58C83 /* BinaryOp.lion in Resources */,
@@ -752,6 +772,7 @@
 				BE3F273B1EE0A97400D58C83 /* ContinueNode.swift in Sources */,
 				BE3F27611EE0A97400D58C83 /* ScopeNode.swift in Sources */,
 				BE3F275F1EE0A97400D58C83 /* CompileError.swift in Sources */,
+				BEEB790E1EF4609000485334 /* BytecodeDescriptor.swift in Sources */,
 				BE3F273F1EE0A97400D58C83 /* ForStatementNode.swift in Sources */,
 				BE3F271F1EE0A97400D58C83 /* ASTChildNode.swift in Sources */,
 				BE3F274F1EE0A97400D58C83 /* StructPrototypeNode.swift in Sources */,
@@ -787,6 +808,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BE1565941EF45B0B004E3894 /* CompiledBytecodeTests.swift in Sources */,
 				BE3F27A31EE0AB1E00D58C83 /* Lexer+Performance.swift in Sources */,
 				BE3F27A71EE0AB1E00D58C83 /* Stdlib+Tests.swift in Sources */,
 				BE3F27A11EE0AB1E00D58C83 /* BaseTestCase.swift in Sources */,
@@ -822,6 +844,7 @@
 				BE3F273C1EE0A97400D58C83 /* ContinueNode.swift in Sources */,
 				BE3F27621EE0A97400D58C83 /* ScopeNode.swift in Sources */,
 				BE3F27601EE0A97400D58C83 /* CompileError.swift in Sources */,
+				BEEB790F1EF4609000485334 /* BytecodeDescriptor.swift in Sources */,
 				BE3F27401EE0A97400D58C83 /* ForStatementNode.swift in Sources */,
 				BE3F27201EE0A97400D58C83 /* ASTChildNode.swift in Sources */,
 				BE3F27501EE0A97400D58C83 /* StructPrototypeNode.swift in Sources */,

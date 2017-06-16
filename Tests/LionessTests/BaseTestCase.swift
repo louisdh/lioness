@@ -28,10 +28,10 @@ class BaseTestCase: XCTestCase {
 		super.tearDown()
 	}
 	
-	func getFilePath(for fileName: String) -> URL? {
+	func getFilePath(for fileName: String, extension: String) -> URL? {
 		
 		let bundle = Bundle(for: type(of: self))
-		let fileURL = bundle.url(forResource: fileName, withExtension: "lion")
+		let fileURL = bundle.url(forResource: fileName, withExtension: `extension`)
 		
 		return fileURL
 		
@@ -39,7 +39,23 @@ class BaseTestCase: XCTestCase {
 	
 	func getSource(for fileName: String) -> String? {
 		
-		let fileURL = getFilePath(for: fileName)
+		let fileURL = getFilePath(for: fileName, extension: "lion")
+		
+		guard let path = fileURL?.path else {
+			return nil
+		}
+		
+		guard let source = try? String(contentsOfFile: path, encoding: .utf8) else {
+			return nil
+		}
+		
+		return source
+		
+	}
+	
+	func getScorpionSource(for fileName: String) -> String? {
+		
+		let fileURL = getFilePath(for: fileName, extension: "scorp")
 		
 		guard let path = fileURL?.path else {
 			return nil
@@ -76,7 +92,7 @@ class BaseTestCase: XCTestCase {
 		
 		let runner = Runner(logDebug: false)
 		
-		let fileURL = getFilePath(for: file)
+		let fileURL = getFilePath(for: file, extension: "lion")
 		
 		guard let path = fileURL?.path else {
 			throw RunnerTestError.sourceNotFound
@@ -98,7 +114,7 @@ class BaseTestCase: XCTestCase {
 		
 		let runner = Runner(logDebug: false)
 		
-		let fileURL = getFilePath(for: file)
+		let fileURL = getFilePath(for: file, extension: "lion")
 		
 		guard let path = fileURL?.path else {
 			throw RunnerTestError.sourceNotFound
