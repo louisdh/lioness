@@ -421,37 +421,9 @@ public class Runner {
 
 	private func logBytecode(_ bytecode: BytecodeBody) {
 
-		var indentLevel = 0
-
-		for b in bytecode {
-
-			if b.type == .virtualEnd || b.type == .privateVirtualEnd {
-				indentLevel -= 1
-			}
-
-			var description = ""
-
-			if b.type == .virtualHeader || b.type == .privateVirtualHeader {
-				description += "\n"
-			}
-
-			for _ in 0..<indentLevel {
-				description += "\t"
-			}
-
-			description += b.description
-
-			if b.type == .virtualEnd || b.type == .privateVirtualEnd {
-				description += "\n"
-			}
-
-			log(description)
-
-			if b.type == .virtualHeader || b.type == .privateVirtualHeader {
-				indentLevel += 1
-			}
-
-		}
+		let bytecodeDescriptor = BytecodeDescriptor(bytecode: bytecode)
+		
+		log(bytecodeDescriptor.humanReadableDescription())
 
 	}
 
