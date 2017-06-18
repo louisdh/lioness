@@ -146,6 +146,8 @@
 		BE7682EB1EF45A7800FC784D /* Fibonacci.scorp in Resources */ = {isa = PBXBuildFile; fileRef = BE7682EA1EF45A7800FC784D /* Fibonacci.scorp */; };
 		BEEB790E1EF4609000485334 /* BytecodeDescriptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEEB790D1EF4609000485334 /* BytecodeDescriptor.swift */; };
 		BEEB790F1EF4609000485334 /* BytecodeDescriptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEEB790D1EF4609000485334 /* BytecodeDescriptor.swift */; };
+		BEF3D2681EF6CC380086EDC8 /* ASTDescriptionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEF3D2671EF6CC380086EDC8 /* ASTDescriptionTests.swift */; };
+		BEF3D26A1EF6CE810086EDC8 /* Fibonacci-ast.txt in Resources */ = {isa = PBXBuildFile; fileRef = BEF3D2691EF6CE810086EDC8 /* Fibonacci-ast.txt */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -241,6 +243,8 @@
 		BE58C1561E16D7BE00BC73CA /* Lioness.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Lioness.h; path = "Lioness iOS/Lioness.h"; sourceTree = SOURCE_ROOT; };
 		BE7682EA1EF45A7800FC784D /* Fibonacci.scorp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Fibonacci.scorp; sourceTree = "<group>"; };
 		BEEB790D1EF4609000485334 /* BytecodeDescriptor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BytecodeDescriptor.swift; sourceTree = "<group>"; };
+		BEF3D2671EF6CC380086EDC8 /* ASTDescriptionTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ASTDescriptionTests.swift; path = AST/ASTDescriptionTests.swift; sourceTree = "<group>"; };
+		BEF3D2691EF6CE810086EDC8 /* Fibonacci-ast.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Fibonacci-ast.txt"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -453,6 +457,7 @@
 			isa = PBXGroup;
 			children = (
 				BE3F27861EE0AB1E00D58C83 /* BaseTestCase.swift */,
+				BEF3D2661EF6CC080086EDC8 /* AST */,
 				BE1565921EF45ADF004E3894 /* Bytecode */,
 				BE3F27871EE0AB1E00D58C83 /* Execution */,
 				BE3F27891EE0AB1E00D58C83 /* Lexer */,
@@ -505,6 +510,7 @@
 				BE3F27941EE0AB1E00D58C83 /* DoTimesLoops.lion */,
 				BE3F27951EE0AB1E00D58C83 /* Fibonacci.lion */,
 				BE7682EA1EF45A7800FC784D /* Fibonacci.scorp */,
+				BEF3D2691EF6CE810086EDC8 /* Fibonacci-ast.txt */,
 				BE3F27961EE0AB1E00D58C83 /* FunctionGlobalVar.lion */,
 				BE3F27971EE0AB1E00D58C83 /* FunctionInFunction.lion */,
 				BE3F27981EE0AB1E00D58C83 /* FunctionReturnGlobalVar.lion */,
@@ -575,6 +581,14 @@
 			);
 			name = "Lioness iOS";
 			path = Lioness;
+			sourceTree = "<group>";
+		};
+		BEF3D2661EF6CC080086EDC8 /* AST */ = {
+			isa = PBXGroup;
+			children = (
+				BEF3D2671EF6CC380086EDC8 /* ASTDescriptionTests.swift */,
+			);
+			name = AST;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -717,6 +731,7 @@
 				BE3F27B21EE0AB1E00D58C83 /* ModulusPerf.lion in Resources */,
 				BE35F8251EE2D95A008C6785 /* Floor.lion in Resources */,
 				BE35F82B1EE382F2008C6785 /* Modulus.lion in Resources */,
+				BEF3D26A1EF6CE810086EDC8 /* Fibonacci-ast.txt in Resources */,
 				BE35F8291EE35F37008C6785 /* NumberSign.lion in Resources */,
 				BE35F8401EE389C8008C6785 /* StructUpdate.lion in Resources */,
 				BE3F27AD1EE0AB1E00D58C83 /* FunctionInFunction.lion in Resources */,
@@ -817,6 +832,7 @@
 				BE3F27A71EE0AB1E00D58C83 /* Stdlib+Tests.swift in Sources */,
 				BE3F27A11EE0AB1E00D58C83 /* BaseTestCase.swift in Sources */,
 				BE3F27A41EE0AB1E00D58C83 /* Lexer+Tests.swift in Sources */,
+				BEF3D2681EF6CC380086EDC8 /* ASTDescriptionTests.swift in Sources */,
 				BE3F27A61EE0AB1E00D58C83 /* Runner+Tests.swift in Sources */,
 				BE3F27A51EE0AB1E00D58C83 /* Runner+Performance.swift in Sources */,
 				BE3F27A21EE0AB1E00D58C83 /* Execution+Performance.swift in Sources */,

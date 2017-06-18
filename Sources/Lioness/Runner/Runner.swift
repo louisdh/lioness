@@ -183,9 +183,18 @@ public class Runner {
 
 	// MARK: -
 	
+	func parseAST(_ source: String) -> [ASTNode]? {
+		
+		guard let ast = (runLexer |> parseTokens)(source) else {
+			return nil
+		}
+		
+		return ast
+	}
+	
 	func compileLionessSourceCode(_ source: String) -> BytecodeBody? {
 
-		guard let ast = (runLexer |> parseTokens)(source) else {
+		guard let ast = parseAST(source) else {
 			return nil
 		}
 

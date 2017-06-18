@@ -34,28 +34,30 @@ class BaseTestCase: XCTestCase {
 		let fileURL = bundle.url(forResource: fileName, withExtension: `extension`)
 		
 		return fileURL
-		
 	}
 	
 	func getSource(for fileName: String) -> String? {
 		
 		let fileURL = getFilePath(for: fileName, extension: "lion")
 		
-		guard let path = fileURL?.path else {
-			return nil
-		}
-		
-		guard let source = try? String(contentsOfFile: path, encoding: .utf8) else {
-			return nil
-		}
-		
-		return source
-		
+		return getSource(for: fileURL)
 	}
 	
 	func getScorpionSource(for fileName: String) -> String? {
 		
 		let fileURL = getFilePath(for: fileName, extension: "scorp")
+		
+		return getSource(for: fileURL)
+	}
+	
+	func getASTDescription(for fileName: String) -> String? {
+		
+		let fileURL = getFilePath(for: "\(fileName)-ast", extension: "txt")
+		
+		return getSource(for: fileURL)
+	}
+	
+	@nonobjc func getSource(for fileURL: URL?) -> String? {
 		
 		guard let path = fileURL?.path else {
 			return nil
