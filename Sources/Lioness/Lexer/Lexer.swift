@@ -109,6 +109,21 @@ public class Lexer {
         self.input = input
 		content = input
     }
+	
+	var nextString: String {
+		
+		let firstChar = content.characters.first
+		
+		let nextString: String
+		
+		if let firstChar = firstChar {
+			nextString = currentString.appending("\(firstChar)")
+		} else {
+			nextString = currentString
+		}
+		
+		return nextString
+	}
 
 	public func tokenize() -> [Token] {
 
@@ -133,16 +148,6 @@ public class Lexer {
 			}
 
 //			print("current: \(currentString)")
-
-			let firstChar = content.characters.first
-
-			let nextString: String
-
-			if let firstChar = firstChar {
-				nextString = currentString.appending("\(firstChar)")
-			} else {
-				nextString = currentString
-			}
 
 			var removedControlChar = false
 
@@ -169,11 +174,33 @@ public class Lexer {
 
 			let isEOF = content.isEmpty
 
-			if isCurrentStringValidNumber || isStringValidNumber(nextString) {
+			if isCurrentStringValidNumber || (!removedControlChar && isStringValidNumber(nextString)) {
 				isInNumber = true
+//				print(nextString)
+//				print("isInNumber = true")
 			}
 
-			if !isInBlockComment && content.hasPrefix("/*") {
+			if !isInLineComment && currentString == "//" {
+				isInLineComment = true
+				continue
+			}
+			
+			if !isInBlockComment && currentString == "/*" {
+				isInBlockComment = true
+				continue
+			}
+			
+			if currentString.isEmpty && !isInNumber && (!isInLineComment && content.hasPrefix("//")) {
+				
+				isInLineComment = true
+				consumeCharactersAtStart(2)
+				continue
+				
+			}
+			
+			
+			
+			if currentString.isEmpty && !isInNumber && (!isInBlockComment && content.hasPrefix("/*")) {
 
 				isInBlockComment = true
 				consumeCharactersAtStart(2)
@@ -182,17 +209,28 @@ public class Lexer {
 
 			if !isInBlockComment && !isInLineComment {
 
+				
+				
 				if isInNumber {
 
-					if !isStringValidNumber(nextString) || isEOF {
+					if !isStringValidNumber(nextString) || isEOF || removedControlChar {
 						if let f = NumberType(currentString) {
 							addToken(type: .number(f))
 
-							if !content.isEmpty {
-								consumeCharactersAtStart(1)
-							}
+							isInNumber = false
 
-							continue
+							if let nextChar = content.characters.first {
+								if currentString == "/" {
+									if nextChar == "/" ||  nextChar == "*" {
+										consumeCharactersAtStart(1)
+										continue
+									}
+								}
+							}
+							
+							if !content.isEmpty {
+								continue
+							}
 
 						}
 
@@ -204,12 +242,21 @@ public class Lexer {
 							consumeCharactersAtStart(1)
 						}
 
+						if let nextChar = content.characters.first {
+							if currentString == "/" {
+								if nextChar == "/" ||  nextChar == "*" {
+									consumeCharactersAtStart(1)
+								}
+							}
+						}
+						
 						continue
 
 					}
 
 				}
 
+				
 				if tokenizeTwoChar() {
 					continue
 				}
@@ -248,14 +295,22 @@ public class Lexer {
 					continue
 				}
 
-				if content.hasPrefix("//") {
-
-					isInLineComment = true
-					consumeCharactersAtStart(2)
-					continue
-
-				}
-
+			}
+			
+			if !isInLineComment && nextString == "//" {
+				
+				isInLineComment = true
+				consumeCharactersAtStart(1)
+				continue
+				
+			}
+			
+			if !isInBlockComment && nextString == "/*" {
+				
+				isInLineComment = true
+				consumeCharactersAtStart(1)
+				continue
+				
 			}
 
 			if content.hasPrefix("*/") {
@@ -300,7 +355,7 @@ public class Lexer {
 	}
 
 	func isStringValidNumber(_ str: String) -> Bool {
-		if str.isEmpty {
+		if str.isEmpty || str == "-" {
 			return false
 		}
 		return str.rangeOfCharacter(from: validNumberCharSet.inverted) == nil

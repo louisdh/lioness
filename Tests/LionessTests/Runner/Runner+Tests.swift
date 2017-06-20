@@ -13,6 +13,14 @@ class Runner_Tests: BaseTestCase {
 	
 	// MARK: - Tests
 	
+	func testCommentAfterAssignment() {
+		assert(in: "CommentAfterAssignment", that: "a", equals: .number(2), useStdLib: false)
+	}
+	
+	func testCommentBlockAfterAssignment() {
+		assert(in: "CommentBlockAfterAssignment", that: "a", equals: .number(2), useStdLib: false)
+	}
+	
 	func testUnusedFunctionResult() {
 		
 		let interpreter = try? execute("UnusedFunctionResult")
