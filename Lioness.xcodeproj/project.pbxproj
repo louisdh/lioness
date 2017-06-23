@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		BE14125A1DB1774900DAA385 /* Lioness.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE2296281DB16EE800EA477A /* Lioness.framework */; };
 		BE1565941EF45B0B004E3894 /* CompiledBytecodeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1565931EF45B0B004E3894 /* CompiledBytecodeTests.swift */; };
+		BE1BEC991EFDA58F00796ECA /* CommentLineAndBlock.lion in Resources */ = {isa = PBXBuildFile; fileRef = BE1BEC981EFDA58F00796ECA /* CommentLineAndBlock.lion */; };
 		BE35F8251EE2D95A008C6785 /* Floor.lion in Resources */ = {isa = PBXBuildFile; fileRef = BE35F8241EE2D95A008C6785 /* Floor.lion */; };
 		BE35F8271EE2FFE1008C6785 /* MinMax.lion in Resources */ = {isa = PBXBuildFile; fileRef = BE35F8261EE2FFE1008C6785 /* MinMax.lion */; };
 		BE35F8291EE35F37008C6785 /* NumberSign.lion in Resources */ = {isa = PBXBuildFile; fileRef = BE35F8281EE35F37008C6785 /* NumberSign.lion */; };
@@ -156,6 +157,7 @@
 /* Begin PBXFileReference section */
 		BE1412571DB1755E00DAA385 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		BE1565931EF45B0B004E3894 /* CompiledBytecodeTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CompiledBytecodeTests.swift; path = LionessTests/Bytecode/CompiledBytecodeTests.swift; sourceTree = "<group>"; };
+		BE1BEC981EFDA58F00796ECA /* CommentLineAndBlock.lion */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = CommentLineAndBlock.lion; sourceTree = "<group>"; };
 		BE2296281DB16EE800EA477A /* Lioness.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Lioness.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BE295CE81DB14DCE0019EC57 /* Lioness macOS Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Lioness macOS Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BE35F8241EE2D95A008C6785 /* Floor.lion */ = {isa = PBXFileReference; explicitFileType = sourcecode.glsl; fileEncoding = 4; path = Floor.lion; sourceTree = "<group>"; };
@@ -537,6 +539,7 @@
 				BE84749C1EF7269F0038FBA3 /* CommentAfterAssignment.lion */,
 				BE84749E1EF726CA0038FBA3 /* CommentBlockAfterAssignment.lion */,
 				BE8474A01EFAF58A0038FBA3 /* EmptyOneLineComment.lion */,
+				BE1BEC981EFDA58F00796ECA /* CommentLineAndBlock.lion */,
 			);
 			path = "Test source files";
 			sourceTree = "<group>";
@@ -743,6 +746,7 @@
 				BE35F82B1EE382F2008C6785 /* Modulus.lion in Resources */,
 				BEF3D26A1EF6CE810086EDC8 /* Fibonacci-ast.txt in Resources */,
 				BE35F8291EE35F37008C6785 /* NumberSign.lion in Resources */,
+				BE1BEC991EFDA58F00796ECA /* CommentLineAndBlock.lion in Resources */,
 				BE35F8401EE389C8008C6785 /* StructUpdate.lion in Resources */,
 				BE3F27AD1EE0AB1E00D58C83 /* FunctionInFunction.lion in Resources */,
 				BE3F27B11EE0AB1E00D58C83 /* LargeMathOperation.lion in Resources */,

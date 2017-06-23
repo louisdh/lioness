@@ -13,6 +13,10 @@ class Runner_Tests: BaseTestCase {
 	
 	// MARK: - Tests
 	
+	func testCommentLineAndBlock() {
+		assert(in: "CommentLineAndBlock", that: "a", equals: .number(2), useStdLib: false)
+	}
+	
 	func testCommentEmptyOneLineComment() {
 		assert(in: "EmptyOneLineComment", that: "a", equals: .number(2), useStdLib: false)
 	}

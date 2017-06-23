@@ -302,14 +302,12 @@ public class Lexer {
 				
 			}
 
-			if content.hasPrefix("*/") {
+			if isInBlockComment && content.hasPrefix("*/") {
 
 				consumeCharactersAtStart(2)
 				isInBlockComment = false
 				addToken(type: .comment)
 				continue
-
-			} else if isInBlockComment {
 
 			}
 
