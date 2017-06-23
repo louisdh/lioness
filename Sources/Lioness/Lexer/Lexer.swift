@@ -151,17 +151,6 @@ public class Lexer {
 
 			var removedControlChar = false
 
-			if removeNewLineControlChar() {
-				removedControlChar = true
-
-				if isInLineComment {
-
-					isInLineComment = false
-					addToken(type: .comment)
-
-				}
-			}
-
 			while removeControlChar() {
 
 				removedControlChar = true
@@ -389,6 +378,17 @@ public class Lexer {
 		for (keyword, _) in Lexer.ignorableMapping {
 
 			if content.hasPrefix(keyword) {
+				
+				if keyword == "\n" {
+					
+					if isInLineComment {
+						
+						isInLineComment = false
+						addToken(type: .comment)
+						
+					}
+					
+				}
 
 				let temp = currentString
 				let keywordLength = keyword.characters.count

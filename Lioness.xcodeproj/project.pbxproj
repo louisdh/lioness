@@ -146,6 +146,7 @@
 		BE7682EB1EF45A7800FC784D /* Fibonacci.scorp in Resources */ = {isa = PBXBuildFile; fileRef = BE7682EA1EF45A7800FC784D /* Fibonacci.scorp */; };
 		BE84749D1EF7269F0038FBA3 /* CommentAfterAssignment.lion in Resources */ = {isa = PBXBuildFile; fileRef = BE84749C1EF7269F0038FBA3 /* CommentAfterAssignment.lion */; };
 		BE84749F1EF726CA0038FBA3 /* CommentBlockAfterAssignment.lion in Resources */ = {isa = PBXBuildFile; fileRef = BE84749E1EF726CA0038FBA3 /* CommentBlockAfterAssignment.lion */; };
+		BE8474A11EFAF58A0038FBA3 /* EmptyOneLineComment.lion in Resources */ = {isa = PBXBuildFile; fileRef = BE8474A01EFAF58A0038FBA3 /* EmptyOneLineComment.lion */; };
 		BEEB790E1EF4609000485334 /* BytecodeDescriptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEEB790D1EF4609000485334 /* BytecodeDescriptor.swift */; };
 		BEEB790F1EF4609000485334 /* BytecodeDescriptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEEB790D1EF4609000485334 /* BytecodeDescriptor.swift */; };
 		BEF3D2681EF6CC380086EDC8 /* ASTDescriptionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEF3D2671EF6CC380086EDC8 /* ASTDescriptionTests.swift */; };
@@ -246,6 +247,7 @@
 		BE7682EA1EF45A7800FC784D /* Fibonacci.scorp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Fibonacci.scorp; sourceTree = "<group>"; };
 		BE84749C1EF7269F0038FBA3 /* CommentAfterAssignment.lion */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = CommentAfterAssignment.lion; sourceTree = "<group>"; };
 		BE84749E1EF726CA0038FBA3 /* CommentBlockAfterAssignment.lion */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = CommentBlockAfterAssignment.lion; sourceTree = "<group>"; };
+		BE8474A01EFAF58A0038FBA3 /* EmptyOneLineComment.lion */ = {isa = PBXFileReference; explicitFileType = sourcecode.glsl; fileEncoding = 4; path = EmptyOneLineComment.lion; sourceTree = "<group>"; };
 		BEEB790D1EF4609000485334 /* BytecodeDescriptor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BytecodeDescriptor.swift; sourceTree = "<group>"; };
 		BEF3D2671EF6CC380086EDC8 /* ASTDescriptionTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ASTDescriptionTests.swift; path = AST/ASTDescriptionTests.swift; sourceTree = "<group>"; };
 		BEF3D2691EF6CE810086EDC8 /* Fibonacci-ast.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Fibonacci-ast.txt"; sourceTree = "<group>"; };
@@ -534,6 +536,7 @@
 				BE57A7341EF4A29D0008DB78 /* RepeatWhileStatement.lion */,
 				BE84749C1EF7269F0038FBA3 /* CommentAfterAssignment.lion */,
 				BE84749E1EF726CA0038FBA3 /* CommentBlockAfterAssignment.lion */,
+				BE8474A01EFAF58A0038FBA3 /* EmptyOneLineComment.lion */,
 			);
 			path = "Test source files";
 			sourceTree = "<group>";
@@ -751,6 +754,7 @@
 				BE3F27B01EE0AB1E00D58C83 /* InnerWhileLoops.lion in Resources */,
 				BE3F27A91EE0AB1E00D58C83 /* Complex.lion in Resources */,
 				BE3F27B31EE0AB1E00D58C83 /* Trigonometry.lion in Resources */,
+				BE8474A11EFAF58A0038FBA3 /* EmptyOneLineComment.lion in Resources */,
 				BE7682EB1EF45A7800FC784D /* Fibonacci.scorp in Resources */,
 				BE3F27AA1EE0AB1E00D58C83 /* DoTimesLoops.lion in Resources */,
 				BE3F27B41EE0AB1E00D58C83 /* UnicodeSumFunction.lion in Resources */,
