@@ -121,6 +121,7 @@ The Standard Library is currently under active development. There currently is n
 
 ## Roadmap
 - [x] Structs
+- [ ] Completion suggestions (given an incomplete source string and insertion point)
 - [ ] Stdlib documentation (Dash?)
 - [ ] Compiler warnings
 - [ ] Compiler optimizations
