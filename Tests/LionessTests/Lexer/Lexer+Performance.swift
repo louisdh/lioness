@@ -21,6 +21,10 @@ class Lexer_Performance: BaseTestCase {
 		runLexerTest(for: "Complex")
 	}
 	
+	func testLargeSource() {
+		runLexerTest(for: "LargeSource")
+	}
+	
 	// MARK: - Boilerplate
 
 	func runLexerTest(for fileName: String) {
