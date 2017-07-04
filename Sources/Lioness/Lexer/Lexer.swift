@@ -103,6 +103,8 @@ public class Lexer {
 	private var currentString = ""
 	private var currentStringLength = 0
 
+	private var nextString = ""
+		
 	private var tokens = [Token]()
 
 	public init(input: String) {
@@ -110,7 +112,7 @@ public class Lexer {
 		content = input
     }
 	
-	var nextString: String {
+	func updateNextString() {
 		
 		let firstChar = content.characters.first
 		
@@ -122,7 +124,7 @@ public class Lexer {
 			nextString = currentString
 		}
 		
-		return nextString
+		self.nextString = nextString
 	}
 
 	public func tokenize() -> [Token] {
@@ -140,6 +142,8 @@ public class Lexer {
 		tokens = [Token]()
 
 		var canDoExtraRun = true
+		
+		updateNextString()
 
 		while !content.isEmpty || canDoExtraRun {
 
@@ -484,6 +488,8 @@ public class Lexer {
 		currentStringLength += n
 		charIndex += n
 		content.removeCharactersAtStart(n)
+
+		updateNextString()
 
 	}
 
