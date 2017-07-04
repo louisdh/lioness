@@ -88,8 +88,10 @@ public class Lexer {
 		return self.invalidIdentifierCharSet.inverted
 	}()
 
-	let validNumberCharSet = CharacterSet(charactersIn: "0123456789.e-")
+	private static let validNumberCharSet = CharacterSet(charactersIn: "0123456789.e-")
 
+	private static let invertedValidNumberCharSet = validNumberCharSet.inverted
+	
 	private let input: String
 	private var content: String
 
@@ -349,7 +351,7 @@ public class Lexer {
 		if str.isEmpty || str == "-" {
 			return false
 		}
-		return str.rangeOfCharacter(from: validNumberCharSet.inverted) == nil
+		return str.rangeOfCharacter(from: Lexer.invertedValidNumberCharSet) == nil
 	}
 
 	func addIdentifierToken() {
