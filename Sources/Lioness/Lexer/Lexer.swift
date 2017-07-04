@@ -116,14 +116,10 @@ public class Lexer {
 	
 	func updateNextString() {
 		
-		let firstChar = content.characters.first
+		var nextString = currentString
 		
-		let nextString: String
-		
-		if let firstChar = firstChar {
-			nextString = currentString.appending("\(firstChar)")
-		} else {
-			nextString = currentString
+		if let firstChar = content.characters.first {
+			nextString.append(firstChar)
 		}
 		
 		self.nextString = nextString
