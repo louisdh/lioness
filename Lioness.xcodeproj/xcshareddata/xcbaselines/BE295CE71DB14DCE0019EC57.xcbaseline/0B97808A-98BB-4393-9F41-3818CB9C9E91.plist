@@ -99,9 +99,9 @@
 				<key>com.apple.XCTPerformanceMetric_WallClockTime</key>
 				<dict>
 					<key>baselineAverage</key>
-					<real>0.0133</real>
+					<real>0.012</real>
 					<key>baselineIntegrationDisplayName</key>
-					<string>4 Jul 2017, 23:06:00</string>
+					<string>5 Jul 2017, 00:17:05</string>
 					<key>maxPercentRelativeStandardDeviation</key>
 					<real>40</real>
 				</dict>
@@ -111,9 +111,9 @@
 				<key>com.apple.XCTPerformanceMetric_WallClockTime</key>
 				<dict>
 					<key>baselineAverage</key>
-					<real>0.045</real>
+					<real>0.0376</real>
 					<key>baselineIntegrationDisplayName</key>
-					<string>4 Jul 2017, 23:22:16</string>
+					<string>5 Jul 2017, 00:17:00</string>
 					<key>maxPercentRelativeStandardDeviation</key>
 					<real>40</real>
 				</dict>
@@ -123,9 +123,9 @@
 				<key>com.apple.XCTPerformanceMetric_WallClockTime</key>
 				<dict>
 					<key>baselineAverage</key>
-					<real>0.415</real>
+					<real>0.326</real>
 					<key>baselineIntegrationDisplayName</key>
-					<string>4 Jul 2017, 23:22:06</string>
+					<string>5 Jul 2017, 00:16:53</string>
 				</dict>
 			</dict>
 		</dict>

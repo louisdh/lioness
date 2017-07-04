@@ -42,13 +42,6 @@ public class Lexer {
 		"=": .equals
 	]
 
-	/// ignoreable tokens (white space, new lines)
-	private static let ignorableMapping: [String] = [
-		"\t",
-		"\n",
-		" ",
-	]
-
 	private static let twoCharTokensMapping: [String : TokenType] = [
 		"==": .comparatorEqual,
 		"!=": .notEqual,
@@ -376,31 +369,31 @@ public class Lexer {
 
 	func removeControlChar() -> Bool {
 
-		for keyword in Lexer.ignorableMapping {
-
-			if content.hasPrefix(keyword) {
-				
-				if keyword == "\n" {
-					
-					if isInLineComment {
-						
-						isInLineComment = false
-						addToken(type: .comment)
-						
-					}
-					
-				}
-
-				let temp = currentString
-				let keywordLength = keyword.characters.count
-				consumeCharactersAtStart(keywordLength)
-				currentString = temp
-
-				return true
-			}
-
+		if content.hasPrefix(" ") {
+		
+			consumeCharactersAtStart(1, updateCurrentString: false)
+			return true
 		}
-
+		
+		if content.hasPrefix("\n") {
+			
+			if isInLineComment {
+				
+				isInLineComment = false
+				addToken(type: .comment)
+				
+			}
+			
+			consumeCharactersAtStart(1, updateCurrentString: false)
+			return true
+		}
+		
+		if content.hasPrefix("\t") {
+			
+			consumeCharactersAtStart(1, updateCurrentString: false)
+			return true
+		}
+		
 		return false
 	}
 
@@ -479,17 +472,20 @@ public class Lexer {
 
 	}
 
-	func consumeCharactersAtStart(_ n: Int) {
+	func consumeCharactersAtStart(_ n: Int, updateCurrentString: Bool = true) {
 
-		let index = content.characters.index(content.startIndex, offsetBy: n)
-
-		currentString += content.substring(to: index)
+		if updateCurrentString {
+			let index = content.characters.index(content.startIndex, offsetBy: n)
+			currentString += content.substring(to: index)
+		}
+		
 		currentStringLength += n
 		charIndex += n
 		content.removeCharactersAtStart(n)
 
-		updateNextString()
-
+		if updateCurrentString {
+			updateNextString()
+		}
 	}
 
 }
