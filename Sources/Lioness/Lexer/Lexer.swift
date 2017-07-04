@@ -42,10 +42,11 @@ public class Lexer {
 		"=": .equals
 	]
 
-	private static let ignorableMapping: [String : TokenType] = [
-		"\t": .ignoreableToken,
-		"\n": .ignoreableToken,
-		" ": .ignoreableToken,
+	/// ignoreable tokens (white space, new lines)
+	private static let ignorableMapping: [String] = [
+		"\t",
+		"\n",
+		" ",
 	]
 
 	private static let twoCharTokensMapping: [String : TokenType] = [
@@ -375,7 +376,7 @@ public class Lexer {
 
 	func removeControlChar() -> Bool {
 
-		for (keyword, _) in Lexer.ignorableMapping {
+		for keyword in Lexer.ignorableMapping {
 
 			if content.hasPrefix(keyword) {
 				
