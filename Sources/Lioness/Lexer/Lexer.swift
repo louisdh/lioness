@@ -164,32 +164,36 @@ public class Lexer {
 //				print(nextString)
 //				print("isInNumber = true")
 			}
-
-			if !isInLineComment && currentString == "//" {
-				isInLineComment = true
-				continue
-			}
 			
-			if !isInBlockComment && currentString == "/*" {
-				isInBlockComment = true
-				continue
-			}
-			
-			if currentString.isEmpty && !isInNumber && (!isInLineComment && content.hasPrefix("//")) {
+			if !isInNumber {
 				
-				isInLineComment = true
-				consumeCharactersAtStart(2)
-				continue
+				if !isInLineComment && currentString == "//" {
+					isInLineComment = true
+					continue
+				}
 				
-			}
-			
-			
-			
-			if currentString.isEmpty && !isInNumber && (!isInBlockComment && content.hasPrefix("/*")) {
-
-				isInBlockComment = true
-				consumeCharactersAtStart(2)
-				continue
+				if !isInBlockComment && currentString == "/*" {
+					isInBlockComment = true
+					continue
+				}
+				
+				if currentString.isEmpty && !isInNumber && (!isInLineComment && content.hasPrefix("//")) {
+					
+					isInLineComment = true
+					consumeCharactersAtStart(2)
+					continue
+					
+				}
+				
+				
+				
+				if currentString.isEmpty && !isInNumber && (!isInBlockComment && content.hasPrefix("/*")) {
+					
+					isInBlockComment = true
+					consumeCharactersAtStart(2)
+					continue
+				}
+				
 			}
 
 			if !isInBlockComment && !isInLineComment {
@@ -474,14 +478,15 @@ public class Lexer {
 
 	func consumeCharactersAtStart(_ n: Int, updateCurrentString: Bool = true) {
 
+		let index = content.characters.index(content.startIndex, offsetBy: n)
+
 		if updateCurrentString {
-			let index = content.characters.index(content.startIndex, offsetBy: n)
 			currentString += content.substring(to: index)
 		}
 		
 		currentStringLength += n
 		charIndex += n
-		content.removeCharactersAtStart(n)
+		content.removeCharacters(to: index)
 
 		if updateCurrentString {
 			updateNextString()
@@ -492,11 +497,20 @@ public class Lexer {
 
 extension String {
 
+	mutating func removeCharacters(to index: String.Index) {
+		self = self.substring(from: index)
+	}
+	
 	mutating func removeCharactersAtStart(_ n: Int) {
 
 		let index = self.characters.index(self.startIndex, offsetBy: n)
 		self = self.substring(from: index)
 
+//		self.removeSubrange(self.startIndex..<index)
+//
+//		for _ in 0..<n {
+//			self.remove(at: self.startIndex)
+//		}
 	}
 
 }

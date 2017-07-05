@@ -34,6 +34,9 @@ class Lexer_Performance: BaseTestCase {
 			return
 		}
 		
+		let preheatLexer = Lexer(input: source)
+		_ = preheatLexer.tokenize()
+		
 		self.measure {
 			
 			let lexer = Lexer(input: source)
