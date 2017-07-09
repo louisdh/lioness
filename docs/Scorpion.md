@@ -1,5 +1,13 @@
-# Scorpion (bytecode)
+<p align="center">
+<img src="resources/scorpion/logo.png" alt="Scorpion Logo" style="max-height: 300px">
+</p>
+
+
+<h1 align="center">Scorpion Bytecode</h1>
+
+<p align="center">
 <img src="https://img.shields.io/badge/extension-.scorp-a1a1a1.svg" style="max-height: 300px;" alt="Extension: .scorp">
+</p>
 
 Scorpion is a simple instruction language, with a very small [instruction set](#instruction-set).
 
