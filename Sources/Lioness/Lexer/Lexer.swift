@@ -10,7 +10,7 @@ import Foundation
 
 public class Lexer {
 
-	private static let keywordTokens: [String : TokenType] = [
+	private static let keywordTokens: [String: TokenType] = [
 		"func": .function,
 		"while": .while,
 		"for": .for,
@@ -29,7 +29,7 @@ public class Lexer {
 	]
 
 	/// Currently only works for 1 char tokens
-	private static let otherMapping: [String : TokenType] = [
+	private static let otherMapping: [String: TokenType] = [
 		"(": .parensOpen,
 		")": .parensClose,
 		"{": .curlyOpen,
@@ -42,7 +42,7 @@ public class Lexer {
 		"=": .equals
 	]
 
-	private static let twoCharTokensMapping: [String : TokenType] = [
+	private static let twoCharTokensMapping: [String: TokenType] = [
 		"==": .comparatorEqual,
 		"!=": .notEqual,
 
@@ -57,7 +57,6 @@ public class Lexer {
 		"*=": .shortHandMul,
 		"/=": .shortHandDiv,
 		"^=": .shortHandPow
-
 	]
 
 	private static let reservedOneCharIdentifiers: [String] = ["+", "-", "/", "*", "^"]
@@ -182,10 +181,7 @@ public class Lexer {
 					isInLineComment = true
 					consumeCharactersAtStart(2)
 					continue
-					
 				}
-				
-				
 				
 				if currentString.isEmpty && !isInNumber && (!isInBlockComment && content.hasPrefix("/*")) {
 					
@@ -197,8 +193,6 @@ public class Lexer {
 			}
 
 			if !isInBlockComment && !isInLineComment {
-
-				
 				
 				if isInNumber {
 
@@ -244,7 +238,6 @@ public class Lexer {
 					}
 
 				}
-
 				
 				if tokenizeTwoChar() {
 					continue
@@ -291,7 +284,6 @@ public class Lexer {
 				isInLineComment = true
 				consumeCharactersAtStart(1)
 				continue
-				
 			}
 			
 			if !isInBlockComment && nextString == "/*" {
@@ -299,7 +291,6 @@ public class Lexer {
 				isInLineComment = true
 				consumeCharactersAtStart(1)
 				continue
-				
 			}
 
 			if isInBlockComment && content.hasPrefix("*/") {
@@ -308,7 +299,6 @@ public class Lexer {
 				isInBlockComment = false
 				addToken(type: .comment)
 				continue
-
 			}
 
 			if !content.isEmpty {
