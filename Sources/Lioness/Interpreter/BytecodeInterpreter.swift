@@ -294,9 +294,6 @@ public class BytecodeInterpreter {
 		let rhs = try popNumber()
 		let lhs = try popNumber()
 
-		// TODO: use when NumberType = Decimal
-//		let p = pow(lhs, Int(rhs.doubleValue))
-
 		let p = pow(lhs, rhs)
 
 		try stack.push(.number(p))

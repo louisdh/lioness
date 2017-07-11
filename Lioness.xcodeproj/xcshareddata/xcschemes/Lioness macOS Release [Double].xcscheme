@@ -14,26 +14,46 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "BE58C14B1E16D77900BC73CA"
+               BlueprintIdentifier = "BE2296271DB16EE800EA477A"
                BuildableName = "Lioness.framework"
-               BlueprintName = "Lioness iOS"
+               BlueprintName = "Lioness macOS"
                ReferencedContainer = "container:Lioness.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
    </BuildAction>
    <TestAction
-      buildConfiguration = "Debug"
+      buildConfiguration = "Debug [Double]"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
-      shouldUseLaunchSchemeArgsEnv = "YES">
+      shouldUseLaunchSchemeArgsEnv = "YES"
+      codeCoverageEnabled = "YES">
       <Testables>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "BE295CE71DB14DCE0019EC57"
+               BuildableName = "Lioness macOS Tests.xctest"
+               BlueprintName = "Lioness macOS Tests"
+               ReferencedContainer = "container:Lioness.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "BE2296271DB16EE800EA477A"
+            BuildableName = "Lioness.framework"
+            BlueprintName = "Lioness macOS"
+            ReferencedContainer = "container:Lioness.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
    </TestAction>
    <LaunchAction
-      buildConfiguration = "Release"
+      buildConfiguration = "Release [Double]"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       launchStyle = "0"
@@ -45,9 +65,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "BE58C14B1E16D77900BC73CA"
+            BlueprintIdentifier = "BE2296271DB16EE800EA477A"
             BuildableName = "Lioness.framework"
-            BlueprintName = "Lioness iOS"
+            BlueprintName = "Lioness macOS"
             ReferencedContainer = "container:Lioness.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -55,7 +75,7 @@
       </AdditionalOptions>
    </LaunchAction>
    <ProfileAction
-      buildConfiguration = "Release"
+      buildConfiguration = "Release [Double]"
       shouldUseLaunchSchemeArgsEnv = "YES"
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
@@ -63,18 +83,18 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "BE58C14B1E16D77900BC73CA"
+            BlueprintIdentifier = "BE2296271DB16EE800EA477A"
             BuildableName = "Lioness.framework"
-            BlueprintName = "Lioness iOS"
+            BlueprintName = "Lioness macOS"
             ReferencedContainer = "container:Lioness.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </ProfileAction>
    <AnalyzeAction
-      buildConfiguration = "Debug">
+      buildConfiguration = "Debug [Double]">
    </AnalyzeAction>
    <ArchiveAction
-      buildConfiguration = "Release"
+      buildConfiguration = "Release [Double]"
       revealArchiveInOrganizer = "YES">
    </ArchiveAction>
 </Scheme>

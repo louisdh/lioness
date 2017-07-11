@@ -8,27 +8,38 @@
 
 import Foundation
 
-public typealias NumberType = Double
+#if NUMBER_TYPE_DECIMAL
 
-// TODO: add compiler flag for Decimal usage
-//public typealias NumberType = Decimal
+	public typealias NumberType = Decimal
+	
+	extension Decimal {
+		
+		var intValue: Int {
+			return NSDecimalNumber(decimal: self).intValue
+		}
+		
+		init?(_ string: String) {
+			
+			if string == "-" || string == "e" || string == "." {
+				return nil
+			}
+			
+			let decNum = NSDecimalNumber(string: string)
+			
+			self = decNum.decimalValue
+			
+		}
+		
+	}
 
-//extension Decimal {
-//	
-//	var doubleValue: Double {
-//		return NSDecimalNumber(decimal: self).doubleValue
-//	}
-//	
-//	init?(_ string: String) {
-//		
-//		if string == "-" {
-//			return nil
-//		}
-//		
-//		let decNum = NSDecimalNumber(string: string)
-//		
-//		self = decNum.decimalValue
-//		
-//	}
-//	
-//}
+	/// Please note: can't raise to a decimal (`rhs` will be rounded down)
+	func pow(_ lhs: Decimal, _ rhs: Decimal) -> Decimal {
+		return pow(lhs, rhs.intValue)
+	}
+
+#else
+
+	public typealias NumberType = Double
+
+#endif
+
