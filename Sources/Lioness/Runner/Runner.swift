@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import CoreFoundation
 
 precedencegroup Pipe {
 	associativity: left
