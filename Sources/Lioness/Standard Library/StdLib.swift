@@ -20,8 +20,6 @@ public class StdLib {
 
 		var stdLib = ""
 
-		let bundle = Bundle(for: type(of: self))
-		
 		#if SWIFT_PACKAGE
 			
 			// Swift packages don't currently have a resources folder
@@ -34,6 +32,8 @@ public class StdLib {
 			
 		#else
 			
+			let bundle = Bundle(for: type(of: self))
+
 			guard let resourcesPath = bundle.resourcePath else {
 				throw StdLibError.resourceNotFound
 			}
