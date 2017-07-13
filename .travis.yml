@@ -6,6 +6,7 @@ os:
 
 dist: trusty
 sudo: required
+osx_image: xcode8.3
 
 env:
   - JOB=Linux
@@ -24,9 +25,6 @@ matrix:
       env: JOB=OSX DESTINATION="arch=x86_64" SCHEME="Lioness macOS Release [Double]" RUN_TESTS="YES" BUILD_EXAMPLE="NO" CODE_COV="YES"
     - os: osx
       env: JOB=Linux
-  include:
-    - os: osx
-      osx_image: xcode8.3
 
 before_install:
   if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
