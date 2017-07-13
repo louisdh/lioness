@@ -6,25 +6,25 @@ os:
 
 dist: trusty
 sudo: required
-osx_image: xcode8.3
-
-env:
-  - JOB=Linux
-  - JOB=OSX DESTINATION="OS=10.3.1,name=iPhone 7 Plus" SCHEME="Lioness iOS [Double]" RUN_TESTS="NO" BUILD_EXAMPLE="NO" CODE_COV="NO"
-  - JOB=OSX DESTINATION="OS=9.0,name=iPhone 6" SCHEME="Lioness iOS [Double]" RUN_TESTS="NO" BUILD_EXAMPLE="NO" CODE_COV="NO"
-  - JOB=OSX DESTINATION="arch=x86_64" SCHEME="Lioness macOS Release [Double]" RUN_TESTS="YES" BUILD_EXAMPLE="NO" CODE_COV="YES"
 
 matrix:
-  exclude:
+  include:
     # TODO: find a way to not duplicate all the environment variables for OS exclusion
     - os: linux
-      env: JOB=OSX DESTINATION="OS=10.3.1,name=iPhone 7 Plus" SCHEME="Lioness iOS [Double]" RUN_TESTS="NO" BUILD_EXAMPLE="NO" CODE_COV="NO"
-    - os: linux
-      env: JOB=OSX DESTINATION="OS=9.0,name=iPhone 6" SCHEME="Lioness iOS [Double]" RUN_TESTS="NO" BUILD_EXAMPLE="NO" CODE_COV="NO"
-    - os: linux
-      env: JOB=OSX DESTINATION="arch=x86_64" SCHEME="Lioness macOS Release [Double]" RUN_TESTS="YES" BUILD_EXAMPLE="NO" CODE_COV="YES"
+      env: 
+        - JOB=Linux
     - os: osx
-      env: JOB=Linux
+      osx_image: xcode8.3
+      env: 
+        - JOB=OSX DESTINATION="OS=9.0,name=iPhone 6" SCHEME="Lioness iOS [Double]" RUN_TESTS="NO" BUILD_EXAMPLE="NO" CODE_COV="NO"
+    - os: osx
+      osx_image: xcode8.3
+      env: 
+        - JOB=OSX DESTINATION="arch=x86_64" SCHEME="Lioness macOS Release [Double]" RUN_TESTS="YES" BUILD_EXAMPLE="NO" CODE_COV="YES"
+    - os: osx
+      osx_image: xcode8.3
+      env: 
+        - JOB=OSX DESTINATION="OS=10.3.1,name=iPhone 7 Plus" SCHEME="Lioness iOS [Double]" RUN_TESTS="NO" BUILD_EXAMPLE="NO" CODE_COV="NO"
 
 before_install:
   if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
