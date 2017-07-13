@@ -9,7 +9,7 @@
 <a href="https://codeclimate.com/github/louisdh/lioness"><img src="https://codeclimate.com/github/louisdh/lioness/badges/gpa.svg" style="max-height: 300px;" alt="Code Climate"/></a>
 <a href="https://codecov.io/gh/louisdh/lioness"><img src="https://codecov.io/gh/louisdh/lioness/branch/master/graph/badge.svg" alt="Codecov"/></a>
 <br>
-<img src="https://img.shields.io/badge/version-0.5.1-blue.svg" style="max-height: 300px;" alt="version 0.5">
+<img src="https://img.shields.io/badge/version-0.5.2-blue.svg" style="max-height: 300px;" alt="version 0.5.2">
 <a href="https://github.com/Carthage/Carthage"><img src="https://img.shields.io/badge/Carthage-compatible-4bc51d.svg?style=flat" style="max-height: 300px;" alt="Carthage Compatible"/></a>
 <a href="https://developer.apple.com/swift/"><img src="https://img.shields.io/badge/Swift-3.1-orange.svg?style=flat" style="max-height: 300px;" alt="Swift"/></a>
 <img src="https://img.shields.io/badge/Platforms-iOS%20%7C%20macOS%20%7C%20tvOS%20%7C%20watchOS%20%7C%20Linux-lightgrey.svg" style="max-height: 300px;" alt="Platform: iOS macOS tvOS watchOS">

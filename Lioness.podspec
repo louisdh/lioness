@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name = 'Lioness'
-  s.version = '0.5.1'
+  s.version = '0.5.2'
   s.license = 'MIT'
   s.summary = 'The Lioness Programming Language'
   s.homepage = 'https://github.com/louisdh/lioness'
