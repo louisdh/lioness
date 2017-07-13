@@ -12,7 +12,7 @@
 <img src="https://img.shields.io/badge/version-0.5.1-blue.svg" style="max-height: 300px;" alt="version 0.5">
 <a href="https://github.com/Carthage/Carthage"><img src="https://img.shields.io/badge/Carthage-compatible-4bc51d.svg?style=flat" style="max-height: 300px;" alt="Carthage Compatible"/></a>
 <a href="https://developer.apple.com/swift/"><img src="https://img.shields.io/badge/Swift-3.1-orange.svg?style=flat" style="max-height: 300px;" alt="Swift"/></a>
-<img src="https://img.shields.io/badge/Platforms-iOS%20%7C%20macOS%20%7C%20tvOS%20%7C%20watchOS-lightgrey.svg" style="max-height: 300px;" alt="Platform: iOS macOS tvOS watchOS">
+<img src="https://img.shields.io/badge/Platforms-iOS%20%7C%20macOS%20%7C%20tvOS%20%7C%20watchOS%20%7C%20Linux-lightgrey.svg" style="max-height: 300px;" alt="Platform: iOS macOS tvOS watchOS">
 <img src="https://img.shields.io/badge/extension-.lion-FF9C27.svg" style="max-height: 300px;" alt="Extension: .lion">
 <br>
 <a href="http://twitter.com/LouisDhauwe"><img src="https://img.shields.io/badge/Twitter-@LouisDhauwe-blue.svg?style=flat" style="max-height: 300px;" alt="Twitter"/></a>
@@ -130,7 +130,7 @@ The Standard Library is currently under active development. There currently is n
 - [x] Support emoticons for identifier names
 - [ ] ```guard``` statement
 - [ ] A lot more unit tests
-- [ ] Linux support
+- [x] Linux support
 
 ## Xcode file template
 Lioness source files can easily be created with Xcode, see [XcodeTemplate.md](XcodeTemplate.md) for instructions.
