@@ -18,7 +18,7 @@
 <a href="http://twitter.com/LouisDhauwe"><img src="https://img.shields.io/badge/Twitter-@LouisDhauwe-blue.svg?style=flat" style="max-height: 300px;" alt="Twitter"/></a>
 </p>
 
-Lioness is a high-level programming language designed for mathematical purposes. This project includes a lexer, parser, compiler and interpreter. All of these are 100% written in Swift without dependencies. 
+Lioness is a high-level, dynamic, programming language designed for mathematical purposes. This project includes a lexer, parser, compiler and interpreter. All of these are 100% written in Swift without dependencies. 
 
 The syntax of Lioness is inspired by Swift, and its feature set is akin to shader languages such as GLSL.
 
