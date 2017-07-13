@@ -5,7 +5,6 @@ sudo: required
 
 matrix:
   include:
-    # TODO: find a way to not duplicate all the environment variables for OS exclusion
     - os: linux
       env: 
         - JOB=Linux
@@ -32,7 +31,6 @@ before_install:
     export PATH="${PWD}/${SWIFT_VERSION}-ubuntu14.04/usr/bin:${PATH}";
     cd "$DIR";
   fi
-
 
 script: 
 
@@ -70,10 +68,7 @@ script:
     swift build;
     fi
 
-
 after_success:
   if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then
     - bash <(curl -s https://codecov.io/bash)
   fi
-
-
