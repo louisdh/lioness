@@ -1,4 +1,9 @@
 language: generic
+
+os:
+  - linux
+  - osx
+
 dist: trusty
 sudo: required
 osx_image: xcode8.3
@@ -12,14 +17,17 @@ env:
   - MACOS_FRAMEWORK_SCHEME="Lioness macOS Release [Double]"
   - EXAMPLE_SCHEME="macOS Example"
 
+  - JOB="Linux"
+  - JOB="OSX" DESTINATION="OS=10.3.1,name=iPhone 7 Plus"     SCHEME="$IOS_FRAMEWORK_SCHEME"     RUN_TESTS="NO" BUILD_EXAMPLE="NO"  CODE_COV="NO"
+  - JOB="OSX" DESTINATION="OS=9.0,name=iPhone 6"           SCHEME="$IOS_FRAMEWORK_SCHEME"     RUN_TESTS="NO" BUILD_EXAMPLE="NO"  CODE_COV="NO"
+  - JOB="OSX" DESTINATION="arch=x86_64"                    SCHEME="$MACOS_FRAMEWORK_SCHEME"   RUN_TESTS="YES" BUILD_EXAMPLE="NO"  CODE_COV="YES"
 
-
-  matrix:
-    - JOB="Linux"
-    - DESTINATION="OS=10.3.1,name=iPhone 7 Plus"     SCHEME="$IOS_FRAMEWORK_SCHEME"     RUN_TESTS="NO" BUILD_EXAMPLE="NO"  CODE_COV="NO"
-    - DESTINATION="OS=9.0,name=iPhone 6"           SCHEME="$IOS_FRAMEWORK_SCHEME"     RUN_TESTS="NO" BUILD_EXAMPLE="NO"  CODE_COV="NO"
-    - DESTINATION="arch=x86_64"                    SCHEME="$MACOS_FRAMEWORK_SCHEME"   RUN_TESTS="YES" BUILD_EXAMPLE="NO"  CODE_COV="YES"
-
+matrix:
+  exclude:
+    - os: linux
+      env: JOB="OSX"
+    - os: osx
+      env: JOB="Linux"
 
 before_install:
   if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
