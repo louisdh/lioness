@@ -147,6 +147,8 @@
 		BE71CB8F1F12A23300C6B93E /* TokenType.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE71CB8E1F12A23300C6B93E /* TokenType.swift */; };
 		BE71CB901F12A23300C6B93E /* TokenType.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE71CB8E1F12A23300C6B93E /* TokenType.swift */; };
 		BE7682EB1EF45A7800FC784D /* Fibonacci.scorp in Resources */ = {isa = PBXBuildFile; fileRef = BE7682EA1EF45A7800FC784D /* Fibonacci.scorp */; };
+		BE7C81771F1AA5E100FAF195 /* ParseErrorType.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE7C81761F1AA5E100FAF195 /* ParseErrorType.swift */; };
+		BE7C81781F1AA5E100FAF195 /* ParseErrorType.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE7C81761F1AA5E100FAF195 /* ParseErrorType.swift */; };
 		BE84749D1EF7269F0038FBA3 /* CommentAfterAssignment.lion in Resources */ = {isa = PBXBuildFile; fileRef = BE84749C1EF7269F0038FBA3 /* CommentAfterAssignment.lion */; };
 		BE84749F1EF726CA0038FBA3 /* CommentBlockAfterAssignment.lion in Resources */ = {isa = PBXBuildFile; fileRef = BE84749E1EF726CA0038FBA3 /* CommentBlockAfterAssignment.lion */; };
 		BE8474A11EFAF58A0038FBA3 /* EmptyOneLineComment.lion in Resources */ = {isa = PBXBuildFile; fileRef = BE8474A01EFAF58A0038FBA3 /* EmptyOneLineComment.lion */; };
@@ -252,6 +254,7 @@
 		BE58C1561E16D7BE00BC73CA /* Lioness.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Lioness.h; path = "Lioness iOS/Lioness.h"; sourceTree = SOURCE_ROOT; };
 		BE71CB8E1F12A23300C6B93E /* TokenType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TokenType.swift; sourceTree = "<group>"; };
 		BE7682EA1EF45A7800FC784D /* Fibonacci.scorp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Fibonacci.scorp; sourceTree = "<group>"; };
+		BE7C81761F1AA5E100FAF195 /* ParseErrorType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParseErrorType.swift; sourceTree = "<group>"; };
 		BE84749C1EF7269F0038FBA3 /* CommentAfterAssignment.lion */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = CommentAfterAssignment.lion; sourceTree = "<group>"; };
 		BE84749E1EF726CA0038FBA3 /* CommentBlockAfterAssignment.lion */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = CommentBlockAfterAssignment.lion; sourceTree = "<group>"; };
 		BE8474A01EFAF58A0038FBA3 /* EmptyOneLineComment.lion */ = {isa = PBXFileReference; explicitFileType = sourcecode.glsl; fileEncoding = 4; path = EmptyOneLineComment.lion; sourceTree = "<group>"; };
@@ -444,6 +447,7 @@
 			isa = PBXGroup;
 			children = (
 				BE3F27121EE0A97400D58C83 /* ParseError.swift */,
+				BE7C81761F1AA5E100FAF195 /* ParseErrorType.swift */,
 				BE3F27131EE0A97400D58C83 /* Parser.swift */,
 			);
 			path = Parser;
@@ -814,6 +818,7 @@
 				BE3F27331EE0A97400D58C83 /* FunctionNode.swift in Sources */,
 				BE3F27671EE0A97400D58C83 /* Counter.swift in Sources */,
 				BE3F27411EE0A97400D58C83 /* LoopNode.swift in Sources */,
+				BE7C81771F1AA5E100FAF195 /* ParseErrorType.swift in Sources */,
 				BE3F273B1EE0A97400D58C83 /* ContinueNode.swift in Sources */,
 				BE3F27611EE0A97400D58C83 /* ScopeNode.swift in Sources */,
 				BE3F275F1EE0A97400D58C83 /* CompileError.swift in Sources */,
@@ -888,6 +893,7 @@
 				BE3F27341EE0A97400D58C83 /* FunctionNode.swift in Sources */,
 				BE3F27681EE0A97400D58C83 /* Counter.swift in Sources */,
 				BE3F27421EE0A97400D58C83 /* LoopNode.swift in Sources */,
+				BE7C81781F1AA5E100FAF195 /* ParseErrorType.swift in Sources */,
 				BE3F273C1EE0A97400D58C83 /* ContinueNode.swift in Sources */,
 				BE3F27621EE0A97400D58C83 /* ScopeNode.swift in Sources */,
 				BE3F27601EE0A97400D58C83 /* CompileError.swift in Sources */,
