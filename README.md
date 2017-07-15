@@ -57,7 +57,7 @@ do n times {
 ## Features
 
 * Minimalistic, yet expressive, syntax
-* **All types are inferred**
+* No type system, language is dynamic
 * 5 basic operators: ```+```, ```-```, ```/```, ```*``` and ```^```
 	* ```^``` means "to the power of", e.g. ```2^10``` equals 1024
 	* all operators have a shorthand, e.g. ```+=``` for ```+```
