@@ -8,7 +8,13 @@
 
 import Foundation
 
-public struct ParseError: Error, CustomStringConvertible {
+public protocol DisplayableError: Error {
+	
+	func description(inSource source: String) -> String
+	
+}
+
+public struct ParseError: DisplayableError, CustomStringConvertible {
 
 	/// The parse error type
 	let type: ParseErrorType
@@ -21,7 +27,7 @@ public struct ParseError: Error, CustomStringConvertible {
 		self.range = range
 	}
 
-	func description(inSource source: String) -> String {
+	public func description(inSource source: String) -> String {
 
 		guard let startIndex = range?.lowerBound else {
 			return type.description()
