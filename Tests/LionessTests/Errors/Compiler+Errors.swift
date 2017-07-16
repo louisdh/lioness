@@ -10,7 +10,7 @@ import Foundation
 import XCTest
 @testable import Lioness
 
-class Compiler_Errors: BaseTestCase {
+class CompilerErrors: BaseTestCase {
 
 	func testAssignFunctionToVar() {
 		let error = "Cannot assign FunctionNode(prototype: FunctionPrototypeNode(name: bar, argumentNames: [], returns: false), \n    ) on line 4"
