@@ -29,7 +29,9 @@ public enum ParseErrorType {
 	case illegalStatement
 	
 	case internalInconsistencyOccurred
-	
+
+	case invalidAssignmentValue(value: String)
+
 }
 
 extension ParseErrorType {
@@ -80,6 +82,9 @@ extension ParseErrorType {
 				
 			case .emptyStructNotAllowed:
 				return "Struct with no members found on line \(line), structs may not be empty"
+			
+			case .invalidAssignmentValue(let value):
+				return "Cannot assign \(value) on line \(line)"
 				
 			}
 			
@@ -127,7 +132,9 @@ extension ParseErrorType {
 			
 		case .emptyStructNotAllowed:
 			return "Struct with no members found, structs may not be empty"
-			
+		
+		case .invalidAssignmentValue:
+			return "Invalid assignment value"
 		}
 	}
 }
