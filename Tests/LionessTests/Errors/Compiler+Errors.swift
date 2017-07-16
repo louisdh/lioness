@@ -23,7 +23,7 @@ class Compiler_Errors: BaseTestCase {
 
 			let message = "[\(file).lion]: Expected error \"\(expectedError)\" but found: nil"
 
-			XCTFail( message)
+			XCTFail(message)
 
 			return
 		}

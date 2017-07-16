@@ -9,9 +9,9 @@
 import Foundation
 
 public protocol DisplayableError: Error {
-	
+
 	func description(inSource source: String) -> String
-	
+
 }
 
 public struct ParseError: DisplayableError, CustomStringConvertible {
