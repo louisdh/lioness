@@ -8,14 +8,20 @@
 
 import Foundation
 
+struct AssignmentNodeValidationError: Error {
+	let invalidValueType: String
+}
+
 public struct AssignmentNode: ASTNode {
 
 	public let variable: ASTNode
 	public let value: ASTNode
 
-	public init(variable: ASTNode, value: ASTNode) {
+	public init(variable: ASTNode, value: ASTNode) throws {
 
-		// TODO: add validation, variable may only be VariableNode or StructMemberNode
+		guard value is NumberNode || value is VariableNode || value is StructMemberNode || value is CallNode || value is BinaryOpNode else {
+			throw AssignmentNodeValidationError(invalidValueType: value.description)
+		}
 
 		self.variable = variable
 		self.value = value

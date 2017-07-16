@@ -320,9 +320,20 @@ public class Parser {
 
 		let expr = try parseExpression()
 
-		let assign = AssignmentNode(variable: varNode, value: expr)
+		do {
+			
+			let assign = try AssignmentNode(variable: varNode, value: expr)
+			return assign
+			
+		} catch let error as AssignmentNodeValidationError {
+			
+			throw self.error(.invalidAssignmentValue(value: error.invalidValueType))
+			
+		} catch {
+		
+			throw self.error(.unexpectedToken)
 
-		return assign
+		}
 	}
 
 	private func parseNumber() throws -> NumberNode {
@@ -363,7 +374,7 @@ public class Parser {
 				throw self.error(.illegalBinaryOperation, token: currentToken)
 			}
 
-			let assignment = AssignmentNode(variable: node, value: operation)
+			let assignment = try AssignmentNode(variable: node, value: operation)
 
 			return assignment
 
