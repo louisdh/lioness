@@ -26,9 +26,9 @@ fileprivate extension NSAttributedString {
 		let style = NSMutableParagraphStyle()
 		style.alignment = .center
 
-		let attributes = [
-			NSFontAttributeName: NSFont.systemFont(ofSize: fontSize),
-			NSParagraphStyleAttributeName: style
+		let attributes: [NSAttributedStringKey: Any] = [
+			.font: NSFont.systemFont(ofSize: fontSize),
+			.paragraphStyle: style
 		]
 
 		self.init(string: nodeDescription, attributes: attributes)
@@ -196,7 +196,7 @@ class ASTVisualizer {
 		let composedImage = NSImage(size: size)
 
 		composedImage.lockFocus()
-		let ctx = NSGraphicsContext.current()
+		let ctx = NSGraphicsContext.current
 		ctx?.imageInterpolation = .high
 		ctx?.shouldAntialias = true
 

@@ -65,11 +65,11 @@ public class Lexer {
 
 		var chars = "-."
 
-		reservedOneCharIdentifiers.forEach {
+		Lexer.reservedOneCharIdentifiers.forEach {
 			chars.append($0)
 		}
 
-		otherMapping.keys.forEach {
+		Lexer.otherMapping.keys.forEach {
 			chars.append($0)
 		}
 
@@ -471,7 +471,7 @@ public class Lexer {
 		let index = content.characters.index(content.startIndex, offsetBy: n)
 
 		if updateCurrentString {
-			currentString += content.substring(to: index)
+			currentString += content[..<index]
 		}
 		
 		currentStringLength += n
@@ -488,19 +488,14 @@ public class Lexer {
 extension String {
 
 	mutating func removeCharacters(to index: String.Index) {
-		self = self.substring(from: index)
+		self.removeSubrange(self.startIndex..<index)
 	}
 	
 	mutating func removeCharactersAtStart(_ n: Int) {
 
 		let index = self.characters.index(self.startIndex, offsetBy: n)
-		self = self.substring(from: index)
+		self.removeSubrange(self.startIndex..<index)
 
-//		self.removeSubrange(self.startIndex..<index)
-//
-//		for _ in 0..<n {
-//			self.remove(at: self.startIndex)
-//		}
 	}
 
 }
