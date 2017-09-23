@@ -30,10 +30,28 @@ class BaseTestCase: XCTestCase {
 	
 	func getFilePath(for fileName: String, extension: String) -> URL? {
 		
-		let bundle = Bundle(for: type(of: self))
-		let fileURL = bundle.url(forResource: fileName, withExtension: `extension`)
+		#if SWIFT_PACKAGE
 		
-		return fileURL
+			// Swift packages don't currently have a resources folder
+			
+			var url = URL(fileURLWithPath: #file)
+			url.deleteLastPathComponent()
+			url.appendPathComponent("Test source files")
+			
+			let resourcesPath = url.path
+		
+			let fullPath = "\(resourcesPath)/\(fileName).\(`extension`)"
+		
+			return URL(fileURLWithPath: fullPath)
+
+		#else
+
+			let bundle = Bundle(for: type(of: self))
+			let fileURL = bundle.url(forResource: fileName, withExtension: `extension`)
+
+			return fileURL
+
+		#endif
 	}
 	
 	func getSource(for fileName: String) -> String? {
