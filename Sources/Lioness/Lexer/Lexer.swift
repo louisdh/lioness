@@ -111,7 +111,7 @@ public class Lexer {
 		
 		var nextString = currentString
 		
-		if let firstChar = content.characters.first {
+		if let firstChar = content.first {
 			nextString.append(firstChar)
 		}
 		
@@ -202,7 +202,7 @@ public class Lexer {
 
 							isInNumber = false
 
-							if let nextChar = content.characters.first {
+							if let nextChar = content.first {
 								if currentString == "/" {
 									if nextChar == "/" ||  nextChar == "*" {
 										consumeCharactersAtStart(1)
@@ -225,7 +225,7 @@ public class Lexer {
 							consumeCharactersAtStart(1)
 						}
 
-						if let nextChar = content.characters.first {
+						if let nextChar = content.first {
 							if currentString == "/" {
 								if nextChar == "/" ||  nextChar == "*" {
 									consumeCharactersAtStart(1)
@@ -351,7 +351,7 @@ public class Lexer {
 		if content.hasPrefix(keyword) {
 
 			let temp = currentString
-			let keywordLength = keyword.characters.count
+			let keywordLength = keyword.count
 			consumeCharactersAtStart(keywordLength)
 			currentString = temp
 
@@ -468,7 +468,7 @@ public class Lexer {
 
 	func consumeCharactersAtStart(_ n: Int, updateCurrentString: Bool = true) {
 
-		let index = content.characters.index(content.startIndex, offsetBy: n)
+		let index = content.index(content.startIndex, offsetBy: n)
 
 		if updateCurrentString {
 			currentString += content[..<index]
@@ -493,7 +493,7 @@ extension String {
 	
 	mutating func removeCharactersAtStart(_ n: Int) {
 
-		let index = self.characters.index(self.startIndex, offsetBy: n)
+		let index = self.index(self.startIndex, offsetBy: n)
 		self.removeSubrange(self.startIndex..<index)
 
 	}

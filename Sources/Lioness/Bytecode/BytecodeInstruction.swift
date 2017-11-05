@@ -140,7 +140,7 @@ public class BytecodeInstruction {
 		}
 
 		if let comment = comment {
-			descr += "; \(comment)".byAppendingLeading(" ", max(1, 30 - descr.characters.count))
+			descr += "; \(comment)".byAppendingLeading(" ", max(1, 30 - descr.count))
 		}
 
 		return descr
