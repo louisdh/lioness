@@ -16,6 +16,7 @@
 <img src="https://img.shields.io/badge/extension-.lion-FF9C27.svg" style="max-height: 300px;" alt="Extension: .lion">
 <br>
 <a href="http://twitter.com/LouisDhauwe"><img src="https://img.shields.io/badge/Twitter-@LouisDhauwe-blue.svg?style=flat" style="max-height: 300px;" alt="Twitter"/></a>
+<a href="https://paypal.me/louisdhauwe"><img src="https://img.shields.io/badge/Donate-PayPal-green.svg?style=flat" alt="Donate via PayPal"/></a>
 </p>
 
 Lioness is a high-level, dynamic, programming language designed for mathematical purposes. This project includes a lexer, parser, compiler and interpreter. All of these are 100% written in Swift without dependencies. 
