@@ -1,4 +1,10 @@
 <p align="center">
+  <b> Lioness </b> &bull;
+  <a href="https://github.com/louisdh/cub">Cub</a> &bull;
+    <a href="https://github.com/louisdh/savannakit">SavannaKit</a>
+</p>
+
+<p align="center">
 <img src="docs/resources/readme/logo.png" alt="Lioness Logo" style="max-height: 300px">
 </p>
 
